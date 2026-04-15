@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Geist Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-bg-base: #050505;
+  --color-bg-surface: #0A0A0A;
+  --color-accent-green: #006239;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: rgba(255, 255, 255, 0.4);
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+
+  --animate-scan: scan 4s ease-in-out infinite;
+  @keyframes scan {
+    0%, 100% { top: 0%; }
+    50% { top: 100%; }
+  }
+}
+
+@layer base {
+  * {
+    border-radius: 0 !important;
+  }
+  
+  body {
+    @apply bg-bg-base text-text-primary font-sans antialiased selection:bg-accent-green selection:text-white;
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: center top;
+    background-attachment: fixed;
+  }
+}
+
+@layer utilities {
+  .tracking-tight-custom {
+    letter-spacing: -0.02em;
+  }
+}

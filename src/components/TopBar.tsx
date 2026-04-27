@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export function TopBar() {
   const [time, setTime] = useState('');
@@ -23,20 +24,20 @@ export function TopBar() {
   }, []);
 
   return (
-    <header className="flex justify-between items-center pb-3 border-b border-border-subtle mb-6 font-mono text-[10px] tracking-[0.1em] text-text-secondary w-full max-w-5xl mx-auto">
+    <header className="flex justify-between items-center pb-3 border-b border-border-subtle mb-6 text-mono-xs text-text-secondary w-full max-w-5xl mx-auto">
       <div className="flex gap-6">
         <div className="flex items-center">
-          <span className="text-accent-green mr-1">LATENCY:</span> {latency}MS
+          <span className="text-emerald-500 mr-1">LATENCY:</span> {latency}MS
         </div>
         <div className="flex items-center">
-          <span className="text-accent-green mr-1">STATUS:</span> ACTIVE
+          <span className="text-emerald-500 mr-1">STATUS:</span> ACTIVE
         </div>
         <div className="flex items-center">
-          <span className="text-accent-green mr-1">SIGNAL:</span> 98.4%
+          <span className="text-emerald-500 mr-1">SIGNAL:</span> 98.4%
         </div>
       </div>
       <div className="flex gap-6">
-        <span>OPERATOR_X // ACCESS_LEVEL_04</span>
+        <Link to="/about" className="hover:text-emerald-500 transition-colors cursor-pointer">ABOUT_OPERATOR</Link> // ACCESS_LEVEL_04
         <span className="hidden sm:inline-block">SYS_T: {time}</span>
       </div>
     </header>

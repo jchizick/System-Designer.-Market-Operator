@@ -17,17 +17,22 @@ const notes = [
 
 export function FieldNotes() {
   return (
-    <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
-      {notes.map((note, idx) => (
-        <div key={idx} className="border-l border-accent-green/40 pl-4 py-1 flex flex-col group cursor-pointer hover:border-accent-green transition-colors">
-          <div className="font-mono text-[10px] text-text-secondary/60 mb-1.5">
+    <section className="mb-10">
+      <div className="text-mono-xs text-emerald-400 mb-2">
+        002 // FIELD NOTES
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {notes.map((note, idx) => (
+        <div key={idx} className="border-l border-emerald-500/40 pl-4 py-2 flex flex-col group cursor-pointer hover:border-emerald-500 transition-colors bg-emerald-500/[0.02] hover:bg-emerald-500/[0.04]">
+          <div className="text-mono-xs text-text-secondary mb-1.5">
             LOG ENTRY &mdash; {note.date}
           </div>
-          <p className="text-[13px] text-text-secondary leading-[1.5] group-hover:text-text-primary transition-colors">
+          <p className="text-body-sm group-hover:text-white/80 transition-colors">
             {note.text}
           </p>
         </div>
       ))}
+      </div>
     </section>
   );
 }

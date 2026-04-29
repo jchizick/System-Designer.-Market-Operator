@@ -117,57 +117,71 @@ export const caseStudies: CaseStudy[] = [
     takeaway: "Blockchain Brawlers is not just a trading brand. It is a cultural engine. The system works because every asset feeds the same loop: philosophy becomes content, content becomes identity, identity becomes community, and community creates demand for deeper education."
   },
   {
-    id: "LIQ_MAP",
-    slug: "ai-brand-machine",
-    type: "HEATMAP OVERLAY",
-    title: "AI Brand Machine",
-    outcome: "Identified hidden support zones across fragmented order books.",
+    id: "SYN_FOUNDRY",
+    slug: "ai-brand-machine-synthetic-foundry",
+    type: "BRAND MANUFACTURING SYSTEM",
+    title: "Synthetic Foundry",
+    outcome: "A high-velocity brand manufacturing system that converts raw business ideas into engineered brand infrastructure.",
     visualType: "grid",
-    state: "STABLE",
-    subtitle: "Order Book Topology Visualizer",
-    heroDescription: "A real-time heatmap system that aggregates liquidity across fragmented venues, revealing hidden support and resistance zones invisible to single-exchange analysis.",
-    year: "2024",
-    duration: "12 WEEKS",
-    role: "LEAD ENGINEER",
-    problem: "Modern markets are fragmented across dozens of venues. A trader looking at a single exchange's order book sees maybe 15-20% of actual available liquidity. Critical support and resistance levels — the zones where large orders cluster — are invisible when viewed through a single lens. This fragmentation creates a systematic blind spot that leads to poor execution and unexpected slippage.",
-    insight: "Liquidity isn't randomly distributed — it follows gravitational patterns. Institutional orders cluster at psychologically significant levels, options strike prices, and historical volume nodes. By aggregating order book snapshots across 8+ venues and applying density estimation algorithms, we can reconstruct the true liquidity topology of any asset in real-time.",
-    buildDescription: "A multi-venue aggregation system that reconstructs true market topology in real-time.",
+    state: "ACTIVE BUILD",
+    subtitle: "Automated Brand Strategy Pipeline",
+    heroDescription: "The Synthetic Foundry is an AI-powered brand manufacturing system that transforms a founder’s raw idea into multiple strategic brand universes, calibrated signal profiles, moodboards, Brand DNA, operating rules, and implementation roadmaps. Instead of treating branding as taste, it treats identity as engineered infrastructure.",
+    year: "2026",
+    duration: "ONGOING",
+    role: "SYSTEM DESIGNER / BRAND STRATEGIST / AI WORKFLOW ARCHITECT",
+    problem: "Traditional branding processes are slow, subjective, and fragmented. Founders often move from vague ideas to logos, colors, and revisions without ever defining the structural logic that should govern how the brand behaves. The result is a polished surface with no operating system underneath: no clear signal profile, no behavioral rules, no implementation map, and no way to scale the identity consistently across product, content, marketing, and experience.",
+    insight: "A brand is not just a visual identity. It is a behavioral system. If the emotional signal, strategic narrative, visual language, and execution rules can be generated, compared, calibrated, and locked in sequence, then branding becomes less like subjective decoration and more like infrastructure design. The critical shift was building a process that forces every creative decision through a structured pipeline: idea, universe, signal, DNA, systems, applications, and execution.",
+    buildDescription: "An AI-assisted workshop and operator dashboard that compresses brand discovery, strategic exploration, identity logic, and execution planning into a repeatable manufacturing pipeline.",
+    heroImage: "/src/assets/brand-machine-hero.png",
+    buildImages: [
+      "/src/assets/brand-machine-input.png",
+      "/src/assets/brand-machine-processing.png",
+      "/src/assets/brand-machine-system.png",
+      "/src/assets/brand-machine-why-this-works.png"
+    ],
+    systemMotionImage: "/src/assets/brand-machine-system-in-motion.png",
     hasVideo: false,
-    videoCaption: "Thermal heatmap rendering across 8 venues during a high-volatility session.",
+    videoCaption: "Looped pipeline animation showing raw input moving through AI processing layers and emerging as structured brand infrastructure.",
     build: [
       {
+        label: "INPUT",
+        title: "Raw Idea Intake & Strategic Brief",
+        description: "The system begins with a founder’s natural-language idea and converts it into a structured strategic brief. It extracts the product concept, audience, problem, emotional intention, founder belief, and brand constraints. This becomes the raw material for the machine: the unrefined ore that will be pressure-tested, shaped, and transformed into multiple possible brand realities.",
+        tags: ["Client Intake", "Prompt Design", "Structured Brief", "Founder Context"]
+      },
+      {
+        label: "PROCESSING",
+        title: "Universe Generation & Signal Calibration",
+        description: "The AI pipeline generates multiple Brand Universes from the same input. Each universe contains a distinct positioning angle, emotional signal profile, narrative logic, visual direction, and moodboard prompt. The 4-Signal Matrix — Authority, Warmth, Energy, and Precision — turns subjective brand feeling into measurable strategic behavior. The user can compare realities before committing to one.",
+        tags: ["LLM Pipeline", "Brand Universes", "Signal Matrix", "Moodboards"]
+      },
+      {
         label: "SYSTEM",
-        title: "Multi-Venue Aggregation Pipeline",
-        description: "Concurrent WebSocket connections to 8 major exchanges with unified order book reconstruction. Custom conflict resolution for crossed markets and stale quote detection. Normalized depth representation regardless of venue-specific formatting.",
-        tags: ["Go", "WebSocket", "Protocol Buffers", "NATS"]
+        title: "Brand DNA & Operating System",
+        description: "Once a universe is selected, the system locks the Brand DNA: core belief, narrative spine, visual DNA, experience principle, and signal profile. That DNA is then translated into concrete behavioral rules across communication, design, product, marketing, and experience. The output is not a static brand guide — it is a Brand Operating System that defines how the identity should behave under real-world pressure.",
+        tags: ["Brand DNA", "Behavioral Rules", "Operating System", "Execution Logic"]
       },
       {
-        label: "DESIGN",
-        title: "Thermal Density Visualization",
-        description: "GPU-accelerated heatmap rendering that maps aggregated liquidity density to a thermal color gradient. Time-decayed historical overlay shows how liquidity zones shift over 1h, 4h, and 24h windows. Interactive zoom from macro (full book depth) to micro (individual price level) views.",
-        tags: ["WebGL", "Three.js", "D3.js"]
-      },
-      {
-        label: "TOOLS",
-        title: "Alert & Anomaly Detection",
-        description: "Statistical engine that detects unusual liquidity formations: iceberg order detection, spoofing pattern recognition, and sudden liquidity withdrawal alerts. Notifications delivered via WebSocket push to operator terminals.",
-        tags: ["Python", "scikit-learn", "PostgreSQL"]
+        label: "OUTPUT",
+        title: "Implementation Matrix & Execution Roadmap",
+        description: "The final layer converts strategy into execution. The Brand Application Matrix maps where the identity appears across product, platform, communication, and environment. The Implementation Planner then turns those touchpoints into a phased roadmap for identity assets, product UI, documentation, content templates, and deployment surfaces. The founder walks away with direction, rules, and a production plan.",
+        tags: ["Application Matrix", "Roadmap", "UI Systems", "Brand Deployment"]
       }
     ],
     outcomes: [
-      "Aggregates liquidity across 8 venues in under 10ms refresh cycles",
-      "Identified 73% of significant support/resistance levels before price tested them",
-      "Reduced average execution slippage by 18% on routed orders",
-      "Detected 12 spoofing events in first month of production deployment",
-      "Adopted by 2 proprietary trading firms for pre-trade analysis"
+      "Designed a repeatable AI-powered workflow for transforming raw ideas into complete brand systems.",
+      "Compressed traditional multi-week discovery into a structured 25-minute workshop format.",
+      "Created a multi-universe generation model that lets founders compare different strategic realities before choosing one.",
+      "Built a 4-Signal Matrix to translate abstract brand traits into concrete communication, design, product, and marketing rules.",
+      "Developed a Brand Operating System model that moves beyond static guidelines into execution-ready infrastructure."
     ],
     resultStats: [
-      { value: "<10ms", label: "Refresh cycle across 8 venues" },
-      { value: "73%", label: "Support/resistance levels identified pre-test" },
-      { value: "18%", label: "Average execution slippage reduction" },
-      { value: "12", label: "Spoofing events detected in first month" }
+      { value: "25 MIN", label: "Workshop path from raw idea to structured brand system" },
+      { value: "3x", label: "Brand universes generated from a single concept" },
+      { value: "4", label: "Core signal dimensions used to calibrate brand behavior" },
+      { value: "6+", label: "Strategic artifacts produced across DNA, systems, and execution" }
     ],
-    takeaway: "The map is not the territory, but a better map changes how you navigate. Seeing aggregated liquidity doesn't guarantee better trades — but it eliminates the worst ones."
+    takeaway: "Branding becomes scalable when it stops depending on taste and starts operating like a system. The Synthetic Foundry turns raw founder logic into structured brand infrastructure: universes, signals, rules, systems, applications, and execution plans forged through one repeatable pipeline."
   },
   {
     id: "BRAWLER_MIND",

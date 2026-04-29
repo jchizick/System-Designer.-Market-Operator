@@ -76,28 +76,28 @@ export function CaseFiles() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 grid-rows-2 gap-4 h-auto md:h-[320px]">
         {caseStudies.map((c, idx) => (
-        <Link
-          key={idx}
-          to={`/case/${c.slug}`}
-          className="relative bg-emerald-500/[0.04] border border-emerald-500/10 p-3 flex flex-col justify-between group hover:border-emerald-500/25 hover:-translate-y-0.5 hover:shadow-[0_4px_16px_-2px_rgba(16,185,129,0.1)] transition-all duration-300 ease-out cursor-pointer no-underline"
-        >
-          <div className="flex justify-between text-mono-2xs mb-2">
-            <span className="text-text-primary font-medium">SYS: {c.id}</span>
-            <span className="text-text-secondary/50">{c.type.split(' ')[0]}</span>
-          </div>
-          
-          <div className="flex items-center justify-between mb-1">
-            <div className="text-[14px] font-normal tracking-[-0.01em] text-text-primary">{c.title}</div>
-            <div className="text-mono-2xs px-1.5 py-[2px] bg-emerald-400/5 text-emerald-400/70 border border-emerald-400/20">{c.state}</div>
-          </div>
-          
-          <AbstractVisual type={c.visualType} />
-          
-          <div className="text-body-sm leading-[1.4]">
-            {c.outcome}
-          </div>
-        </Link>
-      ))}
+          <Link
+            key={idx}
+            to={`/case/${c.slug}`}
+            className="relative bg-emerald-500/[0.04] border border-emerald-500/10 p-3 flex flex-col justify-between group hover:border-emerald-500/25 hover:-translate-y-0.5 hover:shadow-[0_4px_16px_-2px_rgba(16,185,129,0.1)] transition-all duration-300 ease-out cursor-pointer no-underline"
+          >
+            <div className="flex justify-between text-mono-2xs mb-2">
+              <span className="text-text-primary font-medium">SYS: {c.id}</span>
+              <span className="text-text-secondary/50">{c.type.split(' ')[0]}</span>
+            </div>
+
+            <div className="flex items-center justify-between mb-1">
+              <div className="text-body-base font-normal tracking-[-0.01em] text-text-primary">{c.title}</div>
+              <div className="text-mono-2xs px-1.5 py-[2px] bg-emerald-400/5 text-emerald-400/70 border border-emerald-400/20">{c.state}</div>
+            </div>
+
+            <AbstractVisual type={c.visualType} />
+
+            <div className="text-body-sm leading-[1.4]">
+              {c.outcome}
+            </div>
+          </Link>
+        ))}
       </div>
     </section>
   );

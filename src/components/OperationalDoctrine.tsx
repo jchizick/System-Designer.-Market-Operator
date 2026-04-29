@@ -80,7 +80,7 @@ function ExecutionTelemetry() {
           }}
           transition={{ duration: 0.3, repeat: confirmed ? 0 : Infinity }}
         />
-        <span className="font-mono text-[11px] text-emerald-500 tracking-[0.08em]">
+        <span className="text-mono-label text-emerald-500 tracking-[0.08em]">
           {confirmed ? 'ORDER DEPLOYED' : 'DEPLOYING...'}
         </span>
         {confirmed && (
@@ -380,7 +380,7 @@ export function OperationalDoctrine() {
           <div className="text-mono-xs text-emerald-400 mb-1">
             004 // DOCTRINE
           </div>
-          <h2 className="text-[24px] font-normal tracking-[-0.02em] text-text-primary">
+          <h2 className="text-heading-md">
             Operational Loop
           </h2>
         </div>
@@ -549,7 +549,7 @@ export function OperationalDoctrine() {
 
                 {/* Node name */}
                 <motion.div
-                  className={`font-mono text-[11px] tracking-[0.02em] transition-colors duration-300 ${isActive ? 'text-text-primary' : 'text-text-secondary/60'
+                  className={`text-mono-label tracking-[0.02em] transition-colors duration-300 ${isActive ? 'text-text-primary' : 'text-text-secondary/60'
                     }`}
                   animate={
                     executeActive
@@ -562,7 +562,7 @@ export function OperationalDoctrine() {
                 </motion.div>
 
                 {/* Short desc */}
-                <div className="text-[9px] text-text-secondary/50 max-w-[110px] text-center leading-relaxed mt-1 hidden lg:block">
+                <div className="text-mono-2xs text-text-secondary/50 max-w-[110px] text-center leading-relaxed mt-1 hidden lg:block">
                   {node.desc}
                 </div>
               </motion.div>
@@ -622,12 +622,12 @@ export function OperationalDoctrine() {
 
                 <div className="flex flex-col">
                   <div
-                    className={`font-mono text-[10px] transition-colors ${isActive ? 'text-emerald-500' : 'text-text-secondary/50'
+                    className={`text-mono-xs transition-colors ${isActive ? 'text-emerald-500' : 'text-text-secondary/50'
                       }`}
                   >
                     {node.label} — {node.id}
                   </div>
-                  <div className="text-[10px] text-text-secondary/50 leading-relaxed">
+                  <div className="text-mono-xs text-text-secondary/50 leading-relaxed">
                     {node.desc}
                   </div>
                 </div>
@@ -733,7 +733,7 @@ export function OperationalDoctrine() {
                       <span className="text-emerald-500 text-xs">{activeNode.icon}</span>
                     </div>
                     <div>
-                      <div className="font-mono text-[13px] text-emerald-500 tracking-[0.02em]">
+                      <div className="text-mono-sm text-emerald-500 tracking-[0.02em]">
                         {activeNode.id}
                       </div>
                       <div className="text-mono-2xs text-text-secondary/40">

@@ -126,8 +126,8 @@ const TickerRow = React.memo(function TickerRow({ item, focused }: { item: Ticke
       <span
         className={`font-mono tracking-[0.08em] flex-shrink-0 uppercase transition-all duration-700 ease-out ${
           focused
-            ? 'text-[12px] text-emerald-500 w-[76px]'
-            : 'text-[11px] text-text-primary w-[72px] opacity-50'
+            ? 'text-mono-sm text-emerald-500 w-[76px]'
+            : 'text-mono-label text-text-primary w-[72px] opacity-50'
         }`}
       >
         {item.symbol}
@@ -140,8 +140,8 @@ const TickerRow = React.memo(function TickerRow({ item, focused }: { item: Ticke
       <span
         className={`font-mono ml-auto tabular-nums transition-all duration-700 ease-out ${
           focused
-            ? 'text-[13px] text-text-primary'
-            : 'text-[12px] text-text-primary opacity-50'
+            ? 'text-mono-sm text-text-primary'
+            : 'text-mono-sm text-text-primary opacity-50'
         }`}
       >
         {formattedPrice}
@@ -150,7 +150,7 @@ const TickerRow = React.memo(function TickerRow({ item, focused }: { item: Ticke
       {/* % Change */}
       <span
         className={`font-mono text-right tabular-nums flex-shrink-0 transition-all duration-700 ease-out ${
-          focused ? 'text-[12px] w-[60px]' : 'text-[11px] w-[56px] opacity-60'
+          focused ? 'text-mono-sm w-[60px]' : 'text-mono-label w-[56px] opacity-60'
         } ${positive ? 'text-emerald-500' : 'text-[#8b3a3a]'}`}
       >
         {positive ? '+' : ''}{item.change.toFixed(2)}%

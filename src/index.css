@@ -65,7 +65,22 @@
     display: none;
   }
 
-  /* Typography Scale */
+  /* Typography Scale — Prose */
+  .text-display {
+    @apply text-[38px] sm:text-[48px] font-medium tracking-[-0.03em] leading-[0.95] text-text-primary;
+  }
+  .text-heading-lg {
+    @apply text-[28px] sm:text-[34px] font-normal tracking-[-0.02em] leading-[1.1] text-text-primary;
+  }
+  .text-heading-md {
+    @apply text-[20px] sm:text-[24px] font-normal tracking-[-0.02em] text-text-primary;
+  }
+  .text-heading-sm {
+    @apply text-[18px] font-medium tracking-[-0.01em] leading-[1.2] text-text-primary;
+  }
+  .text-stat {
+    @apply text-[28px] sm:text-[32px] font-normal tracking-[-0.02em] leading-none;
+  }
   .text-body-lg {
     @apply text-[16px] leading-[1.5] text-white/70;
   }
@@ -75,13 +90,33 @@
   .text-body-sm {
     @apply text-[13px] leading-[1.6] text-white/60;
   }
+  .text-body-xs {
+    @apply text-[11px] leading-[1.7] text-white/50;
+  }
+
+  /* Typography Scale — Mono */
+  .text-mono-statement {
+    @apply text-[16px] sm:text-[20px] tracking-[-0.01em] font-mono leading-relaxed;
+  }
+  .text-mono-lg {
+    @apply text-[16px] tracking-[0.04em] font-mono;
+  }
+  .text-mono-base {
+    @apply text-[14px] tracking-[0.04em] font-mono;
+  }
+  .text-mono-sm {
+    @apply text-[12px] tracking-[0.03em] font-mono;
+  }
+  .text-mono-label {
+    @apply text-[11px] tracking-[0.04em] font-mono;
+  }
   .text-mono-xs {
     @apply text-[10px] tracking-[0.1em] font-mono;
   }
   .text-mono-2xs {
     @apply text-[9px] tracking-[0.1em] font-mono;
   }
-  .text-mono-sm {
-    @apply text-[12px] tracking-[0.03em] font-mono;
+  .text-mono-3xs {
+    @apply text-[8px] tracking-[0.1em] font-mono;
   }
 }

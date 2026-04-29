@@ -36,68 +36,91 @@ export interface CaseStudy {
   // Media placeholders (paths will be added later when images are ready)
   heroImage?: string;
   buildDiagramImage?: string;
+  buildImages?: string[];        // Per-block images for "The Build" section
+  systemMotionImage?: string;    // Static image for "System in Motion" (pre-video)
   videoClip?: string;
 }
 
 export const caseStudies: CaseStudy[] = [
   {
-    id: "BRAWL_01",
-    slug: "brawl-indicator",
-    type: "VOLATILITY ENGINE",
-    title: "Brawl Indicator",
-    outcome: "Structured decision model for high-volatility environments.",
+    id: "BRAWL_HQ",
+    slug: "blockchain-brawlers",
+    type: "BRAND ECOSYSTEM",
+    title: "Blockchain Brawlers",
+    outcome: "A self-reinforcing content, music, community, and education engine for crypto traders.",
     visualType: "bars",
-    state: "ACTIVE",
-    subtitle: "Volatility Scoring Engine",
-    heroDescription: "A real-time volatility classification system that scores market conditions on a proprietary scale, enabling operators to calibrate position sizing and execution strategy to the current regime.",
-    year: "2024",
-    duration: "8 WEEKS",
-    role: "SYSTEM ARCHITECT",
-    problem: "Traditional volatility indicators like VIX and ATR are lagging by design — they measure what already happened. In fast-moving crypto and derivatives markets, by the time a volatility spike registers on conventional metrics, the opportunity window has already closed or the risk has already materialized. Operators need a forward-looking volatility score that adapts in sub-second intervals.",
-    insight: "Volatility isn't a single number — it's a composite state. By decomposing market microstructure into three layers (order flow imbalance, spread dynamics, and tick velocity), we can construct a real-time \"brawl score\" that predicts regime transitions 200-400ms before they appear in price. The key was treating volatility as a classification problem, not a regression problem.",
-    buildDescription: "A three-layer signal processing system trained on real-time market microstructure data.",
+    state: "LIVE SYSTEM",
+    subtitle: "Underground Trading Culture Engine",
+    heroDescription: "Blockchain Brawlers is a multi-layered brand ecosystem built around crypto trading, outsider psychology, music, education, and community. What started as a content identity evolved into a full cultural machine — connecting visual assets, market commentary, music drops, community language, and trader education into one unified system.",
+    year: "2025",
+    duration: "ONGOING",
+    role: "FOUNDER / BRAND SYSTEM DESIGNER",
+    problem: "Most trading brands look the same: generic charts, recycled motivation, fake alpha, and surface-level content. The crypto education space is crowded with influencers selling shortcuts, while most communities fail to create a real identity people want to belong to. Blockchain Brawlers was built to solve a different problem: how do you turn trading education into a culture — something people can recognize, participate in, and rally around?",
+    insight: "A strong trading brand cannot be built from content alone. It needs mythology, language, rituals, visual identity, music, and repeatable systems. The breakthrough was treating Blockchain Brawlers less like a content page and more like a living ecosystem: every post, song, visual, course concept, and community interaction feeds the same larger narrative — disciplined outsiders learning to survive and win in high-volatility markets.",
+    buildDescription: "A multi-layered brand system connecting content, music, community, and education into one compounding ecosystem.",
+    heroImage: "/src/assets/brawler-hero.png",
+    buildImages: [
+      "/src/assets/brawler-ecosystem.png",
+      "/src/assets/brawler-content-system.png",
+      "/src/assets/brawler-music.png",
+      "/src/assets/brawler-community.png",
+      "/src/assets/brawler-partnerships.png"
+    ],
+    systemMotionImage: "/src/assets/brawler-system-in-motion.png",
     hasVideo: true,
-    videoCaption: "Watch the brawl score classify a flash crash in real-time — from CALM to CHAOS in under 400ms.",
+    videoCaption: "Short cinematic reel showing the Blockchain Brawlers engine in motion: visuals, charts, music, posts, and community loops.",
     build: [
       {
-        label: "SYSTEM",
-        title: "Microstructure Decomposition Engine",
-        description: "Three-layer signal processing pipeline that ingests raw L2 order book data, computes flow toxicity metrics (VPIN), spread z-scores, and tick-by-tick velocity vectors. Each layer produces an independent regime classification that feeds into a weighted ensemble scorer.",
-        tags: ["Python", "NumPy", "WebSocket", "Redis"]
+        label: "ECOSYSTEM",
+        title: "Content → Music → Community → Course → Tools / Partnerships",
+        description: "The brand was structured as a connected ecosystem rather than a collection of disconnected assets. Social content introduces the philosophy, music expands the world, community language creates belonging, and the course turns the worldview into a practical trading education system. Each layer reinforces the others.",
+        tags: ["Brand Strategy", "Ecosystem Design", "Content Architecture", "Community"]
       },
       {
-        label: "DESIGN",
-        title: "Operator Dashboard Interface",
-        description: "Minimal HUD overlay designed for split-second decision making. The brawl score renders as a single pulsing bar with color-coded regime zones (CALM → TENSION → BRAWL → CHAOS). Secondary panels expose the three decomposed layers for operators who want to understand why the score is where it is.",
-        tags: ["React", "Canvas API", "WebGL"]
+        label: "CONTENT",
+        title: "Trading Philosophy Content System",
+        description: "A repeatable content system was built around market psychology, execution discipline, chart interpretation, and outsider identity. Posts, visual assets, quotes, and educational fragments all use a consistent voice: sharp, direct, anti-hype, and focused on turning noisy market behavior into structured decision-making.",
+        tags: ["X / Twitter", "Visual Assets", "Copywriting", "Trading Psychology"]
       },
       {
-        label: "TOOLS",
-        title: "Backtesting & Calibration Suite",
-        description: "Historical replay engine that processes 18 months of tick data across 12 venues to calibrate regime thresholds. Includes a Monte Carlo simulator for stress-testing score stability during black swan events and flash crashes.",
-        tags: ["Rust", "ClickHouse", "Grafana"]
+        label: "MUSIC",
+        title: "The Brawler Soundtrack",
+        description: "Music became a world-building layer for the brand. Tracks across hip-hop, drill, reggae, drum & bass, phonk, synthwave, and global styles were used to give the project emotional gravity and cultural identity. The music system transforms trading from a technical topic into a cinematic, mythic experience.",
+        tags: ["Suno AI", "Album System", "Audio Branding", "Worldbuilding"]
+      },
+      {
+        label: "COMMUNITY",
+        title: "Language, Identity & Engagement Loops",
+        description: "The community layer was designed around shared language, inside jokes, trader archetypes, and the idea of the 'Brawler' as a disciplined market outsider. Engagement was not treated as vanity metrics — it became feedback for refining the content engine and identifying which ideas had cultural traction.",
+        tags: ["Community Design", "Engagement Loops", "Brand Voice", "Tribe Building"]
+      },
+      {
+        label: "PARTNERSHIP",
+        title: "ATAS Platform Partnership",
+        description: "The brand extended beyond content into a strategic partnership with ATAS, aligning Blockchain Brawlers with a professional order flow trading platform used by serious traders. This gave the ecosystem a stronger bridge between education, execution, and real trading tools.",
+        tags: ["ATAS", "Order Flow", "Trading Tools", "Strategic Partnership"]
       }
     ],
     outcomes: [
-      "Regime detection accuracy: 94.2% on out-of-sample data",
-      "Average detection lead time: 340ms before price impact",
-      "Position sizing efficiency improved by 28% during high-vol regimes",
-      "Deployed across 3 trading desks with zero false-positive halts in 6 months",
-      "Processing latency: sub-5ms end-to-end on commodity hardware"
+      "Created a complete trading culture brand spanning content, music, education, and community",
+      "Developed a distinct visual and verbal identity separate from generic crypto influencer branding",
+      "Produced a multi-genre music layer that expanded the brand into a larger fictional and emotional universe",
+      "Built the foundation for a beginner trading course rooted in discipline, psychology, and repeatable process",
+      "Established a scalable ecosystem where each content layer feeds the next"
     ],
     resultStats: [
-      { value: "94.2%", label: "Regime detection accuracy on out-of-sample data" },
-      { value: "340ms", label: "Average detection lead time before price impact" },
-      { value: "28%", label: "Position sizing efficiency improvement" },
-      { value: "<5ms", label: "End-to-end processing latency" }
+      { value: "4", label: "Core ecosystem layers: content, music, community, course" },
+      { value: "33+", label: "Original music tracks developed for the brand universe" },
+      { value: "1", label: "Unified brand mythology across every touchpoint" },
+      { value: "∞", label: "Repeatable content loops designed for long-term compounding" }
     ],
-    takeaway: "The best volatility systems don't predict the future — they classify the present faster than anyone else can react. Speed of classification beats accuracy of prediction every time in live markets."
+    takeaway: "Blockchain Brawlers is not just a trading brand. It is a cultural engine. The system works because every asset feeds the same loop: philosophy becomes content, content becomes identity, identity becomes community, and community creates demand for deeper education."
   },
   {
     id: "LIQ_MAP",
-    slug: "liquidity-mapper",
+    slug: "ai-brand-machine",
     type: "HEATMAP OVERLAY",
-    title: "Liquidity Mapper",
+    title: "AI Brand Machine",
     outcome: "Identified hidden support zones across fragmented order books.",
     visualType: "grid",
     state: "STABLE",
@@ -147,216 +170,271 @@ export const caseStudies: CaseStudy[] = [
     takeaway: "The map is not the territory, but a better map changes how you navigate. Seeing aggregated liquidity doesn't guarantee better trades — but it eliminates the worst ones."
   },
   {
-    id: "SN_DASH",
-    slug: "signal-nexus",
-    type: "OPERATOR TERMINAL",
-    title: "Signal Nexus",
-    outcome: "Unified 14 disparate data feeds into a single execution context.",
+    id: "BRAWLER_MIND",
+    slug: "trading-journey-brawler-mind",
+    type: "TRADING SYSTEM / PERFORMANCE OS",
+    title: "The Brawler Mind",
+    outcome: "A personal trading journey transformed into a decision-making framework for operating under pressure.",
     visualType: "wave",
-    state: "ACTIVE",
-    subtitle: "Unified Intelligence Terminal",
-    heroDescription: "A command-center dashboard that consolidates 14 disparate market data feeds, social signals, and on-chain metrics into a single coherent execution context for market operators.",
-    year: "2023",
-    duration: "16 WEEKS",
-    role: "SYSTEM DESIGNER",
-    problem: "Professional traders and analysts operate across an absurd number of tools — exchange terminals, charting platforms, news feeds, social sentiment trackers, on-chain analytics, economic calendars. Context-switching between 8-12 browser tabs and 3-4 applications creates cognitive overhead that directly costs money. The information exists, but it's scattered across incompatible interfaces with no unified view.",
-    insight: "The problem isn't information scarcity — it's information fragmentation. A trader doesn't need more data; they need the right data, in the right context, at the right moment. By building a priority-weighted attention system that surfaces only the most actionable signals and suppresses noise, we can reduce cognitive load by 60% while improving decision quality.",
-    buildDescription: "A priority-weighted intelligence layer that unifies 14 feeds into a single execution context.",
-    hasVideo: true,
-    videoCaption: "Signal Nexus in FOCUS mode — watch 14 feeds collapse into a single actionable view.",
-    build: [
-      {
-        label: "SYSTEM",
-        title: "Feed Normalization & Priority Engine",
-        description: "Ingestion layer that normalizes 14 data sources into a unified event schema. Each event is scored by a priority engine that considers recency, relevance to active positions, historical impact correlation, and cross-signal confirmation. Low-priority events are suppressed; high-priority events trigger visual and audio alerts.",
-        tags: ["Node.js", "Kafka", "Redis Streams", "TypeScript"]
-      },
-      {
-        label: "DESIGN",
-        title: "Adaptive Command Interface",
-        description: "Terminal-inspired interface with configurable panel layout. Three operator modes: SCAN (broad market overview), FOCUS (single-asset deep dive), and EXECUTE (order entry with pre-populated context). The UI adapts information density based on current volatility regime — showing more detail when markets are calm, stripping to essentials during high-stress periods.",
-        tags: ["React", "Zustand", "Framer Motion", "Canvas"]
-      },
-      {
-        label: "TOOLS",
-        title: "Plugin Architecture & SDK",
-        description: "Extensible plugin system allowing operators to write custom signal processors in TypeScript. SDK includes pre-built connectors for major exchanges, sentiment APIs, and on-chain data providers. Hot-reloadable plugins with sandboxed execution for security.",
-        tags: ["TypeScript SDK", "WASM Sandbox", "REST/WS API"]
-      }
-    ],
-    outcomes: [
-      "Consolidated 14 data feeds into a single sub-200ms latency view",
-      "Average operator context-switching reduced by 62%",
-      "Decision-to-execution time decreased from 4.2s to 1.8s average",
-      "Plugin ecosystem grew to 23 community-contributed signal processors",
-      "Active daily users across 2 proprietary desks and 15 independent operators"
-    ],
-    resultStats: [
-      { value: "14", label: "Data feeds consolidated into one view" },
-      { value: "62%", label: "Reduction in operator context-switching" },
-      { value: "1.8s", label: "Average decision-to-execution time" },
-      { value: "23", label: "Community-contributed plugins" }
-    ],
-    takeaway: "Unification is not aggregation. Throwing everything on one screen creates a different kind of noise. The real design challenge is deciding what not to show — and when."
-  },
-  {
-    id: "VRTX_99",
-    slug: "vertex-router",
-    type: "EXECUTION ALGO",
-    title: "Vertex Router",
-    outcome: "Reduced slippage by 12% during peak market stress events.",
-    visualType: "nodes",
-    state: "STABLE",
-    subtitle: "Adaptive Execution Algorithm",
-    heroDescription: "An intelligent order routing system that dynamically splits and sequences trades across venues and time to minimize market impact and execution cost during high-stress market conditions.",
-    year: "2024",
-    duration: "10 WEEKS",
-    role: "ALGO ENGINEER",
-    problem: "Large orders move markets. A naive market order on a single venue creates predictable price impact that erodes returns. Existing smart order routers optimize for fill rate and speed but largely ignore the temporal dimension — they don't model how their own execution affects subsequent fill quality. During market stress events, this blind spot amplifies, turning a 2% slippage into 5-8%.",
-    insight: "Execution is a game against yourself. Every partial fill changes the state of the market for your remaining order. The key insight was modeling execution as a sequential decision process where each fill updates the expected cost of the remaining quantity. By combining venue-specific microstructure models with a lightweight reinforcement learning agent, the router learns to adapt its splitting strategy in real-time based on observed fill quality.",
-    buildDescription: "An adaptive order routing engine that learns from its own execution in real-time.",
-    hasVideo: true,
-    videoCaption: "Vertex Router splitting a $2M order across 6 venues during a volatility spike.",
-    build: [
-      {
-        label: "SYSTEM",
-        title: "Multi-Venue Order Management System",
-        description: "FIX protocol connectivity to 6 venues with sub-millisecond order routing. Parent-child order hierarchy with real-time fill tracking, partial fill reconciliation, and automatic residual handling. Risk limits enforced at every layer with hard circuit breakers.",
-        tags: ["C++", "FIX 4.4", "ZeroMQ", "RocksDB"]
-      },
-      {
-        label: "DESIGN",
-        title: "Execution Analytics Console",
-        description: "Post-trade analysis dashboard showing fill distribution across venues and time, realized vs. expected slippage decomposition, and market impact visualization. Real-time monitoring view during active execution shows order progress, venue allocation, and cost accumulation.",
-        tags: ["React", "Recharts", "WebSocket"]
-      },
-      {
-        label: "TOOLS",
-        title: "Strategy Backtester & Simulator",
-        description: "Historical order replay engine with realistic fill simulation including queue position modeling, partial fill probability, and market impact feedback. Supports strategy parameter optimization via grid search and Bayesian optimization.",
-        tags: ["Python", "Ray", "DuckDB", "Optuna"]
-      }
-    ],
-    outcomes: [
-      "Average slippage reduction: 12.4% across all market conditions",
-      "Peak stress slippage reduction: 23% vs. baseline TWAP",
-      "Fill rate maintained at 99.7% despite aggressive impact minimization",
-      "Processed $2.4B in notional volume during first quarter of production",
-      "Zero risk limit breaches across 180 days of continuous operation"
-    ],
-    resultStats: [
-      { value: "12.4%", label: "Average slippage reduction across all conditions" },
-      { value: "$2.4B", label: "Notional volume processed in Q1" },
-      { value: "99.7%", label: "Fill rate maintained under stress" },
-      { value: "0", label: "Risk limit breaches in 180 days" }
-    ],
-    takeaway: "The best execution algorithm is one that treats every fill as new information. Static strategies break under stress — adaptive ones thrive on it."
-  },
-  {
-    id: "OBS_NET",
-    slug: "obsidian-network",
-    type: "MONITORING SYSTEM",
-    title: "Obsidian Network",
-    outcome: "Real-time anomaly detection with sub-millisecond latency.",
-    visualType: "radar",
-    state: "TESTING",
-    subtitle: "Infrastructure Anomaly Detection Grid",
-    heroDescription: "A distributed monitoring mesh that detects infrastructure anomalies, performance degradation, and systemic risks across trading systems with sub-millisecond precision.",
+    state: "LIVE",
+    subtitle: "Trading Psychology, Execution Discipline & Human Performance System",
+    heroDescription: "A case study on turning years of market observation, emotional pattern recognition, and execution pressure into a practical operating system for traders: The Brawler Mind.",
     year: "2025",
-    duration: "14 WEEKS",
-    role: "INFRASTRUCTURE LEAD",
-    problem: "Trading infrastructure failures don't announce themselves — they cascade. A memory leak in one service becomes a latency spike in another, which triggers a timeout in a third, which causes a missed fill that costs real money. Traditional monitoring tools (Datadog, Grafana) operate on 10-60 second polling intervals — an eternity in systems where microseconds matter. By the time an alert fires, the damage is done.",
-    insight: "Monitoring at the speed of trading requires rethinking what \"monitoring\" means. Instead of polling metrics at intervals, we instrument every system boundary with inline telemetry that emits structured events on every state change. The anomaly detection model runs at the edge — on the same machines as the trading systems — eliminating network roundtrip latency entirely. The model doesn't look for threshold breaches; it learns normal behavioral patterns and flags deviations.",
-    buildDescription: "Edge-deployed anomaly detection that operates at the speed of the systems it monitors.",
-    hasVideo: false,
-    videoCaption: "Cascade failure propagation visualized in real-time across the network topology.",
+    duration: "ONGOING",
+    role: "TRADER / SYSTEM DESIGNER / AUTHOR",
+    problem: "Most traders don’t lose because they lack information. They lose because their internal state collapses under pressure. Volatility exposes unfinished decisions: fear, urgency, ego, overconfidence, hesitation, and the need to be right. The challenge was not simply learning how to read charts — it was learning how to read the operator behind the chart.",
+    insight: "The market is not only a price system. It is a behavioral mirror. Every candle reflects participation, pressure, memory, direction, and cycles — but every trade also reflects the trader’s internal auction: their nervous system, emotional state, objective clarity, and ability to execute without contamination. The real edge is not prediction. It is alignment between market context, internal state, strategy, risk, and execution.",
+    buildDescription: "A personal trading framework evolved into a full performance operating system: part market-reading model, part execution process, part psychological discipline, and part written field manual.",
+    heroImage: "/src/assets/brawler-mind-hero.png",
+    buildImages: [
+      "/src/assets/brawler-mind-philosophy.png",
+      "/src/assets/brawler-mind-system-rules.png",
+      "/src/assets/brawler-mind-book.png",
+      "/src/assets/brawler-mind-chart-examples.png"
+    ],
+    systemMotionImage: "/src/assets/brawler-mind-system-in-motion.png",
+    hasVideo: true,
+    videoCaption: "Chart replay showing price movement, internal reaction, decision filter, and execution outcome.",
     build: [
       {
+        label: "PHILOSOPHY",
+        title: "The Market as Mirror",
+        description: "The foundation of the system reframes trading as a mirror of human behavior. Price action is treated as emotional telemetry: fear, greed, urgency, conviction, hesitation, and exhaustion rendered through candles, volume, structure, and time. The trader’s task is not to predict the future, but to perceive what is happening clearly enough to act without distortion.",
+        tags: ["Market Psychology", "Auction Theory", "Emotional Telemetry", "Pattern Recognition"]
+      },
+      {
         label: "SYSTEM",
-        title: "Edge-Deployed Anomaly Detection",
-        description: "Lightweight anomaly detection agents deployed as sidecar processes alongside every critical trading service. Each agent maintains a local model of normal behavior (latency distributions, throughput patterns, error rates) and emits anomaly scores in real-time. Central coordinator aggregates edge signals to detect correlated failures across services.",
-        tags: ["Rust", "eBPF", "DPDK", "gRPC"]
+        title: "The B.R.A.W.L Process",
+        description: "A five-part execution framework designed to reduce emotional leakage under pressure: Break Down the charts, Recognize the objective, Assess the strategy, Work the execution, and Learn from the results. Each step acts as a gatekeeper against a specific failure mode: confusion, overreach, misalignment, emotional execution, and unexamined repetition.",
+        tags: ["Process Design", "Risk Management", "Execution Discipline", "Decision Framework"]
       },
       {
-        label: "DESIGN",
-        title: "Network Topology Visualization",
-        description: "Real-time 3D network graph showing all monitored services as nodes with health-colored edges representing inter-service communication. Anomaly propagation is visualized as a spreading wavefront across the topology, making cascade failures immediately visible. Drill-down views expose individual service telemetry with microsecond-precision timelines.",
-        tags: ["Three.js", "WebGL", "React", "D3-force"]
+        label: "BOOK",
+        title: "The Brawler Mind",
+        description: "The trading framework was expanded into a full written system exploring market structure, emotional regulation, trading process, failure modes, safety rails, and the eight circuits of consciousness. The book became the clearest expression of the work: not a shortcut, not a signal system, but a field manual for mastering the internal system behind performance.",
+        tags: ["Writing", "Systems Thinking", "Human Performance", "Trading Psychology"]
       },
       {
-        label: "TOOLS",
-        title: "Chaos Engineering & Replay",
-        description: "Controlled fault injection framework for testing anomaly detection sensitivity. Includes network partition simulation, latency injection, memory pressure testing, and CPU throttling. Full telemetry replay capability for post-incident forensic analysis with frame-by-frame timeline scrubbing.",
-        tags: ["Go", "Toxiproxy", "InfluxDB", "Temporal"]
+        label: "APPLICATION",
+        title: "Chart Study & Execution Review",
+        description: "The framework is applied through chart breakdowns, trade reviews, emotional state audits, and post-session feedback loops. Wins and losses are treated as information, not identity. The goal is to refine the operator over time until process becomes instinct.",
+        tags: ["Trade Review", "Journaling", "Feedback Loops", "Performance Analysis"]
       }
     ],
     outcomes: [
-      "Anomaly detection latency: 0.3ms median (99th percentile: 0.8ms)",
-      "Detected 94% of cascade-risk anomalies before user-visible impact",
-      "Reduced mean time to detection (MTTD) from 45 seconds to 0.5ms",
-      "Agent CPU overhead: < 0.1% of host resources",
-      "Currently monitoring 47 services across 3 data centers in testing"
+      "Created a complete trading philosophy centered on state control, process, and execution discipline",
+      "Developed the B.R.A.W.L framework as a repeatable decision-making sequence under pressure",
+      "Expanded the system into The Brawler Mind, a full-length book on trading psychology and self-mastery",
+      "Built a reusable language system for future trading content, visual assets, course material, and brand extensions",
+      "Translated personal market experience into a portfolio-ready case study demonstrating decision-making under uncertainty"
     ],
     resultStats: [
-      { value: "0.3ms", label: "Median anomaly detection latency" },
-      { value: "94%", label: "Cascade-risk anomalies caught pre-impact" },
-      { value: "90,000x", label: "Faster than traditional MTTD" },
-      { value: "47", label: "Services monitored across 3 data centers" }
+      { value: "5", label: "Core steps in the B.R.A.W.L execution process" },
+      { value: "3", label: "Major sections: Market & Mind, Process, Consciousness" },
+      { value: "8", label: "Internal circuits mapped for performance mastery" },
+      { value: "250", label: "Pages in the first Brawler Mind manuscript" }
     ],
-    takeaway: "You can't monitor a microsecond system with a millisecond tool. The monitoring layer must operate at least one order of magnitude faster than the system it watches."
+    takeaway: "The market does not only test your strategy. It tests your state. The strongest trading system is the one that protects the operator from impulse, distortion, and identity-driven decision-making."
   },
   {
-    id: "PRISM_X",
-    slug: "prism-analytics",
-    type: "DATA REFRACTION",
-    title: "Prism Analytics",
-    outcome: "Separated institutional flow from retail noise automatically.",
+    id: "ALG_EXP",
+    slug: "algonquin-dashboard",
+    type: "EXPEDITION CONTROL SYSTEM",
+    title: "Algonquin Dashboard",
+    outcome: "A real-time planning command center for a backcountry camping trip.",
+    visualType: "nodes",
+    state: "LIVE BUILD",
+    subtitle: "Maple Leaf Lake Expedition Control",
+    heroDescription: "A high-utility dashboard built to coordinate a real backcountry camping and hiking trip to Maple Leaf Lake in Algonquin Park — centralizing weather, gear, meals, timeline, route data, crew responsibilities, park intelligence, and offline safety status into one calm operational interface.",
+    year: "2026",
+    duration: "IN PROGRESS",
+    role: "PRODUCT DESIGNER / FULL-STACK BUILDER",
+    problem: "Backcountry trip planning lives across too many disconnected surfaces: weather apps, park alerts, PDF maps, reservation portals, gear spreadsheets, meal lists, notes, and group chats. Each tool solves one small part of the problem, but none of them create a complete operational picture. For a July hiking and camping trip with Liz to Maple Leaf Lake, that fragmentation created unnecessary planning friction and made it harder to know what was ready, what needed action, and what risks still needed to be managed.",
+    insight: "The real product opportunity was not navigation. It was preparation. Existing tools help answer where to go, but they do not help bridge the gap between booking the trip and stepping onto the trail. The dashboard turns that preparation phase into a system of record: a shared command center that translates raw trip variables into readiness, clarity, and calm execution.",
+    buildDescription: "A localized expedition control dashboard designed around preparedness, environmental awareness, and team coordination.",
+    heroImage: "/src/assets/algonquin-hero.png",
+    buildImages: [
+      "/src/assets/algonquin-data-inputs.png",
+      "/src/assets/algonquin-ui-screens.png",
+      "/src/assets/algonquin-decision-flow.png",
+      "/src/assets/algonquin-mobile-view.png"
+    ],
+    systemMotionImage: "/src/assets/algonquin-system-in-motion.png",
+    hasVideo: true,
+    videoCaption: "Dashboard state changes showing readiness, weather, gear status, and timeline updates across the expedition plan.",
+    build: [
+      {
+        label: "SYSTEM",
+        title: "Centralized Expedition Data Model",
+        description: "The dashboard consolidates the core planning layers of the trip into one operational interface: route, forecast, gear, meals, crew roles, timeline, alerts, park intelligence, and offline safety. Instead of forcing the user to jump between apps and documents, each module contributes to a shared readiness picture.",
+        tags: ["Next.js", "React", "TypeScript", "Supabase"]
+      },
+      {
+        label: "DESIGN",
+        title: "Mission Control Interface",
+        description: "The visual system is built around calm intelligence rather than outdoor lifestyle aesthetics. Dense cards, status rings, segmented readiness bars, mono labels, and dark field-interface styling make the product feel like professional expedition software — closer to digital PPE than a travel app.",
+        tags: ["Tailwind CSS", "Lucide Icons", "Dark UI", "Dashboard UX"]
+      },
+      {
+        label: "LOGIC",
+        title: "Readiness Engine",
+        description: "A weighted scoring system evaluates gear completeness, meal planning, safety readiness, weather preparation, and timeline completion. The goal is to make ambiguity visible: what is packed, what is missing, what is critical, and what is already under control.",
+        tags: ["Readiness Scoring", "Helper Functions", "State Logic", "Status Systems"]
+      },
+      {
+        label: "DATA",
+        title: "Environmental + Park Intelligence Layer",
+        description: "The dashboard integrates weather, conditions, sunrise/sunset timing, park advisories, water notes, fire status, wildlife information, and site-specific details for Maple Leaf Lake. This creates a localized planning layer that generic apps do not provide.",
+        tags: ["Weather Data", "Park Alerts", "Maple Leaf Lake", "Site 4"]
+      },
+      {
+        label: "TOOLS",
+        title: "Offline Safety + Field Execution",
+        description: "The system includes an offline vault for critical trip assets: permits, maps, route data, satellite device status, and emergency contact readiness. This shifts the dashboard from a planning document into a field-preparation tool.",
+        tags: ["Offline Vault", "Safety Checks", "Permits", "Route Data"]
+      }
+    ],
+    outcomes: [
+      "Replaced scattered planning across maps, weather apps, spreadsheets, and notes with one expedition control system.",
+      "Created a live readiness model for gear, meals, timeline, weather preparation, and offline safety.",
+      "Built a localized trip interface for Maple Leaf Lake / Site 4 instead of relying on generic outdoor planning tools.",
+      "Designed a calm, high-density UI that gives both the technical planner and co-adventurer a shared source of truth.",
+      "Established a scalable foundation for future outdoor planning systems, including weather sync, alerts, offline data, and trip-specific logistics."
+    ],
+    resultStats: [
+      { value: "1", label: "Unified command center replacing fragmented planning tools" },
+      { value: "5", label: "Readiness categories tracked across the trip system" },
+      { value: "4D", label: "Expedition timeline structured into daily execution phases" },
+      { value: "LIVE", label: "Dashboard connected to real planning data and active trip preparation" }
+    ],
+    takeaway: "The best planning tools do not add more information — they reduce the cost of knowing what matters. The Algonquin Dashboard turns scattered trip logistics into a calm, operational system for making better decisions before entering the field."
+  },
+  {
+    id: "DMT_SYSTEM",
+    slug: "daniels-massage-therapy",
+    type: "CLIENT TRANSFORMATION",
+    title: "Daniel's Massage Therapy",
+    outcome: "Higher bookings, reduced friction, and a fully aligned client experience.",
+    visualType: "radar",
+    state: "DEPLOYED",
+    subtitle: "Brand, Booking System, and Client Experience Overhaul",
+    heroDescription: "A full-stack transformation of a local massage therapy business — replacing a generic template site with a high-conversion, personality-driven booking system that aligns digital presence with real-world experience.",
+    year: "2025",
+    duration: "6 WEEKS",
+    role: "STRATEGY / DESIGN / BUILD",
+    problem: "Daniel’s online presence was working against him. His website relied on a generic template with stock imagery, offering no differentiation or emotional connection. There was no booking system — clients had to call manually, creating friction and missed opportunities. Worse, the digital experience didn’t match the high-quality, personalized care clients received in person, breaking trust at the first touchpoint.",
+    insight: "For service-based businesses, the website isn't just informational — it sets the tone for trust. If the first interaction feels generic or inconvenient, clients hesitate. By aligning brand identity, simplifying booking, and reinforcing the real-world experience digitally, the website becomes a conversion engine instead of a bottleneck.",
+    buildDescription: "A personality-driven brand system paired with a frictionless booking experience.",
+    heroImage: "/src/assets/dmt-hero.png",
+    buildImages: [
+      "/src/assets/dmt-branding-transformation.png",
+      "/src/assets/dmt-booking-flow.png",
+      "/src/assets/dmt-touchpoints.png"
+    ],
+    systemMotionImage: "/src/assets/dmt-sys-motion.png",
+    hasVideo: false,
+    videoCaption: "Scroll-through of the responsive booking experience across desktop and mobile.",
+    build: [
+      {
+        label: "SYSTEM",
+        title: "Brand Identity Transformation",
+        description: "Replaced generic stock visuals with a custom identity rooted in Daniel’s personality and practice style. Delivered a cohesive brand system including logo, iconography, color palette, and typography to establish trust and recognition across all touchpoints.",
+        tags: ["Brand Strategy", "Logo Design", "Typography", "Color Systems"]
+      },
+      {
+        label: "FLOW",
+        title: "Frictionless Booking Experience",
+        description: "Designed and built a responsive Webflow site with integrated Calendly booking. Eliminated the need for phone calls by enabling real-time scheduling, automated confirmations, SMS/email reminders, and clear pre-appointment instructions.",
+        tags: ["Webflow", "Calendly", "UX Design", "Responsive Design"]
+      },
+      {
+        label: "TOUCHPOINTS",
+        title: "End-to-End Client Experience",
+        description: "Aligned every interaction point — from search discovery to post-booking communication. Delivered business cards, portrait photography, and a cohesive digital presence to ensure consistency between online perception and in-person experience.",
+        tags: ["Photography", "Print Design", "Client Journey", "Brand Consistency"]
+      },
+      {
+        label: "ENABLEMENT",
+        title: "Client Empowerment & Systems Thinking",
+        description: "Coached Daniel on mindset, communication, and system usage — including how to manage bookings, interact with clients, and extend his brand through content. Delivered a YouTube playbook and scripts to support long-term growth.",
+        tags: ["Coaching", "Content Strategy", "Systems Thinking"]
+      }
+    ],
+    outcomes: [
+      "Increased booking volume through reduced scheduling friction",
+      "Lower bounce rates due to improved clarity and trust",
+      "Higher client satisfaction with automated reminders and onboarding",
+      "More repeat clients and referrals",
+      "Stronger search presence and inbound leads",
+      "Improved personal confidence and motivation for the client"
+    ],
+    resultStats: [
+      { value: "+40%", label: "Increase in bookings (est.)" },
+      { value: "-60%", label: "Reduction in booking friction" },
+      { value: "+25%", label: "Increase in repeat clients" },
+      { value: "24/7", label: "Automated booking availability" }
+    ],
+    takeaway: "A business doesn’t scale through skill alone — it scales through systems. When brand, experience, and infrastructure align, growth becomes a byproduct."
+  },
+  {
+    id: "VP_REAL_ESTATE",
+    slug: "real-estate-branding-system",
+    type: "BRANDING SYSTEM",
+    title: "Veronica Piper Real Estate",
+    outcome: "End-to-end real estate branding system designed to elevate positioning, win listings, and deploy high-converting marketing at speed.",
     visualType: "scatter",
     state: "ARCHIVED",
-    subtitle: "Flow Classification Intelligence",
-    heroDescription: "A machine learning pipeline that classifies order flow into institutional and retail categories in real-time, enabling operators to align their execution with smart money movement.",
-    year: "2023",
-    duration: "20 WEEKS",
-    role: "ML ENGINEER",
-    problem: "Not all order flow is created equal. Institutional orders — from hedge funds, prop desks, and market makers — carry predictive information about future price direction. Retail orders are largely noise. But on modern exchanges, the two are interleaved and indistinguishable at the surface level. Existing flow analysis tools rely on crude heuristics (order size, time-of-day) that produce high false-positive rates and miss sophisticated institutional execution strategies like iceberg orders and algorithmic slicing.",
-    insight: "Institutional flow has a fingerprint — not in any single order, but in the statistical signature of order sequences. Institutions can disguise individual orders, but they can't disguise the temporal autocorrelation, venue selection patterns, and order-to-trade ratios that emerge over sequences of 50-200 events. By training a transformer model on labeled flow sequences from venues with known institutional participation, we can classify flow with high confidence in real-time.",
-    buildDescription: "A transformer-based ML pipeline that classifies order flow by institutional signature.",
+    subtitle: "Full-Stack Real Estate Branding & Marketing System",
+    heroDescription: "A complete branding and marketing system for a Toronto-based real estate broker — spanning identity, digital presence, print collateral, and listing execution — designed to win listings, build trust instantly, and operate at high speed in a competitive market.",
+    year: "2025",
+    duration: "ONGOING",
+    role: "DESIGN / DEV / STRATEGY",
+    problem: "In Toronto real estate, perception is everything. Sellers choose agents based on trust signals, presentation quality, and perceived reach. Most agents rely on fragmented tools — templated websites, inconsistent branding, slow turnaround on materials — resulting in weak positioning and lost listings. In competitive scenarios, delays of even 24–48 hours can mean losing the deal entirely.",
+    insight: "Winning listings isn't just about experience — it's about how that experience is presented. The agent with the strongest, most cohesive system appears more capable, more organized, and more premium. Speed compounds this advantage. A unified system that can produce high-quality marketing instantly becomes a competitive weapon.",
+    buildDescription: "A fully integrated real estate branding system designed for speed, consistency, and trust at every touchpoint.",
+    heroImage: "/src/assets/vp-hero.png",
+    buildImages: [
+      "/src/assets/vp-identity.png",
+      "/src/assets/vp-application.png",
+      "/src/assets/vp-digital.png"
+    ],
+    systemMotionImage: "/src/assets/vp-system.png",
     hasVideo: false,
     videoCaption: "Flow decomposition dashboard separating institutional signal from retail noise.",
     build: [
       {
-        label: "SYSTEM",
-        title: "Real-Time Flow Classification Pipeline",
-        description: "Streaming ML inference pipeline that processes raw order flow events, constructs rolling sequence windows, and runs classification through an optimized transformer model. Features include order size normalization, venue-adjusted timing, and inter-order interval analysis. Model outputs flow class probabilities with confidence scores at sub-100ms latency.",
-        tags: ["Python", "PyTorch", "ONNX Runtime", "Kafka"]
+        label: "IDENTITY",
+        title: "Premium Brand System",
+        description: "Designed a clean, minimal identity system centered around trust and clarity. Developed logo, typography hierarchy, spacing system, and layout rules to ensure consistency across all mediums — from business cards to digital listings. The visual language balances corporate credibility with modern luxury.",
+        tags: ["Branding", "Typography", "Art Direction"]
       },
       {
-        label: "DESIGN",
-        title: "Flow Decomposition Dashboard",
-        description: "Split-view interface showing raw order flow on the left and classified/decomposed flow on the right. Institutional flow is highlighted with intensity proportional to confidence score. Time-series view shows institutional flow accumulation over configurable windows. Integrated with execution tools to enable flow-aligned order placement.",
-        tags: ["React", "Visx", "WebSocket", "TanStack"]
+        label: "APPLICATION",
+        title: "End-to-End Marketing Assets",
+        description: "Built a complete ecosystem of marketing materials used throughout the listing lifecycle — including listing brochures, postcards, signage, pitch decks, email campaigns, and custom gifts. Each asset is systemized for rapid production while maintaining a consistent premium look.",
+        tags: ["Print Design", "Marketing Systems", "Collateral"]
       },
       {
-        label: "TOOLS",
-        title: "Model Training & Evaluation Pipeline",
-        description: "End-to-end MLOps pipeline for model retraining on new labeled data. Includes automated feature engineering, hyperparameter optimization, A/B testing framework for model versions, and drift detection to trigger retraining when market microstructure changes.",
-        tags: ["MLflow", "Weights & Biases", "Airflow", "DVC"]
+        label: "DIGITAL",
+        title: "Website & Listing Infrastructure",
+        description: "Designed and developed a CMS-driven website in Webflow to manage listings, content, and lead capture. Each listing page is structured for clarity and conversion — combining strong visuals, detailed property data, and direct contact pathways. The system enables rapid publishing and updates under tight timelines.",
+        tags: ["Webflow", "CMS", "UX/UI"]
       }
     ],
     outcomes: [
-      "Flow classification accuracy: 87.3% on out-of-sample data",
-      "Institutional flow detection preceded 68% of significant price moves by 2-8 minutes",
-      "False positive rate: 4.2% (vs. 18% for heuristic-based approaches)",
-      "Model retraining cadence: weekly with automatic drift detection",
-      "Archived after core IP was integrated into Signal Nexus terminal"
+      "Enabled full listing marketing packages to be produced within 24 hours",
+      "Created a consistent premium brand presence across all client touchpoints",
+      "Improved perceived authority and professionalism in listing presentations",
+      "Supported successful listing acquisition in a highly competitive Toronto market",
+      "Reduced reliance on third-party tools through a unified system"
     ],
     resultStats: [
-      { value: "87.3%", label: "Flow classification accuracy" },
-      { value: "68%", label: "Price moves preceded by flow detection" },
-      { value: "4.2%", label: "False positive rate" },
-      { value: "4.3x", label: "Better than heuristic approaches" }
+      { value: "24h", label: "Turnaround for full marketing packages" },
+      { value: "10+", label: "Asset types systemized and standardized" },
+      { value: "100+", label: "Distribution channels per listing" },
+      { value: "1", label: "Unified system replacing fragmented tools" }
     ],
-    takeaway: "The signal was always there — buried in the sequence, not the individual event. Pattern recognition at scale reveals what no single observation can."
+    takeaway: "In real estate, trust is built before the first conversation. A cohesive, high-speed branding system doesn't just support the agent — it becomes the product. The agent with the best system wins."
   }
 ];
 

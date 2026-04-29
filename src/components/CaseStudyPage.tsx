@@ -11,6 +11,27 @@ import {
   Layers
 } from "lucide-react";
 
+/* ─── DMT Case Study Images ─── */
+import dmtHero from '../assets/dmt-hero.png';
+import dmtBrandingTransformation from '../assets/dmt-branding-transformation.png';
+import dmtBookingFlow from '../assets/dmt-booking-flow.png';
+import dmtTouchpoints from '../assets/dmt-touchpoints.png';
+import dmtSysMotion from '../assets/dmt-sys-motion.png';
+
+/* ─── Image path → import map (Vite requires static imports) ─── */
+const imageMap: Record<string, string> = {
+  '/src/assets/dmt-hero.png': dmtHero,
+  '/src/assets/dmt-branding-transformation.png': dmtBrandingTransformation,
+  '/src/assets/dmt-booking-flow.png': dmtBookingFlow,
+  '/src/assets/dmt-touchpoints.png': dmtTouchpoints,
+  '/src/assets/dmt-sys-motion.png': dmtSysMotion,
+};
+
+function resolveImage(path?: string): string | undefined {
+  if (!path) return undefined;
+  return imageMap[path] || path;
+}
+
 /* ─── Animated section wrapper ─── */
 function RevealSection({ children, className = '', delay = 0 }: { key?: React.Key; children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -51,7 +72,7 @@ function SectionHeader({ icon: Icon, number, title, children }: { icon?: React.E
             {title}
           </span>
         </div>
-        
+
         {/* Children (Paragraphs, etc) */}
         {children && (
           <div className="text-body-sm">
@@ -92,16 +113,37 @@ function MediaPlaceholder({ label, className = '', aspectClass = 'aspect-video' 
             <line x1="16" y1="2" x2="2" y2="16" stroke="rgba(255,255,255,0.06)" strokeWidth="0.5" />
           </svg>
         </div>
-        <span className="font-mono text-[9px] text-text-secondary/30 tracking-[0.1em]">{label}</span>
+        <span className="text-mono-2xs text-text-secondary/30">{label}</span>
       </div>
       {/* Status bar */}
-      <div className="absolute bottom-0 left-0 right-0 border-t border-border-subtle px-3 py-1.5 flex justify-between font-mono text-[8px] text-text-secondary/20">
+      <div className="absolute bottom-0 left-0 right-0 border-t border-border-subtle px-3 py-1.5 flex justify-between text-mono-3xs text-text-secondary/20">
         <span>PLACEHOLDER</span>
         <span className="flex items-center gap-1">
           <span className="w-1 h-1 bg-emerald-500/40" />
           PIPELINE ACTIVE
         </span>
       </div>
+    </div>
+  );
+}
+
+/* ─── Case study image with framing ─── */
+function CaseImage({ src, alt, className = '', aspectClass = '' }: { src: string; alt: string; className?: string; aspectClass?: string }) {
+  return (
+    <div className={`relative overflow-hidden border border-border-subtle group/img ${className}`}>
+      {/* Corner accents */}
+      <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-emerald-500/20 z-10" />
+      <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-emerald-500/20 z-10" />
+      <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-emerald-500/20 z-10" />
+      <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-emerald-500/20 z-10" />
+      <img
+        src={src}
+        alt={alt}
+        className={`w-full h-full object-cover transition-transform duration-700 ease-out group-hover/img:scale-[1.02] ${aspectClass}`}
+        loading="lazy"
+      />
+      {/* Subtle overlay on hover */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-500 pointer-events-none" />
     </div>
   );
 }
@@ -134,7 +176,7 @@ function VideoPlaceholder({ caption }: { caption?: string }) {
       </div>
       {/* Caption bar */}
       {caption && (
-        <div className="absolute bottom-0 left-0 right-0 border-t border-border-subtle px-4 py-2 font-mono text-[9px] text-text-secondary/40 flex justify-between items-center">
+        <div className="absolute bottom-0 left-0 right-0 border-t border-border-subtle px-4 py-2 text-mono-2xs text-text-secondary/40 flex justify-between items-center">
           <span>{caption}</span>
           <span className="flex items-center gap-1">
             <span className="w-1 h-1 bg-emerald-500/40" />
@@ -162,11 +204,11 @@ export function CaseStudyPage() {
   if (!caseStudy) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-6">
-        <div className="font-mono text-[11px] text-emerald-500/60 tracking-[0.05em] mb-4">
+        <div className="text-mono-label text-emerald-500/60 mb-4">
           ERR: 404 // CASE NOT FOUND
         </div>
-        <div className="text-[24px] text-text-primary mb-6">Case file not found.</div>
-        <Link to="/" className="px-6 py-2 border border-border-subtle hover:border-emerald-500 hover:text-emerald-500 transition-colors font-mono text-xs tracking-widest uppercase">
+        <div className="text-heading-md mb-6">Case file not found.</div>
+        <Link to="/" className="px-6 py-2 border border-border-subtle hover:border-emerald-500 hover:text-emerald-500 transition-colors text-mono-xs tracking-widest uppercase">
           [ Return to Terminal ]
         </Link>
       </div>
@@ -201,7 +243,7 @@ export function CaseStudyPage() {
             Title + subtitle left, large image right
         ═══════════════════════════════════════════ */}
         <RevealSection className="mb-10">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-8 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.4fr_0.6fr] gap-10 items-center">
             {/* Left: Text */}
             <div className="flex flex-col h-full">
               {/* Badge + counter */}
@@ -214,7 +256,7 @@ export function CaseStudyPage() {
                 </span>
               </div>
 
-              <h1 className="text-[38px] sm:text-[46px] font-medium tracking-[-0.03em] leading-[0.95] text-text-primary mb-3">
+              <h1 className="text-display mb-3">
                 {caseStudy.title}
               </h1>
               <div className="text-mono-sm text-emerald-400 uppercase mb-5">
@@ -224,27 +266,33 @@ export function CaseStudyPage() {
               <p className="text-body-base mb-8 max-w-[480px]">
                 {caseStudy.heroDescription}
               </p>
-
-              {/* Meta row with dividers */}
-              <div className="mt-auto pt-6">
-                <div className="flex flex-row flex-wrap divide-x divide-border-subtle w-full border-t border-border-subtle pt-6">
-                  {[
-                    { key: 'YEAR', val: caseStudy.year },
-                    { key: 'TYPE', val: caseStudy.type },
-                    { key: 'ROLE', val: caseStudy.role },
-                    { key: 'DURATION', val: caseStudy.duration },
-                  ].map((meta) => (
-                    <div key={meta.key} className="flex flex-col px-6 mb-4 first:pl-0 last:pr-0">
-                      <span className="text-mono-xs text-text-secondary uppercase mb-1">{meta.key}</span>
-                      <span className="text-mono-sm text-white font-medium uppercase" title={meta.val}>{meta.val}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
             </div>
 
-            {/* Right: Hero image placeholder */}
-            <MediaPlaceholder label="HERO_VISUAL" aspectClass="aspect-[4/3]" />
+            {/* Right: Hero image */}
+            {resolveImage(caseStudy.heroImage) ? (
+              <CaseImage
+                src={resolveImage(caseStudy.heroImage)!}
+                alt={`${caseStudy.title} hero`}
+                aspectClass="aspect-[16/9] object-cover"
+              />
+            ) : (
+              <MediaPlaceholder label="HERO_VISUAL" aspectClass="aspect-[16/9]" />
+            )}
+          </div>
+
+          {/* Meta row strip */}
+          <div className="w-full border-y border-border-subtle mt-8 flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-border-subtle">
+            {[
+              { key: 'YEAR', val: caseStudy.year },
+              { key: 'TYPE', val: caseStudy.type },
+              { key: 'ROLE', val: caseStudy.role },
+              { key: 'DURATION', val: caseStudy.duration },
+            ].map((meta) => (
+              <div key={meta.key} className="flex flex-col flex-1 py-5 md:py-6 md:px-6 first:pl-0 last:pr-0">
+                <span className="text-mono-xs text-text-secondary uppercase mb-1.5">{meta.key}</span>
+                <span className="text-mono-sm text-white font-medium uppercase" title={meta.val}>{meta.val}</span>
+              </div>
+            ))}
           </div>
         </RevealSection>
 
@@ -257,12 +305,12 @@ export function CaseStudyPage() {
         <RevealSection className="mb-10">
           <div className="grid grid-cols-1 lg:grid-cols-[0.4fr_0.6fr] gap-10">
             {/* Left column: Problem + Insight stacked */}
-            <div className="flex flex-col gap-10">
+            <div className="flex flex-col gap-10 lg:sticky lg:top-12 self-start">
               {/* Problem */}
               <SectionHeader icon={AlertTriangle} number="01" title="The Problem">
                 {caseStudy.problem}
               </SectionHeader>
-              
+
               <div className="h-px bg-border-subtle" />
 
               {/* Insight */}
@@ -276,8 +324,51 @@ export function CaseStudyPage() {
               <p className="mb-5">
                 {caseStudy.buildDescription}
               </p>
-              {/* Build diagram placeholder */}
-              <MediaPlaceholder label="SYSTEM_DIAGRAM" aspectClass="aspect-[4/3.2]" />
+              {/* Build diagram / per-block images */}
+              {caseStudy.buildImages && caseStudy.buildImages.length > 0 ? (
+                <div className="flex flex-col gap-6 mt-2">
+                  {caseStudy.build.map((block, idx) => {
+                    const imgSrc = resolveImage(caseStudy.buildImages?.[idx]);
+                    return (
+                      <RevealSection key={block.label} delay={idx * 0.12}>
+                        {/* Build block card with image */}
+                        <div className="border border-border-subtle bg-transparent">
+                          {/* Block header bar */}
+                          <div className="border-b border-border-subtle px-4 py-2.5 flex items-center justify-between">
+                            <span className="text-mono-2xs text-emerald-500/70">{block.label}</span>
+                            <div className="flex gap-1">
+                              {[0, 1, 2].map(i => <div key={i} className="w-1 h-1 bg-emerald-500/30" />)}
+                            </div>
+                          </div>
+                          {/* Image */}
+                          {imgSrc && (
+                            <CaseImage
+                              src={imgSrc}
+                              alt={`${caseStudy.title} — ${block.title}`}
+                            />
+                          )}
+                          {/* Text content */}
+                          <div className="p-4">
+                            <h4 className="text-body-base font-normal tracking-[-0.01em] text-text-primary mb-2">{block.title}</h4>
+                            <p className="text-body-xs text-text-secondary mb-3">{block.description}</p>
+                            {block.tags && block.tags.length > 0 && (
+                              <div className="flex flex-wrap gap-1.5">
+                                {block.tags.map(tag => (
+                                  <span key={tag} className="text-mono-3xs px-1.5 py-0.5 border border-border-subtle text-text-secondary/50">
+                                    {tag}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </RevealSection>
+                    );
+                  })}
+                </div>
+              ) : (
+                <MediaPlaceholder label="SYSTEM_DIAGRAM" aspectClass="aspect-[4/3.2]" />
+              )}
             </SectionHeader>
           </div>
         </RevealSection>
@@ -292,19 +383,19 @@ export function CaseStudyPage() {
                   <div className="border border-border-subtle bg-transparent hover:bg-white/[0.015] transition-colors h-full flex flex-col">
                     {/* Block header */}
                     <div className="border-b border-border-subtle px-4 py-2.5 flex items-center justify-between">
-                      <span className="font-mono text-[9px] text-emerald-500/70 tracking-[0.1em]">{block.label}</span>
+                      <span className="text-mono-2xs text-emerald-500/70">{block.label}</span>
                       <div className="flex gap-1">
                         {[0, 1, 2].map(i => <div key={i} className="w-1 h-1 bg-emerald-500/30" />)}
                       </div>
                     </div>
                     {/* Block body */}
                     <div className="p-4 flex flex-col flex-1">
-                      <h4 className="text-[14px] font-normal tracking-[-0.01em] text-text-primary mb-2.5">{block.title}</h4>
-                      <p className="text-[11.5px] text-text-secondary leading-[1.7] mb-4 flex-1">{block.description}</p>
+                      <h4 className="text-body-base font-normal tracking-[-0.01em] text-text-primary mb-2.5">{block.title}</h4>
+                      <p className="text-body-xs text-text-secondary mb-4 flex-1">{block.description}</p>
                       {block.tags && block.tags.length > 0 && (
                         <div className="flex flex-wrap gap-1.5 mt-auto">
                           {block.tags.map(tag => (
-                            <span key={tag} className="font-mono text-[8px] tracking-[0.06em] px-1.5 py-0.5 border border-border-subtle text-text-secondary/50">
+                            <span key={tag} className="text-mono-3xs px-1.5 py-0.5 border border-border-subtle text-text-secondary/50">
                               {tag}
                             </span>
                           ))}
@@ -329,8 +420,27 @@ export function CaseStudyPage() {
             <SectionHeader icon={Activity} number="04" title="System in Motion">
               {caseStudy.videoCaption || 'Watch the system in action.'}
             </SectionHeader>
-            {/* Right: video placeholder */}
-            <VideoPlaceholder caption={caseStudy.videoCaption} />
+            {/* Right: video or static image */}
+            {resolveImage(caseStudy.systemMotionImage) ? (
+              <div className="relative">
+                <CaseImage
+                  src={resolveImage(caseStudy.systemMotionImage)!}
+                  alt={`${caseStudy.title} — System in motion`}
+                />
+                {/* Status bar indicating video pending */}
+                <div className="border border-t-0 border-border-subtle px-4 py-2 flex justify-between items-center text-mono-2xs text-text-secondary/40">
+                  <span>{caseStudy.videoCaption || 'System overview'}</span>
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 bg-amber-500/60 rounded-full" />
+                    VIDEO_PENDING
+                  </span>
+                </div>
+              </div>
+            ) : caseStudy.hasVideo ? (
+              <VideoPlaceholder caption={caseStudy.videoCaption} />
+            ) : (
+              <VideoPlaceholder caption={caseStudy.videoCaption} />
+            )}
           </div>
         </RevealSection>
 
@@ -361,7 +471,7 @@ export function CaseStudyPage() {
                   >
                     {/* Top accent line */}
                     <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent group-hover/card:via-emerald-500/40 transition-all duration-300" />
-                    <div className="text-[28px] sm:text-[32px] font-normal tracking-[-0.02em] text-emerald-500 leading-none mb-3 group-hover/card:text-emerald-400 transition-colors duration-300">
+                    <div className="text-stat text-emerald-500 mb-3 group-hover/card:text-emerald-400 transition-colors duration-300">
                       {stat.value}
                     </div>
                     <div className="text-body-sm text-text-secondary/60 group-hover/card:text-text-secondary/80 transition-colors duration-300">
@@ -406,10 +516,10 @@ export function CaseStudyPage() {
                 <div className="text-mono-xs text-emerald-500/50 mb-1">
                   SYS: {prev.id}
                 </div>
-                <div className="text-[14px] text-text-primary group-hover:text-emerald-500 transition-colors">
+                <div className="text-body-base text-text-primary group-hover:text-emerald-500 transition-colors">
                   {prev.title}
                 </div>
-                <div className="text-[11px] text-text-secondary/50 mt-1">
+                <div className="text-body-xs text-text-secondary/50 mt-1">
                   {prev.type}
                 </div>
               </Link>
@@ -428,10 +538,10 @@ export function CaseStudyPage() {
                 <div className="text-mono-xs text-emerald-500/50 mb-1">
                   SYS: {next.id}
                 </div>
-                <div className="text-[14px] text-text-primary group-hover:text-emerald-500 transition-colors">
+                <div className="text-body-base text-text-primary group-hover:text-emerald-500 transition-colors">
                   {next.title}
                 </div>
-                <div className="text-[11px] text-text-secondary/50 mt-1">
+                <div className="text-body-xs text-text-secondary/50 mt-1">
                   {next.type}
                 </div>
               </Link>

@@ -293,7 +293,7 @@ function SystemMapVisual() {
           }}
         >
           <span className="text-mono-2xs text-emerald-400 whitespace-nowrap">{node.label}</span>
-          <span className="text-[8px] text-text-secondary/50 font-mono whitespace-nowrap">{node.subtitle}</span>
+          <span className="text-mono-3xs text-text-secondary/50 whitespace-nowrap">{node.subtitle}</span>
         </div>
       ))}
 
@@ -327,7 +327,7 @@ function PathRow({ step, index }: { key?: React.Key; step: PathStep; index: numb
           <div className="flex items-center h-14">
             <div className="flex flex-row items-start gap-2">
               <span className="text-mono-sm text-emerald-400 whitespace-nowrap">{step.number} //</span>
-              <span className="font-mono text-[13px] font-medium text-text-primary uppercase leading-tight whitespace-pre-line">{step.title}</span>
+              <span className="text-mono-base font-medium text-text-primary uppercase leading-tight whitespace-pre-line">{step.title}</span>
             </div>
           </div>
         </div>
@@ -460,7 +460,7 @@ export function AboutPage() {
                 </span>
               </div>
 
-              <h1 className="text-[38px] sm:text-[48px] font-medium tracking-[-0.03em] leading-[0.95] text-text-primary mb-4">
+              <h1 className="text-display mb-4">
                 About Me
               </h1>
 
@@ -494,7 +494,7 @@ export function AboutPage() {
           {/* ─── HOW THE SYSTEM WORKS ─── */}
           <div className="w-full h-px bg-border-subtle mt-8 mb-8" />
           <div className="w-full">
-            <div className="font-mono text-[15px] font-medium tracking-[0.04em] text-emerald-400 uppercase mb-8">
+            <div className="text-mono-base font-medium text-emerald-400 uppercase mb-8">
               HOW THE SYSTEM WORKS
             </div>
             
@@ -504,8 +504,8 @@ export function AboutPage() {
                   <div key={step.number} className="flex flex-col items-center text-center flex-1 px-2">
                     {/* Number and Title */}
                     <div className="flex flex-col items-center mb-6">
-                      <div className="text-emerald-400 font-mono text-[13px] mb-1.5">{step.number}</div>
-                      <div className="text-text-primary font-mono text-[14px] tracking-[0.08em] uppercase">{step.title}</div>
+                      <div className="text-emerald-400 text-mono-sm mb-1.5">{step.number}</div>
+                      <div className="text-text-primary text-mono-base uppercase">{step.title}</div>
                     </div>
                     
                     {/* Image with absolute arrow to the right */}
@@ -524,7 +524,7 @@ export function AboutPage() {
                     </div>
                     
                     {/* Text */}
-                    <p className="text-text-secondary whitespace-pre-line text-[13px] leading-[1.7] max-w-[180px]">
+                    <p className="text-body-sm text-text-secondary whitespace-pre-line max-w-[180px]">
                       {step.text}
                     </p>
                   </div>
@@ -542,7 +542,7 @@ export function AboutPage() {
         <RevealSection className="mb-10">
           {/* Section label */}
           <div className="flex flex-col gap-3 mb-3">
-            <span className="font-mono text-[14px] font-medium tracking-[-0.01em] text-emerald-400 uppercase leading-tight">THE PATH</span>
+            <span className="text-mono-base font-medium text-emerald-400 uppercase leading-tight">THE PATH</span>
             <div className="w-full h-px bg-border-subtle" />
           </div>
 
@@ -564,7 +564,7 @@ export function AboutPage() {
             {/* Left: Core System */}
             <div className="flex flex-col">
               <span className="text-mono-xs text-emerald-400 mb-4">{coreSystem.label}</span>
-              <h2 className="text-[28px] sm:text-[34px] font-normal tracking-[-0.02em] leading-[1.1] text-text-primary mb-5">
+              <h2 className="text-heading-lg mb-5">
                 {coreSystem.heading.map((line, i) => (
                   <React.Fragment key={i}>
                     {line}<br />
@@ -624,13 +624,13 @@ export function AboutPage() {
             <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-emerald-500/30" />
 
             {/* Text */}
-            <div className="font-mono text-[16px] sm:text-[20px] tracking-[-0.01em] leading-relaxed">
+            <div className="text-mono-statement">
               <div className="text-text-primary">{closingBanner.line1}</div>
               <div className="text-emerald-400">{closingBanner.line2}</div>
             </div>
 
             {/* Stamp */}
-            <div className="flex-shrink-0 border border-border-subtle px-4 py-3 font-mono text-[14px] sm:text-[16px] text-text-secondary/50 leading-tight text-right">
+            <div className="flex-shrink-0 border border-border-subtle px-4 py-3 text-mono-base sm:text-mono-lg text-text-secondary/50 leading-tight text-right">
               {closingBanner.stamp.map((line, i) => (
                 <div key={i}>{line}</div>
               ))}

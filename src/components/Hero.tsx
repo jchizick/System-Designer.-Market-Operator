@@ -10,7 +10,7 @@ export function Hero() {
           001 // IDENTITY
         </div>
 
-        <h1 className="text-[38px] sm:text-[48px] font-medium tracking-[-0.03em] leading-[0.95] text-text-primary mb-4">
+        <h1 className="text-display mb-4">
           System Designer<br />
           <span className="font-thin opacity-20">Market Operator</span>
         </h1>

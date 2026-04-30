@@ -139,8 +139,8 @@ export const caseStudies: CaseStudy[] = [
       "/src/assets/brand-machine-system.png",
       "/src/assets/brand-machine-why-this-works.png"
     ],
-    systemMotionImage: "/src/assets/brand-machine-system-in-motion.png",
-    hasVideo: false,
+    videoClip: "/src/assets/system-in-motion-video.mp4",
+    hasVideo: true,
     videoCaption: "Looped pipeline animation showing raw input moving through AI processing layers and emerging as structured brand infrastructure.",
     build: [
       {

@@ -17,6 +17,7 @@ import dmtBrandingTransformation from '../assets/dmt-branding-transformation.png
 import dmtBookingFlow from '../assets/dmt-booking-flow.png';
 import dmtTouchpoints from '../assets/dmt-touchpoints.png';
 import dmtSysMotion from '../assets/dmt-sys-motion.png';
+import synSystemInMotionVideo from '../assets/system-in-motion-video.mp4';
 
 /* ─── Image path → import map (Vite requires static imports) ─── */
 const imageMap: Record<string, string> = {
@@ -25,6 +26,7 @@ const imageMap: Record<string, string> = {
   '/src/assets/dmt-booking-flow.png': dmtBookingFlow,
   '/src/assets/dmt-touchpoints.png': dmtTouchpoints,
   '/src/assets/dmt-sys-motion.png': dmtSysMotion,
+  '/src/assets/system-in-motion-video.mp4': synSystemInMotionVideo,
 };
 
 function resolveImage(path?: string): string | undefined {
@@ -280,19 +282,26 @@ export function CaseStudyPage() {
             )}
           </div>
 
-          {/* Meta row strip */}
-          <div className="w-full border-y border-border-subtle mt-8 flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-border-subtle">
-            {[
-              { key: 'YEAR', val: caseStudy.year },
-              { key: 'TYPE', val: caseStudy.type },
-              { key: 'ROLE', val: caseStudy.role },
-              { key: 'DURATION', val: caseStudy.duration },
-            ].map((meta) => (
-              <div key={meta.key} className="flex flex-col flex-1 py-5 md:py-6 md:px-6 first:pl-0 last:pr-0">
-                <span className="text-mono-xs text-text-secondary uppercase mb-1.5">{meta.key}</span>
-                <span className="text-mono-sm text-white font-medium uppercase" title={meta.val}>{meta.val}</span>
-              </div>
-            ))}
+          {/* Meta info rail — thin single-line strip */}
+          <div className="w-full border-y border-border-subtle mt-8 overflow-x-auto scrollbar-hide">
+            <div className="flex items-center gap-0 min-w-max px-0 py-3">
+              {[
+                { key: 'YEAR', val: caseStudy.year },
+                { key: 'TYPE', val: caseStudy.type },
+                { key: 'ROLE', val: caseStudy.role },
+                { key: 'STATUS', val: caseStudy.state },
+              ].map((meta, idx, arr) => (
+                <React.Fragment key={meta.key}>
+                  <div className="flex items-center gap-2.5 px-4 first:pl-0">
+                    <span className="text-[10px] tracking-[0.12em] uppercase text-text-secondary/40 font-medium whitespace-nowrap">{meta.key}</span>
+                    <span className="text-[11px] tracking-[0.08em] uppercase text-white/85 font-medium whitespace-nowrap">{meta.val}</span>
+                  </div>
+                  {idx < arr.length - 1 && (
+                    <span className="text-emerald-500/30 text-[11px] select-none">/</span>
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
           </div>
         </RevealSection>
 
@@ -421,7 +430,30 @@ export function CaseStudyPage() {
               {caseStudy.videoCaption || 'Watch the system in action.'}
             </SectionHeader>
             {/* Right: video or static image */}
-            {resolveImage(caseStudy.systemMotionImage) ? (
+            {caseStudy.videoClip ? (
+              <div className="relative border border-border-subtle overflow-hidden">
+                {/* Corner accents */}
+                <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-emerald-500/20 z-10" />
+                <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-emerald-500/20 z-10" />
+                <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-emerald-500/20 z-10" />
+                <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-emerald-500/20 z-10" />
+                <video
+                  src={resolveImage(caseStudy.videoClip)}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+                <div className="border-t border-border-subtle px-4 py-2 flex justify-between items-center text-mono-2xs text-text-secondary/40 bg-bg-surface">
+                  <span>{caseStudy.videoCaption || 'System overview'}</span>
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 bg-emerald-500/60 rounded-full" />
+                    SYSTEM_ACTIVE
+                  </span>
+                </div>
+              </div>
+            ) : resolveImage(caseStudy.systemMotionImage) ? (
               <div className="relative">
                 <CaseImage
                   src={resolveImage(caseStudy.systemMotionImage)!}

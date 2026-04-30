@@ -8,8 +8,42 @@ import {
   Wrench,
   Activity,
   ChartNoAxesCombined,
-  Layers
+  Layers,
+  Infinity as InfinityIcon
 } from "lucide-react";
+
+/* ─── Blockchain Brawlers Images ─── */
+import brawlerHero from '../assets/brawler-hero.png';
+import brawlerEcosystem from '../assets/brawler-ecosystem.png';
+import brawlerContentSystem from '../assets/brawler-content-system.png';
+import brawlerMusic from '../assets/brawler-music.png';
+import brawlerCommunity from '../assets/brawler-community.png';
+import brawlerPartnerships from '../assets/brawler-partnerships.png';
+import brawlerSystemInMotion from '../assets/brawler-system-in-motion.png';
+
+/* ─── Synthetic Foundry Images ─── */
+import brandMachineHero from '../assets/brand-machine-hero.png';
+import brandMachineInput from '../assets/brand-machine-input.png';
+import brandMachineProcessing from '../assets/brand-machine-processing.png';
+import brandMachineSystem from '../assets/brand-machine-system.png';
+import brandMachineWhyThisWorks from '../assets/brand-machine-why-this-works.png';
+import synSystemInMotionVideo from '../assets/system-in-motion-video.mp4';
+
+/* ─── Brawler Mind Images ─── */
+import brawlerMindHero from '../assets/brawler-mind-hero.png';
+import brawlerMindPhilosophy from '../assets/brawler-mind-philosophy.png';
+import brawlerMindSystemRules from '../assets/brawler-mind-system-rules.png';
+import brawlerMindBook from '../assets/brawler-mind-book.png';
+import brawlerMindChartExamples from '../assets/brawler-mind-chart-examples.png';
+import brawlerMindSystemInMotion from '../assets/brawler-mind-system-in-motion.png';
+
+/* ─── Algonquin Dashboard Images ─── */
+import algonquinHero from '../assets/algonquin-hero.png';
+import algonquinDataInputs from '../assets/algonquin-data-inputs.png';
+import algonquinUiScreens from '../assets/algonquin-ui-screens.png';
+import algonquinDecisionFlow from '../assets/algonquin-decision-flow.png';
+import algonquinMobileView from '../assets/algonquin-mobile-view.png';
+import algonquinSystemInMotion from '../assets/algonquin-system-in-motion.png';
 
 /* ─── DMT Case Study Images ─── */
 import dmtHero from '../assets/dmt-hero.png';
@@ -17,16 +51,57 @@ import dmtBrandingTransformation from '../assets/dmt-branding-transformation.png
 import dmtBookingFlow from '../assets/dmt-booking-flow.png';
 import dmtTouchpoints from '../assets/dmt-touchpoints.png';
 import dmtSysMotion from '../assets/dmt-sys-motion.png';
-import synSystemInMotionVideo from '../assets/system-in-motion-video.mp4';
 
-/* ─── Image path → import map (Vite requires static imports) ─── */
+/* ─── Veronica Piper Images ─── */
+import vpHero from '../assets/vp-hero.png';
+import vpIdentity from '../assets/vp-identity.png';
+import vpApplication from '../assets/vp-application.png';
+import vpDigital from '../assets/vp-digital.png';
+import vpSystem from '../assets/vp-system.png';
+
+/* ─── Image/video path → import map (Vite requires static imports) ─── */
 const imageMap: Record<string, string> = {
+  // Blockchain Brawlers
+  '/src/assets/brawler-hero.png': brawlerHero,
+  '/src/assets/brawler-ecosystem.png': brawlerEcosystem,
+  '/src/assets/brawler-content-system.png': brawlerContentSystem,
+  '/src/assets/brawler-music.png': brawlerMusic,
+  '/src/assets/brawler-community.png': brawlerCommunity,
+  '/src/assets/brawler-partnerships.png': brawlerPartnerships,
+  '/src/assets/brawler-system-in-motion.png': brawlerSystemInMotion,
+  // Synthetic Foundry
+  '/src/assets/brand-machine-hero.png': brandMachineHero,
+  '/src/assets/brand-machine-input.png': brandMachineInput,
+  '/src/assets/brand-machine-processing.png': brandMachineProcessing,
+  '/src/assets/brand-machine-system.png': brandMachineSystem,
+  '/src/assets/brand-machine-why-this-works.png': brandMachineWhyThisWorks,
+  '/src/assets/system-in-motion-video.mp4': synSystemInMotionVideo,
+  // Brawler Mind
+  '/src/assets/brawler-mind-hero.png': brawlerMindHero,
+  '/src/assets/brawler-mind-philosophy.png': brawlerMindPhilosophy,
+  '/src/assets/brawler-mind-system-rules.png': brawlerMindSystemRules,
+  '/src/assets/brawler-mind-book.png': brawlerMindBook,
+  '/src/assets/brawler-mind-chart-examples.png': brawlerMindChartExamples,
+  '/src/assets/brawler-mind-system-in-motion.png': brawlerMindSystemInMotion,
+  // Algonquin Dashboard
+  '/src/assets/algonquin-hero.png': algonquinHero,
+  '/src/assets/algonquin-data-inputs.png': algonquinDataInputs,
+  '/src/assets/algonquin-ui-screens.png': algonquinUiScreens,
+  '/src/assets/algonquin-decision-flow.png': algonquinDecisionFlow,
+  '/src/assets/algonquin-mobile-view.png': algonquinMobileView,
+  '/src/assets/algonquin-system-in-motion.png': algonquinSystemInMotion,
+  // DMT
   '/src/assets/dmt-hero.png': dmtHero,
   '/src/assets/dmt-branding-transformation.png': dmtBrandingTransformation,
   '/src/assets/dmt-booking-flow.png': dmtBookingFlow,
   '/src/assets/dmt-touchpoints.png': dmtTouchpoints,
   '/src/assets/dmt-sys-motion.png': dmtSysMotion,
-  '/src/assets/system-in-motion-video.mp4': synSystemInMotionVideo,
+  // Veronica Piper
+  '/src/assets/vp-hero.png': vpHero,
+  '/src/assets/vp-identity.png': vpIdentity,
+  '/src/assets/vp-application.png': vpApplication,
+  '/src/assets/vp-digital.png': vpDigital,
+  '/src/assets/vp-system.png': vpSystem,
 };
 
 function resolveImage(path?: string): string | undefined {
@@ -504,7 +579,7 @@ export function CaseStudyPage() {
                     {/* Top accent line */}
                     <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent group-hover/card:via-emerald-500/40 transition-all duration-300" />
                     <div className="text-stat text-emerald-500 mb-3 group-hover/card:text-emerald-400 transition-colors duration-300">
-                      {stat.value}
+                      {stat.value === '∞' ? <InfinityIcon className="w-[1.25em] h-[1.25em] inline-block -mt-2" strokeWidth={1.5} /> : stat.value}
                     </div>
                     <div className="text-body-sm text-text-secondary/60 group-hover/card:text-text-secondary/80 transition-colors duration-300">
                       {stat.label}

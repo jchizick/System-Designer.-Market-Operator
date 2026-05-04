@@ -16,7 +16,7 @@ import {
 import brawlerHero from '../assets/brawler-hero.png';
 import brawlerEcosystem from '../assets/brawler-ecosystem.png';
 import brawlerContentSystem from '../assets/brawler-content-system.png';
-import brawlerMusic from '../assets/brawler-music.png';
+import brawlerMusic from '../assets/brawler-music.mp4';
 import brawlerCommunity from '../assets/brawler-community.png';
 import brawlerPartnerships from '../assets/brawler-partnerships.png';
 import brawlerSystemInMotion from '../assets/brawler-system-in-motion.png';
@@ -35,7 +35,7 @@ import brawlerMindPhilosophy from '../assets/brawler-mind-philosophy.png';
 import brawlerMindSystemRules from '../assets/brawler-mind-system-rules.png';
 import brawlerMindBook from '../assets/brawler-mind-book.png';
 import brawlerMindChartExamples from '../assets/brawler-mind-chart-examples.png';
-import brawlerMindSystemInMotion from '../assets/brawler-mind-system-in-motion.png';
+import brawlerMindSystemInMotion from '../assets/brawler-mind-system-in-motion.mp4';
 
 /* ─── Algonquin Dashboard Images ─── */
 import algonquinHero from '../assets/algonquin-hero.png';
@@ -65,7 +65,7 @@ const imageMap: Record<string, string> = {
   '/src/assets/brawler-hero.png': brawlerHero,
   '/src/assets/brawler-ecosystem.png': brawlerEcosystem,
   '/src/assets/brawler-content-system.png': brawlerContentSystem,
-  '/src/assets/brawler-music.png': brawlerMusic,
+  '/src/assets/brawler-music.mp4': brawlerMusic,
   '/src/assets/brawler-community.png': brawlerCommunity,
   '/src/assets/brawler-partnerships.png': brawlerPartnerships,
   '/src/assets/brawler-system-in-motion.png': brawlerSystemInMotion,
@@ -82,7 +82,7 @@ const imageMap: Record<string, string> = {
   '/src/assets/brawler-mind-system-rules.png': brawlerMindSystemRules,
   '/src/assets/brawler-mind-book.png': brawlerMindBook,
   '/src/assets/brawler-mind-chart-examples.png': brawlerMindChartExamples,
-  '/src/assets/brawler-mind-system-in-motion.png': brawlerMindSystemInMotion,
+  '/src/assets/brawler-mind-system-in-motion.mp4': brawlerMindSystemInMotion,
   // Algonquin Dashboard
   '/src/assets/algonquin-hero.png': algonquinHero,
   '/src/assets/algonquin-data-inputs.png': algonquinDataInputs,
@@ -424,12 +424,23 @@ export function CaseStudyPage() {
                               {[0, 1, 2].map(i => <div key={i} className="w-1 h-1 bg-emerald-500/30" />)}
                             </div>
                           </div>
-                          {/* Image */}
+                          {/* Image or Video */}
                           {imgSrc && (
-                            <CaseImage
-                              src={imgSrc}
-                              alt={`${caseStudy.title} — ${block.title}`}
-                            />
+                            (caseStudy.buildImages?.[idx]?.endsWith('.mp4')) ? (
+                              <video
+                                src={imgSrc}
+                                autoPlay
+                                muted
+                                loop
+                                playsInline
+                                className="w-full h-full object-cover"
+                              />
+                            ) : (
+                              <CaseImage
+                                src={imgSrc}
+                                alt={`${caseStudy.title} — ${block.title}`}
+                              />
+                            )
                           )}
                           {/* Text content */}
                           <div className="p-4">

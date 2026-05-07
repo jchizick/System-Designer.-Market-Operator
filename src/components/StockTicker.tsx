@@ -24,7 +24,7 @@ const SEED_TICKERS: TickerItem[] = [
 ];
 
 const ROW_HEIGHT = 42; // px — fixed row height
-const VISIBLE_ROWS = 6;
+const VISIBLE_ROWS = 5;
 const STEP_INTERVAL_MS = 3000; // scroll one row every 3s
 const FOCUS_POSITION = 1; // which visible row (0-indexed) is the "focused" one
 
@@ -232,7 +232,7 @@ export function StockTicker() {
   const translateY = -(step * ROW_HEIGHT);
 
   return (
-    <div className="relative flex flex-col h-full max-h-[280px] w-full border border-border-subtle bg-bg-surface overflow-hidden">
+    <div className="relative flex flex-col h-full max-h-[244px] w-full border border-border-subtle bg-bg-surface overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between px-3 py-2 border-b border-border-subtle bg-[rgba(255,255,255,0.02)] flex-shrink-0 z-20">
         <span className="text-mono-xs text-text-secondary uppercase">

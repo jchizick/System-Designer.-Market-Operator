@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, useInView } from 'motion/react';
 import { getCaseStudyBySlug, getAdjacentCases, caseStudies, type BuildBlock } from '../data/caseStudies';
@@ -35,6 +35,7 @@ import brawlerMindPhilosophy from '../assets/brawler-mind-philosophy.png';
 import brawlerMindSystemRules from '../assets/brawler-mind-system-rules.png';
 import brawlerMindBook from '../assets/brawler-mind-book.png';
 import brawlerMindChartExamples from '../assets/brawler-mind-chart-examples.png';
+import brawlerMindDecisionLayers from '../assets/brawler-mind-decision-layers.png';
 import brawlerMindSystemInMotion from '../assets/brawler-mind-system-in-motion.mp4';
 
 /* ─── Algonquin Dashboard Images ─── */
@@ -82,6 +83,7 @@ const imageMap: Record<string, string> = {
   '/src/assets/brawler-mind-system-rules.png': brawlerMindSystemRules,
   '/src/assets/brawler-mind-book.png': brawlerMindBook,
   '/src/assets/brawler-mind-chart-examples.png': brawlerMindChartExamples,
+  '/src/assets/brawler-mind-decision-layers.png': brawlerMindDecisionLayers,
   '/src/assets/brawler-mind-system-in-motion.mp4': brawlerMindSystemInMotion,
   // Algonquin Dashboard
   '/src/assets/algonquin-hero.png': algonquinHero,
@@ -204,10 +206,83 @@ function MediaPlaceholder({ label, className = '', aspectClass = 'aspect-video' 
   );
 }
 
-/* ─── Case study image with framing ─── */
-function CaseImage({ src, alt, className = '', aspectClass = '' }: { src: string; alt: string; className?: string; aspectClass?: string }) {
+/* ─── Image Lightbox ─── */
+function ImageLightbox({ src, alt, onClose }: { src: string; alt: string; onClose: () => void }) {
+  const overlayRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', handleKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', handleKey);
+      document.body.style.overflow = '';
+    };
+  }, [onClose]);
+
   return (
-    <div className={`relative overflow-hidden border border-border-subtle group/img ${className}`}>
+    <motion.div
+      ref={overlayRef}
+      className="fixed inset-0 z-[10000] flex items-center justify-center"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25, ease: 'easeOut' }}
+      onClick={(e) => { if (e.target === overlayRef.current) onClose(); }}
+      style={{ cursor: 'zoom-out' }}
+    >
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-black/92 backdrop-blur-sm" />
+
+      {/* Close button */}
+      <button
+        onClick={onClose}
+        className="absolute top-5 right-5 z-10 w-10 h-10 border border-border-subtle bg-black/50 flex items-center justify-center text-text-secondary hover:text-emerald-400 hover:border-emerald-500/40 transition-colors"
+        aria-label="Close lightbox"
+      >
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M2 2L12 12M12 2L2 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+      </button>
+
+      {/* Image container */}
+      <div className="relative z-10 flex flex-col items-center max-w-[92vw] max-h-[88vh] px-4">
+        <img
+          src={src}
+          alt={alt}
+          className="max-w-full max-h-[80vh] object-contain select-none"
+          style={{ touchAction: 'pinch-zoom' }}
+          draggable={false}
+        />
+        {/* Caption bar */}
+        {alt && (
+          <div className="mt-3 px-4 py-2 border border-border-subtle bg-bg-surface/80 backdrop-blur-sm flex items-center gap-3 max-w-full">
+            <span className="w-1.5 h-1.5 bg-emerald-500/50 flex-shrink-0" />
+            <span className="text-mono-2xs text-text-secondary/60 truncate">{alt}</span>
+          </div>
+        )}
+      </div>
+
+      {/* Keyboard hint */}
+      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-10 text-mono-3xs text-text-secondary/25 select-none">
+        ESC TO CLOSE
+      </div>
+    </motion.div>
+  );
+}
+
+/* ─── Case study image with framing ─── */
+function CaseImage({ src, alt, className = '', aspectClass = '', expandable = false, onExpand }: { src: string; alt: string; className?: string; aspectClass?: string; expandable?: boolean; onExpand?: () => void }) {
+  return (
+    <div
+      className={`relative overflow-hidden border border-border-subtle group/img ${expandable ? 'cursor-zoom-in' : ''} ${className}`}
+      onClick={expandable && onExpand ? onExpand : undefined}
+      role={expandable ? 'button' : undefined}
+      tabIndex={expandable ? 0 : undefined}
+      onKeyDown={expandable && onExpand ? (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onExpand(); } } : undefined}
+    >
       {/* Corner accents */}
       <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-emerald-500/20 z-10" />
       <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-emerald-500/20 z-10" />
@@ -221,6 +296,18 @@ function CaseImage({ src, alt, className = '', aspectClass = '' }: { src: string
       />
       {/* Subtle overlay on hover */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      {/* Click to expand affordance */}
+      {expandable && (
+        <div className="absolute bottom-2.5 right-2.5 z-10 flex items-center gap-1.5 px-2 py-1 bg-black/60 backdrop-blur-sm border border-border-subtle opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 pointer-events-none">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M7 1H11V5" stroke="rgba(16,185,129,0.6)" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M5 11H1V7" stroke="rgba(16,185,129,0.6)" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M11 1L7 5" stroke="rgba(16,185,129,0.6)" strokeWidth="1" strokeLinecap="round" />
+            <path d="M1 11L5 7" stroke="rgba(16,185,129,0.6)" strokeWidth="1" strokeLinecap="round" />
+          </svg>
+          <span className="text-mono-3xs text-emerald-400/60">EXPAND</span>
+        </div>
+      )}
     </div>
   );
 }
@@ -274,6 +361,11 @@ export function CaseStudyPage() {
   const caseStudy = slug ? getCaseStudyBySlug(slug) : undefined;
   const caseIndex = caseStudy ? caseStudies.findIndex(cs => cs.slug === caseStudy.slug) : -1;
 
+  // Lightbox state
+  const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null);
+  const openLightbox = useCallback((src: string, alt: string) => setLightboxImage({ src, alt }), []);
+  const closeLightbox = useCallback(() => setLightboxImage(null), []);
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [slug]);
@@ -296,6 +388,15 @@ export function CaseStudyPage() {
 
   return (
     <div className="min-h-screen flex flex-col relative p-6">
+
+      {/* ─── Lightbox ─── */}
+      {lightboxImage && (
+        <ImageLightbox
+          src={lightboxImage.src}
+          alt={lightboxImage.alt}
+          onClose={closeLightbox}
+        />
+      )}
 
       {/* ─── Top Navigation Bar ─── */}
       <header className="flex justify-between items-center pb-3 border-b border-border-subtle mb-8 text-mono-xs text-text-secondary w-full max-w-5xl mx-auto">
@@ -351,6 +452,8 @@ export function CaseStudyPage() {
                 src={resolveImage(caseStudy.heroImage)!}
                 alt={`${caseStudy.title} hero`}
                 aspectClass="aspect-[16/9] object-cover"
+                expandable
+                onExpand={() => openLightbox(resolveImage(caseStudy.heroImage)!, `${caseStudy.title} — Hero`)}
               />
             ) : (
               <MediaPlaceholder label="HERO_VISUAL" aspectClass="aspect-[16/9]" />
@@ -439,6 +542,8 @@ export function CaseStudyPage() {
                               <CaseImage
                                 src={imgSrc}
                                 alt={`${caseStudy.title} — ${block.title}`}
+                                expandable
+                                onExpand={() => openLightbox(imgSrc, `${caseStudy.title} — ${block.title}`)}
                               />
                             )
                           )}
@@ -544,6 +649,8 @@ export function CaseStudyPage() {
                 <CaseImage
                   src={resolveImage(caseStudy.systemMotionImage)!}
                   alt={`${caseStudy.title} — System in motion`}
+                  expandable
+                  onExpand={() => openLightbox(resolveImage(caseStudy.systemMotionImage)!, `${caseStudy.title} — System in Motion`)}
                 />
                 {/* Status bar indicating video pending */}
                 <div className="border border-t-0 border-border-subtle px-4 py-2 flex justify-between items-center text-mono-2xs text-text-secondary/40">

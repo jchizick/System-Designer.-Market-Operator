@@ -204,7 +204,8 @@ export const caseStudies: CaseStudy[] = [
       "/src/assets/brawler-mind-philosophy.png",
       "/src/assets/brawler-mind-system-rules.png",
       "/src/assets/brawler-mind-book.png",
-      "/src/assets/brawler-mind-chart-examples.png"
+      "/src/assets/brawler-mind-chart-examples.png",
+      "/src/assets/brawler-mind-decision-layers.png"
     ],
     videoClip: "/src/assets/brawler-mind-system-in-motion.mp4",
     hasVideo: true,
@@ -217,22 +218,28 @@ export const caseStudies: CaseStudy[] = [
         tags: ["Market Psychology", "Auction Theory", "Emotional Telemetry", "Pattern Recognition"]
       },
       {
-        label: "SYSTEM",
+        label: "FRAMEWORK",
         title: "The B.R.A.W.L Process",
         description: "A five-part execution framework designed to reduce emotional leakage under pressure: Break Down the charts, Recognize the objective, Assess the strategy, Work the execution, and Learn from the results. Each step acts as a gatekeeper against a specific failure mode: confusion, overreach, misalignment, emotional execution, and unexamined repetition.",
         tags: ["Process Design", "Risk Management", "Execution Discipline", "Decision Framework"]
       },
       {
-        label: "BOOK",
+        label: "DOCTRINE",
         title: "The Brawler Mind",
         description: "The trading framework was expanded into a full written system exploring market structure, emotional regulation, trading process, failure modes, safety rails, and the eight circuits of consciousness. The book became the clearest expression of the work: not a shortcut, not a signal system, but a field manual for mastering the internal system behind performance.",
         tags: ["Writing", "Systems Thinking", "Human Performance", "Trading Psychology"]
       },
       {
-        label: "APPLICATION",
-        title: "Chart Study & Execution Review",
-        description: "The framework is applied through chart breakdowns, trade reviews, emotional state audits, and post-session feedback loops. Wins and losses are treated as information, not identity. The goal is to refine the operator over time until process becomes instinct.",
-        tags: ["Trade Review", "Journaling", "Feedback Loops", "Performance Analysis"]
+        label: "OPERATING SYSTEM",
+        title: "Market Command Dashboard",
+        description: "The framework is operationalized through a private market command dashboard that consolidates performance review, market context, gamma levels, sentiment, synthesis notes, and execution checklists into one decision-support layer. Wins and losses are treated as feedback loops, not identity.",
+        tags: ["Performance Review", "Market Context", "Execution Checklist", "Feedback Loops"]
+      },
+      {
+        label: "DECISION LAYERS",
+        title: "Market Command Modules",
+        description: "A closer look at the core decision layers inside Market Command — the private dashboard built to connect performance review, live market context, gamma levels, sentiment, synthesis notes, and execution readiness into one operating system.",
+        tags: ["Performance Review", "Market Context", "Gamma + Sentiment", "Trading Checklist", "Decision Support"]
       }
     ],
     outcomes: [

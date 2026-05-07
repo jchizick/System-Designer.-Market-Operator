@@ -575,7 +575,7 @@ export function AboutPage() {
                 {coreSystem.body}
               </p>
               <Link
-                to="#"
+                to="/reading-path"
                 className="inline-flex items-center gap-2 px-5 py-2.5 border border-border-subtle hover:border-emerald-500 hover:text-emerald-500 transition-colors text-mono-xs tracking-widest uppercase w-fit group"
               >
                 {coreSystem.cta}

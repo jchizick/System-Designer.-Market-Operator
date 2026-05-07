@@ -8,6 +8,7 @@ import { OperationalDoctrine } from './components/OperationalDoctrine';
 import { Footer } from './components/Footer';
 import { CaseStudyPage } from './components/CaseStudyPage';
 import { AboutPage } from './components/AboutPage';
+import { ReadingPathPage } from './components/ReadingPathPage';
 import { AtmosphereOverlay } from './components/atmosphere/AtmosphereOverlay';
 
 function HomePage() {
@@ -32,6 +33,7 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/case/:slug" element={<CaseStudyPage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/reading-path" element={<ReadingPathPage />} />
       </Routes>
       <AtmosphereOverlay />
     </>

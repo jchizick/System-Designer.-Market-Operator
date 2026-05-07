@@ -140,7 +140,7 @@ export const coreSystem = {
   label: 'CORE SYSTEM',
   heading: ['Understanding.', 'Structure.', 'Execution.'],
   body: 'I study how people think, how narratives shape perception, and how systems drive outcomes. Then I build frameworks, tools, environments, and products that create leverage.',
-  cta: 'VIEW FULL BOOKLIST',
+  cta: 'VIEW MY READING PATH',
 };
 
 /* ─── Closing Banner ─── */

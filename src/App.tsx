@@ -8,6 +8,7 @@ import { OperationalDoctrine } from './components/OperationalDoctrine';
 import { Footer } from './components/Footer';
 import { CaseStudyPage } from './components/CaseStudyPage';
 import { AboutPage } from './components/AboutPage';
+import { AtmosphereOverlay } from './components/atmosphere/AtmosphereOverlay';
 
 function HomePage() {
   return (
@@ -26,10 +27,13 @@ function HomePage() {
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/case/:slug" element={<CaseStudyPage />} />
-      <Route path="/about" element={<AboutPage />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/case/:slug" element={<CaseStudyPage />} />
+        <Route path="/about" element={<AboutPage />} />
+      </Routes>
+      <AtmosphereOverlay />
+    </>
   );
 }

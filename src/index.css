@@ -3,22 +3,42 @@
 @theme {
   --font-sans: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
-  
+
   --color-bg-base: #050505;
   --color-bg-surface: #0A0A0A;
   --color-accent-emerald: #10b981;
-  --color-text-primary: #FFFFFF;
+  --color-text-primary: #f0ede6;
   --color-text-secondary: rgba(255, 255, 255, 0.4);
   --color-border-subtle: rgba(255, 255, 255, 0.08);
 
   --animate-scan: scan 4s ease-in-out infinite;
+
   @keyframes scan {
-    0%, 100% { top: 0%; }
-    50% { top: 100%; }
+
+    0%,
+    100% {
+      top: 0%;
+    }
+
+    50% {
+      top: 100%;
+    }
   }
 }
 
 @layer base {
+  :root {
+    --scanline-opacity: 1;
+    --scanline-spacing: 4px;
+    --scanline-thickness: 1px;
+    --scanline-color: rgba(0, 0, 0, 0.08);
+    --scanline-z-index: 10002;
+    --noise-opacity: 0.08;
+    --noise-z-index: 10001;
+    --noise-blend-mode: normal;
+    --noise-size: 4px;
+  }
+
   * {
     border-radius: 0 !important;
   }
@@ -27,10 +47,10 @@
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, 0.12) #050505;
   }
-  
+
   body {
     @apply bg-bg-base text-text-primary font-sans antialiased selection:bg-emerald-500 selection:text-white;
-    background-image: 
+    background-image:
       linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
     background-size: 40px 40px;
@@ -56,6 +76,44 @@
   }
 }
 
+@layer components {
+  .atmosphere-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .global-noise {
+    position: fixed;
+    inset: 0;
+    z-index: var(--noise-z-index);
+    pointer-events: none;
+    opacity: var(--noise-opacity);
+    mix-blend-mode: var(--noise-blend-mode);
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.5) 0 0.45px, transparent 0.7px),
+      radial-gradient(circle at 70% 65%, rgba(0, 0, 0, 0.8) 0 0.5px, transparent 0.75px),
+      radial-gradient(circle at 45% 80%, rgba(255, 255, 255, 0.35) 0 0.35px, transparent 0.65px);
+    background-size:
+      var(--noise-size) var(--noise-size),
+      calc(var(--noise-size) * 1.5) calc(var(--noise-size) * 1.5),
+      calc(var(--noise-size) * 2.25) calc(var(--noise-size) * 2.25);
+    background-position: 0 0, 1px 2px, 2px 1px;
+  }
+
+  .global-scanlines {
+    position: fixed;
+    inset: 0;
+    z-index: var(--scanline-z-index);
+    pointer-events: none;
+    opacity: var(--scanline-opacity);
+    background: repeating-linear-gradient(0deg,
+        transparent 0 calc(var(--scanline-spacing) - var(--scanline-thickness)),
+        var(--scanline-color) calc(var(--scanline-spacing) - var(--scanline-thickness)) var(--scanline-spacing));
+  }
+}
+
 @layer utilities {
   .tracking-tight-custom {
     letter-spacing: -0.02em;
@@ -69,6 +127,7 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
@@ -77,27 +136,35 @@
   .text-display {
     @apply text-[38px] sm:text-[48px] font-medium tracking-[-0.03em] leading-[0.95] text-text-primary;
   }
+
   .text-heading-lg {
     @apply text-[28px] sm:text-[34px] font-normal tracking-[-0.02em] leading-[1.1] text-text-primary;
   }
+
   .text-heading-md {
     @apply text-[20px] sm:text-[24px] font-normal tracking-[-0.02em] text-text-primary;
   }
+
   .text-heading-sm {
     @apply text-[18px] font-medium tracking-[-0.01em] leading-[1.2] text-text-primary;
   }
+
   .text-stat {
     @apply text-[28px] sm:text-[32px] font-normal tracking-[-0.02em] leading-none;
   }
+
   .text-body-lg {
     @apply text-[16px] leading-[1.5] text-white/70;
   }
+
   .text-body-base {
     @apply text-[14px] leading-[1.6] text-white/70;
   }
+
   .text-body-sm {
     @apply text-[13px] leading-[1.6] text-white/60;
   }
+
   .text-body-xs {
     @apply text-[11px] leading-[1.7] text-white/50;
   }
@@ -106,24 +173,31 @@
   .text-mono-statement {
     @apply text-[16px] sm:text-[20px] tracking-[-0.01em] font-mono leading-relaxed;
   }
+
   .text-mono-lg {
     @apply text-[16px] tracking-[0.04em] font-mono;
   }
+
   .text-mono-base {
     @apply text-[14px] tracking-[0.04em] font-mono;
   }
+
   .text-mono-sm {
     @apply text-[12px] tracking-[0.03em] font-mono;
   }
+
   .text-mono-label {
     @apply text-[11px] tracking-[0.04em] font-mono;
   }
+
   .text-mono-xs {
     @apply text-[10px] tracking-[0.1em] font-mono;
   }
+
   .text-mono-2xs {
     @apply text-[9px] tracking-[0.1em] font-mono;
   }
+
   .text-mono-3xs {
     @apply text-[8px] tracking-[0.1em] font-mono;
   }

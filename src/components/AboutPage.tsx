@@ -447,7 +447,7 @@ export function AboutPage() {
             SECTION 01 — HERO
         ═══════════════════════════════════════════ */}
         <RevealSection className="mb-10">
-          <div className="grid grid-cols-1 lg:grid-cols-[0.65fr_1.35fr] gap-8 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-14 items-start">
             {/* Left: Text */}
             <div className="flex flex-col">
               {/* Badge + counter */}
@@ -497,7 +497,7 @@ export function AboutPage() {
             <div className="text-mono-base font-medium text-emerald-400 uppercase mb-8">
               HOW THE SYSTEM WORKS
             </div>
-            
+
             <div className="w-full overflow-x-auto pb-4" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
               <div className="flex flex-row items-stretch justify-between min-w-[900px] lg:min-w-0">
                 {transformationSteps.map((step, i) => (
@@ -507,22 +507,22 @@ export function AboutPage() {
                       <div className="text-emerald-400 text-mono-sm mb-1.5">{step.number}</div>
                       <div className="text-text-primary text-mono-base uppercase">{step.title}</div>
                     </div>
-                    
+
                     {/* Image with absolute arrow to the right */}
                     <div className="w-full flex justify-center mb-8 relative">
                       <div className="relative flex justify-center w-full">
                         <img src={step.img} alt={step.title} className="w-full max-w-[160px] max-h-[160px] object-contain" />
-                        
+
                         {i < transformationSteps.length - 1 && (
                           <div className="absolute top-1/2 -right-2 lg:-right-4 -translate-y-1/2 translate-x-1/2 text-emerald-500/60 z-10">
                             <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
-                              <path d="M1 1L7 7L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                              <path d="M1 1L7 7L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                           </div>
                         )}
                       </div>
                     </div>
-                    
+
                     {/* Text */}
                     <p className="text-body-sm text-text-secondary whitespace-pre-line max-w-[180px]">
                       {step.text}

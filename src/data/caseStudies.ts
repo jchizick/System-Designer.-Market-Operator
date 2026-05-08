@@ -188,7 +188,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "trading-journey-brawler-mind",
     type: "TRADING SYSTEM / PERFORMANCE OS",
     title: "The Brawler Mind",
-    outcome: "A personal trading journey transformed into a decision-making framework for operating under pressure.",
+    outcome: "A trading philosophy transformed into a book, decision framework, and private market command system for operating under pressure.",
     visualType: "wave",
     state: "LIVE",
     subtitle: "Trading Psychology, Execution Discipline & Human Performance System",

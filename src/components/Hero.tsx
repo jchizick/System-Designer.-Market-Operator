@@ -11,8 +11,8 @@ export function Hero() {
         </div>
 
         <h1 className="text-display font-pixel mb-4">
-          System Designer<br />
-          <span className="text-display font-pixel opacity-15">Market Operator</span>
+          Design Engineer<br />
+          <span className="text-display font-pixel opacity-15">AI Systems Designer</span>
         </h1>
 
         <p className="text-mono-base text-white/70 max-w-[350px]">

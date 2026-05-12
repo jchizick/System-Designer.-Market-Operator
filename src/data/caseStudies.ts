@@ -401,7 +401,7 @@ export const caseStudies: CaseStudy[] = [
     id: "VP_REAL_ESTATE",
     slug: "real-estate-branding-system",
     type: "BRANDING SYSTEM",
-    title: "Veronica Piper Real Estate",
+    title: "Toronto Real Estate Brand System",
     outcome: "End-to-end real estate branding system designed to elevate positioning, win listings, and deploy high-converting marketing at speed.",
     visualType: "scatter",
     state: "ARCHIVED",

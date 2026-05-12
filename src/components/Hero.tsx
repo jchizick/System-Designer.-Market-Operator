@@ -10,20 +10,20 @@ export function Hero() {
           001 // IDENTITY
         </div>
 
-        <h1 className="text-display mb-4">
+        <h1 className="text-display font-pixel mb-4">
           System Designer<br />
-          <span className="font-thin opacity-20">Market Operator</span>
+          <span className="text-display font-pixel opacity-15">Market Operator</span>
         </h1>
 
-        <p className="text-body-lg max-w-[420px]">
+        <p className="text-mono-base text-white/70 max-w-[350px]">
           Designing and operating systems that extract signal from noise and execute under pressure.
         </p>
 
         <div className="flex flex-wrap gap-4 pt-6">
-          <button className="px-6 py-2 bg-bg-surface border border-border-subtle hover:border-emerald-500 hover:text-emerald-500 transition-colors text-mono-xs tracking-widest uppercase">
+          <button className="px-6 py-2 bg-bg-surface border border-emerald-700 text-emerald-500 hover:bg-emerald-500/10 transition-colors text-mono-xs tracking-widest uppercase">
             [ Access Case Files ]
           </button>
-          <button className="px-6 py-2 bg-transparent border border-transparent hover:border-border-subtle transition-colors text-mono-xs tracking-widest uppercase text-text-secondary hover:text-text-primary">
+          <button className="px-6 py-2 bg-transparent border border-border-subtle hover:bg-white/5 transition-colors text-mono-xs tracking-widest uppercase text-text-secondary hover:text-text-primary">
             [ Initiate Contact ]
           </button>
         </div>

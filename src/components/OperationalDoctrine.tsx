@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { Eye, Funnel, Box, Play, RefreshCw } from 'lucide-react';
 
 const EXECUTE_INDEX = 3;
 
@@ -7,37 +8,37 @@ const nodes = [
   {
     id: "OBSERVE",
     label: "01",
-    desc: "Market behavior, user patterns, anomalies",
+    desc: "Market behavior, user patterns",
     detail: "Scan environment. Ingest raw streams. Detect behavioral drift and statistical anomalies early.",
-    icon: "◉"
+    icon: Eye
   },
   {
     id: "FILTER",
     label: "02",
     desc: "Remove noise, isolate signal",
     detail: "Strip noise. Isolate signal. Preserve edge-critical variance.",
-    icon: "⬡"
+    icon: Funnel
   },
   {
     id: "STRUCTURE",
     label: "03",
     desc: "Build decision framework",
     detail: "Convert signal into a thesis. Define risk. Set triggers.",
-    icon: "◈"
+    icon: Box
   },
   {
     id: "EXECUTE",
     label: "04",
     desc: "Deploy with discipline",
     detail: "Deploy capital with precision. No hesitation. No override.",
-    icon: "▣"
+    icon: Play
   },
   {
     id: "REVIEW",
     label: "05",
     desc: "Refine edge, iterate",
     detail: "Audit outcome. Compare expected vs realized. Update the model.",
-    icon: "◎"
+    icon: RefreshCw
   }
 ];
 
@@ -344,7 +345,7 @@ export function OperationalDoctrine() {
   return (
     <section
       ref={sectionRef}
-      className="border-t border-border-subtle pt-10 pb-8 relative"
+      className="mb-10 relative"
       style={{
         // inject the shake keyframes inline so we need zero CSS file changes
       }}
@@ -375,18 +376,14 @@ export function OperationalDoctrine() {
       */}
 
       {/* Section Header */}
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <div className="text-mono-xs text-emerald-400 mb-1">
-            004 // DOCTRINE
-          </div>
-          <h2 className="text-heading-md">
-            Operational Loop
-          </h2>
-        </div>
-        <div className="text-mono-2xs text-text-secondary/50 text-right hidden sm:block">
-          <div>CYCLE: {String(activeIndex + 1).padStart(2, '0')}/05</div>
-          <div className="mt-0.5">MODE: {isAutoPlay ? 'AUTO' : 'MANUAL'}</div>
+      <div className="flex items-center gap-4 mb-8">
+        <span className="text-mono-xs text-emerald-400 flex-shrink-0">
+          004 // OPERATIONAL LOOP
+        </span>
+        <div className="flex-1 h-px bg-white/[0.06]" />
+        <div className="text-mono-2xs text-text-secondary/50 flex items-center gap-4 flex-shrink-0 hidden sm:flex">
+          <span>CYCLE: {String(activeIndex + 1).padStart(2, '0')}/05</span>
+          <span>MODE: {isAutoPlay ? 'AUTO' : 'MANUAL'}</span>
         </div>
       </div>
 
@@ -489,12 +486,12 @@ export function OperationalDoctrine() {
                   {/* Node body */}
                   <motion.div
                     className={`w-10 h-10 border flex items-center justify-center transition-all duration-500 ${executeActive
-                        ? 'bg-emerald-500/20 border-emerald-500'
-                        : isActive
-                          ? 'bg-emerald-500/10 border-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.3)]'
-                          : isPast
-                            ? 'bg-emerald-500/5 border-emerald-500/40'
-                            : 'bg-bg-surface border-white/[0.08] group-hover:border-white/20'
+                      ? 'bg-emerald-500/20 border-emerald-500'
+                      : isActive
+                        ? 'bg-emerald-500/10 border-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.3)]'
+                        : isPast
+                          ? 'bg-emerald-500/5 border-emerald-500/40'
+                          : 'bg-bg-surface border-white/[0.08] group-hover:border-white/20'
                       }`}
                     animate={
                       executeActive
@@ -511,17 +508,17 @@ export function OperationalDoctrine() {
                   >
                     <motion.span
                       className={`text-sm transition-colors duration-300 ${executeActive
+                        ? 'text-emerald-500'
+                        : isActive
                           ? 'text-emerald-500'
-                          : isActive
-                            ? 'text-emerald-500'
-                            : isPast
-                              ? 'text-emerald-500/60'
-                              : 'text-white/20 group-hover:text-white/40'
+                          : isPast
+                            ? 'text-emerald-500/60'
+                            : 'text-white/20 group-hover:text-white/40'
                         }`}
                       animate={executeActive ? { scale: [1, 1.15, 1] } : { scale: 1 }}
                       transition={executeActive ? { duration: 0.8, repeat: Infinity } : {}}
                     >
-                      {node.icon}
+                      <node.icon size={16} strokeWidth={1.5} />
                     </motion.span>
                   </motion.div>
 
@@ -538,10 +535,10 @@ export function OperationalDoctrine() {
                 {/* Label */}
                 <div
                   className={`text-mono-2xs mb-1 transition-colors duration-300 ${isActive
-                      ? 'text-emerald-500'
-                      : isPast
-                        ? 'text-emerald-500/50'
-                        : 'text-text-secondary/40'
+                    ? 'text-emerald-500'
+                    : isPast
+                      ? 'text-emerald-500/50'
+                      : 'text-text-secondary/40'
                     }`}
                 >
                   {node.label}
@@ -598,12 +595,12 @@ export function OperationalDoctrine() {
                 {/* Node body */}
                 <motion.div
                   className={`w-9 h-9 border flex items-center justify-center flex-shrink-0 transition-all duration-500 ${executeActive
-                      ? 'bg-emerald-500/20 border-emerald-500'
-                      : isActive
-                        ? 'bg-emerald-500/10 border-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.3)]'
-                        : isPast
-                          ? 'bg-emerald-500/5 border-emerald-500/40'
-                          : 'bg-bg-surface border-white/[0.08]'
+                    ? 'bg-emerald-500/20 border-emerald-500'
+                    : isActive
+                      ? 'bg-emerald-500/10 border-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.3)]'
+                      : isPast
+                        ? 'bg-emerald-500/5 border-emerald-500/40'
+                        : 'bg-bg-surface border-white/[0.08]'
                     }`}
                   animate={
                     executeActive
@@ -616,7 +613,7 @@ export function OperationalDoctrine() {
                     className={`text-xs ${isActive ? 'text-emerald-500' : isPast ? 'text-emerald-500/60' : 'text-white/20'
                       }`}
                   >
-                    {node.icon}
+                    <node.icon size={14} strokeWidth={1.5} />
                   </span>
                 </motion.div>
 
@@ -730,7 +727,7 @@ export function OperationalDoctrine() {
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 border border-emerald-500/40 bg-emerald-500/5 flex items-center justify-center">
-                      <span className="text-emerald-500 text-xs">{activeNode.icon}</span>
+                      <activeNode.icon size={14} strokeWidth={1.5} className="text-emerald-500" />
                     </div>
                     <div>
                       <div className="text-mono-sm text-emerald-500 tracking-[0.02em]">
@@ -766,10 +763,10 @@ export function OperationalDoctrine() {
                       <div
                         key={i}
                         className={`w-1.5 h-1.5 transition-all duration-300 ${i === activeIndex
-                            ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.5)]'
-                            : i < activeIndex
-                              ? 'bg-emerald-500/30'
-                              : 'bg-white/[0.06]'
+                          ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.5)]'
+                          : i < activeIndex
+                            ? 'bg-emerald-500/30'
+                            : 'bg-white/[0.06]'
                           }`}
                       />
                     ))}

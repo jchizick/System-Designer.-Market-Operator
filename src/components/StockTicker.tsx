@@ -9,18 +9,18 @@ interface TickerItem {
 }
 
 const SEED_TICKERS: TickerItem[] = [
-  { symbol: 'BTC/USD',  price: 84_312.45, change:  1.87, sparkline: [] },
-  { symbol: 'ETH/USD',  price:  3_218.70, change: -0.42, sparkline: [] },
-  { symbol: 'SOL/USD',  price:   148.93,  change:  3.21, sparkline: [] },
-  { symbol: 'AAPL',     price:   198.52,  change:  0.64, sparkline: [] },
-  { symbol: 'NVDA',     price:   875.30,  change:  2.15, sparkline: [] },
-  { symbol: 'TSLA',     price:   172.88,  change: -1.33, sparkline: [] },
-  { symbol: 'SPY',      price:   512.41,  change:  0.38, sparkline: [] },
-  { symbol: 'XAU/USD',  price: 2_342.10,  change:  0.92, sparkline: [] },
-  { symbol: 'EUR/USD',  price:     1.0872,change: -0.11, sparkline: [] },
-  { symbol: 'DOGE/USD', price:     0.1623,change:  5.44, sparkline: [] },
-  { symbol: 'AVAX/USD', price:    36.72,  change: -2.08, sparkline: [] },
-  { symbol: 'LINK/USD', price:    14.88,  change:  1.55, sparkline: [] },
+  { symbol: 'BTC/USD', price: 84_312.45, change: 1.87, sparkline: [] },
+  { symbol: 'ETH/USD', price: 3_218.70, change: -0.42, sparkline: [] },
+  { symbol: 'SOL/USD', price: 148.93, change: 3.21, sparkline: [] },
+  { symbol: 'AAPL', price: 198.52, change: 0.64, sparkline: [] },
+  { symbol: 'NVDA', price: 875.30, change: 2.15, sparkline: [] },
+  { symbol: 'TSLA', price: 172.88, change: -1.33, sparkline: [] },
+  { symbol: 'SPY', price: 512.41, change: 0.38, sparkline: [] },
+  { symbol: 'XAU/USD', price: 2_342.10, change: 0.92, sparkline: [] },
+  { symbol: 'EUR/USD', price: 1.0872, change: -0.11, sparkline: [] },
+  { symbol: 'DOGE/USD', price: 0.1623, change: 5.44, sparkline: [] },
+  { symbol: 'AVAX/USD', price: 36.72, change: -2.08, sparkline: [] },
+  { symbol: 'LINK/USD', price: 14.88, change: 1.55, sparkline: [] },
 ];
 
 const ROW_HEIGHT = 42; // px — fixed row height
@@ -110,11 +110,10 @@ const TickerRow = React.memo(function TickerRow({ item, focused }: { item: Ticke
 
   return (
     <div
-      className={`flex items-center gap-3 px-3 border-b border-border-subtle transition-all duration-700 ease-out ${
-        focused
+      className={`flex items-center gap-3 px-3 border-b border-border-subtle transition-all duration-700 ease-out ${focused
           ? 'bg-[rgba(16,185,129,0.08)]'
           : 'bg-transparent'
-      }`}
+        }`}
       style={{
         height: ROW_HEIGHT,
         ...(focused ? {
@@ -124,11 +123,10 @@ const TickerRow = React.memo(function TickerRow({ item, focused }: { item: Ticke
     >
       {/* Symbol */}
       <span
-        className={`font-mono tracking-[0.08em] flex-shrink-0 uppercase transition-all duration-700 ease-out ${
-          focused
+        className={`font-mono tracking-[0.08em] flex-shrink-0 uppercase transition-all duration-700 ease-out ${focused
             ? 'text-mono-sm text-emerald-500 w-[76px]'
             : 'text-mono-label text-text-primary w-[72px] opacity-50'
-        }`}
+          }`}
       >
         {item.symbol}
       </span>
@@ -138,29 +136,26 @@ const TickerRow = React.memo(function TickerRow({ item, focused }: { item: Ticke
 
       {/* Price */}
       <span
-        className={`font-mono ml-auto tabular-nums transition-all duration-700 ease-out ${
-          focused
+        className={`font-mono ml-auto tabular-nums transition-all duration-700 ease-out ${focused
             ? 'text-mono-sm text-text-primary'
             : 'text-mono-sm text-text-primary opacity-50'
-        }`}
+          }`}
       >
         {formattedPrice}
       </span>
 
       {/* % Change */}
       <span
-        className={`font-mono text-right tabular-nums flex-shrink-0 transition-all duration-700 ease-out ${
-          focused ? 'text-mono-sm w-[60px]' : 'text-mono-label w-[56px] opacity-60'
-        } ${positive ? 'text-emerald-500' : 'text-[#8b3a3a]'}`}
+        className={`font-mono text-right tabular-nums flex-shrink-0 transition-all duration-700 ease-out ${focused ? 'text-mono-sm w-[60px]' : 'text-mono-label w-[56px] opacity-60'
+          } ${positive ? 'text-emerald-500' : 'text-[#8b3a3a]'}`}
       >
         {positive ? '+' : ''}{item.change.toFixed(2)}%
       </span>
 
       {/* Focus indicator dot */}
       <span
-        className={`w-1 h-1 flex-shrink-0 ml-1 transition-all duration-700 ${
-          focused ? 'bg-emerald-500 opacity-100 animate-pulse' : 'bg-transparent opacity-0'
-        }`}
+        className={`w-1 h-1 flex-shrink-0 ml-1 transition-all duration-700 ${focused ? 'bg-emerald-500 opacity-100 animate-pulse' : 'bg-transparent opacity-0'
+          }`}
       />
     </div>
   );
@@ -236,7 +231,7 @@ export function StockTicker() {
       {/* Header */}
       <div className="flex items-center justify-between px-3 py-2 border-b border-border-subtle bg-[rgba(255,255,255,0.02)] flex-shrink-0 z-20">
         <span className="text-mono-xs text-text-secondary uppercase">
-          Live Feed
+          Live Signal Feed
         </span>
         <div className="flex items-center gap-2">
           <span

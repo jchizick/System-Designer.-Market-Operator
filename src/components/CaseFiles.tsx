@@ -70,9 +70,14 @@ function AbstractVisual({ type }: { type: string }) {
 
 export function CaseFiles() {
   return (
-    <section className="mb-8">
-      <div className="text-mono-xs text-emerald-400 mb-2">
-        003 // CASE FILES
+    <section className="mb-10">
+      <div className="flex items-center gap-4 mb-2">
+        <span className="text-mono-xs text-emerald-400 flex-shrink-0">003 // CASE FILES</span>
+        <div className="flex-1 h-px bg-white/[0.06]" />
+        <a href="#" className="text-mono-xs text-emerald-500 hover:text-emerald-400 transition-colors tracking-[0.08em] flex items-center gap-1.5 flex-shrink-0">
+          BROWSE ALL SYSTEMS
+          <span className="text-[10px]">→</span>
+        </a>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 grid-rows-2 gap-4 h-auto md:h-[320px]">
         {caseStudies.map((c, idx) => (
@@ -93,7 +98,7 @@ export function CaseFiles() {
 
             <AbstractVisual type={c.visualType} />
 
-            <div className="text-body-sm leading-[1.4]">
+            <div className="text-mono-label text-white/60 leading-[1.4]">
               {c.outcome}
             </div>
           </Link>

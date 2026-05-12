@@ -6,6 +6,7 @@ import { FieldNotes } from './components/FieldNotes';
 import { CaseFiles } from './components/CaseFiles';
 import { OperationalDoctrine } from './components/OperationalDoctrine';
 import { Footer } from './components/Footer';
+import { BuildLog } from './components/BuildLog';
 import { CaseStudyPage } from './components/CaseStudyPage';
 import { AboutPage } from './components/AboutPage';
 import { ReadingPathPage } from './components/ReadingPathPage';
@@ -20,6 +21,7 @@ function HomePage() {
         <FieldNotes />
         <CaseFiles />
         <OperationalDoctrine />
+        <BuildLog />
       </main>
       <Footer />
     </div>

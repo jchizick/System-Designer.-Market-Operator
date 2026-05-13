@@ -5,6 +5,7 @@ import { Hero } from './components/Hero';
 import { FieldNotes } from './components/FieldNotes';
 import { CaseFiles } from './components/CaseFiles';
 import { OperationalDoctrine } from './components/OperationalDoctrine';
+import { Capabilities } from './components/Capabilities';
 import { Footer } from './components/Footer';
 import { BuildLog } from './components/BuildLog';
 import { CaseStudyPage } from './components/CaseStudyPage';
@@ -23,6 +24,7 @@ function HomePage() {
         <FieldNotes />
         <CaseFiles />
         <OperationalDoctrine />
+        <Capabilities />
         <BuildLog />
       </main>
       <Footer />

@@ -117,11 +117,11 @@ export function Capabilities() {
             </span>
           </div>
 
-          <div className="border border-white/[0.05] bg-bg-base">
+          <div className="relative overflow-hidden border border-emerald-500/15 bg-bg-base shadow-[0_0_24px_rgba(16,185,129,0.08),inset_0_0_18px_rgba(16,185,129,0.05)] before:pointer-events-none before:absolute before:inset-0 before:z-10 before:bg-emerald-500/[0.055] before:mix-blend-screen after:pointer-events-none after:absolute after:inset-0 after:z-10 after:bg-[radial-gradient(circle_at_50%_34%,transparent_0%,rgba(16,185,129,0.06)_58%,rgba(0,0,0,0.34)_100%)]">
             <img
               src={operatorPhoto}
               alt="Operator portrait"
-              className="aspect-[4/3] w-full object-cover object-center opacity-85 grayscale-[20%]"
+              className="relative z-0 aspect-[4/3] w-full object-cover object-center opacity-90 grayscale contrast-[1.12] brightness-[0.78] saturate-[0.55]"
             />
           </div>
 

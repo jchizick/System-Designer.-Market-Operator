@@ -253,7 +253,7 @@ const progressionKeywords = [
 /* ═══════════════════════════════════════════════════════════════
    STAGE CARD
    ═══════════════════════════════════════════════════════════════ */
-function StageCard({ stage, index }: { stage: Stage; index: number }) {
+function StageCard({ stage, index }: { key?: React.Key; stage: Stage; index: number }) {
   const Icon = stage.icon;
   return (
     <RevealSection delay={index * 0.06} className="w-full">

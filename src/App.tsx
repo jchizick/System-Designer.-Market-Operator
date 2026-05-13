@@ -10,6 +10,8 @@ import { BuildLog } from './components/BuildLog';
 import { CaseStudyPage } from './components/CaseStudyPage';
 import { AboutPage } from './components/AboutPage';
 import { ReadingPathPage } from './components/ReadingPathPage';
+import { FieldNotesArchivePage } from './components/FieldNotesArchivePage';
+import { FieldNotePage } from './components/FieldNotePage';
 import { AtmosphereOverlay } from './components/atmosphere/AtmosphereOverlay';
 
 function HomePage() {
@@ -36,6 +38,8 @@ export default function App() {
         <Route path="/case/:slug" element={<CaseStudyPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/reading-path" element={<ReadingPathPage />} />
+        <Route path="/field-notes" element={<FieldNotesArchivePage />} />
+        <Route path="/field-notes/:slug" element={<FieldNotePage />} />
       </Routes>
       <AtmosphereOverlay />
     </>

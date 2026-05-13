@@ -141,6 +141,13 @@
     display: none;
   }
 
+  .field-note-card__excerpt {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
   /* Typography Scale — Prose */
   .text-display {
     @apply text-[38px] sm:text-[48px] font-medium tracking-[-0.03em] leading-[0.95] text-text-primary;

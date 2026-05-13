@@ -138,7 +138,7 @@ export function BuildLog() {
             </div>
 
             {/* Entry name */}
-            <span className="text-mono-sm text-text-primary/90 tracking-[0.01em] group-hover:text-text-primary transition-colors truncate">
+            <span className="text-mono-label text-white/60 tracking-[0.01em] group-hover:text-text-primary transition-colors truncate">
               {entry.name}
             </span>
 

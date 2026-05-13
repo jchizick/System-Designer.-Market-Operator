@@ -58,7 +58,7 @@ const CapabilityCard: React.FC<{ capability: Capability }> = ({ capability }) =>
           <h3 className="mb-2 text-body-base font-normal leading-tight text-text-primary">
             {capability.title}
           </h3>
-          <p className="text-body-xs">
+          <p className="text-mono-label text-white/60">
             {capability.description}
           </p>
         </div>
@@ -98,8 +98,8 @@ export function Capabilities() {
                 <div className="mb-2 text-mono-2xs font-medium text-emerald-400/80">
                   OPERATOR PHILOSOPHY
                 </div>
-                <p className="text-body-sm text-text-primary/80">
-                  Less interested in isolated assets. More interested in systems that keep working after launch.
+                <p className="text-mono-label text-white/60">
+                  Systems over assets. Durability over decoration.
                 </p>
               </div>
             </div>
@@ -126,7 +126,7 @@ export function Capabilities() {
           </div>
 
           <div className="border-b border-white/[0.06] py-3">
-            <p className="text-mono-sm leading-relaxed text-text-primary/85">
+            <p className="text-mono-label leading-relaxed text-text-primary/85">
               Independent operator.
               <br />
               Systems thinker. Builder.
@@ -135,7 +135,7 @@ export function Capabilities() {
 
           <div className="flex gap-3 pt-3">
             <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 bg-emerald-400" />
-            <p className="text-body-xs">
+            <p className="text-body-xs text-white/60">
               Operating at the intersection of design, code, and strategy. Focused on durable systems that compound over time.
             </p>
           </div>

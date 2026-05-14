@@ -161,6 +161,112 @@
     word-break: normal;
   }
 
+  .hero-typewriter {
+    --cursor-delay: 2.7s;
+    --type-cursor-color: rgba(16, 185, 129, 0.75);
+    --cursor-visible: 0.55s;
+  }
+
+  .hero-typewriter .type-line {
+    display: block;
+    max-width: 100%;
+    min-height: 0.95em;
+    overflow: visible;
+  }
+
+  .hero-typewriter .type-text {
+    box-sizing: content-box;
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+    width: 0;
+    vertical-align: bottom;
+  }
+
+  .hero-typewriter .type-line-1 .type-text {
+    animation: heroTypeLine1 1.1s steps(15, end) forwards;
+  }
+
+  .hero-typewriter .type-line-2 .type-text {
+    animation: heroTypeLine2 1.3s steps(19, end) 1.22s forwards;
+  }
+
+  .hero-typewriter .type-text::after {
+    background: var(--type-cursor-color);
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.35);
+    content: "";
+    height: 0.78em;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0.1em;
+    width: 2px;
+  }
+
+  .hero-typewriter .type-line-1 .type-text::after {
+    animation:
+      heroCursorBlink 0.55s steps(1, end) 2,
+      heroCursorFade 0.01s linear 1.1s forwards;
+  }
+
+  .hero-typewriter .type-line-2 .type-text::after {
+    animation:
+      heroCursorBlink 0.55s steps(1, end) 1.22s 5,
+      heroCursorFade 0.01s linear 3.95s forwards;
+  }
+
+  @keyframes heroTypeLine1 {
+    from {
+      width: 0;
+    }
+
+    to {
+      width: min(15ch, 100%);
+    }
+  }
+
+  @keyframes heroTypeLine2 {
+    from {
+      width: 0;
+    }
+
+    to {
+      width: min(19ch, 100%);
+    }
+  }
+
+  @keyframes heroCursorBlink {
+
+    0%,
+    49% {
+      opacity: 0.55;
+    }
+
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes heroCursorFade {
+    to {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-typewriter .type-text {
+      animation: none;
+      width: auto;
+    }
+
+    .hero-typewriter .type-text::after {
+      content: none;
+    }
+  }
+
   /* Typography Scale — Prose */
   .text-display {
     @apply text-[38px] sm:text-[48px] font-medium tracking-[-0.03em] leading-[0.95] text-text-primary;

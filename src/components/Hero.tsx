@@ -10,9 +10,13 @@ export function Hero() {
           001 // IDENTITY
         </div>
 
-        <h1 className="text-display font-pixel mb-4 break-words">
-          Design Engineer<br />
-          <span className="text-display font-pixel opacity-15">AI Systems Designer</span>
+        <h1 className="hero-typewriter text-display font-pixel mb-4 break-words" aria-label="Design Engineer AI Systems Designer">
+          <span className="type-line type-line-1">
+            <span className="type-text">Design Engineer</span>
+          </span>
+          <span className="type-line type-line-2 text-display font-pixel opacity-30">
+            <span className="type-text">AI Systems Designer</span>
+          </span>
         </h1>
 
         <p className="text-mono-base text-white/70 max-w-[350px]">

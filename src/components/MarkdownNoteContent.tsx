@@ -60,7 +60,7 @@ export function MarkdownNoteContent({ content }: { content: string }) {
         }
 
         return (
-          <p key={index} className="text-body-base text-white/70 max-w-[720px] break-words">
+          <p key={index} className="text-mono-sm text-white/70 max-w-[80ch] break-words">
             {renderInlineMarkdown(block)}
           </p>
         );

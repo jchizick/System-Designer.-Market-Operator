@@ -269,7 +269,7 @@
 
   /* Typography Scale — Prose */
   .text-display {
-    @apply text-[38px] sm:text-[48px] font-medium tracking-[-0.03em] leading-[0.95] text-text-primary;
+    @apply text-[38px] sm:text-[48px] font-medium tracking-[-0.03em] leading-[1] text-text-primary;
   }
 
   .text-heading-lg {

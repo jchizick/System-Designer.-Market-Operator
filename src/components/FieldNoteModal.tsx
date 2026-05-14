@@ -113,7 +113,7 @@ export function FieldNoteModal({ note, onClose }: FieldNoteModalProps) {
               </span>
               <span className="min-w-0 break-words text-mono-xs text-emerald-400">#{note.tag}</span>
             </div>
-            <h2 id={titleId} className="text-heading-lg max-w-full break-words">
+            <h2 id={titleId} className="text-heading-lg font-pixel max-w-full break-words">
               {note.title}
             </h2>
           </div>

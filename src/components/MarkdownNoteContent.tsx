@@ -28,11 +28,11 @@ export function MarkdownNoteContent({ content }: { content: string }) {
   const blocks = content.split(/\n{2,}/).filter(Boolean);
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="field-note-content flex min-w-0 max-w-full flex-col gap-5">
       {blocks.map((block, index) => {
         if (block.startsWith('### ')) {
           return (
-            <h3 key={index} className="text-mono-base text-emerald-400 uppercase mt-3">
+            <h3 key={index} className="text-mono-base text-emerald-400 uppercase mt-3 max-w-full break-words">
               {block.replace(/^### /, '')}
             </h3>
           );
@@ -40,7 +40,7 @@ export function MarkdownNoteContent({ content }: { content: string }) {
 
         if (block.startsWith('## ')) {
           return (
-            <h2 key={index} className="text-heading-sm text-text-primary mt-4">
+            <h2 key={index} className="text-heading-sm text-text-primary mt-4 max-w-full break-words">
               {block.replace(/^## /, '')}
             </h2>
           );
@@ -48,11 +48,11 @@ export function MarkdownNoteContent({ content }: { content: string }) {
 
         if (block.split(/\r?\n/).every((line) => line.startsWith('- '))) {
           return (
-            <ul key={index} className="flex flex-col gap-2 pl-1">
+            <ul key={index} className="flex min-w-0 max-w-full flex-col gap-2 pl-1">
               {block.split(/\r?\n/).map((line) => (
-                <li key={line} className="flex gap-3 text-body-base">
-                  <span className="text-emerald-500/50 mt-[9px] text-[6px]">+</span>
-                  <span>{renderInlineMarkdown(line.replace(/^- /, ''))}</span>
+                <li key={line} className="flex min-w-0 gap-3 text-body-base">
+                  <span className="mt-[9px] flex-shrink-0 text-[6px] text-emerald-500/50">+</span>
+                  <span className="min-w-0">{renderInlineMarkdown(line.replace(/^- /, ''))}</span>
                 </li>
               ))}
             </ul>
@@ -60,7 +60,7 @@ export function MarkdownNoteContent({ content }: { content: string }) {
         }
 
         return (
-          <p key={index} className="text-body-base text-white/70 max-w-[720px]">
+          <p key={index} className="text-body-base text-white/70 max-w-[720px] break-words">
             {renderInlineMarkdown(block)}
           </p>
         );

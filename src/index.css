@@ -49,7 +49,15 @@
   }
 
   * {
+    box-sizing: border-box;
     border-radius: 0 !important;
+  }
+
+  html,
+  body,
+  #root {
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   html {
@@ -146,6 +154,11 @@
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  .field-note-content {
+    overflow-wrap: anywhere;
+    word-break: normal;
   }
 
   /* Typography Scale — Prose */

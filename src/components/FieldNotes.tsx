@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { formatFieldNoteDate, getLatestFieldNotes } from '../lib/fieldNotes';
+import { FieldNote, formatFieldNoteDate, getLatestFieldNotes } from '../lib/fieldNotes';
+import { FieldNoteModal } from './FieldNoteModal';
 
 export function FieldNotes() {
   const notes = getLatestFieldNotes(4);
+  const [selectedNote, setSelectedNote] = useState<FieldNote | null>(null);
 
   return (
     <section className="mb-10">
@@ -17,7 +19,12 @@ export function FieldNotes() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {notes.map((note) => (
-          <Link key={note.slug} to={`/field-notes/${note.slug}`} className="border-l border-emerald-500/40 pl-4 py-2 flex flex-col group cursor-pointer hover:border-emerald-500 transition-colors bg-emerald-500/[0.02] hover:bg-emerald-500/[0.04]">
+          <button
+            key={note.slug}
+            type="button"
+            onClick={() => setSelectedNote(note)}
+            className="border-l border-emerald-500/40 pl-4 py-2 flex flex-col group cursor-pointer hover:border-emerald-500 transition-colors bg-emerald-500/[0.02] hover:bg-emerald-500/[0.04] text-left focus:outline-none focus:border-emerald-400 focus:bg-emerald-500/[0.055]"
+          >
             <div className="text-mono-xs text-text-secondary mb-1.5">
               LOG ENTRY &mdash; {formatFieldNoteDate(note.date, 'short')}
             </div>
@@ -29,9 +36,10 @@ export function FieldNotes() {
                 #{note.tag}
               </span>
             </div>
-          </Link>
+          </button>
         ))}
       </div>
+      <FieldNoteModal note={selectedNote} onClose={() => setSelectedNote(null)} />
     </section>
   );
 }

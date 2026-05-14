@@ -17,9 +17,9 @@ import { AtmosphereOverlay } from './components/atmosphere/AtmosphereOverlay';
 
 function HomePage() {
   return (
-    <div className="min-h-screen flex flex-col relative p-6">
+    <div className="min-h-screen flex flex-col relative max-w-full overflow-x-hidden p-4 sm:p-6">
       <TopBar />
-      <main className="flex-grow flex flex-col w-full max-w-5xl mx-auto space-y-8">
+      <main className="flex-grow flex flex-col w-full max-w-5xl mx-auto space-y-8 min-w-0">
         <Hero />
         <FieldNotes />
         <CaseFiles />

@@ -10,7 +10,7 @@ export function FieldNotes() {
   return (
     <section className="mb-10">
       <div className="flex items-center gap-4 mb-2">
-        <span className="text-mono-xs text-emerald-400 flex-shrink-0">002 // FIELD NOTES</span>
+        <span className="text-mono-xs text-emerald-400 flex-shrink-0">007 // FIELD NOTES</span>
         <div className="flex-1 h-px bg-white/[0.06]" />
         <Link to="/field-notes" className="text-mono-xs text-emerald-500 hover:text-emerald-400 transition-colors tracking-[0.08em] flex items-center gap-1.5 flex-shrink-0">
           VIEW ALL NOTES

@@ -4,7 +4,8 @@ import { TopBar } from './components/TopBar';
 import { Hero } from './components/Hero';
 import { FieldNotes } from './components/FieldNotes';
 import { CaseFiles } from './components/CaseFiles';
-import { OperationalDoctrine } from './components/OperationalDoctrine';
+import { ForwardDeployedFit } from './components/ForwardDeployedFit';
+// import { OperationalDoctrine } from './components/OperationalDoctrine';
 import { Capabilities } from './components/Capabilities';
 import { ServiceStack } from './components/ServiceStack';
 import { Footer } from './components/Footer';
@@ -21,11 +22,12 @@ function HomePage() {
       <TopBar />
       <main className="flex-grow flex flex-col w-full max-w-5xl mx-auto space-y-8 min-w-0">
         <Hero />
-        <FieldNotes />
         <CaseFiles />
-        <OperationalDoctrine />
+        <ForwardDeployedFit />
         <Capabilities />
+        {/* <OperationalDoctrine /> */}
         <ServiceStack />
+        <FieldNotes />
       </main>
       <Footer />
     </div>

@@ -1,26 +1,31 @@
 import React from 'react';
-import { StockTicker } from './StockTicker';
+import { DeploymentSurface } from './DeploymentSurface';
 
 export function Hero() {
   return (
-    <section className="grid min-w-0 grid-cols-1 gap-8 mb-12 lg:grid-cols-[1.2fr_0.8fr] lg:gap-10">
+    <section className="grid min-w-0 grid-cols-1 gap-8 mb-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-10">
       {/* Left Column: Text */}
       <div className="flex min-w-0 flex-col">
         <div className="text-mono-xs text-emerald-400 mb-2">
           001 // IDENTITY
         </div>
 
-        <h1 className="hero-typewriter text-display font-pixel mb-4 break-words" aria-label="Design Engineer AI Systems Designer">
-          <span className="type-line type-line-1">
-            <span className="type-text">Design Engineer</span>
-          </span>
-          <span className="type-line type-line-2 text-display font-pixel opacity-30">
-            <span className="type-text">AI Systems Designer</span>
-          </span>
-        </h1>
+        <div className="mb-4">
+          <h1 className="hero-typewriter text-display font-pixel break-words" aria-label="Forward-Deployed Design Engineer">
+            <span className="type-line type-line-1">
+              <span className="type-text">Forward-Deployed</span>
+            </span>
+            <span className="type-line type-line-2">
+              <span className="type-text">Design Engineer</span>
+            </span>
+          </h1>
+          <h2 className="hero-subtitle-fade text-heading-md font-pixel">
+            AI Workflow & Product Systems
+          </h2>
+        </div>
 
         <p className="text-mono-base text-white/70 max-w-[350px]">
-          Designing and operating systems that extract signal from noise and execute under pressure.
+          I help teams turn messy operations into usable AI-assisted workflows, internal tools, and digital operating systems.
         </p>
 
         <div className="flex flex-wrap gap-3 pt-6 sm:gap-4">
@@ -28,14 +33,14 @@ export function Hero() {
             [ Access Case Files ]
           </button>
           <button className="max-w-full px-4 py-2 bg-transparent border border-border-subtle hover:bg-white/5 transition-colors text-mono-xs tracking-widest uppercase text-text-secondary hover:text-text-primary sm:px-6">
-            [ Initiate Contact ]
+            [ CONTACT OPERATOR ]
           </button>
         </div>
       </div>
 
-      {/* Right Column: Live Ticker */}
+      {/* Right Column: Deployment Surface */}
       <div className="flex min-w-0 items-center">
-        <StockTicker />
+        <DeploymentSurface />
       </div>
     </section>
   );

@@ -75,9 +75,6 @@ function ExecutionTelemetry() {
           className="w-2 h-2 bg-emerald-500"
           animate={{
             opacity: confirmed ? 1 : [1, 0.3, 1],
-            boxShadow: confirmed
-              ? '0 0 8px rgba(16,185,129,0.8)'
-              : ['0 0 2px rgba(16,185,129,0.4)', '0 0 8px rgba(16,185,129,0.8)', '0 0 2px rgba(16,185,129,0.4)'],
           }}
           transition={{ duration: 0.3, repeat: confirmed ? 0 : Infinity }}
         />
@@ -181,7 +178,6 @@ function ChainCascade() {
       <div className="absolute inset-x-12 top-1/2 h-px"
         style={{
           background: 'linear-gradient(90deg, rgba(16,185,129,0.1), rgba(16,185,129,0.6), rgba(16,185,129,0.9), rgba(16,185,129,0.6), rgba(16,185,129,0.1))',
-          boxShadow: '0 0 12px rgba(16,185,129,0.4)',
         }}
       />
     </motion.div>
@@ -189,28 +185,23 @@ function ChainCascade() {
 }
 
 // ─── Connection line between nodes ───
-function ConnectionLine({ active, index, isExecuting }: { active: boolean; index: number; isExecuting: boolean }) {
+function ConnectionLine({ active, isExecuting }: { active: boolean; isExecuting: boolean }) {
   return (
     <div className="hidden md:flex items-center flex-1 relative" style={{ minWidth: 40 }}>
       {/* Base line */}
       <div className={`absolute inset-x-0 top-1/2 h-px transition-colors duration-300 ${isExecuting ? 'bg-emerald-500/30' : 'bg-border-subtle'
         }`} />
 
-      {/* Animated pulse */}
-      <motion.div
+      {/* Static signal tint */}
+      <div
         className="absolute top-1/2 h-px"
         style={{
+          left: 0,
+          width: '100%',
+          opacity: active || isExecuting ? 0.72 : 0.38,
           background: active || isExecuting
             ? 'linear-gradient(90deg, transparent, #10b981, transparent)'
             : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)',
-        }}
-        initial={{ left: '-20%', width: '20%' }}
-        animate={{ left: '100%' }}
-        transition={{
-          duration: isExecuting ? 0.6 : 1.5,
-          repeat: Infinity,
-          delay: index * (isExecuting ? 0.1 : 0.4),
-          ease: 'linear',
         }}
       />
 
@@ -243,24 +234,19 @@ function ConnectionLine({ active, index, isExecuting }: { active: boolean; index
 }
 
 // Mobile connection (vertical)
-function MobileConnection({ active, index }: { active: boolean; index: number }) {
+function MobileConnection({ active }: { active: boolean }) {
   return (
     <div className="md:hidden flex flex-col items-center py-1 relative" style={{ height: 32 }}>
       <div className="absolute inset-y-0 left-1/2 w-px bg-border-subtle" />
-      <motion.div
+      <div
         className="absolute left-1/2 w-px"
         style={{
+          top: 0,
+          height: '100%',
+          opacity: active ? 0.72 : 0.38,
           background: active
             ? 'linear-gradient(180deg, transparent, #10b981, transparent)'
             : 'linear-gradient(180deg, transparent, rgba(255,255,255,0.1), transparent)',
-        }}
-        initial={{ top: '-20%', height: '20%' }}
-        animate={{ top: '100%' }}
-        transition={{
-          duration: 1.2,
-          repeat: Infinity,
-          delay: index * 0.3,
-          ease: 'linear',
         }}
       />
       {/* Arrow */}
@@ -378,7 +364,7 @@ export function OperationalDoctrine() {
       {/* Section Header */}
       <div className="flex items-center gap-4 mb-8">
         <span className="text-mono-xs text-emerald-400 flex-shrink-0">
-          004 // OPERATIONAL LOOP
+          005 // OPERATIONAL LOOP
         </span>
         <div className="flex-1 h-px bg-white/[0.06]" />
         <div className="text-mono-2xs text-text-secondary/50 flex items-center gap-4 flex-shrink-0 hidden sm:flex">
@@ -397,9 +383,6 @@ export function OperationalDoctrine() {
           initial={false}
           animate={{
             width: `${((activeIndex + 1) / nodes.length) * 100}%`,
-            boxShadow: isOnExecute
-              ? '0 0 12px rgba(16,185,129,0.6)'
-              : '0 0 0px transparent',
           }}
           transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
         />
@@ -457,29 +440,21 @@ export function OperationalDoctrine() {
                 {/* Node ring */}
                 <div className="relative mb-3">
                   {/* Outer glow ring */}
-                  <motion.div
+                  <div
                     className="absolute inset-[-6px] border"
-                    animate={{
+                    style={{
                       borderColor: executeActive
-                        ? ['rgba(16,185,129,0.6)', 'rgba(16,185,129,0.2)', 'rgba(16,185,129,0.6)']
+                        ? 'rgba(16,185,129,0.38)'
                         : isActive
-                          ? ['rgba(16,185,129,0.3)', 'rgba(16,185,129,0.1)', 'rgba(16,185,129,0.3)']
+                          ? 'rgba(16,185,129,0.2)'
                           : 'transparent',
-                      boxShadow: executeActive
-                        ? ['0 0 20px rgba(16,185,129,0.3)', '0 0 30px rgba(16,185,129,0.5)', '0 0 20px rgba(16,185,129,0.3)']
-                        : '0 0 0px transparent',
                     }}
-                    transition={{ duration: executeActive ? 0.8 : 2, repeat: Infinity }}
                   />
 
                   {/* Second outer ring for execute */}
                   {executeActive && (
-                    <motion.div
+                    <div
                       className="absolute inset-[-12px] border border-emerald-500/10"
-                      animate={{
-                        borderColor: ['rgba(16,185,129,0.15)', 'rgba(16,185,129,0.05)', 'rgba(16,185,129,0.15)'],
-                      }}
-                      transition={{ duration: 1.2, repeat: Infinity }}
                     />
                   )}
 
@@ -493,18 +468,6 @@ export function OperationalDoctrine() {
                           ? 'bg-emerald-500/5 border-emerald-500/40'
                           : 'bg-bg-surface border-white/[0.08] group-hover:border-white/20'
                       }`}
-                    animate={
-                      executeActive
-                        ? {
-                          boxShadow: [
-                            '0 0 20px rgba(16,185,129,0.4)',
-                            '0 0 35px rgba(16,185,129,0.6)',
-                            '0 0 20px rgba(16,185,129,0.4)',
-                          ],
-                        }
-                        : {}
-                    }
-                    transition={executeActive ? { duration: 1, repeat: Infinity } : {}}
                   >
                     <motion.span
                       className={`text-sm transition-colors duration-300 ${executeActive
@@ -515,8 +478,6 @@ export function OperationalDoctrine() {
                             ? 'text-emerald-500/60'
                             : 'text-white/20 group-hover:text-white/40'
                         }`}
-                      animate={executeActive ? { scale: [1, 1.15, 1] } : { scale: 1 }}
-                      transition={executeActive ? { duration: 0.8, repeat: Infinity } : {}}
                     >
                       <node.icon size={16} strokeWidth={1.5} />
                     </motion.span>
@@ -548,12 +509,6 @@ export function OperationalDoctrine() {
                 <motion.div
                   className={`text-mono-label tracking-[0.02em] transition-colors duration-300 ${isActive ? 'text-text-primary' : 'text-text-secondary/60'
                     }`}
-                  animate={
-                    executeActive
-                      ? { color: ['#ffffff', '#10b981', '#ffffff'] }
-                      : {}
-                  }
-                  transition={executeActive ? { duration: 1.5, repeat: Infinity } : {}}
                 >
                   {node.id}
                 </motion.div>
@@ -568,7 +523,6 @@ export function OperationalDoctrine() {
               {idx < nodes.length - 1 && (
                 <ConnectionLine
                   active={idx < activeIndex}
-                  index={idx}
                   isExecuting={isOnExecute && isExecuting}
                 />
               )}
@@ -602,12 +556,6 @@ export function OperationalDoctrine() {
                         ? 'bg-emerald-500/5 border-emerald-500/40'
                         : 'bg-bg-surface border-white/[0.08]'
                     }`}
-                  animate={
-                    executeActive
-                      ? { boxShadow: ['0 0 15px rgba(16,185,129,0.3)', '0 0 30px rgba(16,185,129,0.5)', '0 0 15px rgba(16,185,129,0.3)'] }
-                      : {}
-                  }
-                  transition={executeActive ? { duration: 1, repeat: Infinity } : {}}
                 >
                   <span
                     className={`text-xs ${isActive ? 'text-emerald-500' : isPast ? 'text-emerald-500/60' : 'text-white/20'
@@ -631,7 +579,7 @@ export function OperationalDoctrine() {
               </motion.div>
 
               {idx < nodes.length - 1 && (
-                <MobileConnection active={idx < activeIndex} index={idx} />
+                <MobileConnection active={idx < activeIndex} />
               )}
             </React.Fragment>
           );
@@ -652,18 +600,12 @@ export function OperationalDoctrine() {
         transition={{ duration: 0.5 }}
       >
         {/* Scan line effect — faster during execute */}
-        <motion.div
+        <div
           className="absolute top-0 left-0 right-0 h-px"
           style={{
             background: isOnExecute
               ? 'linear-gradient(90deg, transparent, rgba(16,185,129,0.7), transparent)'
               : 'linear-gradient(90deg, transparent, rgba(16,185,129,0.4), transparent)',
-          }}
-          animate={{ y: [0, 80, 0] }}
-          transition={{
-            duration: isOnExecute ? 1.5 : 4,
-            repeat: Infinity,
-            ease: 'linear',
           }}
         />
 

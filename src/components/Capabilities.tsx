@@ -1,9 +1,9 @@
 import React from 'react';
-import { Box, Code2, Layers, Repeat2, Workflow, type LucideIcon } from 'lucide-react';
+import { Box, Code2, Database, Workflow, type LucideIcon } from 'lucide-react';
 import operatorPhoto from '../assets/operator-photo.png';
+import { OperationalLoop } from './OperationalLoop';
 
 type Capability = {
-  label: string;
   title: string;
   description: string;
   icon: LucideIcon;
@@ -11,27 +11,23 @@ type Capability = {
 
 const capabilities: Capability[] = [
   {
-    label: '01 // PRODUCT',
     title: 'Product Systems',
-    description: 'Interface architecture, dashboards, user flows, and internal tools built for clarity under pressure.',
+    description: 'End-to-end product systems with dashboards, tools, and operational interfaces.',
     icon: Box,
   },
   {
-    label: '02 // AI',
-    title: 'AI Workflows',
-    description: 'Prompt systems, automation logic, brand engines, and content pipelines that scale useful output.',
+    title: 'AI Workflow Systems',
+    description: 'Design and integrate AI workflows that automate, augment, and accelerate real work.',
     icon: Workflow,
   },
   {
-    label: '03 // BRAND',
-    title: 'Brand Infrastructure',
-    description: 'Positioning, visual systems, messaging frameworks, and campaign assets aligned into one operating layer.',
-    icon: Layers,
+    title: 'Business Systems',
+    description: 'Build the operating layer that connects data, people, processes, and tools.',
+    icon: Database,
   },
   {
-    label: '04 // FRONTEND',
     title: 'Frontend Prototyping',
-    description: 'React and Next.js interfaces, interactive layouts, and fast MVP builds for testing ideas in motion.',
+    description: 'Rapid, high-fidelity interfaces to test ideas, align stakeholders, and ship with confidence.',
     icon: Code2,
   },
 ];
@@ -40,28 +36,25 @@ const CapabilityCard: React.FC<{ capability: Capability }> = ({ capability }) =>
   const Icon = capability.icon;
 
   return (
-    <article className="group relative min-h-[150px] overflow-hidden border border-emerald-500/12 bg-emerald-500/[0.035] p-4 transition-all duration-300 hover:border-emerald-500/25 hover:bg-emerald-500/[0.055]">
-      <div className="absolute right-3 top-3 flex gap-1">
+    <article className="group relative min-h-[156px] overflow-hidden border border-emerald-500/12 bg-emerald-500/[0.035] p-3 transition-colors duration-300 hover:border-emerald-500/25 hover:bg-emerald-500/[0.055]">
+      <div className="absolute right-2.5 top-2.5 flex gap-1">
         {[0, 1, 2, 3].map((tick) => (
           <span key={tick} className="h-1 w-1 bg-emerald-400/35 transition-colors group-hover:bg-emerald-400/55" />
         ))}
       </div>
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-400/25 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-      <div className="flex h-full gap-4">
-        <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center border border-emerald-500/25 bg-bg-surface/70 text-emerald-400">
-          <Icon size={18} strokeWidth={1.5} />
-        </div>
-        <div className="min-w-0 pt-0.5">
-          <div className="mb-2 text-mono-2xs font-medium text-emerald-400/80">
-            {capability.label}
+      <div className="flex h-full flex-col gap-2.5">
+        <div className="flex items-start">
+          <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center border border-emerald-500/25 bg-bg-surface/70 text-emerald-400">
+            <Icon size={16} strokeWidth={1.5} />
           </div>
-          <h3 className="mb-2 text-body-base font-normal leading-tight text-text-primary">
-            {capability.title}
-          </h3>
-          <p className="text-mono-label text-white/60">
-            {capability.description}
-          </p>
         </div>
+        <h3 className="text-[13px] font-normal leading-snug text-text-primary">
+          {capability.title}
+        </h3>
+        <p className="text-mono-3xs leading-relaxed text-white/60 sm:text-[10px]">
+          {capability.description}
+        </p>
       </div>
     </article>
   );
@@ -69,10 +62,10 @@ const CapabilityCard: React.FC<{ capability: Capability }> = ({ capability }) =>
 
 export function Capabilities() {
   return (
-    <section className="mb-10">
+    <section className="mb-4">
       <div className="mb-4 flex items-center gap-4">
         <span className="flex-shrink-0 text-mono-xs text-emerald-400">
-          005 // CAPABILITIES
+          004 // CAPABILITIES
         </span>
         <div className="h-px flex-1 bg-white/[0.06]" />
         <span className="hidden flex-shrink-0 text-mono-2xs text-text-secondary/40 sm:inline">
@@ -80,33 +73,18 @@ export function Capabilities() {
         </span>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <div className="space-y-4 lg:col-span-2">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_280px] xl:grid-cols-[minmax(0,1fr)_300px]">
+        <div className="space-y-3">
+          <div className="grid grid-cols-1 gap-3 min-[520px]:grid-cols-2 lg:grid-cols-4">
             {capabilities.map((capability) => (
-              <CapabilityCard key={capability.label} capability={capability} />
+              <CapabilityCard key={capability.title} capability={capability} />
             ))}
           </div>
 
-          <div className="relative overflow-hidden border border-emerald-500/12 bg-emerald-500/[0.035] p-4">
-            <div className="absolute left-0 top-0 h-full w-px bg-emerald-400/25" />
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-              <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center border border-emerald-500/25 bg-bg-surface/70 text-emerald-400">
-                <Repeat2 size={18} strokeWidth={1.5} />
-              </div>
-              <div className="min-w-0">
-                <div className="mb-2 text-mono-2xs font-medium text-emerald-400/80">
-                  OPERATOR PHILOSOPHY
-                </div>
-                <p className="text-mono-label text-white/60">
-                  Systems over assets. Durability over decoration.
-                </p>
-              </div>
-            </div>
-          </div>
+          <OperationalLoop />
         </div>
 
-        <aside className="border border-border-subtle bg-[#070707] p-3">
+        <aside className="flex flex-col border border-border-subtle bg-[#070707] p-3">
           <div className="mb-3 flex items-center justify-between gap-3">
             <span className="text-mono-2xs text-text-secondary/60">
               ABOUT / OPERATOR
@@ -118,7 +96,7 @@ export function Capabilities() {
           </div>
 
           <div className="
-  relative z-0 aspect-[4/3] w-full object-cover object-center
+  relative z-0 aspect-[5/4] w-full object-cover object-center
   opacity-95
   contrast-[1.06]
   brightness-[0.9]
@@ -126,7 +104,7 @@ export function Capabilities() {
             <img
               src={operatorPhoto}
               alt="Operator portrait"
-              className="aspect-[4/3] w-full object-cover object-center  relative overflow-hidden border border-emerald-500/15 bg-bg-base
+              className="aspect-[5/4] w-full object-cover object-center  relative overflow-hidden border border-emerald-500/15 bg-bg-base
   shadow-[0_0_24px_rgba(16,185,129,0.07),inset_0_0_18px_rgba(16,185,129,0.04)]
   before:pointer-events-none before:absolute before:inset-0 before:z-10
   before:bg-emerald-500/[0.025] before:mix-blend-screen
@@ -136,22 +114,38 @@ export function Capabilities() {
             />
           </div>
 
-          <div className="border-b border-white/[0.06] py-3">
+          <div className="py-3">
             <p className="text-mono-label leading-relaxed text-text-primary/85">
-              Independent operator.
-              <br />
-              Systems thinker. Builder.
+              Independent operator building interfaces, AI workflows, and business systems for founders, operators, and small teams.
+            </p>
+            <p className="mt-2 text-mono-label leading-relaxed text-text-primary/85">
+              Focused on durable systems that keep working after launch.
             </p>
           </div>
 
-          <div className="flex gap-3 pt-3">
-            <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 bg-emerald-400" />
-            <p className="text-body-xs text-white/60">
-              Operating at the intersection of design, code, and strategy. Focused on durable systems that compound over time.
-            </p>
+          <div className="mt-auto border-t border-white/[0.06] pt-3">
+            <div className="space-y-2 pb-3">
+              {[
+                ['LOCATION', 'TORONTO, ON'],
+                ['AVAILABILITY', 'OPEN'],
+                ['ENGAGEMENT', 'PROJECT / RETAINER'],
+              ].map(([label, value]) => (
+                <div key={label} className="flex items-baseline gap-2 text-mono-2xs uppercase">
+                  <span className="font-medium text-emerald-400/80">{label}:</span>
+                  <span className="text-text-primary/65">{value}</span>
+                </div>
+              ))}
+            </div>
+
+            <a
+              href="#"
+              className="flex w-full items-center justify-center border border-emerald-500/45 px-4 py-3 text-mono-xs font-medium uppercase tracking-[0.1em] text-emerald-400 transition-colors duration-300 hover:border-emerald-400/75 hover:bg-emerald-500/[0.055] hover:text-emerald-300 hover:shadow-[0_0_16px_rgba(16,185,129,0.08)]"
+            >
+              CONTACT OPERATOR &rarr;
+            </a>
           </div>
         </aside>
-      </div>
-    </section>
+      </div >
+    </section >
   );
 }

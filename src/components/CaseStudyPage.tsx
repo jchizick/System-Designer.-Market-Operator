@@ -783,7 +783,7 @@ export function CaseStudyPage() {
         <Link to="/" className="text-emerald-500 hover:text-emerald-500/80 transition-colors cursor-pointer">
           SHUTDOWN / EXIT NODE
         </Link>
-        <div>BUILT FOR SIGNAL. NOT FOR NOISE.</div>
+        <div>SYSTEMS OVER ASSETS. DURABILITY OVER DECORATION.</div>
         <div className="flex gap-4">
           <a href="#" className="hover:text-text-primary transition-colors">[ CONTACT ]</a>
           <a href="#" className="hover:text-text-primary transition-colors">[ LINKEDIN ]</a>

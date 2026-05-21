@@ -1,7 +1,13 @@
 node_modules/
+.vite/
 build/
 dist/
 coverage/
+tmp/
+screenshots/
+media/
+architecture/
+architecture-exports/
 .DS_Store
 *.log
 .env*

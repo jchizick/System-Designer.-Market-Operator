@@ -17,8 +17,26 @@ export default defineConfig(({mode}) => {
     },
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      // Do not modifyâfile watching is disabled to prevent flickering during agent edits.
+      // Keep watchers away from generated/runtime folders to reduce Windows watcher churn.
       hmr: process.env.DISABLE_HMR !== 'true',
+      strictPort: true,
+      watch: {
+        usePolling: false,
+        ignored: [
+          '**/.git/**',
+          '**/node_modules/**',
+          '**/node_modules/.vite/**',
+          '**/dist/**',
+          '**/build/**',
+          '**/coverage/**',
+          '**/tmp/**',
+          '**/*.log',
+          '**/screenshots/**',
+          '**/media/**',
+          '**/architecture/**',
+          '**/architecture-exports/**',
+        ],
+      },
     },
   };
 });

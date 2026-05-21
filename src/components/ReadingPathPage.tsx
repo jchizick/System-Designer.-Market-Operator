@@ -555,7 +555,7 @@ export function ReadingPathPage() {
         >
           SHUTDOWN / EXIT NODE
         </Link>
-        <div>BUILT FOR SIGNAL. NOT FOR NOISE.</div>
+        <div>SYSTEMS OVER ASSETS. DURABILITY OVER DECORATION.</div>
         <div className="flex gap-4">
           <a
             href="#"

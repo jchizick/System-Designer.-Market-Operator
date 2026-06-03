@@ -20,12 +20,13 @@ import { AlgonquinDashboardV2Page } from './components/AlgonquinDashboardV2Page'
 import { BlockchainBrawlersV2Page } from './components/BlockchainBrawlersV2Page';
 import { MarketCommandV2Page } from './components/MarketCommandV2Page';
 import { BrawlerMindV2Page } from './components/BrawlerMindV2Page';
+import { ContactPage } from './components/ContactPage';
 
 function HomePage() {
   return (
     <div className="min-h-screen flex flex-col relative max-w-full overflow-x-hidden p-4 sm:p-6">
-      <TopBar />
-      <main className="flex-grow flex flex-col w-full max-w-5xl mx-auto space-y-8 min-w-0">
+      <TopBar className="max-w-[1180px]" />
+      <main className="flex-grow flex flex-col w-full max-w-[1180px] mx-auto space-y-8 min-w-0">
         <Hero />
         <CaseFiles />
         <ForwardDeployedFit />
@@ -34,7 +35,7 @@ function HomePage() {
         <ServiceStack />
         <FieldNotes />
       </main>
-      <Footer />
+      <Footer className="max-w-[1180px]" />
     </div>
   );
 }
@@ -51,6 +52,7 @@ export default function App() {
         <Route path="/trading-journey-brawler-mind-v2" element={<BrawlerMindV2Page />} />
         <Route path="/case/:slug" element={<CaseStudyPage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="/reading-path" element={<ReadingPathPage />} />
         <Route path="/field-notes" element={<FieldNotesArchivePage />} />
         <Route path="/field-notes/:slug" element={<FieldNotePage />} />

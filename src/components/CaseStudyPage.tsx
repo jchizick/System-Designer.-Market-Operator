@@ -785,7 +785,7 @@ export function CaseStudyPage() {
         </Link>
         <div>SYSTEMS OVER ASSETS. DURABILITY OVER DECORATION.</div>
         <div className="flex gap-4">
-          <a href="#" className="hover:text-text-primary transition-colors">[ CONTACT ]</a>
+          <Link to="/contact" className="hover:text-text-primary transition-colors">[ CONTACT ]</Link>
           <a href="#" className="hover:text-text-primary transition-colors">[ LINKEDIN ]</a>
           <a href="#" className="hover:text-text-primary transition-colors">[ X ]</a>
         </div>

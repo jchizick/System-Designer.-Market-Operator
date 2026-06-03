@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Box, Code2, Database, Workflow, type LucideIcon } from 'lucide-react';
 import operatorPhoto from '../assets/operator-photo.png';
 import { OperationalLoop } from './OperationalLoop';
@@ -137,12 +138,12 @@ export function Capabilities() {
               ))}
             </div>
 
-            <a
-              href="#"
+            <Link
+              to="/contact"
               className="flex w-full items-center justify-center border border-emerald-500/45 px-4 py-3 text-mono-xs font-medium uppercase tracking-[0.1em] text-emerald-400 transition-colors duration-300 hover:border-emerald-400/75 hover:bg-emerald-500/[0.055] hover:text-emerald-300 hover:shadow-[0_0_16px_rgba(16,185,129,0.08)]"
             >
               CONTACT OPERATOR &rarr;
-            </a>
+            </Link>
           </div>
         </aside>
       </div >

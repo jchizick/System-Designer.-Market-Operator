@@ -1206,7 +1206,7 @@ export function SyntheticFoundryV2Page() {
             </div>
 
             <div className="mb-3">
-              <h1 className="font-season-mix text-[42px] font-medium uppercase leading-[0.98] tracking-[0] text-text-primary sm:text-[58px] lg:text-[58px]">
+              <h1 className="font-space-grotesk text-[42px] font-medium uppercase leading-[0.98] tracking-[0] text-text-primary sm:text-[58px] lg:text-[58px]">
                 Synthetic<br />Foundry
               </h1>
               <h2 className="mt-3 text-mono-base uppercase text-emerald-400">

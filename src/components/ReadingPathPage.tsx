@@ -557,12 +557,12 @@ export function ReadingPathPage() {
         </Link>
         <div>SYSTEMS OVER ASSETS. DURABILITY OVER DECORATION.</div>
         <div className="flex gap-4">
-          <a
-            href="#"
+          <Link
+            to="/contact"
             className="hover:text-text-primary transition-colors"
           >
             [ CONTACT ]
-          </a>
+          </Link>
           <a
             href="#"
             className="hover:text-text-primary transition-colors"

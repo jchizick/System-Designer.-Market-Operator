@@ -35,7 +35,7 @@ const homepageCaseFiles = [
 
 export function CaseFiles() {
   return (
-    <section className="mb-10">
+    <section id="case-files" className="mb-10 scroll-mt-24">
       <div className="flex items-center gap-4 mb-2">
         <span className="text-mono-xs text-emerald-400 flex-shrink-0">002 // CASE STUDIES</span>
         <div className="flex-1 h-px bg-white/[0.06]" />

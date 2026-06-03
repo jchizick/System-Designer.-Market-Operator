@@ -434,14 +434,14 @@ export function CaseStudyPage() {
                 </span>
               </div>
 
-              <h1 className="text-display mb-3">
+              <h1 className="text-display font-pixel break-words mb-3">
                 {caseStudy.title}
               </h1>
-              <div className="text-mono-sm text-emerald-400 uppercase mb-5">
+              <div className="text-heading-md font-pixel opacity-70 mb-5">
                 {caseStudy.subtitle}
               </div>
 
-              <p className="text-body-base mb-8 max-w-[480px]">
+              <p className="text-mono-label mb-8 max-w-[480px]">
                 {caseStudy.heroDescription}
               </p>
             </div>

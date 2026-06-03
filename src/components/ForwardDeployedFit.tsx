@@ -9,15 +9,15 @@ const fitSignals = [
 const zoneLabels = [
   {
     label: 'HIGH ACUMEN / LOW TECH',
-    className: 'left-[13%] top-[20%]',
+    className: 'left-[13%] top-[25%]',
   },
   {
     label: 'LOW ACUMEN / LOW TECH',
-    className: 'left-[13%] bottom-[25%]',
+    className: 'left-[13%] bottom-[10%]',
   },
   {
     label: 'HIGH TECH / LOW ACUMEN',
-    className: 'right-[11%] bottom-[25%]',
+    className: 'right-[11%] bottom-[10%]',
   },
 ];
 
@@ -72,8 +72,8 @@ export function ForwardDeployedFit() {
                 <span className="absolute -right-[1px] bottom-[-3px] h-1.5 w-1.5 rotate-45 border-r border-t border-emerald-500/34" />
                 <span className="absolute -left-[3px] -top-[1px] h-1.5 w-1.5 -rotate-45 border-r border-t border-emerald-500/34" />
               </div>
-              <div className="pointer-events-none absolute left-4 right-4 top-[48%] border-t border-dashed border-emerald-500/22 sm:left-20 sm:right-5" />
-              <div className="pointer-events-none absolute bottom-9 top-5 left-1/2 border-l border-dashed border-emerald-500/22" />
+              <div className="pointer-events-none absolute left-4 right-4 top-[46%] border-t border-dashed border-emerald-500/22 sm:left-20 sm:right-5" />
+              <div className="pointer-events-none absolute bottom-9 top-5 left-[52%] border-l border-dashed border-emerald-500/22" />
 
               <div className="relative z-10 h-full min-h-[168px]">
                 <div className="mb-2 text-center text-mono-3xs uppercase text-white/48 sm:hidden">
@@ -94,35 +94,35 @@ export function ForwardDeployedFit() {
                   High
                 </div>
                 <div className="pointer-events-none absolute bottom-[-1.55rem] right-9 hidden h-px w-6 bg-white/42 sm:block">
-                  <span className="absolute -right-1 -top-[3px] h-1.5 w-1.5 rotate-45 border-r border-t border-white/42" />
+                  <span className="absolute -right-0 -top-[3px] h-1.5 w-1.5 rotate-45 border-r border-t border-white/42" />
                 </div>
                 <div className="pointer-events-none absolute bottom-0 left-[-0.25rem] hidden text-mono-3xs uppercase text-white/32 sm:block">
                   Low
                 </div>
-                <div className="pointer-events-none absolute left-[-0.25rem] top-5 hidden text-mono-3xs uppercase text-white/32 sm:block">
+                <div className="pointer-events-none absolute left-[-0.45rem] top-5 hidden text-mono-3xs uppercase text-white/32 sm:block">
                   High
                 </div>
 
                 {zoneLabels.map((zone) => (
                   <div
                     key={zone.label}
-                    className={`pointer-events-none absolute max-w-[8rem] text-mono-3xs uppercase leading-relaxed text-white/35 ${zone.className}`}
+                    className={`pointer-events-none absolute max-w-[8rem] text-mono-2xs uppercase leading-relaxed text-white/35 ${zone.className}`}
                   >
                     {zone.label}
                   </div>
                 ))}
 
-                <div className="absolute right-[7%] top-[14%] flex max-w-[12rem] items-center gap-3 sm:right-[5%] sm:top-[15%]">
+                <div className="absolute right-[7%] top-[14%] flex max-w-[12rem] items-center gap-3 sm:right-[5%] sm:top-[25%]">
                   <div className="relative h-4 w-4 flex-shrink-0">
                     <span className="absolute -inset-5 bg-[radial-gradient(circle,rgba(16,185,129,0.22)_0%,rgba(16,185,129,0.06)_32%,transparent_68%)]" />
                     <span className="absolute inset-0 border border-emerald-300/60 bg-emerald-400/82 shadow-[0_0_14px_rgba(16,185,129,0.5)]" />
                     <span className="absolute inset-[5px] bg-black/50" />
                   </div>
                   <div className="min-w-0">
-                    <div className="text-mono-2xs uppercase leading-tight text-emerald-300">
+                    <div className="text-mono-xs uppercase leading-tight text-emerald-300">
                       Forward-Deployed Fit
                     </div>
-                    <div className="mt-1 text-mono-3xs uppercase text-emerald-400/58">
+                    <div className="mt-1 text-mono-2xs uppercase text-emerald-400/58">
                       High Leverage Zone
                     </div>
                   </div>

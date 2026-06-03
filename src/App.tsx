@@ -15,6 +15,11 @@ import { ReadingPathPage } from './components/ReadingPathPage';
 import { FieldNotesArchivePage } from './components/FieldNotesArchivePage';
 import { FieldNotePage } from './components/FieldNotePage';
 import { AtmosphereOverlay } from './components/atmosphere/AtmosphereOverlay';
+import { SyntheticFoundryV2Page } from './components/SyntheticFoundryV2Page';
+import { AlgonquinDashboardV2Page } from './components/AlgonquinDashboardV2Page';
+import { BlockchainBrawlersV2Page } from './components/BlockchainBrawlersV2Page';
+import { MarketCommandV2Page } from './components/MarketCommandV2Page';
+import { BrawlerMindV2Page } from './components/BrawlerMindV2Page';
 
 function HomePage() {
   return (
@@ -39,6 +44,11 @@ export default function App() {
     <>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/ai-brand-machine-synthetic-foundry-v2" element={<SyntheticFoundryV2Page />} />
+        <Route path="/algonquin-dashboard-v2" element={<AlgonquinDashboardV2Page />} />
+        <Route path="/market-command-v2" element={<MarketCommandV2Page />} />
+        <Route path="/blockchain-brawlers-v2" element={<BlockchainBrawlersV2Page />} />
+        <Route path="/trading-journey-brawler-mind-v2" element={<BrawlerMindV2Page />} />
         <Route path="/case/:slug" element={<CaseStudyPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/reading-path" element={<ReadingPathPage />} />

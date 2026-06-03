@@ -25,7 +25,7 @@ export function Hero() {
         </div>
 
         <p className="text-mono-base text-white/70 max-w-[350px]">
-          I help teams turn messy operations into usable AI-assisted workflows, internal tools, and digital operating systems.
+          I help teams turn messy workflows into usable AI systems, internal tools, and operational interfaces.
         </p>
 
         <div className="flex flex-wrap gap-3 pt-6 sm:gap-4">

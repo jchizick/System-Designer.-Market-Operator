@@ -16,6 +16,7 @@ type ContactPayload = {
   budget?: unknown;
   timeline?: unknown;
   message?: unknown;
+  caseStudy?: unknown;
   companyWebsite?: unknown;
 };
 
@@ -73,6 +74,7 @@ export default async function handler(req: ContactRequest, res: ContactResponse)
   const budget = asCleanString(payload.budget) || 'Not specified';
   const timeline = asCleanString(payload.timeline) || 'Not specified';
   const message = asCleanString(payload.message);
+  const caseStudy = asCleanString(payload.caseStudy);
 
   if (!name || !email || !projectType || !message) {
     return res.status(400).json({ success: false, error: 'Missing required fields' });
@@ -102,6 +104,7 @@ export default async function handler(req: ContactRequest, res: ContactResponse)
     `Name: ${name}`,
     `Email: ${email}`,
     `Project Type: ${projectType}`,
+    ...(caseStudy ? [`Case Study / Build: ${caseStudy}`] : []),
     `Budget / Scope: ${budget}`,
     `Timeline: ${timeline}`,
     '',

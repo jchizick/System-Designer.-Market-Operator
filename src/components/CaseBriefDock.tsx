@@ -11,6 +11,7 @@ interface CaseBriefDockProps {
   pdfUrl: string;
   shareUrl: string;
   detailHref?: string;
+  discussHref?: string;
   contactHref?: string;
 }
 
@@ -24,7 +25,8 @@ export function CaseBriefDock({
   pdfUrl,
   shareUrl,
   detailHref = '#case-brief',
-  contactHref = '#',
+  discussHref = '/contact',
+  contactHref = '/contact',
 }: CaseBriefDockProps) {
   const [isPastThreshold, setIsPastThreshold] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
@@ -169,10 +171,10 @@ export function CaseBriefDock({
         </a>
 
         <a
-          href={detailHref}
+          href={discussHref}
           className="mt-3 flex h-9 w-full items-center justify-center border border-emerald-500/25 bg-black/35 px-4 text-mono-xs font-semibold uppercase tracking-widest text-white/86 transition-colors hover:border-emerald-400/55 hover:bg-emerald-500/8 hover:text-emerald-300"
         >
-          View Details
+          Discuss This Build
         </a>
 
         <div className="mt-5 flex items-center justify-center gap-3 text-mono-xs font-semibold uppercase tracking-widest text-white/78">

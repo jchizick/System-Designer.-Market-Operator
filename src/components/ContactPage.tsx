@@ -1,4 +1,5 @@
 import React, { FormEvent, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, Clock3, Layers3, LockKeyhole, Mail, MapPin, Radar, ShieldCheck, XCircle } from 'lucide-react';
 import { Footer } from './Footer';
 import { TopBar } from './TopBar';
@@ -12,6 +13,23 @@ const projectTypes = [
   'Portfolio / Website',
   'Other',
 ];
+
+const caseStudyTitles: Record<string, string> = {
+  'synthetic-foundry': 'Synthetic Foundry',
+  'market-command': 'Market Command',
+  'algonquin-dashboard': 'Algonquin Dashboard',
+  'the-brawler-mind': 'The Brawler Mind',
+  'blockchain-brawlers': 'Blockchain Brawlers',
+  'daniels-massage-therapy': 'Daniels Massage Therapy',
+};
+
+function titleFromCaseSlug(slug: string) {
+  return slug
+    .split('-')
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+}
 
 const initialFormState = {
   name: '',
@@ -128,12 +146,15 @@ function validateForm(values: FormState) {
 }
 
 export function ContactPage() {
+  const [searchParams] = useSearchParams();
   const [values, setValues] = useState<FormState>(initialFormState);
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
   const isSuccess = submitState === 'success';
+  const caseParam = searchParams.get('case')?.trim() || '';
+  const caseStudyTitle = caseParam ? caseStudyTitles[caseParam] || titleFromCaseSlug(caseParam) : '';
 
   const updateField = (field: keyof FormState, value: string) => {
     setValues((current) => ({ ...current, [field]: value }));
@@ -184,7 +205,10 @@ export function ContactPage() {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values),
+        body: JSON.stringify({
+          ...values,
+          caseStudy: caseStudyTitle || undefined,
+        }),
       });
       const result = await response.json().catch(() => null);
 
@@ -290,6 +314,13 @@ export function ContactPage() {
                   <div className="text-mono-sm uppercase tracking-widest">{statusCopy.heading}</div>
                   <p className="mt-1 text-mono-sm leading-relaxed text-white/64">{statusCopy.copy}</p>
                 </div>
+              </div>
+            )}
+
+            {caseStudyTitle && (
+              <div className="mb-5 inline-flex max-w-full items-center gap-2 border border-emerald-500/28 bg-emerald-500/7 px-3 py-2 text-mono-xs uppercase tracking-widest text-emerald-300">
+                <span className="h-1.5 w-1.5 shrink-0 bg-emerald-400 shadow-[0_0_8px_rgba(16,185,129,0.65)]" />
+                <span className="min-w-0 truncate">Discussing Build: {caseStudyTitle}</span>
               </div>
             )}
 

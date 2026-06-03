@@ -1283,6 +1283,8 @@ export function MarketCommandV2Page() {
         coverAlt="Market Command case brief cover"
         pdfUrl={marketCommandBrief.pdfUrl}
         shareUrl={marketCommandBrief.shareUrl}
+        discussHref="/contact?case=market-command"
+        contactHref="/contact?case=market-command"
       />
     </div>
   );

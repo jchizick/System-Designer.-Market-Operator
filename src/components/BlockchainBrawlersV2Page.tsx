@@ -939,6 +939,8 @@ export function BlockchainBrawlersV2Page() {
         coverAlt="Blockchain Brawlers case brief cover"
         pdfUrl={blockchainBrawlersBrief.pdfUrl}
         shareUrl={blockchainBrawlersBrief.shareUrl}
+        discussHref="/contact?case=blockchain-brawlers"
+        contactHref="/contact?case=blockchain-brawlers"
       />
     </div>
   );

@@ -1265,6 +1265,8 @@ export function SyntheticFoundryV2Page() {
         coverAlt="Synthetic Foundry case brief cover"
         pdfUrl={syntheticFoundryBrief.pdfUrl}
         shareUrl={syntheticFoundryBrief.shareUrl}
+        discussHref="/contact?case=synthetic-foundry"
+        contactHref="/contact?case=synthetic-foundry"
       />
     </div>
   );

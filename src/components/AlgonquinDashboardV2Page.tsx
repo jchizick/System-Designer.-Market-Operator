@@ -1070,6 +1070,8 @@ export function AlgonquinDashboardV2Page() {
         coverAlt="Algonquin Dashboard case brief cover"
         pdfUrl={algonquinDashboardBrief.pdfUrl}
         shareUrl={algonquinDashboardBrief.shareUrl}
+        discussHref="/contact?case=algonquin-dashboard"
+        contactHref="/contact?case=algonquin-dashboard"
       />
     </div>
   );

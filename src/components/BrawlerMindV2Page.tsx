@@ -890,6 +890,8 @@ export function BrawlerMindV2Page() {
         coverAlt="The Brawler Mind case brief cover"
         pdfUrl={brawlerMindBrief.pdfUrl}
         shareUrl={brawlerMindBrief.shareUrl}
+        discussHref="/contact?case=the-brawler-mind"
+        contactHref="/contact?case=the-brawler-mind"
       />
     </div>
   );

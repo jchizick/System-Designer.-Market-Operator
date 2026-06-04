@@ -62,7 +62,7 @@ export const caseStudies: CaseStudy[] = [
     buildImages: [
       "/src/assets/brawler-ecosystem.png",
       "/src/assets/brawler-content-system.png",
-      "/src/assets/brawler-music.mp4",
+      "/src/assets/brawler-music.png",
       "/src/assets/brawler-community.png",
       "/src/assets/brawler-partnerships.png"
     ],
@@ -139,7 +139,7 @@ export const caseStudies: CaseStudy[] = [
       "/src/assets/brand-machine-system.png",
       "/src/assets/brand-machine-why-this-works.png"
     ],
-    videoClip: "/src/assets/system-in-motion-video.mp4",
+    systemMotionImage: "/src/assets/brand-machine-system-in-motion.png",
     hasVideo: true,
     videoCaption: "Looped pipeline animation showing raw input moving through AI processing layers and emerging as structured brand infrastructure.",
     build: [
@@ -207,7 +207,7 @@ export const caseStudies: CaseStudy[] = [
       "/src/assets/brawler-mind-chart-examples.png",
       "/src/assets/brawler-mind-decision-layers.png"
     ],
-    videoClip: "/src/assets/brawler-mind-system-in-motion.mp4",
+    systemMotionImage: "/src/assets/brawler-mind-system-in-motion.png",
     hasVideo: true,
     videoCaption: "Chart replay showing price movement, internal reaction, decision filter, and execution outcome.",
     build: [

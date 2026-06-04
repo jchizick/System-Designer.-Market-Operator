@@ -16,7 +16,7 @@ import {
 import brawlerHero from '../assets/brawler-hero.png';
 import brawlerEcosystem from '../assets/brawler-ecosystem.png';
 import brawlerContentSystem from '../assets/brawler-content-system.png';
-import brawlerMusic from '../assets/brawler-music.mp4';
+import brawlerMusic from '../assets/brawler-music.png';
 import brawlerCommunity from '../assets/brawler-community.png';
 import brawlerPartnerships from '../assets/brawler-partnerships.png';
 import brawlerSystemInMotion from '../assets/brawler-system-in-motion.png';
@@ -27,7 +27,7 @@ import brandMachineInput from '../assets/brand-machine-input.png';
 import brandMachineProcessing from '../assets/brand-machine-processing.png';
 import brandMachineSystem from '../assets/brand-machine-system.png';
 import brandMachineWhyThisWorks from '../assets/brand-machine-why-this-works.png';
-import synSystemInMotionVideo from '../assets/system-in-motion-video.mp4';
+import brandMachineSystemInMotion from '../assets/brand-machine-system-in-motion.png';
 
 /* ─── Brawler Mind Images ─── */
 import brawlerMindHero from '../assets/brawler-mind-hero.png';
@@ -36,7 +36,7 @@ import brawlerMindSystemRules from '../assets/brawler-mind-system-rules.png';
 import brawlerMindBook from '../assets/brawler-mind-book.png';
 import brawlerMindChartExamples from '../assets/brawler-mind-chart-examples.png';
 import brawlerMindDecisionLayers from '../assets/brawler-mind-decision-layers.png';
-import brawlerMindSystemInMotion from '../assets/brawler-mind-system-in-motion.mp4';
+import brawlerMindSystemInMotion from '../assets/brawler-mind-system-in-motion.png';
 
 /* ─── Algonquin Dashboard Images ─── */
 import algonquinHero from '../assets/algonquin-hero.png';
@@ -66,7 +66,7 @@ const imageMap: Record<string, string> = {
   '/src/assets/brawler-hero.png': brawlerHero,
   '/src/assets/brawler-ecosystem.png': brawlerEcosystem,
   '/src/assets/brawler-content-system.png': brawlerContentSystem,
-  '/src/assets/brawler-music.mp4': brawlerMusic,
+  '/src/assets/brawler-music.png': brawlerMusic,
   '/src/assets/brawler-community.png': brawlerCommunity,
   '/src/assets/brawler-partnerships.png': brawlerPartnerships,
   '/src/assets/brawler-system-in-motion.png': brawlerSystemInMotion,
@@ -76,7 +76,7 @@ const imageMap: Record<string, string> = {
   '/src/assets/brand-machine-processing.png': brandMachineProcessing,
   '/src/assets/brand-machine-system.png': brandMachineSystem,
   '/src/assets/brand-machine-why-this-works.png': brandMachineWhyThisWorks,
-  '/src/assets/system-in-motion-video.mp4': synSystemInMotionVideo,
+  '/src/assets/brand-machine-system-in-motion.png': brandMachineSystemInMotion,
   // Brawler Mind
   '/src/assets/brawler-mind-hero.png': brawlerMindHero,
   '/src/assets/brawler-mind-philosophy.png': brawlerMindPhilosophy,
@@ -84,7 +84,7 @@ const imageMap: Record<string, string> = {
   '/src/assets/brawler-mind-book.png': brawlerMindBook,
   '/src/assets/brawler-mind-chart-examples.png': brawlerMindChartExamples,
   '/src/assets/brawler-mind-decision-layers.png': brawlerMindDecisionLayers,
-  '/src/assets/brawler-mind-system-in-motion.mp4': brawlerMindSystemInMotion,
+  '/src/assets/brawler-mind-system-in-motion.png': brawlerMindSystemInMotion,
   // Algonquin Dashboard
   '/src/assets/algonquin-hero.png': algonquinHero,
   '/src/assets/algonquin-data-inputs.png': algonquinDataInputs,

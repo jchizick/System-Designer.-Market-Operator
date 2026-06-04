@@ -12,7 +12,7 @@ export function Hero() {
         </div>
 
         <div className="mb-4">
-          <h1 className="hero-typewriter font-space-grotesk text-[42px] font-medium leading-[0.98] tracking-[0] text-text-primary break-words sm:text-[46px] lg:text-[50px]" aria-label="Forward-Deployed Design Engineer">
+          <h1 className="hero-typewriter font-space-grotesk text-[42px] font-medium leading-[0.98] tracking-[0] text-text-primary break-words sm:text-[46px] lg:text-[48px]" aria-label="Forward-Deployed Design Engineer">
             <span className="type-line type-line-1">
               <span className="type-text">FORWARD-DEPLOYED</span>
             </span>

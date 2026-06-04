@@ -954,7 +954,7 @@ function CaseStudySubnav() {
         className="flex min-w-0 items-center gap-2 transition-colors hover:text-emerald-400"
       >
         <ArrowLeft className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
-        <span className="truncate">Back To Case Files</span>
+        <span className="truncate">RETURN TO TERMINAL</span>
       </Link>
 
       <div className="flex shrink-0 items-center gap-4">

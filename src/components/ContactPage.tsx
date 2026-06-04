@@ -1,6 +1,6 @@
 import React, { FormEvent, useMemo, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { ArrowRight, CheckCircle2, Clock3, Layers3, LockKeyhole, Mail, MapPin, Radar, ShieldCheck, XCircle } from 'lucide-react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { ArrowLeft, ArrowRight, CheckCircle2, Clock3, Layers3, LockKeyhole, Mail, MapPin, Radar, ShieldCheck, XCircle } from 'lucide-react';
 import { Footer } from './Footer';
 import { TopBar } from './TopBar';
 
@@ -228,6 +228,13 @@ export function ContactPage() {
   return (
     <div className="relative flex min-h-screen max-w-full flex-col overflow-x-hidden p-4 sm:p-6">
       <TopBar className="max-w-[1180px]" />
+      <Link
+        to="/"
+        className="mx-auto flex w-full max-w-[1180px] items-center gap-2 pb-3 text-mono-xs uppercase text-white/45 transition-colors hover:text-emerald-400"
+      >
+        <ArrowLeft className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
+        <span className="truncate">RETURN TO TERMINAL</span>
+      </Link>
       <main className="mx-auto w-full max-w-[1180px] flex-grow">
         <section className="relative mb-8 border border-transparent pt-2">
           <div className="pointer-events-none absolute left-0 top-0 h-3 w-3 border-l border-t border-emerald-500/30" aria-hidden="true" />
@@ -235,8 +242,7 @@ export function ContactPage() {
 
           <div className="grid min-w-0 grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_220px] lg:items-start">
             <div className="min-w-0">
-              <div className="mb-8 text-mono-base uppercase tracking-widest text-emerald-400">008 // Contact</div>
-              <h1 className="font-space-grotesk text-[48px] font-medium uppercase leading-none tracking-[0] text-text-primary sm:text-[58px] lg:text-[58px]">
+              <h1 className="mt-6 font-space-grotesk text-[48px] font-medium uppercase leading-none tracking-[0] text-text-primary sm:text-[58px] lg:text-[58px]">
                 Open A Channel
               </h1>
               <div className="mt-6 h-1 w-12 bg-emerald-400 shadow-[0_0_18px_rgba(16,185,129,0.45)]" />

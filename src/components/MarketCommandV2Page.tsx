@@ -39,7 +39,7 @@ import marketCommandArchitecture from '../assets/market-command-architecture-ope
 import marketCommandBriefCover from '../assets/market-command-brief-cover.png';
 
 const marketCommandBrief = {
-  pdfUrl: 'https://ybnjfz0v2gs31z0q.public.blob.vercel-storage.com/market-command-case-brief.pdf',
+  pdfUrl: 'https://ybnjfz0v2gs31z0q.public.blob.vercel-storage.com/market-command-brief.pdf',
   shareUrl: '/market-command-v2',
 };
 
@@ -155,7 +155,7 @@ function CaseStudySubnav() {
     <div className="mx-auto mb-0 flex w-full max-w-[1180px] items-center justify-between gap-4 pb-3 text-mono-xs uppercase text-white/45">
       <Link to="/" className="flex min-w-0 items-center gap-2 transition-colors hover:text-emerald-400">
         <ArrowLeft className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
-        <span className="truncate">Back To Case Files</span>
+        <span className="truncate">RETURN TO TERMINAL</span>
       </Link>
 
       <div className="flex shrink-0 items-center gap-4">

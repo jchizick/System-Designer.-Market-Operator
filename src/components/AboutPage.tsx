@@ -63,7 +63,7 @@ const transformationSteps = [
   },
 ];
 
-/* ─── Animated section wrapper (reused pattern from CaseStudyPage) ─── */
+/* ─── Animated section wrapper ─── */
 function RevealSection({ children, className = '', delay = 0 }: { key?: React.Key; children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-60px' });

@@ -467,9 +467,13 @@ export function ContactPage() {
               <div>Brand Systems</div>
             </div>
           </div>
-          <div className="py-4 md:pl-6">
+          <div className="flex flex-col items-center py-4 text-center md:pl-6">
             <div className="mb-4 text-emerald-400">Secure Channel</div>
-            <div className="relative mx-auto mb-4 flex h-16 w-16 items-center justify-center border border-white/15 text-emerald-400 md:mx-0">
+            <div className="relative mb-4 flex h-16 w-24 items-center justify-center text-emerald-400">
+              <span className="pointer-events-none absolute left-0 top-0 h-3 w-3 border-l border-t border-white/35" />
+              <span className="pointer-events-none absolute right-0 top-0 h-3 w-3 border-r border-t border-white/35" />
+              <span className="pointer-events-none absolute bottom-0 left-0 h-3 w-3 border-b border-l border-white/35" />
+              <span className="pointer-events-none absolute bottom-0 right-0 h-3 w-3 border-b border-r border-white/35" />
               <span className="h-2 w-2 bg-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.75)]" />
             </div>
             <div>Encrypted End-To-End</div>

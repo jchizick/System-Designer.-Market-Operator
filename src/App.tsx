@@ -5,11 +5,9 @@ import { Hero } from './components/Hero';
 import { FieldNotes } from './components/FieldNotes';
 import { CaseFiles } from './components/CaseFiles';
 import { ForwardDeployedFit } from './components/ForwardDeployedFit';
-// import { OperationalDoctrine } from './components/OperationalDoctrine';
 import { Capabilities } from './components/Capabilities';
 import { ServiceStack } from './components/ServiceStack';
 import { Footer } from './components/Footer';
-import { CaseStudyPage } from './components/CaseStudyPage';
 import { AboutPage } from './components/AboutPage';
 import { ReadingPathPage } from './components/ReadingPathPage';
 import { FieldNotesArchivePage } from './components/FieldNotesArchivePage';
@@ -31,7 +29,6 @@ function HomePage() {
         <CaseFiles />
         <ForwardDeployedFit />
         <Capabilities />
-        {/* <OperationalDoctrine /> */}
         <ServiceStack />
         <FieldNotes />
       </main>
@@ -50,7 +47,6 @@ export default function App() {
         <Route path="/market-command-v2" element={<MarketCommandV2Page />} />
         <Route path="/blockchain-brawlers-v2" element={<BlockchainBrawlersV2Page />} />
         <Route path="/trading-journey-brawler-mind-v2" element={<BrawlerMindV2Page />} />
-        <Route path="/case/:slug" element={<CaseStudyPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/reading-path" element={<ReadingPathPage />} />

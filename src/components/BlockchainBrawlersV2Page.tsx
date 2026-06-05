@@ -148,12 +148,16 @@ const learningNotes = [
   'Empower the community to co-create the brand.',
 ];
 
-const impactTags = ['Culture', 'Content', 'Community', 'Education', 'Flywheel'];
+const impactItems = [
+  ['Culture Engine', 'Repeatable media identity', Clapperboard],
+  ['Community Loop', 'Audience participation', Users],
+  ['Education Layer', 'Trust-building at scale', GraduationCap],
+];
 
 const operatorNotes = [
-  ['Would I build it again?', 'Yes-stronger and earlier.', Target],
-  ['Biggest risk', 'Platform changes, attribution.', PlayCircle],
-  ['Next iteration', 'Token-gated perks & learning bootcamps.', Box],
+  ['Would I build again', 'Yes — stronger and earlier.'],
+  ['Biggest risk', 'Platform changes and attribution.'],
+  ['Next iteration', 'Token-gated perks & learning bootcamps.'],
 ];
 
 function MagnetIcon({ className, strokeWidth = 1.6 }: { className?: string; strokeWidth?: number }) {
@@ -848,21 +852,22 @@ function ResultsSection() {
 
 function TakeawaySection() {
   return (
-    <section className="relative mb-16 grid min-w-0 grid-cols-1 border border-border-subtle bg-black/18 lg:grid-cols-[0.95fr_1.28fr_0.95fr]">
+    <section className="relative mb-16 border border-border-subtle bg-black/18 p-4 sm:p-5">
       <CornerSquares />
+      <div className="grid min-w-0 grid-cols-1 gap-8 lg:grid-cols-[0.92fr_1.55fr_0.85fr] lg:gap-0">
 
-      <div className="min-w-0 border-b border-border-subtle p-4 sm:p-5 lg:border-b-0 lg:border-r">
+      <div className="min-w-0 lg:border-r lg:border-dashed lg:border-emerald-500/20 lg:pr-7">
         <div className="mb-4 flex items-center gap-2 text-mono-label uppercase text-emerald-400">
           <span>06</span>
           <span>//</span>
           <span>Takeaway</span>
         </div>
 
-        <div className="border border-emerald-500/18 bg-black/20 p-4">
-          <div className="mb-4 text-mono-2xs uppercase text-emerald-400">What I Learned</div>
-          <ul className="space-y-4">
+        <div className="border border-emerald-500/18 bg-black/20 p-3">
+          <div className="mb-3 text-mono-2xs uppercase text-emerald-400">What I Learned</div>
+          <ul className="space-y-2">
             {learningNotes.map((note) => (
-              <li key={note} className="grid min-w-0 grid-cols-[1.2rem_minmax(0,1fr)] gap-3">
+              <li key={note} className="grid min-w-0 grid-cols-[1.1rem_minmax(0,1fr)] gap-3">
                 <CheckSquare className="mt-0.5 h-3.5 w-3.5 text-white/52" strokeWidth={1.6} />
                 <span className="text-mono-2xs leading-relaxed text-white/72">{note}</span>
               </li>
@@ -871,50 +876,42 @@ function TakeawaySection() {
         </div>
       </div>
 
-      <div className="min-w-0 border-b border-border-subtle p-4 sm:p-5 lg:border-b-0 lg:border-r">
-        <div className="grid min-w-0 grid-cols-[3.4rem_minmax(0,1fr)] gap-4 border border-emerald-500/18 bg-black/20 p-4">
-          <div className="flex h-11 w-11 items-center justify-center text-emerald-400">
-            <Target className="h-9 w-9" strokeWidth={1.6} />
-          </div>
-          <div className="min-w-0">
-            <div className="mb-3 text-mono-label uppercase text-emerald-400">Strategic Impact</div>
-            <p className="max-w-[54ch] text-mono-2xs leading-relaxed text-white/72">
-              Blockchain Brawlers evolved into a repeatable operating system-uniting media, music, education, and community under one brand world. This system drives loyalty, creates compounding content value, and opens scalable monetization and owned-audience opportunities.
-            </p>
-          </div>
+      <div className="min-w-0 lg:border-r lg:border-dashed lg:border-emerald-500/20 lg:px-8">
+        <div className="mb-4 text-mono-label uppercase text-emerald-400">Strategic Impact</div>
+        <p className="text-mono-label leading-relaxed text-white/72">
+          Blockchain Brawlers evolved into a repeatable operating system — uniting media, music, education, and community under one brand world. The system drives loyalty, creates compounding content value, and opens scalable monetization and owned-audience opportunities.
+        </p>
 
-          <div className="col-span-full mt-1 grid min-w-0 grid-cols-2 gap-3 sm:grid-cols-5">
-            {impactTags.map((tag) => (
-              <span
-                key={tag}
-                className="border border-emerald-500/22 bg-black/28 px-3 py-2 text-center text-mono-2xs uppercase text-emerald-400"
-              >
-                {tag}
-              </span>
+        <div className="mt-5 grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-3">
+          {impactItems.map(([title, copy, Icon]) => (
+            <div key={title as string} className="min-w-0 text-center">
+              <div className="mx-auto mb-3 flex h-8 w-8 items-center justify-center text-emerald-400">
+                {React.createElement(Icon as React.ElementType, { className: 'h-6 w-6', strokeWidth: 1.6 })}
+              </div>
+              <div className="mb-1 text-mono-2xs uppercase text-emerald-400">{title as string}</div>
+              <p className="text-mono-3xs leading-relaxed text-white/58">{copy as string}</p>
+            </div>
             ))}
-          </div>
         </div>
       </div>
 
-      <aside className="min-w-0 p-4 sm:p-5">
+      <aside className="min-w-0 lg:pl-7">
         <div className="mb-4 text-mono-label uppercase text-emerald-400">Operator Notes</div>
-        <div className="border border-emerald-500/18 bg-black/20 p-4">
-          <div className="space-y-5">
-            {operatorNotes.map(([label, value, Icon]) => (
-              <div key={label as string} className="grid min-w-0 grid-cols-[2rem_minmax(0,1fr)] gap-3">
-                {React.createElement(Icon as React.ElementType, {
-                  className: 'h-7 w-7 text-emerald-400',
-                  strokeWidth: 1.6,
-                })}
-                <div className="min-w-0">
-                  <div className="mb-1 text-mono-2xs uppercase text-emerald-400">{label as string}</div>
-                  <p className="text-mono-2xs leading-relaxed text-white/72">{value as string}</p>
-                </div>
+        <div className="border border-emerald-500/18 bg-black/20">
+          {operatorNotes.map(([label, value], index) => (
+            <div
+              key={label}
+              className={`grid min-w-0 grid-cols-[0.85fr_1.35fr] ${index > 0 ? 'border-t border-emerald-500/18' : ''}`}
+            >
+              <div className="border-r border-emerald-500/18 p-2 text-mono-3xs uppercase leading-relaxed text-emerald-400">
+                {label}
               </div>
-            ))}
-          </div>
+              <div className="p-2 text-mono-2xs leading-relaxed text-white/72">{value}</div>
+            </div>
+          ))}
         </div>
       </aside>
+      </div>
     </section>
   );
 }

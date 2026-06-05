@@ -213,7 +213,7 @@ export function OperationalLoop() {
         </span>
       </div>
 
-      <div className="relative z-10 grid grid-cols-1 items-start gap-4 md:grid-cols-[minmax(0,0.7fr)_minmax(310px,1.30fr)]">
+      <div className="relative z-10 grid grid-cols-1 items-start gap-4 md:grid-cols-[minmax(0,0.8fr)_minmax(310px,1.20fr)]">
         <div className="relative min-w-0">
           <div className="relative">
             <div className="pointer-events-none absolute bottom-[1.85rem] left-[2.65rem] top-[1.85rem] z-10 w-px bg-emerald-500/[0.18]" />
@@ -242,7 +242,7 @@ export function OperationalLoop() {
                 </span>
 
                 <div
-                  className={`grid min-w-0 grid-cols-[2.35rem_minmax(0,1fr)] gap-2 border-emerald-500/[0.10] px-2.5 py-2.5 transition-colors duration-300 ${
+                  className={`grid min-w-0 grid-cols-[2.35rem_minmax(0,1fr)] gap-2 border-emerald-500/[0.10] px-4 py-2.5 transition-colors duration-300 ${
                     isActive ? 'bg-emerald-500/[0.055]' : 'bg-emerald-500/[0.022] group-hover:bg-emerald-500/[0.04]'
                   } ${
                     index === loopSteps.length - 1 ? '' : 'border-b'

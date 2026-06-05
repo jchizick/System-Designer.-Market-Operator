@@ -108,7 +108,11 @@ const learningNotes = [
   'Operators are built - not inspired.',
 ];
 
-const impactTags = ['Mental Edge', 'Decision Systems', 'Education Engine', 'Operator Identity'];
+const impactItems = [
+  ['Mental Edge', 'Clearer thinking under pressure', Brain],
+  ['Decision Systems', 'Repeatable execution framework', Target],
+  ['Operator Identity', 'Shared language for disciplined traders', UserRound],
+];
 
 const operatorNotes = [
   ['Would I build it again?', 'Absolutely.'],
@@ -507,6 +511,25 @@ const brawlerMotionSteps = [
   ['05', 'Review', 'Outcome logged, lesson captured.'],
 ];
 
+const internalStateRows = [
+  ['Calm', '82%', [10, 11, 13, 12, 13, 14, 14], 'emerald'],
+  ['Clarity', '76%', [10, 10, 11, 13, 12, 13, 13], 'emerald'],
+  ['Focus', '88%', [9, 10, 12, 12, 13, 13, 14], 'emerald'],
+  ['Emotion', '21%', [11, 11, 10, 11, 10, 10, 11], 'amber'],
+  ['Confidence', '72%', [9, 10, 11, 10, 12, 12, 13], 'emerald'],
+];
+
+const stateSummaryRows = [
+  ['Mind', 'Clear'],
+  ['Body', 'Composed'],
+  ['Emotion', 'Neutral'],
+  ['Readiness', 'High'],
+];
+
+const principleNotes = [
+  'Control what you can control Accept what you cant.',
+];
+
 const brawlFilterRows = [
   ['Bias', 'Long above acceptance'],
   ['Risk', '1R max - no chase'],
@@ -535,14 +558,69 @@ function MotionProcessCard({ number, title, copy }: { number: string; title: str
   );
 }
 
-function MotionInfoPanel({ title, children }: { title: string; children: React.ReactNode }) {
+function MotionInfoPanel({ title, children, active = false }: { title: string; children: React.ReactNode; active?: boolean }) {
   return (
     <section className="min-w-0 border border-emerald-500/18 bg-black/24">
-      <div className="border-b border-emerald-500/14 px-3 py-2 text-mono-2xs uppercase text-emerald-400">
+      <div className="flex items-center gap-2 border-b border-emerald-500/14 px-3 py-2 text-mono-2xs uppercase text-emerald-400">
+        {active ? <span className="h-1.5 w-1.5 rounded-full bg-emerald-400/82" aria-hidden="true" /> : null}
         {title}
       </div>
       <div className="p-3">{children}</div>
     </section>
+  );
+}
+
+function StateSparkline({ points, tone = 'emerald' }: { points: number[]; tone?: 'emerald' | 'amber' }) {
+  const width = 46;
+  const height = 14;
+  const max = Math.max(...points);
+  const min = Math.min(...points);
+  const range = Math.max(max - min, 1);
+  const path = points
+    .map((point, index) => {
+      const x = (index / (points.length - 1)) * width;
+      const y = height - ((point - min) / range) * (height - 4) - 2;
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    })
+    .join(' ');
+
+  return (
+    <svg
+      className={`h-3.5 w-[46px] ${tone === 'amber' ? 'text-amber-400/62' : 'text-emerald-400/48'}`}
+      viewBox={`0 0 ${width} ${height}`}
+      fill="none"
+      aria-hidden="true"
+    >
+      <polyline points={path} stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.15" />
+    </svg>
+  );
+}
+
+function ReadinessGauge() {
+  const radius = 19;
+  const circumference = 2 * Math.PI * radius;
+  const progress = 0.72 * circumference;
+
+  return (
+    <div className="relative flex h-[58px] w-[58px] shrink-0 items-center justify-center" aria-hidden="true">
+      <svg className="absolute inset-0 -rotate-90" viewBox="0 0 58 58">
+        <circle cx="29" cy="29" r={radius} fill="none" stroke="rgba(6,78,59,0.62)" strokeWidth="4" />
+        <circle
+          cx="29"
+          cy="29"
+          r={radius}
+          fill="none"
+          stroke="rgba(52,211,153,0.68)"
+          strokeDasharray={`${progress} ${circumference - progress}`}
+          strokeLinecap="round"
+          strokeWidth="4"
+        />
+      </svg>
+      <div className="text-center font-mono uppercase leading-none">
+        <div className="text-[13px] text-emerald-400">72%</div>
+        <div className="mt-1 text-[7px] text-emerald-300/70">Ready</div>
+      </div>
+    </div>
   );
 }
 
@@ -581,26 +659,38 @@ function BrawlerSystemPreview() {
 
           <div className="grid grid-cols-[184px_minmax(0,1fr)_260px] items-start gap-3">
             <aside className="space-y-3 opacity-90">
-              <MotionInfoPanel title="Internal State">
+              <MotionInfoPanel title="Internal State" active>
                 <div className="space-y-2 text-mono-3xs uppercase">
-                  {[
-                    ['Focus', 'Clear'],
-                    ['Impulse', 'Contained'],
-                    ['Patience', 'Active'],
-                    ['Risk Tone', 'Calibrated'],
-                  ].map(([label, value]) => (
-                    <div key={label} className="grid grid-cols-[1fr_4.4rem] gap-2">
-                      <span className="text-white/44">{label}</span>
-                      <span className="text-right text-emerald-400">{value}</span>
+                  {internalStateRows.map(([label, value, points, tone]) => (
+                    <div key={label as string} className="grid grid-cols-[4rem_2.4rem_2.9rem] items-center gap-1">
+                      <span className={tone === 'amber' ? 'text-amber-400/78' : 'text-white/52'}>{label}</span>
+                      <span className={`text-right ${tone === 'amber' ? 'text-amber-400' : 'text-emerald-400'}`}>{value}</span>
+                      <StateSparkline points={points as number[]} tone={tone as 'emerald' | 'amber'} />
                     </div>
                   ))}
                 </div>
               </MotionInfoPanel>
 
-              <MotionInfoPanel title="Operator Notes">
-                <p className="text-mono-3xs leading-relaxed text-white/58">
-                  Trade only when context and internal state agree. No revenge entries. No late chase.
-                </p>
+              <MotionInfoPanel title="State Summary">
+                <div className="grid grid-cols-[minmax(0,1fr)_3.65rem] items-center gap-2">
+                  <div className="space-y-1.5 text-mono-3xs uppercase">
+                    {stateSummaryRows.map(([label, value]) => (
+                      <div key={label} className="whitespace-nowrap">
+                        <span className="text-emerald-400/72">{label}: </span>
+                        <span className="text-emerald-300/86">{value}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <ReadinessGauge />
+                </div>
+              </MotionInfoPanel>
+
+              <MotionInfoPanel title="Notes / Principles">
+                <div className="space-y-1.5 text-mono-3xs leading-relaxed text-white/60">
+                  {principleNotes.map((note) => (
+                    <p key={note}>{note}</p>
+                  ))}
+                </div>
               </MotionInfoPanel>
             </aside>
 
@@ -818,7 +908,7 @@ function TakeawaySection() {
 
           <div className="border border-emerald-500/18 bg-black/20 p-3">
             <div className="mb-3 text-mono-2xs uppercase text-emerald-400">What I Learned</div>
-            <ul className="space-y-2">
+            <ul className="space-y-1.5">
               {learningNotes.map((note) => (
                 <li key={note} className="grid min-w-0 grid-cols-[1.1rem_minmax(0,1fr)] gap-3">
                   <CheckSquare className="mt-0.5 h-3.5 w-3.5 text-white/52" strokeWidth={1.6} />
@@ -832,17 +922,18 @@ function TakeawaySection() {
         <div className="min-w-0 lg:border-r lg:border-dashed lg:border-emerald-500/20 lg:px-8">
           <div className="mb-4 text-mono-label uppercase text-emerald-400">Strategic Impact</div>
           <p className="text-mono-label leading-relaxed text-white/72">
-            The Brawler Mind became more than a book - it became a living system for traders to think, decide, and grow. By turning philosophy into frameworks, content, and training loops, it created a repeatable path to clarity under pressure and a shared language for a global community of disciplined operators.
+            The Brawler Mind became more than a book — it became a living system for traders to think, decide, and grow. By turning philosophy into frameworks, content, and training loops, it created a repeatable path to clarity under pressure and a shared language for a global community of disciplined operators.
           </p>
 
-          <div className="mt-5 grid min-w-0 grid-cols-2 gap-2 sm:grid-cols-4">
-            {impactTags.map((tag) => (
-              <span
-                key={tag}
-                className="min-w-0 border border-emerald-500/18 bg-black/24 px-2 py-2 text-center text-mono-3xs uppercase text-emerald-400"
-              >
-                {tag}
-              </span>
+          <div className="mt-5 grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-3">
+            {impactItems.map(([title, copy, Icon]) => (
+              <div key={title as string} className="min-w-0 text-center">
+                <div className="mx-auto mb-3 flex h-8 w-8 items-center justify-center text-emerald-400">
+                  {React.createElement(Icon as React.ElementType, { className: 'h-6 w-6', strokeWidth: 1.6 })}
+                </div>
+                <div className="mb-1 text-mono-2xs uppercase text-emerald-400">{title as string}</div>
+                <p className="text-mono-3xs leading-relaxed text-white/58">{copy as string}</p>
+              </div>
             ))}
           </div>
         </div>
@@ -855,10 +946,10 @@ function TakeawaySection() {
                 key={label}
                 className={`grid min-w-0 grid-cols-[0.85fr_1.35fr] ${index > 0 ? 'border-t border-emerald-500/18' : ''}`}
               >
-                <div className="border-r border-emerald-500/18 p-2 text-mono-3xs uppercase leading-relaxed text-emerald-400">
+                <div className="border-r border-emerald-500/18 px-2 py-1.5 text-mono-3xs uppercase leading-relaxed text-emerald-400">
                   {label}
                 </div>
-                <div className="p-2 text-mono-2xs leading-relaxed text-white/72">{value}</div>
+                <div className="px-2 py-1.5 text-mono-2xs leading-relaxed text-white/72">{value}</div>
               </div>
             ))}
           </div>

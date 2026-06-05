@@ -58,10 +58,10 @@ export function CaseFiles() {
             </div>
 
             <div className="min-w-0">
-              <div className="text-body-base font-normal tracking-[-0.01em] text-text-primary">{c.title}</div>
+              <div className="text-body-lg font-space-grotesk tracking-[-0.01em] text-text-primary">{c.title}</div>
             </div>
 
-            <div className="text-mono-label text-white/60 leading-[1.4]">
+            <div className="text-mono-sm text-white/60 leading-[1.4]">
               {c.outcome}
             </div>
 

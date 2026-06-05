@@ -50,10 +50,10 @@ const CapabilityCard: React.FC<{ capability: Capability }> = ({ capability }) =>
             <Icon size={16} strokeWidth={1.5} />
           </div>
         </div>
-        <h3 className="text-[13px] font-normal leading-snug text-text-primary">
+        <h3 className="text-[14px] font-space-grotesk leading-snug text-text-primary">
           {capability.title}
         </h3>
-        <p className="text-mono-3xs leading-relaxed text-white/60 sm:text-[10px]">
+        <p className="text-mono-2xs leading-relaxed text-white/60 sm:text-[10px]">
           {capability.description}
         </p>
       </div>

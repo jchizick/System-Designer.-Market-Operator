@@ -430,7 +430,7 @@ function HeroPanel() {
         </div>
 
         <div className="mb-3">
-          <h1 className="font-space-grotesk text-[42px] font-medium uppercase leading-[0.98] tracking-[0] text-text-primary sm:text-[58px] lg:text-[58px]">
+          <h1 className="font-space-grotesk text-[42px] font-medium uppercase leading-[0.98] tracking-[-.01em] text-text-primary sm:text-[50px] lg:text-[52px]">
             Market<br />Command
           </h1>
           <h2 className="mt-3 text-mono-base uppercase text-emerald-400">
@@ -522,8 +522,8 @@ function ProblemInsightSection() {
             <ul className="mt-3 space-y-0.5">
               {problemImpacts.map((impact) => (
                 <li key={impact} className="flex gap-1.5 leading-snug">
-                  <span className="text-emerald-500/70">•</span>
-                  <span className="text-mono-label leading-relaxed text-white/72">{impact}</span>
+                  <span className="mt-1.5 h-1 w-1 shrink-0 bg-emerald-400/70" />
+                  <span className="px-1 text-mono-label leading-relaxed text-white/72">{impact}</span>
                 </li>
               ))}
             </ul>

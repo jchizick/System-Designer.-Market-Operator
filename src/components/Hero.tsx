@@ -12,7 +12,8 @@ export function Hero() {
         </div>
 
         <div className="mb-4">
-          <h1 className="hero-typewriter font-space-grotesk text-[42px] font-medium leading-[0.98] tracking-[0] text-text-primary break-words sm:text-[46px] lg:text-[48px]" aria-label="Forward-Deployed Design Engineer">
+          {/*
+          <h1 className="hero-typewriter font-space-grotesk text-[42px] font-medium leading-[0.98] tracking-[0] text-text-primary break-words sm:text-[46px] lg:text-[50px]" aria-label="Forward-Deployed Design Engineer">
             <span className="type-line type-line-1">
               <span className="type-text">FORWARD-DEPLOYED</span>
             </span>
@@ -23,6 +24,12 @@ export function Hero() {
           <h2 className="hero-subtitle-fade text-heading-md font-pixel">
             AI Workflow & Product Systems
           </h2>
+          */}
+          <h1 className="font-space-grotesk text-[42px] font-medium leading-[1.05] tracking-[-.04em] break-words sm:text-[48px] lg:text-[48px]" aria-label="Design Engineer AI Workflow and Product Systems">
+            <span className="block text-text-primary">DESIGN ENGINEER</span>
+            <span className="block text-emerald-500">AI WORKFLOW &amp;</span>
+            <span className="block text-emerald-500">PRODUCT SYSTEMS</span>
+          </h1>
         </div>
 
         <p className="text-mono-base text-white/70 max-w-[350px]">

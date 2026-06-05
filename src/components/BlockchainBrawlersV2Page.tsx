@@ -32,6 +32,7 @@ import { Footer } from './Footer';
 import { CaseBriefDock } from './CaseBriefDock';
 import { TopBar } from './TopBar';
 import blockchainBrawlersBriefCover from '../assets/blockchain-brawlers-brief-cover.png';
+import blockchainBrawlersEcosystemMap from '../assets/blockchain-brawlers-ecosystem-map.png';
 import blockchainBrawlersSystemInMotionMockup from '../assets/blockchain-brawlers-system-in-motion-mockup.png';
 
 const blockchainBrawlersBrief = {
@@ -54,19 +55,9 @@ const projectDetails = [
   ['Deliverable', 'Brand & Content Operating System'],
 ];
 
-const ecosystemNodes = [
-  ['Content', PlayCircle, 'top-[4%] left-1/2 -translate-x-1/2'],
-  ['Education', GraduationCap, 'right-[8%] top-[32%]'],
-  ['Offers / Outputs', Box, 'bottom-[12%] right-[8%]'],
-  ['Music / Media', Music, 'bottom-[12%] left-[8%]'],
-  ['Community', Users, 'left-[8%] top-[32%]'],
-];
-
 const sideStats = [
   ['Community Growth', '+2.8K', 'this month', 'lineUp'],
   ['Content Throughput', '124', 'assets / month', 'bars'],
-  ['Engagement Rate', '88%', 'avg. engagement', 'donut'],
-  ['Output Cadence', '5', 'streams active', 'barsUp'],
 ];
 
 const healthCards = [
@@ -74,7 +65,7 @@ const healthCards = [
   ['Content Flow', '92%', 16],
   ['Community Activity', '88%', 15],
   ['Education Impact', '85%', 14],
-  ['Member Retention', '81%', 13],
+  ['Engagement Rate', '88%', 15],
 ];
 
 const problemImpacts = [
@@ -123,6 +114,22 @@ const motionPipeline = [
   ['03', 'Community', 'Engage, discuss, collaborate.'],
   ['04', 'Conversion', 'Offers, tools, memberships.'],
   ['05', 'Flywheel', 'Feedback, UGC, compounding growth.'],
+];
+
+const buildFlywheelSteps = [
+  ['01', 'Attract', 'Culture Signal', 'market energy, identity, trader pain', Radio],
+  ['02', 'Engage', 'Content Engine', 'posts, videos, music, narratives', PlayCircle],
+  ['03', 'Educate', 'Community Participation', 'discussion, UGC, belonging, feedback', Users],
+  ['04', 'Convert', 'Education / Trust', 'lessons, frameworks, shared language', BookOpen],
+  ['05', 'Amplify', 'Offers / Outputs', 'tools, products, streams, member value', Box],
+];
+
+const buildImpactStats = [
+  ['Signal Strength', 'Rising relevance and resonance', BarChart3],
+  ['Community Growth', 'More members, deeper engagement', Users],
+  ['Trust Compounding', 'Shared knowledge builds conviction', CheckSquare],
+  ['Value Creation', 'Products, IP, and new revenue streams', Box],
+  ['Network Effects', 'Outputs amplify signal and restart the loop', RefreshLoopIcon],
 ];
 
 const resultCards = [
@@ -303,35 +310,12 @@ function MiniStatVisual({ type }: { type: string }) {
 
 function BrawlersEcosystemMap() {
   return (
-    <div className="relative min-h-[242px] overflow-hidden border border-emerald-500/14 bg-black/28">
-      <div className="absolute inset-0 opacity-[0.35] [background-image:radial-gradient(circle,rgba(16,185,129,0.65)_1px,transparent_1.3px)] [background-size:18px_18px]" />
-      <svg className="absolute inset-0 h-full w-full" viewBox="0 0 460 260" preserveAspectRatio="none" aria-hidden="true">
-        <circle cx="230" cy="132" r="88" fill="none" stroke="rgba(16,185,129,0.22)" strokeWidth="1" />
-        <circle cx="230" cy="132" r="62" fill="none" stroke="rgba(16,185,129,0.18)" strokeDasharray="4 8" strokeWidth="1" />
-        <path d="M230 67 L230 94" stroke="rgba(52,211,153,0.78)" strokeWidth="1.5" markerEnd="url(#arrow)" />
-        <path d="M302 117 L264 126" stroke="rgba(52,211,153,0.78)" strokeWidth="1.5" markerEnd="url(#arrow)" />
-        <path d="M283 196 L257 166" stroke="rgba(52,211,153,0.78)" strokeWidth="1.5" markerEnd="url(#arrow)" />
-        <path d="M177 196 L203 166" stroke="rgba(52,211,153,0.78)" strokeWidth="1.5" markerEnd="url(#arrow)" />
-        <path d="M158 117 L196 126" stroke="rgba(52,211,153,0.78)" strokeWidth="1.5" markerEnd="url(#arrow)" />
-        <defs>
-          <marker id="arrow" markerHeight="6" markerWidth="6" orient="auto" refX="5" refY="3">
-            <path d="M0,0 L6,3 L0,6 Z" fill="rgba(52,211,153,0.78)" />
-          </marker>
-        </defs>
-      </svg>
-
-        <div className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center border border-emerald-400/70 bg-black/70 text-[38px] font-semibold leading-none text-emerald-400 shadow-[0_0_28px_rgba(16,185,129,0.2)]">
-          BB
-        </div>
-
-      {ecosystemNodes.map(([label, Icon, position]) => (
-        <div key={label as string} className={`absolute ${position as string} flex w-28 flex-col items-center text-center`}>
-          <div className="mb-2 flex h-11 w-11 items-center justify-center border border-emerald-500/45 bg-black/58 text-emerald-400">
-            {React.createElement(Icon as React.ElementType, { className: 'h-5 w-5', strokeWidth: 1.6 })}
-          </div>
-          <div className="text-mono-3xs uppercase text-white/56">{label as string}</div>
-        </div>
-      ))}
+    <div className="relative aspect-[836/471] w-full overflow-hidden border border-emerald-500/14 bg-black/28">
+      <img
+        src={blockchainBrawlersEcosystemMap}
+        alt="Blockchain Brawlers ecosystem map"
+        className="absolute inset-0 h-full w-full object-contain"
+      />
     </div>
   );
 }
@@ -352,47 +336,56 @@ function BrawlersCommandCenter() {
           </span>
         </header>
 
-        <div className="p-3 sm:p-4">
-          <div className="grid min-w-0 grid-cols-1 gap-3 lg:grid-cols-[116px_minmax(0,1fr)_172px]">
-            <aside className="flex min-h-full flex-col border border-emerald-500/18 bg-black/18 lg:row-span-2">
-              {commandModes.map(({ label, icon: Icon, active }) => (
-                <div
-                  key={label}
-                  className={`flex flex-1 items-center gap-3 border-b border-emerald-500/10 px-3 py-3 text-mono-xs uppercase last:border-b-0 ${
-                    active
-                      ? 'bg-emerald-500/12 text-emerald-400 shadow-[inset_2px_0_0_rgba(16,185,129,0.65)]'
-                      : 'text-white/48'
-                  }`}
-                >
-                  <Icon size={15} strokeWidth={1.7} />
-                  <span>{label}</span>
-                </div>
-              ))}
-            </aside>
-
-            <section className="min-w-0 border border-emerald-500/16 bg-black/18 p-2.5">
-              <div className="mb-2 text-mono-xs uppercase text-emerald-400">Ecosystem Map</div>
-              <BrawlersEcosystemMap />
-            </section>
-
-            <aside className="grid min-w-0 grid-cols-1 border border-emerald-500/12 bg-black/22">
-              {sideStats.map(([label, value, copy, visual], index) => (
-                <div key={label} className={`${index > 0 ? 'border-t border-emerald-500/10' : ''} p-3`}>
-                  <div className="text-mono-3xs uppercase text-emerald-400">{label}</div>
-                  <div className="mt-1 flex items-center justify-between gap-3">
-                    <div>
-                      <div className="font-mono text-[18px] leading-none text-emerald-400 tabular-nums">{value}</div>
-                      <div className="mt-1 text-mono-3xs uppercase text-white/58">{copy}</div>
-                    </div>
-                    <div className="min-w-[52px] flex-1">
-                      <MiniStatVisual type={visual} />
-                    </div>
+        <div className="p-3 sm:p-2">
+          <div className="min-w-0 space-y-3">
+            <div className="grid min-w-0 grid-cols-1 items-stretch gap-3 sm:grid-cols-[116px_minmax(0,1fr)]">
+              <aside className="border border-emerald-500/18 bg-black/18">
+                {commandModes.map(({ label, icon: Icon, active }) => (
+                  <div
+                    key={label}
+                    className={`flex items-center gap-3 border-b border-emerald-500/10 px-3 py-3 text-mono-xs uppercase last:border-b-0 ${
+                      active
+                        ? 'bg-emerald-500/12 text-emerald-400 shadow-[inset_2px_0_0_rgba(16,185,129,0.65)]'
+                        : 'text-white/48'
+                    }`}
+                  >
+                    <span
+                      className={`flex h-4 w-4 shrink-0 items-center justify-center border ${
+                        active ? 'border-emerald-400/65 text-emerald-400' : 'border-white/28 text-white/36'
+                      }`}
+                    >
+                      <Icon size={10} strokeWidth={1.8} />
+                    </span>
+                    <span>{label}</span>
                   </div>
-                </div>
-              ))}
-            </aside>
+                ))}
+              </aside>
 
-            <section className="border border-emerald-500/16 bg-black/18 p-3 lg:col-span-2">
+              <section className="min-w-0 border border-emerald-500/16 bg-black/18 p-2.5">
+                <div className="mb-2 text-mono-xs uppercase text-emerald-400">Ecosystem Map</div>
+                <div className="grid min-w-0 grid-cols-1 items-stretch gap-2 lg:grid-cols-[minmax(0,1fr)_136px]">
+                  <BrawlersEcosystemMap />
+                  <aside className="grid min-w-0 grid-cols-1 grid-rows-2 border border-emerald-500/12 bg-black/22">
+                    {sideStats.map(([label, value, copy, visual], index) => (
+                      <div key={label} className={`${index > 0 ? 'border-t border-emerald-500/10' : ''} flex flex-col justify-center p-3`}>
+                        <div className="text-mono-3xs uppercase text-emerald-400">{label}</div>
+                        <div className="mt-1 flex items-center justify-between gap-3">
+                          <div>
+                            <div className="font-mono text-[18px] leading-none text-emerald-400 tabular-nums">{value}</div>
+                            <div className="mt-1 text-mono-3xs uppercase text-white/58">{copy}</div>
+                          </div>
+                          <div className="min-w-[52px] flex-1">
+                            <MiniStatVisual type={visual} />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </aside>
+                </div>
+              </section>
+            </div>
+
+            <section className="border border-emerald-500/16 bg-black/18 p-3">
               <div className="mb-3 text-mono-xs uppercase text-emerald-400">System Health</div>
               <div className="grid min-w-0 grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-5">
                 {healthCards.map(([label, value, filledSegments]) => (
@@ -406,7 +399,7 @@ function BrawlersCommandCenter() {
             </section>
           </div>
 
-          <div className="mt-3 flex flex-wrap items-center justify-end gap-x-5 gap-y-2 px-1 text-mono-3xs uppercase text-white/45">
+          <div className="mt-2 flex flex-wrap items-center justify-end gap-x-5 gap-y-2 px-1 text-mono-3xs uppercase text-white/45">
             <span>Last Sync: 17:24:11Z</span>
             <span className="hidden h-4 w-px bg-emerald-500/15 sm:block" />
             <span className="flex items-center gap-2 text-emerald-400">
@@ -431,7 +424,7 @@ function HeroPanel() {
         </div>
 
         <div className="mb-3">
-          <h1 className="font-space-grotesk text-[42px] font-medium uppercase leading-[0.98] tracking-[0] text-text-primary sm:text-[58px] lg:text-[58px]">
+          <h1 className="font-space-grotesk text-[42px] font-medium uppercase leading-[0.98] tracking-[-.01em] text-text-primary sm:text-[50px] lg:text-[52px]">
             Blockchain<br />Brawlers
           </h1>
           <h2 className="mt-3 text-mono-base uppercase text-emerald-400">
@@ -524,8 +517,8 @@ function ProblemInsightSection() {
               <ul className="space-y-0.5">
                 {problemImpacts.map((impact) => (
                   <li key={impact} className="flex gap-1.5 leading-snug">
-                    <span className="text-emerald-500/70">·</span>
-                    <span className="text-mono-label leading-relaxed text-white/72">{impact}</span>
+                    <span className="mt-1.5 h-1 w-1 shrink-0 bg-emerald-400/70" />
+                    <span className="px-1 text-mono-label leading-relaxed text-white/72">{impact}</span>
                   </li>
                 ))}
               </ul>
@@ -598,74 +591,83 @@ function BrawlersEcosystemOverview() {
 
 function BuildSection() {
   return (
-    <section id="case-brief" className="relative mb-5 grid min-w-0 scroll-mt-24 grid-cols-1 gap-3 lg:grid-cols-[0.95fr_1fr]">
-      <div className="relative min-w-0 border border-border-subtle bg-black/18 p-4 sm:p-5">
-        <CornerSquares />
-        <div className="mb-4 flex items-center gap-2 text-mono-label uppercase text-emerald-400">
-          <span>03</span>
-          <span>//</span>
-          <span>The Build</span>
+    <section id="case-brief" className="relative mb-5 min-w-0 scroll-mt-24 border border-border-subtle bg-black/18 p-4 sm:p-5">
+      <CornerSquares />
+      <div className="mb-3 flex items-center gap-2 text-mono-label uppercase text-emerald-400">
+        <span>03</span>
+        <span>//</span>
+        <span>The Build</span>
+      </div>
+      <p className="max-w-[84ch] text-mono-sm leading-relaxed text-white/72">
+        A self-reinforcing content and community flywheel that turns culture into participation, trust, and output.
+      </p>
+
+      <div className="my-5 border-t border-dotted border-emerald-500/22" />
+
+      <div className="relative">
+        <div className="grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5 lg:gap-8 xl:gap-9">
+          {buildFlywheelSteps.map(([number, phase, title, copy, Icon], index) => (
+            <div key={title as string} className="relative min-w-0">
+              <div className="mb-3 hidden items-center justify-center text-mono-2xs uppercase text-emerald-400/78 lg:flex">
+                <span>{phase as string}</span>
+              </div>
+              <div className="relative mx-auto flex min-h-[198px] w-full max-w-[184px] flex-col justify-between border border-emerald-500/26 bg-black/24 p-3 text-center shadow-[inset_0_0_16px_rgba(16,185,129,0.022)]">
+                <span className="absolute left-3 top-3 flex h-7 w-7 items-center justify-center border border-emerald-500/28 text-mono-2xs text-emerald-400/82">
+                  {number as string}
+                </span>
+                <span className="absolute -right-px -top-px h-1.5 w-1.5 border-r border-t border-emerald-400/36" />
+                <span className="absolute -bottom-px -left-px h-1.5 w-1.5 border-b border-l border-emerald-400/36" />
+                <div className="pt-8">
+                  {React.createElement(Icon as React.ElementType, {
+                    className: 'mx-auto mb-4 h-12 w-12 text-emerald-400',
+                    strokeWidth: 1.45,
+                  })}
+                  <div className="mx-auto mb-3 h-px w-20 border-t border-dotted border-emerald-500/30" />
+                  <div className="text-mono-xs font-semibold uppercase leading-snug text-emerald-400">{title as string}</div>
+                </div>
+                <p className="mt-3 border-t border-dotted border-emerald-500/22 pt-3 text-mono-label leading-snug text-white/60">
+                  {copy as string}
+                </p>
+              </div>
+              {index < buildFlywheelSteps.length - 1 ? (
+                <div className="absolute right-[-1.55rem] top-[55%] z-10 hidden h-6 w-6 -translate-y-1/2 items-center justify-center border border-emerald-500/18 bg-bg-base/88 text-emerald-400/78 lg:flex xl:right-[-1.7rem]">
+                  <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.6} />
+                </div>
+              ) : null}
+            </div>
+          ))}
         </div>
 
-        <div className="space-y-3">
-          <section className="border border-emerald-500/18 bg-black/20 p-3">
-            <div className="mb-2 text-mono-2xs uppercase text-emerald-400">System Architecture</div>
-            <div className="grid min-w-0 grid-cols-1 items-stretch gap-1 sm:grid-cols-[1fr_1.25rem_1fr_1.25rem_1fr_1.25rem_1fr_1.25rem_1fr]">
-              {architectureSteps.map(([label, copy, Icon], index) => (
-                <React.Fragment key={label as string}>
-                  <div className="flex h-full min-w-0 flex-col justify-center border border-emerald-500/18 bg-black/25 px-2 py-2 text-center">
-                    {React.createElement(Icon as React.ElementType, {
-                      className: 'mx-auto mb-2 h-5 w-5 text-emerald-400',
-                      strokeWidth: 1.6,
-                    })}
-                    <div className="mb-1 text-mono-xs uppercase text-emerald-400">{label as string}</div>
-                    <div className="text-mono-2xs text-white/58">{copy as string}</div>
-                  </div>
-                  {index < architectureSteps.length - 1 ? (
-                    <div className="hidden items-center justify-center text-mono-xs text-emerald-500/60 sm:flex">&gt;</div>
-                  ) : null}
-                </React.Fragment>
-              ))}
-            </div>
-          </section>
-
-          <section className="border border-emerald-500/18 bg-black/20 p-3">
-            <div className="mb-2 text-mono-2xs uppercase text-emerald-400">Core Capabilities</div>
-            <div className="grid min-w-0 grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-5">
-              {coreCapabilities.map(([title, copy, Icon]) => (
-                <div key={title as string} className="min-w-0 border border-emerald-500/14 bg-black/22 p-3 text-center">
-                  {React.createElement(Icon as React.ElementType, {
-                    className: 'mx-auto mb-3 h-6 w-6 text-emerald-400',
-                    strokeWidth: 1.6,
-                  })}
-                  <div className="mb-2 text-mono-2xs uppercase text-white/72">{title as string}</div>
-                  <p className="text-mono-3xs leading-relaxed text-white/55">{copy as string}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section className="border border-emerald-500/18 bg-black/20 p-3">
-            <div className="mb-2 text-mono-2xs uppercase text-emerald-400">Stack</div>
-            <div className="grid min-w-0 grid-cols-2 gap-2 sm:grid-cols-4 xl:grid-cols-7">
-              {stackItems.map((item) => (
-                <span
-                  key={item}
-                  className="min-w-0 border border-emerald-500/18 bg-black/24 px-3 py-2 text-center text-mono-3xs uppercase text-white/62"
-                >
-                  {item}
-                </span>
-              ))}
-            </div>
-          </section>
+        <div className="relative mx-auto mt-6 hidden max-w-[70%] items-center justify-center lg:flex">
+          <div className="absolute left-0 right-0 top-1/2 border-t border-dotted border-emerald-500/34" />
+          <span className="relative border border-emerald-500/34 bg-bg-base px-4 py-1.5 text-mono-2xs uppercase text-emerald-400 shadow-[0_0_14px_rgba(16,185,129,0.055)]">
+            Feedback Loop
+          </span>
+        </div>
+        <div className="mt-1 hidden text-center text-mono-3xs uppercase text-emerald-400/58 lg:block">
+          Flywheel Effect
         </div>
       </div>
 
-      <aside className="relative flex min-w-0 flex-col border border-border-subtle bg-black/18 p-4 sm:p-5">
-        <CornerSquares />
-        <div className="mb-4 text-mono-label uppercase text-emerald-400">System Overview</div>
-        <BrawlersEcosystemOverview />
-      </aside>
+      <div className="mt-6 border border-emerald-500/16 bg-black/18 px-2 py-3">
+        <div className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5 lg:gap-0">
+          {buildImpactStats.map(([title, copy, Icon], index) => (
+            <div
+              key={title as string}
+              className={`flex min-w-0 items-center gap-2.5 px-2.5 ${index > 0 ? 'lg:border-l lg:border-emerald-500/20' : ''}`}
+            >
+              {React.createElement(Icon as React.ElementType, {
+                className: 'h-6 w-6 shrink-0 text-emerald-400',
+                strokeWidth: 1.5,
+              })}
+              <div className="min-w-0">
+                <div className="text-mono-3xs uppercase text-emerald-400">{title as string}</div>
+                <p className="text-mono-3xs leading-snug text-white/54">{copy as string}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }

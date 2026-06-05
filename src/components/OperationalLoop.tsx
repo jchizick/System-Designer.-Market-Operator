@@ -213,7 +213,7 @@ export function OperationalLoop() {
         </span>
       </div>
 
-      <div className="relative z-10 grid grid-cols-1 items-start gap-3.5 md:grid-cols-[minmax(0,0.88fr)_minmax(310px,1.12fr)]">
+      <div className="relative z-10 grid grid-cols-1 items-start gap-4 md:grid-cols-[minmax(0,0.7fr)_minmax(310px,1.30fr)]">
         <div className="relative min-w-0">
           <div className="relative">
             <div className="pointer-events-none absolute bottom-[1.85rem] left-[2.65rem] top-[1.85rem] z-10 w-px bg-emerald-500/[0.18]" />
@@ -250,7 +250,7 @@ export function OperationalLoop() {
                 >
                   <CircularIconNode Icon={Icon} size={34} iconSize={14} active={isActive} title={title} />
                   <div className="min-w-0">
-                    <h3 className={`text-body-base font-normal leading-[1.04] transition-colors duration-300 ${isActive ? 'text-white' : 'text-text-primary'}`}>
+                    <h3 className={`text-body-base font-space-grotesk leading-[1.04] transition-colors duration-300 ${isActive ? 'text-white' : 'text-text-primary'}`}>
                       {title}
                     </h3>
                     <p className={`text-mono-3xs leading-[1.45] transition-colors duration-300 sm:text-[9px] ${isActive ? 'text-white/72' : 'text-white/56'}`}>
@@ -363,7 +363,7 @@ export function OperationalLoop() {
                 y="180"
                 textAnchor="middle"
                 fill="rgba(52,211,153,0.72)"
-                className="text-[10px] font-semibold uppercase"
+                className="text-[11px] font-space-grotesk font-semibold uppercase"
               >
                 OPERATIONAL
               </text>

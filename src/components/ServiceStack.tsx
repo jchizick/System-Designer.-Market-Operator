@@ -51,15 +51,15 @@ const ServiceCard: React.FC<{ service: Service }> = ({ service }) => {
             <Icon size={18} strokeWidth={1.5} />
           </div>
           <div className="min-w-0 pt-0.5">
-            <span className="mb-2 block text-mono-2xs font-medium text-emerald-400/80">
+            <span className="mb-1 block text-mono-2xs font-medium text-emerald-400/80">
               {service.label}
             </span>
-            <h3 className="text-body-base font-normal leading-tight text-text-primary">
+            <h3 className="text-body-lg font-space-grotesk leading-tight text-text-primary">
               {service.title}
             </h3>
           </div>
         </div>
-        <p className="text-mono-label leading-relaxed text-white/60">
+        <p className="text-mono-sm leading-relaxed text-white/60">
           {service.description}
         </p>
       </div>
@@ -110,7 +110,7 @@ export function ServiceStack() {
             <div className="mb-2 text-mono-2xs font-medium text-emerald-400/80">
               OPERATOR FIT
             </div>
-            <p className="text-body-sm text-text-primary/80">
+            <p className="text-body-base font-space-grotesk text-text-primary/80">
               Built for operators, founders, and teams moving through complexity.
             </p>
           </div>

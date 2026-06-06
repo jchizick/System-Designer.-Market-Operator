@@ -617,7 +617,7 @@ function ReadinessGauge() {
         />
       </svg>
       <div className="text-center font-mono uppercase leading-none">
-        <div className="text-[13px] text-emerald-400">72%</div>
+        <div className="text-[12px] text-emerald-400">72%</div>
         <div className="mt-1 text-[7px] text-emerald-300/70">Ready</div>
       </div>
     </div>

@@ -132,12 +132,22 @@ const outputCards = [
   ['06', 'ROADMAP', 'roadmap'],
 ];
 
-const systemLogRows = [
-  ['14:32:18', 'PIPELINE INITIATED'],
-  ['14:32:19', 'SIGNALS INGESTED'],
-  ['14:32:48', 'SELECTION COMPLETE'],
-  ['14:33:07', 'TRANSLATION COMPLETE'],
-  ['14:33:39', 'SYSTEM ASSEMBLED'],
+const systemLogGroups = [
+  [
+    ['14:32:18', 'PIPELINE INITIATED'],
+    ['14:32:18', 'INPUT SIGNALS INGESTED'],
+    ['14:32:19', 'UNIVERSE GENERATION'],
+  ],
+  [
+    ['14:32:31', 'SIGNAL CALIBRATION'],
+    ['14:32:48', 'SELECTION COMPLETE'],
+    ['14:32:55', 'BRAND DNA CODIFIED'],
+  ],
+  [
+    ['14:33:07', 'SIGNAL TRANSLATION'],
+    ['14:33:21', 'SYSTEMS MAPPING'],
+    ['14:33:39', 'OPERATING SYSTEM ASSEMBLED'],
+  ],
 ];
 
 const resultCards = [
@@ -683,13 +693,13 @@ function OutputPreviewCard({ number, title, type }: { number: string; title: str
 }
 
 function SystemConsoleSparkline() {
-  const points = '0,42 12,39 24,41 36,35 48,38 60,30 72,33 84,26 96,28 108,18 120,20 132,12 144,17 156,9 168,13 180,7';
+  const points = '0,36 14,34 28,28 42,31 56,25 70,27 84,22 98,18 112,24 126,17 140,20 154,12 168,15 182,20 196,16 210,19 224,12 238,15 252,9 266,17 280,14';
 
   return (
-    <svg className="h-9 w-full text-emerald-400" viewBox="0 0 180 54" aria-hidden="true">
-      <path d="M0 45H180" stroke="rgba(255,255,255,0.09)" />
-      <polyline points={points} fill="none" stroke="currentColor" strokeOpacity="0.72" strokeWidth="1.5" />
-      <path d={`M ${points.replaceAll(' ', ' L ')} L 180 54 L 0 54 Z`} fill="currentColor" opacity="0.08" />
+    <svg className="h-9 w-full text-emerald-400" viewBox="0 0 280 48" aria-hidden="true">
+      <path d="M0 40H280" stroke="rgba(255,255,255,0.07)" />
+      <polyline points={points} fill="none" stroke="currentColor" strokeOpacity="0.64" strokeWidth="1.35" />
+      <path d={`M ${points.replaceAll(' ', ' L ')} L 280 48 L 0 48 Z`} fill="currentColor" opacity="0.055" />
     </svg>
   );
 }
@@ -811,29 +821,43 @@ function SystemInMotionSection() {
           </aside>
         </div>
 
-        <footer className="relative mt-3 grid min-w-0 grid-cols-1 border border-emerald-500/16 bg-black/24 lg:grid-cols-[0.65fr_1.7fr_0.5fr]">
-          <div className="min-w-0 border-b border-emerald-500/12 px-2.5 py-2 lg:border-b-0 lg:border-r">
-            <div className="mb-0.5 text-[8px] uppercase leading-none text-white/48">SYSTEM CONSOLE</div>
+        <footer className="relative mt-3 grid min-w-0 grid-cols-1 border border-emerald-500/16 bg-black/24 px-3 py-2 lg:grid-cols-[0.62fr_2.55fr_0.38fr]">
+          <div className="min-w-0 border-b border-emerald-500/12 pb-2 lg:border-b-0 lg:border-r lg:pb-0 lg:pr-4">
+            <div className="mb-1 text-[8px] uppercase tracking-[0.08em] text-white/48">SYSTEM CONSOLE</div>
             <SystemConsoleSparkline />
           </div>
-          <div className="min-w-0 border-b border-emerald-500/12 px-2.5 py-2 lg:border-b-0 lg:border-r">
-            <div className="mb-1 text-[8px] uppercase leading-none text-white/48">LOG</div>
-            <div className="grid min-w-0 grid-cols-1 gap-x-4 gap-y-1 md:grid-cols-2">
-              {systemLogRows.map(([time, label]) => (
-                <div key={`${time}-${label}`} className="grid min-w-0 grid-cols-[4.4rem_minmax(0,1fr)_1.4rem] gap-1.5 text-[8px] uppercase leading-tight">
-                  <span className="text-emerald-400/78 tabular-nums">{time}</span>
-                  <span className="truncate text-white/68">{label} ........</span>
-                  <span className="text-emerald-400">OK</span>
+          <div className="min-w-0 border-b border-emerald-500/12 py-2 lg:border-b-0 lg:border-r lg:px-4 lg:py-0">
+            <div className="grid min-w-0 grid-cols-1 gap-3 md:grid-cols-3 md:gap-0">
+              {systemLogGroups.map((group, groupIndex) => (
+                <div
+                  key={groupIndex}
+                  className={`min-w-0 md:px-2.5 ${groupIndex === 0 ? 'md:pl-0' : 'md:border-l md:border-emerald-500/16'} ${groupIndex === systemLogGroups.length - 1 ? 'md:pr-0' : ''}`}
+                >
+                  <div className="mb-1 text-[8px] uppercase tracking-[0.08em] text-white/48">{groupIndex === 0 ? 'LOG' : '\u00a0'}</div>
+                  <div className="space-y-1">
+                    {group.map(([time, label]) => (
+                      <div key={`${time}-${label}`} className="grid min-w-0 grid-cols-[3.55rem_minmax(0,1fr)_1.25rem] gap-1.5 font-mono text-[7px] uppercase leading-tight">
+                        <span className="text-emerald-400/78 tabular-nums">{time}</span>
+                        <span className="flex min-w-0 items-center gap-1 text-white/66">
+                          <span className="truncate">{label}</span>
+                          <span className="h-px min-w-3 flex-1 border-t border-dotted border-white/18" aria-hidden="true" />
+                        </span>
+                        <span className="text-right text-emerald-400">OK</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
           </div>
-          <div className="flex min-w-0 items-center justify-start gap-2 px-2.5 py-2 lg:justify-end">
-            <CheckCircle2 className="h-6 w-6 shrink-0 text-emerald-400" strokeWidth={1.35} />
-            <div className="min-w-0 text-left lg:text-right">
-              <div className="text-[8px] uppercase leading-none text-white/48">SYSTEM HEALTH</div>
-              <div className="font-mono text-[20px] leading-none text-emerald-400 tabular-nums">100%</div>
-              <div className="text-[8px] uppercase leading-none text-emerald-400/82">ALL SYSTEMS GO</div>
+          <div className="flex min-w-0 items-center justify-start gap-2.5 pt-2 lg:justify-end lg:pt-0 lg:pl-3">
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center border border-emerald-400/48 bg-emerald-400/[0.04] text-emerald-400 [clip-path:polygon(25%_4%,75%_4%,100%_50%,75%_96%,25%_96%,0_50%)]">
+              <Cpu className="h-3.5 w-3.5" strokeWidth={1.45} />
+            </div>
+            <div className="min-w-0">
+              <div className="text-[8px] uppercase tracking-[0.08em] text-white/48">SYS. HEALTH</div>
+              <div className="font-mono text-[14px] leading-none text-emerald-400 tabular-nums">100%</div>
+              <div className="mt-1 text-[7px] uppercase leading-none text-emerald-400/82">ALL SYSTEMS GO</div>
             </div>
           </div>
         </footer>

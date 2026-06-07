@@ -5,6 +5,7 @@ import {
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
+  AudioWaveform,
   Bot,
   Braces,
   CheckCircle2,
@@ -17,8 +18,11 @@ import {
   Crosshair,
   Database,
   Download,
+  Dna,
   FileText,
   FolderInput,
+  Hexagon,
+  Layers,
   Lightbulb,
   MemoryStick,
   Menu,
@@ -104,14 +108,90 @@ const signalInputs = [
   ['MOODBOARD SEEDS', 'Textures, tone, atmosphere.', '23 ASSETS', Puzzle],
 ];
 
-const processingNodes = [
-  ['01', 'UNIVERSE GENERATION', 'Expand conceptual space.', CircleHelp],
-  ['02', 'SIGNAL CALIBRATION', 'Score clarity, resonance, fit.', SlidersHorizontal],
-  ['03', 'SELECTION', 'Choose highest-potential route.', Crosshair],
-  ['04', 'BRAND DNA', 'Codify core identity.', Braces],
-  ['05', 'SIGNAL TRANSLATION', 'Convert DNA into signals.', Database],
-  ['06', 'BRAND SYSTEMS MAP', 'Map structure and hierarchy.', Network],
-  ['07', 'BRAND OPERATING SYSTEM', 'Assemble for activation and scale.', Puzzle],
+type ProcessingNodeData = {
+  number: string;
+  title: string;
+  copy: string;
+  icon: React.ElementType;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  active?: boolean;
+};
+
+const processingNodes: ProcessingNodeData[] = [
+  {
+    number: '01',
+    title: 'UNIVERSE GENERATION',
+    copy: 'Expand the conceptual space into brand possibility universes.',
+    icon: ProcessingUniverseIcon,
+    x: 5,
+    y: 8,
+    width: 26,
+    height: 21,
+  },
+  {
+    number: '02',
+    title: 'SIGNAL CALIBRATION',
+    copy: 'Score and calibrate signals for clarity, resonance, and fit.',
+    icon: AudioWaveform,
+    x: 37,
+    y: 8,
+    width: 26,
+    height: 21,
+  },
+  {
+    number: '03',
+    title: 'SELECTION',
+    copy: 'Select the highest potential universe for development.',
+    icon: Crosshair,
+    x: 69,
+    y: 8,
+    width: 26,
+    height: 21,
+    active: true,
+  },
+  {
+    number: '04',
+    title: 'BRAND DNA',
+    copy: 'Codify the core identity into distinct, enduring brand DNA.',
+    icon: Dna,
+    x: 8,
+    y: 43,
+    width: 34,
+    height: 21,
+  },
+  {
+    number: '05',
+    title: 'SIGNAL TRANSLATION',
+    copy: 'Translate DNA into verbal, visual, and sensory signals.',
+    icon: ProcessingSignalGridIcon,
+    x: 55,
+    y: 43,
+    width: 34,
+    height: 21,
+  },
+  {
+    number: '06',
+    title: 'BRAND SYSTEMS MAP',
+    copy: 'Map relationships, hierarchies, and system architecture.',
+    icon: ProcessingSystemsMapIcon,
+    x: 5,
+    y: 73,
+    width: 38,
+    height: 20,
+  },
+  {
+    number: '07',
+    title: 'BRAND OPERATING SYSTEM',
+    copy: 'Assemble the complete operating system for activation and scale.',
+    icon: Layers,
+    x: 53,
+    y: 73,
+    width: 40,
+    height: 20,
+  },
 ];
 
 const processingMetrics = [
@@ -530,12 +610,47 @@ function SignalInputCard({
       </div>
       <div className="min-w-0">
         <div className="mb-1 grid min-w-0 grid-cols-[minmax(0,1fr)_auto] gap-2">
-          <h4 className="min-w-0 text-[10px] uppercase leading-tight text-white/82">{title}</h4>
+          <h4 className="font-mono min-w-0 text-[10px] uppercase leading-tight text-white/82">{title}</h4>
           <span className="shrink-0 text-[8px] uppercase leading-tight text-white/55">{meta}</span>
         </div>
-        <p className="truncate text-[10px] leading-tight text-white/56">{copy}</p>
+        <p className="font-mono truncate text-[9px] leading-tight text-white/56">{copy}</p>
       </div>
     </article>
+  );
+}
+
+function ProcessingUniverseIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" {...props}>
+      <ellipse cx="16" cy="16" rx="12" ry="4.2" stroke="currentColor" strokeWidth="1.25" transform="rotate(-20 16 16)" />
+      <ellipse cx="16" cy="16" rx="12" ry="4.2" stroke="currentColor" strokeWidth="1.25" transform="rotate(20 16 16)" />
+      <circle cx="16" cy="16" r="2.7" fill="currentColor" />
+    </svg>
+  );
+}
+
+function ProcessingSignalGridIcon({ className }: { className?: string }) {
+  return (
+    <div className={`grid grid-cols-4 gap-[3px] text-white/82 ${className ?? ''}`} aria-hidden="true">
+      {Array.from({ length: 16 }, (_, index) => (
+        <span
+          key={index}
+          className={`h-1 w-1 rounded-full ${
+            index === 5 || index === 6 || index === 9 || index === 10 ? 'bg-emerald-400/90 shadow-[0_0_6px_rgba(52,211,153,0.45)]' : 'bg-current'
+          }`}
+        />
+      ))}
+    </div>
+  );
+}
+
+function ProcessingSystemsMapIcon({ className }: { className?: string }) {
+  return (
+    <div className={`relative h-8 w-9 text-white/82 ${className ?? ''}`} aria-hidden="true">
+      <Hexagon strokeWidth={1.2} className="absolute left-0 top-2 h-[18px] w-[18px]" />
+      <Hexagon strokeWidth={1.2} className="absolute left-[13px] top-0 h-[18px] w-[18px]" />
+      <Hexagon strokeWidth={1.2} className="absolute left-[13px] top-[15px] h-[18px] w-[18px]" />
+    </div>
   );
 }
 
@@ -544,59 +659,83 @@ function ProcessingNode({
   title,
   copy,
   icon: Icon,
-  wide = false,
+  x,
+  y,
+  width,
+  height,
   active = false,
 }: {
   number: string;
   title: string;
   copy: string;
   icon: React.ElementType;
-  wide?: boolean;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
   active?: boolean;
 }) {
   return (
     <article
-      className={`synthetic-processing-node relative min-h-[76px] min-w-0 border bg-black/34 p-2 ${
-        active ? 'synthetic-processing-pulse border-emerald-400/45' : 'border-emerald-500/18'
+      className={`synthetic-processing-node absolute min-w-0 border bg-[#070908]/88 px-3 py-2.5 shadow-[inset_0_0_18px_rgba(255,255,255,0.025)] transition-colors duration-500 hover:border-emerald-400/55 ${
+        active ? 'synthetic-processing-pulse border-emerald-400/55' : 'border-white/18'
       }`}
+      style={{
+        left: `${x}%`,
+        top: `${y}%`,
+        width: `${width}%`,
+        height: `${height}%`,
+      }}
     >
-      <div className="mb-1.5 flex items-start justify-between gap-2">
-        <span className="font-mono text-[14px] leading-none text-white/82 tabular-nums">{number}</span>
-        <Icon className="h-4 w-4 shrink-0 text-emerald-400/82" strokeWidth={1.45} />
+      <div className="mb-1 flex items-start justify-between gap-2">
+        <span className="font-mono text-[10px] leading-none text-white/80 tabular-nums">{number}</span>
+        <span className="h-1.5 w-1.5 bg-emerald-400/70 shadow-[0_0_8px_rgba(52,211,153,0.55)]" aria-hidden="true" />
       </div>
-      <h4 className="mb-1 text-[10px] uppercase leading-snug text-white/82">{title}</h4>
-      <p className="text-[9px] leading-tight text-white/56">{copy}</p>
+      <div className="mb-1.5 flex h-8 items-center text-white/82">
+        <Icon className="h-7 w-7 shrink-0 text-current" strokeWidth={1.35} />
+      </div>
+      <h4 className="mb-1 font-mono text-[8px] uppercase leading-tight text-white/86">{title}</h4>
+      <p className="font-mono text-[7px] leading-[1.35] text-white/56">{copy}</p>
     </article>
   );
 }
 
 function ProcessingFlowConnectors() {
   const dots = [
-    [16.5, 22], [50, 22], [83.5, 22],
-    [32, 51], [68, 51],
-    [32, 80], [68, 80],
+    [31, 18.5], [37, 18.5], [63, 18.5], [69, 18.5], [95, 18.5],
+    [82, 36], [25, 36], [25, 43],
+    [42, 53.5], [55, 53.5], [72, 64], [24, 64], [24, 73],
+    [43, 83], [53, 83],
   ];
 
   return (
     <svg
-      className="pointer-events-none absolute inset-2 hidden h-[calc(100%-1rem)] w-[calc(100%-1rem)] text-emerald-400 sm:block"
+      className="pointer-events-none absolute inset-0 h-full w-full text-emerald-400"
       viewBox="0 0 100 100"
       preserveAspectRatio="none"
       aria-hidden="true"
     >
-      <g fill="none" stroke="currentColor" strokeLinecap="square" strokeLinejoin="miter">
-        <path d="M16.5 22H50H83.5" strokeOpacity="0.32" strokeWidth="0.55" />
-        <path d="M16.5 22V36H32V51" strokeOpacity="0.24" strokeWidth="0.5" />
-        <path d="M50 22V36H50V51H68" strokeOpacity="0.24" strokeWidth="0.5" />
-        <path d="M83.5 22V36H68V51" strokeOpacity="0.24" strokeWidth="0.5" />
-        <path d="M32 51H68" strokeOpacity="0.34" strokeWidth="0.55" />
-        <path d="M32 51V66H32V80" strokeOpacity="0.24" strokeWidth="0.5" />
-        <path d="M68 51V66H68V80" strokeOpacity="0.24" strokeWidth="0.5" />
-        <path d="M32 80H68" strokeOpacity="0.34" strokeWidth="0.55" />
+      <defs>
+        <filter id="processingRouteGlow" colorInterpolationFilters="sRGB" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="0.55" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+      <g fill="none" stroke="currentColor" strokeLinecap="square" strokeLinejoin="miter" filter="url(#processingRouteGlow)">
+        <path d="M31 18.5H37" strokeOpacity="0.58" strokeWidth="0.55" />
+        <path d="M63 18.5H69" strokeOpacity="0.58" strokeWidth="0.55" />
+        <path d="M82 29V36H25V43" strokeOpacity="0.5" strokeWidth="0.5" />
+        <path d="M42 53.5H55" strokeOpacity="0.5" strokeWidth="0.55" />
+        <path d="M72 64V68H24V73" strokeOpacity="0.48" strokeWidth="0.5" />
+        <path d="M43 83H53" strokeOpacity="0.5" strokeWidth="0.55" />
       </g>
       {dots.map(([cx, cy]) => (
-        <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="0.9" fill="currentColor" opacity="0.55" />
+        <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="0.75" fill="rgba(2,6,5,0.96)" stroke="currentColor" strokeWidth="0.32" opacity="0.82" />
       ))}
+      <circle cx="95" cy="18.5" r="0.85" fill="currentColor" opacity="0.72" />
     </svg>
   );
 }
@@ -683,7 +822,7 @@ function OutputPreviewVisual({ type }: { type: string }) {
 function OutputPreviewCard({ number, title, type }: { number: string; title: string; type: string }) {
   return (
     <article className="min-h-[88px] min-w-0 border border-emerald-500/16 bg-black/24 p-2">
-      <h4 className="mb-1.5 flex min-w-0 items-start gap-1.5 text-[8px] uppercase leading-tight text-white/82">
+      <h4 className="mb-1.5 flex min-w-0 items-start gap-1.5 font-mono text-[10px] uppercase leading-tight text-white/82">
         <span className="text-emerald-400">{number}</span>
         <span className="min-w-0">{title}</span>
       </h4>
@@ -719,7 +858,7 @@ function SystemInMotionSection() {
         <div className="relative grid min-w-0 grid-cols-1 items-stretch gap-3 lg:grid-cols-[0.74fr_1.45fr_0.95fr]">
           <aside className="relative min-w-0 border border-emerald-500/16 bg-black/24 p-2.5">
             <div className="mb-2">
-              <div className="text-[10px] uppercase leading-none text-emerald-400">INPUT</div>
+              <div className="font-space-grotesk text-[10px] uppercase leading-none text-emerald-400">INPUT</div>
               <div className="mt-1 text-mono-3xs uppercase text-white/48">RAW SIGNALS</div>
             </div>
             <div className="space-y-2">
@@ -744,58 +883,37 @@ function SystemInMotionSection() {
             <div className="pointer-events-none absolute -right-4 top-1/2 hidden h-px w-4 bg-emerald-500/25 lg:block" aria-hidden="true" />
             <span className="synthetic-packet pointer-events-none absolute left-0 top-1/2 hidden h-1.5 w-1.5 bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.75)] lg:block" aria-hidden="true" />
             <div className="mb-2">
-              <div className="text-[10px] uppercase leading-none text-emerald-400">PROCESSING</div>
+              <div className="font-space-grotesk text-[10px] uppercase leading-none text-emerald-400">PROCESSING</div>
               <div className="mt-1 text-mono-3xs uppercase text-white/48">MACHINE LOGIC</div>
             </div>
 
-            <div className="relative border border-emerald-500/10 bg-black/18 p-2">
-              <div className="pointer-events-none absolute inset-0 opacity-[0.16] [background-image:linear-gradient(rgba(16,185,129,0.25)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.18)_1px,transparent_1px)] [background-size:14px_14px]" aria-hidden="true" />
-              <ProcessingFlowConnectors />
-              <div className="relative space-y-2">
-                <div className="grid min-w-0 grid-cols-1 gap-2 sm:grid-cols-3">
-                  {processingNodes.slice(0, 3).map(([number, title, copy, Icon], index) => (
-                    <React.Fragment key={title as string}>
-                      <ProcessingNode
-                        number={number as string}
-                        title={title as string}
-                        copy={copy as string}
-                        icon={Icon as React.ElementType}
-                        active={index === 2}
-                      />
-                    </React.Fragment>
-                  ))}
-                </div>
-                <div className="grid min-w-0 grid-cols-1 gap-2 sm:grid-cols-2">
-                  {processingNodes.slice(3, 5).map(([number, title, copy, Icon]) => (
-                    <React.Fragment key={title as string}>
-                      <ProcessingNode
-                        number={number as string}
-                        title={title as string}
-                        copy={copy as string}
-                        icon={Icon as React.ElementType}
-                      />
-                    </React.Fragment>
-                  ))}
-                </div>
-                <div className="grid min-w-0 grid-cols-1 gap-2 sm:grid-cols-2">
-                  {processingNodes.slice(5).map(([number, title, copy, Icon]) => (
-                    <React.Fragment key={title as string}>
-                      <ProcessingNode
-                        number={number as string}
-                        title={title as string}
-                        copy={copy as string}
-                        icon={Icon as React.ElementType}
-                      />
-                    </React.Fragment>
-                  ))}
-                </div>
+            <div className="relative overflow-hidden border border-emerald-500/10 bg-black/18 py-2" tabIndex={0} aria-label="Synthetic Foundry processing diagram">
+              <div className="relative aspect-[5/4] w-full overflow-hidden border-y border-white/[0.06] bg-[#030504] shadow-[inset_0_0_32px_rgba(16,185,129,0.035)]">
+                <div className="pointer-events-none absolute inset-0 opacity-[0.14] [background-image:linear-gradient(rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.12)_1px,transparent_1px)] [background-size:12px_12px]" aria-hidden="true" />
+                <div className="pointer-events-none absolute inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(52,211,153,0.22)_1px,transparent_1px),linear-gradient(90deg,rgba(52,211,153,0.18)_1px,transparent_1px)] [background-size:60px_60px]" aria-hidden="true" />
+                <ProcessingFlowConnectors />
+                {processingNodes.map((node) => (
+                  <React.Fragment key={node.title}>
+                    <ProcessingNode
+                      number={node.number}
+                      title={node.title}
+                      copy={node.copy}
+                      icon={node.icon}
+                      x={node.x}
+                      y={node.y}
+                      width={node.width}
+                      height={node.height}
+                      active={node.active}
+                    />
+                  </React.Fragment>
+                ))}
               </div>
             </div>
 
             <div className="mt-auto grid min-w-0 grid-cols-2 border border-emerald-500/12 bg-black/22 sm:grid-cols-3 xl:grid-cols-6">
               {processingMetrics.map(([label, value], index) => (
                 <div key={label} className={`min-w-0 px-2 py-1.5 ${index > 0 ? 'border-l border-emerald-500/12' : ''}`}>
-                  <div className="text-[7px] uppercase leading-none text-white/42">{label}</div>
+                  <div className="font-mono text-[7px] uppercase leading-none text-white/42">{label}</div>
                   <div className="mt-1 font-mono text-[14px] leading-none text-emerald-400 tabular-nums">{value}</div>
                 </div>
               ))}
@@ -805,7 +923,7 @@ function SystemInMotionSection() {
           <aside className="relative min-w-0 border border-emerald-500/16 bg-black/24 p-2.5">
             <div className="pointer-events-none absolute -left-4 top-1/2 hidden h-px w-4 bg-emerald-500/25 lg:block" aria-hidden="true" />
             <div className="mb-2">
-              <div className="text-[10px] uppercase leading-none text-emerald-400">OUTPUT</div>
+              <div className="font-space-grotesk text-[10px] uppercase leading-none text-emerald-400">OUTPUT</div>
               <div className="mt-1 text-mono-3xs uppercase text-white/48">REFINED DELIVERABLES</div>
             </div>
             <div className="grid min-w-0 grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
@@ -823,7 +941,7 @@ function SystemInMotionSection() {
 
         <footer className="relative mt-3 grid min-w-0 grid-cols-1 border border-emerald-500/16 bg-black/24 px-3 py-2 lg:grid-cols-[0.62fr_2.55fr_0.38fr]">
           <div className="min-w-0 border-b border-emerald-500/12 pb-2 lg:border-b-0 lg:border-r lg:pb-0 lg:pr-4">
-            <div className="mb-1 text-[8px] uppercase tracking-[0.08em] text-white/48">SYSTEM CONSOLE</div>
+            <div className="mb-1 font-mono text-[8px] uppercase tracking-[0.08em] text-white/48">SYSTEM CONSOLE</div>
             <SystemConsoleSparkline />
           </div>
           <div className="min-w-0 border-b border-emerald-500/12 py-2 lg:border-b-0 lg:border-r lg:px-4 lg:py-0">
@@ -833,7 +951,7 @@ function SystemInMotionSection() {
                   key={groupIndex}
                   className={`min-w-0 md:px-2.5 ${groupIndex === 0 ? 'md:pl-0' : 'md:border-l md:border-emerald-500/16'} ${groupIndex === systemLogGroups.length - 1 ? 'md:pr-0' : ''}`}
                 >
-                  <div className="mb-1 text-[8px] uppercase tracking-[0.08em] text-white/48">{groupIndex === 0 ? 'LOG' : '\u00a0'}</div>
+                  <div className="mb-1 font-mono text-[8px] uppercase tracking-[0.08em] text-white/48">{groupIndex === 0 ? 'LOG' : '\u00a0'}</div>
                   <div className="space-y-1">
                     {group.map(([time, label]) => (
                       <div key={`${time}-${label}`} className="grid min-w-0 grid-cols-[3.55rem_minmax(0,1fr)_1.25rem] gap-1.5 font-mono text-[7px] uppercase leading-tight">
@@ -855,7 +973,7 @@ function SystemInMotionSection() {
               <Cpu className="h-3.5 w-3.5" strokeWidth={1.45} />
             </div>
             <div className="min-w-0">
-              <div className="text-[8px] uppercase tracking-[0.08em] text-white/48">SYS. HEALTH</div>
+              <div className="font-mono text-[8px] uppercase tracking-[0.08em] text-white/48">SYS. HEALTH</div>
               <div className="font-mono text-[14px] leading-none text-emerald-400 tabular-nums">100%</div>
               <div className="mt-1 text-[7px] uppercase leading-none text-emerald-400/82">ALL SYSTEMS GO</div>
             </div>

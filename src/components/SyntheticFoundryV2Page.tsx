@@ -113,6 +113,7 @@ type ProcessingNodeData = {
   title: string;
   copy: string;
   icon: React.ElementType;
+  layout?: 'stack' | 'split';
   x: number;
   y: number;
   width: number;
@@ -127,9 +128,9 @@ const processingNodes: ProcessingNodeData[] = [
     copy: 'Expand the conceptual space into brand possibility universes.',
     icon: ProcessingUniverseIcon,
     x: 5,
-    y: 8,
+    y: 5,
     width: 26,
-    height: 21,
+    height: 30,
   },
   {
     number: '02',
@@ -137,9 +138,9 @@ const processingNodes: ProcessingNodeData[] = [
     copy: 'Score and calibrate signals for clarity, resonance, and fit.',
     icon: AudioWaveform,
     x: 37,
-    y: 8,
+    y: 5,
     width: 26,
-    height: 21,
+    height: 30,
   },
   {
     number: '03',
@@ -147,9 +148,9 @@ const processingNodes: ProcessingNodeData[] = [
     copy: 'Select the highest potential universe for development.',
     icon: Crosshair,
     x: 69,
-    y: 8,
+    y: 5,
     width: 26,
-    height: 21,
+    height: 30,
     active: true,
   },
   {
@@ -157,6 +158,7 @@ const processingNodes: ProcessingNodeData[] = [
     title: 'BRAND DNA',
     copy: 'Codify the core identity into distinct, enduring brand DNA.',
     icon: Dna,
+    layout: 'split',
     x: 8,
     y: 43,
     width: 34,
@@ -167,6 +169,7 @@ const processingNodes: ProcessingNodeData[] = [
     title: 'SIGNAL TRANSLATION',
     copy: 'Translate DNA into verbal, visual, and sensory signals.',
     icon: ProcessingSignalGridIcon,
+    layout: 'split',
     x: 55,
     y: 43,
     width: 34,
@@ -177,6 +180,7 @@ const processingNodes: ProcessingNodeData[] = [
     title: 'BRAND SYSTEMS MAP',
     copy: 'Map relationships, hierarchies, and system architecture.',
     icon: ProcessingSystemsMapIcon,
+    layout: 'split',
     x: 5,
     y: 73,
     width: 38,
@@ -187,6 +191,7 @@ const processingNodes: ProcessingNodeData[] = [
     title: 'BRAND OPERATING SYSTEM',
     copy: 'Assemble the complete operating system for activation and scale.',
     icon: Layers,
+    layout: 'split',
     x: 53,
     y: 73,
     width: 40,
@@ -659,6 +664,7 @@ function ProcessingNode({
   title,
   copy,
   icon: Icon,
+  layout = 'stack',
   x,
   y,
   width,
@@ -669,12 +675,39 @@ function ProcessingNode({
   title: string;
   copy: string;
   icon: React.ElementType;
+  layout?: 'stack' | 'split';
   x: number;
   y: number;
   width: number;
   height: number;
   active?: boolean;
 }) {
+  if (layout === 'split') {
+    return (
+      <article
+        className={`synthetic-processing-node absolute grid min-w-0 grid-cols-[2.1rem_minmax(0,1fr)] gap-2 border bg-[#070908]/88 px-2.5 py-2 shadow-[inset_0_0_18px_rgba(255,255,255,0.025)] transition-colors duration-500 hover:border-emerald-400/55 ${
+          active ? 'synthetic-processing-pulse border-emerald-400/55' : 'border-white/18'
+        }`}
+        style={{
+          left: `${x}%`,
+          top: `${y}%`,
+          width: `${width}%`,
+          height: `${height}%`,
+        }}
+      >
+        <span className="absolute right-2.5 top-2.5 h-1.5 w-1.5 bg-emerald-400/70 shadow-[0_0_8px_rgba(52,211,153,0.55)]" aria-hidden="true" />
+        <div className="flex min-w-0 flex-col items-start gap-2 text-white/82">
+          <span className="font-mono text-[10px] leading-none text-white/80 tabular-nums">{number}</span>
+          <Icon className="h-7 w-7 shrink-0 text-current" strokeWidth={1.35} />
+        </div>
+        <div className="min-w-0 mt-1.5 pr-2">
+          <h4 className="mb-1 font-mono text-[8px] uppercase leading-tight text-white/86">{title}</h4>
+          <p className="font-mono text-[7px] leading-[1.35] text-white/56">{copy}</p>
+        </div>
+      </article>
+    );
+  }
+
   return (
     <article
       className={`synthetic-processing-node absolute min-w-0 border bg-[#070908]/88 px-3 py-2.5 shadow-[inset_0_0_18px_rgba(255,255,255,0.025)] transition-colors duration-500 hover:border-emerald-400/55 ${
@@ -691,7 +724,7 @@ function ProcessingNode({
         <span className="font-mono text-[10px] leading-none text-white/80 tabular-nums">{number}</span>
         <span className="h-1.5 w-1.5 bg-emerald-400/70 shadow-[0_0_8px_rgba(52,211,153,0.55)]" aria-hidden="true" />
       </div>
-      <div className="mb-1.5 flex h-8 items-center text-white/82">
+      <div className="mb-1 flex h-8 items-center text-white/82">
         <Icon className="h-7 w-7 shrink-0 text-current" strokeWidth={1.35} />
       </div>
       <h4 className="mb-1 font-mono text-[8px] uppercase leading-tight text-white/86">{title}</h4>
@@ -702,8 +735,8 @@ function ProcessingNode({
 
 function ProcessingFlowConnectors() {
   const dots = [
-    [31, 18.5], [37, 18.5], [63, 18.5], [69, 18.5], [95, 18.5],
-    [82, 36], [25, 36], [25, 43],
+    [31, 20], [37, 20], [63, 20], [69, 20], [95, 20],
+    [82, 38], [25, 38], [25, 43],
     [42, 53.5], [55, 53.5], [72, 64], [24, 64], [24, 73],
     [43, 83], [53, 83],
   ];
@@ -725,9 +758,9 @@ function ProcessingFlowConnectors() {
         </filter>
       </defs>
       <g fill="none" stroke="currentColor" strokeLinecap="square" strokeLinejoin="miter" filter="url(#processingRouteGlow)">
-        <path d="M31 18.5H37" strokeOpacity="0.58" strokeWidth="0.55" />
-        <path d="M63 18.5H69" strokeOpacity="0.58" strokeWidth="0.55" />
-        <path d="M82 29V36H25V43" strokeOpacity="0.5" strokeWidth="0.5" />
+        <path d="M31 20H37" strokeOpacity="0.58" strokeWidth="0.55" />
+        <path d="M63 20H69" strokeOpacity="0.58" strokeWidth="0.55" />
+        <path d="M82 35V38H25V43" strokeOpacity="0.5" strokeWidth="0.5" />
         <path d="M42 53.5H55" strokeOpacity="0.5" strokeWidth="0.55" />
         <path d="M72 64V68H24V73" strokeOpacity="0.48" strokeWidth="0.5" />
         <path d="M43 83H53" strokeOpacity="0.5" strokeWidth="0.55" />
@@ -735,7 +768,7 @@ function ProcessingFlowConnectors() {
       {dots.map(([cx, cy]) => (
         <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="0.75" fill="rgba(2,6,5,0.96)" stroke="currentColor" strokeWidth="0.32" opacity="0.82" />
       ))}
-      <circle cx="95" cy="18.5" r="0.85" fill="currentColor" opacity="0.72" />
+      <circle cx="95" cy="20" r="0.85" fill="currentColor" opacity="0.72" />
     </svg>
   );
 }
@@ -744,11 +777,46 @@ function OutputPreviewVisual({ type }: { type: string }) {
   if (type === 'orbit') {
     return (
       <svg className="h-14 w-full text-emerald-400" viewBox="0 0 170 70" aria-hidden="true">
-        <circle cx="84" cy="45" r="8" fill="none" stroke="currentColor" strokeOpacity="0.75" />
-        <path d="M28 48c18-28 74-36 112-6M26 58c36 17 83 13 124-19M42 26c44-8 86 9 100 42" fill="none" stroke="currentColor" strokeOpacity="0.35" />
-        {[42, 76, 108, 128, 146].map((x, index) => (
-          <circle key={x} cx={x} cy={[62, 34, 28, 56, 41][index]} r={index === 2 ? 4 : 3} fill="currentColor" opacity="0.82" />
-        ))}
+        <defs>
+          <filter id="brandUniverseGlow" colorInterpolationFilters="sRGB" x="-45%" y="-45%" width="190%" height="190%">
+            <feGaussianBlur stdDeviation="1.4" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        <g fill="none" stroke="currentColor" strokeLinecap="square">
+          <ellipse cx="85" cy="35" rx="47" ry="22" strokeOpacity="0.22" strokeWidth="0.85" />
+          <ellipse cx="85" cy="35" rx="30" ry="32" strokeOpacity="0.12" strokeWidth="0.75" transform="rotate(90 85 35)" />
+          <path d="M85 26V18M96 35H126M85 44V52M74 35H44" strokeOpacity="0.36" strokeWidth="0.7" />
+        </g>
+        <g fontFamily="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" fontSize="5.7" letterSpacing="0">
+          <g filter="url(#brandUniverseGlow)">
+            <circle cx="85" cy="35" r="9.2" fill="rgba(3,7,8,0.96)" stroke="currentColor" strokeOpacity="0.9" strokeWidth="1" />
+            <circle cx="85" cy="35" r="2.2" fill="currentColor" opacity="0.9" />
+          </g>
+          <text x="85" y="49.2" fill="rgba(236,253,245,0.86)" textAnchor="middle">CORE</text>
+
+          <g fill="rgba(3,7,8,0.96)" stroke="currentColor" strokeWidth="0.9">
+            <circle cx="85" cy="15" r="3.6" />
+            <circle cx="130" cy="35" r="3.6" />
+            <circle cx="85" cy="55" r="3.6" />
+            <circle cx="40" cy="35" r="3.6" />
+          </g>
+          <g fill="rgba(236,253,245,0.68)">
+            <text x="85" y="8.5" textAnchor="middle">VOICE</text>
+            <text x="137" y="37.2">VISUALS</text>
+            <text x="85" y="66" textAnchor="middle">AUDIENCE</text>
+            <text x="32" y="37.2" textAnchor="end">OFFER</text>
+          </g>
+          <g fill="currentColor">
+            <circle cx="85" cy="15" r="1.25" />
+            <circle cx="130" cy="35" r="1.25" />
+            <circle cx="85" cy="55" r="1.25" />
+            <circle cx="40" cy="35" r="1.25" />
+          </g>
+        </g>
       </svg>
     );
   }
@@ -881,14 +949,14 @@ function SystemInMotionSection() {
           <section className="relative flex min-w-0 flex-col overflow-hidden border border-emerald-500/16 bg-black/24 p-2.5">
             <div className="pointer-events-none absolute -left-4 top-1/2 hidden h-px w-4 bg-emerald-500/25 lg:block" aria-hidden="true" />
             <div className="pointer-events-none absolute -right-4 top-1/2 hidden h-px w-4 bg-emerald-500/25 lg:block" aria-hidden="true" />
-            <span className="synthetic-packet pointer-events-none absolute left-0 top-1/2 hidden h-1.5 w-1.5 bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.75)] lg:block" aria-hidden="true" />
+            {/*<span className="synthetic-packet pointer-events-none absolute left-0 top-1/2 hidden h-1.5 w-1.5 bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.75)] lg:block" aria-hidden="true" />*/}
             <div className="mb-2">
               <div className="font-space-grotesk text-[10px] uppercase leading-none text-emerald-400">PROCESSING</div>
               <div className="mt-1 text-mono-3xs uppercase text-white/48">MACHINE LOGIC</div>
             </div>
 
-            <div className="relative overflow-hidden border border-emerald-500/10 bg-black/18 py-2" tabIndex={0} aria-label="Synthetic Foundry processing diagram">
-              <div className="relative aspect-[5/4] w-full overflow-hidden border-y border-white/[0.06] bg-[#030504] shadow-[inset_0_0_32px_rgba(16,185,129,0.035)]">
+            <div className="relative overflow-hidden border border-emerald-500/10 bg-black/18" tabIndex={0} aria-label="Synthetic Foundry processing diagram">
+              <div className="relative aspect-[5/4] w-full overflow-hidden bg-[#030504] shadow-[inset_0_0_32px_rgba(16,185,129,0.035)]">
                 <div className="pointer-events-none absolute inset-0 opacity-[0.14] [background-image:linear-gradient(rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.12)_1px,transparent_1px)] [background-size:12px_12px]" aria-hidden="true" />
                 <div className="pointer-events-none absolute inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(52,211,153,0.22)_1px,transparent_1px),linear-gradient(90deg,rgba(52,211,153,0.18)_1px,transparent_1px)] [background-size:60px_60px]" aria-hidden="true" />
                 <ProcessingFlowConnectors />
@@ -899,6 +967,7 @@ function SystemInMotionSection() {
                       title={node.title}
                       copy={node.copy}
                       icon={node.icon}
+                      layout={node.layout}
                       x={node.x}
                       y={node.y}
                       width={node.width}
@@ -910,14 +979,14 @@ function SystemInMotionSection() {
               </div>
             </div>
 
-            <div className="mt-auto grid min-w-0 grid-cols-2 border border-emerald-500/12 bg-black/22 sm:grid-cols-3 xl:grid-cols-6">
+            {/*<div className="mt-auto grid min-w-0 grid-cols-2 border border-emerald-500/12 bg-black/22 sm:grid-cols-3 xl:grid-cols-6">
               {processingMetrics.map(([label, value], index) => (
                 <div key={label} className={`min-w-0 px-2 py-1.5 ${index > 0 ? 'border-l border-emerald-500/12' : ''}`}>
                   <div className="font-mono text-[7px] uppercase leading-none text-white/42">{label}</div>
                   <div className="mt-1 font-mono text-[14px] leading-none text-emerald-400 tabular-nums">{value}</div>
                 </div>
               ))}
-            </div>
+            </div> */}
           </section>
 
           <aside className="relative min-w-0 border border-emerald-500/16 bg-black/24 p-2.5">

@@ -222,11 +222,12 @@ function BrawlerMindControlCenter() {
 
           <section className="mt-2 border border-emerald-500/16 bg-black/18 px-3 py-2">
             <div className="flex min-w-0 flex-wrap items-center justify-between gap-x-3 gap-y-1 text-mono-3xs uppercase">
-              <span className="text-white/52">Systems · Discipline · Repetition</span>
-              <span className="text-white/44">Design → Execute → Evolve</span>
+              
+              {/* <span className="text-white/44">Design → Execute → Evolve</span> */}
               <span className="border border-emerald-500/20 bg-black/24 px-2 py-1 text-emerald-400/72">
                 Built in the markets · Engineered in discipline
               </span>
+              <span className="text-white/52">Systems · Discipline · Repetition</span>
             </div>
           </section>
 

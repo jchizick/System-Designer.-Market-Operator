@@ -680,9 +680,9 @@ function SystemInMotionSection() {
   return (
     <section className="relative mb-5 border border-border-subtle bg-black/18 p-4 sm:p-5">
       <CornerSquares />
-      <div className="grid min-w-0 grid-cols-1 gap-5 lg:grid-cols-[0.42fr_1.58fr]">
+      <div className="grid min-w-0 grid-cols-1 gap-5 lg:grid-cols-[0.5fr_1.5fr]">
         <aside className="min-w-0">
-          <div className="mb-4 flex items-center gap-2 text-mono-label uppercase text-emerald-400">
+          <div className="mb-3 flex items-center gap-2 text-mono-label uppercase text-emerald-400">
             <span>04</span>
             <span>//</span>
             <span>System In Motion</span>

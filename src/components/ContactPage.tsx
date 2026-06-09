@@ -47,7 +47,7 @@ type SubmitState = 'idle' | 'loading' | 'success' | 'error';
 
 function ContactRadar() {
   return (
-    <div className="relative hidden h-48 w-48 shrink-0 items-center justify-center text-emerald-400 opacity-70 lg:flex" aria-hidden="true">
+    <div className="relative hidden h-33 w-33 shrink-0 items-center justify-center text-emerald-400 opacity-70 lg:flex" aria-hidden="true">
       <div className="absolute inset-0 border border-emerald-500/10" />
       <div className="absolute left-1/2 top-0 h-full w-px bg-emerald-500/12" />
       <div className="absolute left-0 top-1/2 h-px w-full bg-emerald-500/12" />
@@ -245,7 +245,7 @@ export function ContactPage() {
               <h1 className="mt-6 font-space-grotesk text-[48px] font-medium uppercase leading-none tracking-[0] text-text-primary sm:text-[58px] lg:text-[58px]">
                 Open A Channel
               </h1>
-              <div className="mt-6 h-1 w-12 bg-emerald-400 shadow-[0_0_18px_rgba(16,185,129,0.45)]" />
+              {/* <div className="mt-6 h-1 w-12 bg-emerald-400 shadow-[0_0_18px_rgba(16,185,129,0.45)]" /> */}
               <p className="mt-7 max-w-[550px] text-mono-base leading-relaxed text-white/66">
                 For AI systems, product interfaces, workflow design, trading dashboards, brand systems, and forward-deployed work.
               </p>
@@ -295,7 +295,7 @@ export function ContactPage() {
               <ArrowRight className="h-4 w-4 text-emerald-300" strokeWidth={1.6} />
             </a>
 
-            <div className="relative mt-9 border border-white/12 px-5 py-5 text-center text-mono-sm uppercase leading-7 tracking-widest text-emerald-200/78">
+            <div className="relative mt-6 border border-white/12 px-5 py-5 text-center text-mono-sm uppercase leading-7 tracking-widest text-emerald-200/78">
               <span className="pointer-events-none absolute left-0 top-0 h-2 w-2 border-l border-t border-white/35" />
               <span className="pointer-events-none absolute right-0 top-0 h-2 w-2 border-r border-t border-white/35" />
               <span className="pointer-events-none absolute bottom-0 left-0 h-2 w-2 border-b border-l border-white/35" />
@@ -438,7 +438,7 @@ export function ContactPage() {
 
             <div className="mt-7 grid grid-cols-[2.4rem_minmax(0,1fr)] gap-4 text-mono-sm leading-relaxed text-white/58">
               <ShieldCheck className="h-7 w-7 text-white/50" strokeWidth={1.4} />
-              <p>Signals are reviewed personally. If there's alignment, I'll respond directly.</p>
+              <p>Signals are reviewed personally.<br />If there's alignment, I'll respond directly.</p>
             </div>
           </section>
         </section>

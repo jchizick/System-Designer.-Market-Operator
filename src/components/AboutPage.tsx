@@ -5,7 +5,7 @@ import {
   GraduationCap,
   Search,
   Brain,
-  TrendingUp,
+  SlidersHorizontal,
   Rocket,
   Crosshair,
   Layers,
@@ -16,52 +16,20 @@ import {
 } from 'lucide-react';
 import {
   systemMapNodes,
-  pathSteps,
   principles,
   tools,
   coreSystem,
   closingBanner,
-  type PathStep,
 } from '../data/aboutData';
-import aboutHeroImg from '../assets/about-hero.png';
-import sparkImg from '../assets/01-spark.png';
-import structureImg from '../assets/02-structure.png';
-import integrationImg from '../assets/03-integration.png';
-import executionImg from '../assets/04-execution.png';
-import impactImg from '../assets/05-impact.png';
-
-const transformationSteps = [
-  {
-    number: '01',
-    title: 'SPARK',
-    img: sparkImg,
-    text: 'It starts with curiosity.\nA question. A spark.\nThe desire to understand.',
-  },
-  {
-    number: '02',
-    title: 'STRUCTURE',
-    img: structureImg,
-    text: 'I build frameworks.\nMap the system.\nMake sense of complexity.',
-  },
-  {
-    number: '03',
-    title: 'INTEGRATION',
-    img: integrationImg,
-    text: 'Connect the dots.\nIntegrate knowledge.\nTurn theory into clarity.',
-  },
-  {
-    number: '04',
-    title: 'EXECUTION',
-    img: executionImg,
-    text: 'I take action.\nTest. Build. Iterate.\nSystems in motion.',
-  },
-  {
-    number: '05',
-    title: 'IMPACT',
-    img: impactImg,
-    text: 'Create leverage.\nMultiply impact.\nLeave a mark.',
-  },
-];
+import aboutHeroBg from '../assets/about-hero-bg.png';
+import blockchainBrawlersCover from '../assets/blockchain-brawlers-cover.png';
+import brawlerMindCover from '../assets/the-brawler-mind-cover.png';
+import algonquinDashboardCover from '../assets/algonquin-dashboard-cover.png';
+import aiBrandMachineCover from '../assets/ai-brand-machine-cover.png';
+import brawlerMindRealCover from '../assets/brawler-mind-real-cover.png';
+import futureOfWorkCover from '../assets/future-of-work-cover.png';
+import behavioralLeveragePrinciplesCover from '../assets/12-behavioral-leverage-principles.png';
+import { TopBar } from './TopBar';
 
 /* ─── Animated section wrapper ─── */
 function RevealSection({ children, className = '', delay = 0 }: { key?: React.Key; children: React.ReactNode; className?: string; delay?: number }) {
@@ -311,65 +279,364 @@ function SystemMapVisual() {
 /* ═══════════════════════════════════════════════════════════════
    PATH ROW — Single timeline step
    ═══════════════════════════════════════════════════════════════ */
-const pathIcons = [GraduationCap, Search, Brain, TrendingUp, Rocket];
+const pathIcons = [GraduationCap, Search, Brain, SlidersHorizontal, Rocket];
 
-function PathRow({ step, index }: { key?: React.Key; step: PathStep; index: number }) {
-  const Icon = pathIcons[index] || GraduationCap;
+const pathTimelineSteps = [
+  {
+    number: '01',
+    title: 'UNIVERSITY\nEDUCATION',
+    description: 'I built a foundation in strategy, finance, and economics - learning how systems allocate resources and shape outcomes.',
+    cta: 'See full details',
+    bullets: ['Strategy & markets', 'Economics & finance', 'Systems thinking introduced'],
+  },
+  {
+    number: '02',
+    title: 'RESEARCH ON THE\nFUTURE OF WORK',
+    description: 'I researched how automation and AI are reshaping the labor market and the skills required to thrive.',
+    cta: 'View research',
+    bullets: ['Rise of automation', 'Shift to knowledge work', 'Human skills as leverage'],
+  },
+  {
+    number: '03',
+    title: 'REBUILDING\nMY MIND',
+    description: 'I identified my gaps and rebuilt my thinking from the ground up - across disciplines and mental models.',
+    cta: 'My reading list',
+    bullets: ['Cross-disciplinary learning', 'Mental models & systems', 'Psychology to persuasion'],
+  },
+  {
+    number: '04',
+    title: 'THE PATH TO\nTRADING',
+    description: 'I entered the markets to test everything I had learned. Trading became the ultimate classroom.',
+    cta: 'Trading journal',
+    bullets: ['Mastery of self', 'Risk, probability, discipline', 'Systems thinking in action'],
+  },
+  {
+    number: '05',
+    title: 'EXECUTION\nMODE',
+    description: 'Bringing ideas to life. Building systems, content, and tools that create real impact.',
+    cta: 'Explore my work',
+    bullets: ['Brand building', 'Product & systems', 'Data to decision', 'AI x creativity'],
+  },
+];
 
-  return (
-    <RevealSection delay={index * 0.08}>
-      <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch py-6 gap-6 lg:gap-0">
-        {/* Left: Icon + Number/Title */}
-        <div className="lg:col-span-4 flex items-start gap-4 lg:pr-8 lg:border-r lg:border-border-subtle">
-          <div className="w-14 h-14 flex-shrink-0 flex items-center justify-center border border-border-subtle bg-bg-surface">
-            <Icon className="w-7 h-7 text-emerald-400/60" />
-          </div>
-          <div className="flex items-center h-14">
-            <div className="flex flex-row items-start gap-2">
-              <span className="text-mono-sm text-emerald-400 whitespace-nowrap">{step.number} //</span>
-              <span className="text-mono-base font-medium text-text-primary uppercase leading-tight whitespace-pre-line">{step.title}</span>
-            </div>
-          </div>
-        </div>
+const currentWorkItems = [
+  {
+    title: 'Blockchain Brawlers',
+    description: 'A multi-layered brand ecosystem combining trading education, content, music, and community.',
+    image: blockchainBrawlersCover,
+    href: '/blockchain-brawlers-v2',
+  },
+  {
+    title: 'The Brawler Mind',
+    description: 'A framework for high-performance thinking, decision-making, and identity under pressure.',
+    image: brawlerMindCover,
+    href: '/trading-journey-brawler-mind-v2',
+  },
+  {
+    title: 'Algonquin Park\nCamping Dashboard',
+    description: 'A data-driven dashboard that helps campers make smarter decisions with real-time environmental insights.',
+    image: algonquinDashboardCover,
+    href: '/algonquin-dashboard-v2',
+  },
+  {
+    title: 'AI Brand Machine\n(Synthetic Foundry)',
+    description: 'An AI-powered system for building brands-input to output pipelines, visual systems, and iterative creation.',
+    image: aiBrandMachineCover,
+    href: '/ai-brand-machine-synthetic-foundry-v2',
+  },
+];
 
-        {/* Center: Description */}
-        <div className="lg:col-span-4 text-body-sm lg:px-8 lg:border-r lg:border-border-subtle">
-          {step.description}
-        </div>
+const throughLinePillars = [
+  {
+    title: 'PSYCHOLOGY',
+    description: 'Behavior, cognition, decision-making, identity.',
+    icon: 'psychology',
+  },
+  {
+    title: 'NARRATIVE',
+    description: 'Meaning, communication, persuasion, cultural influence.',
+    icon: 'narrative',
+  },
+  {
+    title: 'SYSTEMS',
+    description: 'Structure, leverage, feedback loops, compounding.',
+    icon: 'systems',
+  },
+];
 
-        {/* Right: Side label + Bullets */}
-        <div className="lg:col-span-4 flex justify-between lg:pl-8">
-          <div className="flex flex-col">
-            <span className="text-mono-xs text-emerald-400 mb-2">{step.sideLabel}</span>
-            <ul className="flex flex-col gap-1">
-              {step.bullets.map((bullet) => (
-                <li key={bullet} className="flex items-start gap-2 text-body-sm">
-                  <span className="text-emerald-500/50 mt-[5px] text-[6px]">●</span>
-                  <span>{bullet}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+const fieldDocuments = [
+  {
+    title: 'The Brawler Mind',
+    description: 'Master your inner game. A guide to identity, discipline, and edge.',
+    image: brawlerMindRealCover,
+    href: '/trading-journey-brawler-mind-v2',
+  },
+  {
+    title: '12 Behavioral\nLeverage Principles',
+    description: 'Mental models for better decisions under pressure.',
+    image: behavioralLeveragePrinciplesCover,
+    href: '/reading-path',
+  },
+  {
+    title: 'Future of Work\nResearch Report',
+    description: 'Signals, shifts, and skill stacks for the next era.',
+    image: futureOfWorkCover,
+    href: '/reading-path',
+  },
+];
 
-          {/* Arrow */}
-          <div className="hidden lg:flex items-center justify-center self-center">
-            <ArrowRight className="w-4 h-4 text-emerald-500/30" />
-          </div>
-        </div>
-      </div>
+const operatorSignals = [
+  {
+    quote: 'JLC has a rare ability to turn complex systems and ideas into clarity-and then build things that actually work.',
+    source: 'Founder, Fintech Platform',
+  },
+  {
+    quote: 'Strategic, relentless, and incredibly sharp. He sees around corners and executes with precision.',
+    source: 'Head of Growth, AI Startup',
+  },
+];
 
-      {/* Divider */}
-      {index < pathSteps.length - 1 && (
-        <div className="h-px bg-border-subtle" />
-      )}
-    </RevealSection>
-  );
-}
 
 
 /* ═══════════════════════════════════════════════════════════════
    PRINCIPLE CARD
    ═══════════════════════════════════════════════════════════════ */
+function PathTimelineSection() {
+  return (
+    <RevealSection className="mb-10">
+      <section className="relative overflow-hidden border-t border-white/10 pt-7">
+        <div className="mb-7 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-4">
+          <span className="text-mono-sm font-medium uppercase leading-tight text-emerald-400">THE PATH</span>
+          <span className="h-px bg-white/10" aria-hidden="true" />
+        </div>
+
+        <div className="relative overflow-x-auto pb-3 scrollbar-hide">
+          <div className="relative min-w-[1040px]">
+            <div className="absolute left-2 right-2 top-[30px] h-px bg-white/44" aria-hidden="true" />
+            <span className="absolute left-1 top-[27px] h-1.5 w-1.5 bg-[#f1aa3d] shadow-[0_0_8px_rgba(241,170,61,0.6)]" aria-hidden="true" />
+            <span className="absolute right-1 top-[27px] h-1.5 w-1.5 bg-[#f1aa3d] shadow-[0_0_8px_rgba(241,170,61,0.6)]" aria-hidden="true" />
+
+            <div className="grid grid-cols-5 gap-8">
+              {pathTimelineSteps.map((step, index) => {
+                const Icon = pathIcons[index] || GraduationCap;
+
+                return (
+                  <article key={step.number} className="relative min-w-0 pt-[92px]">
+                    <div className="absolute left-1/2 top-0 z-10 flex h-[62px] w-[62px] -translate-x-1/2 items-center justify-center border border-white/55 bg-black/62 text-white/72 shadow-[0_0_16px_rgba(255,255,255,0.04)]">
+                      <span className="absolute inset-1.5 border border-white/18" aria-hidden="true" />
+                      <Icon className="h-7 w-7" strokeWidth={1.35} />
+                    </div>
+
+                    <div className="mb-3 font-mono text-[18px] leading-none text-[#f1aa3d] tabular-nums">
+                      {step.number} /
+                    </div>
+                    <h3 className="mb-5 min-h-[4.2rem] whitespace-pre-line font-mono text-[18px] uppercase leading-[1.18] tracking-[0.04em] text-white/82">
+                      {step.title}
+                    </h3>
+                    <p className="mb-5 font-mono text-[12px] leading-[1.72] text-white/55">
+                      {step.description}
+                    </p>
+                    <ul className="mb-6 space-y-1.5">
+                      {step.bullets.map((bullet) => (
+                        <li key={bullet} className="grid grid-cols-[0.65rem_minmax(0,1fr)] gap-1.5 font-mono text-[12px] leading-relaxed text-white/62">
+                          <span className="pt-[0.48rem] text-[9px] leading-none text-[#f1aa3d]">•</span>
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="inline-flex items-center gap-2 font-mono text-[13px] font-medium text-[#f1aa3d]">
+                      <span>{step.cta}</span>
+                      <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+    </RevealSection>
+  );
+}
+
+function CurrentWorkSection() {
+  return (
+    <RevealSection className="mb-10">
+      <section className="border-t border-white/10 pt-7">
+        <div className="mb-4 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3">
+          <span className="text-mono-sm font-medium uppercase leading-tight text-emerald-400">CURRENT WORK</span>
+          <span className="h-px bg-white/10" aria-hidden="true" />
+        </div>
+
+        <h2 className="mb-5 font-season-mix text-[32px] font-medium leading-tight text-[#f4efe6] sm:text-[40px]">
+          Systems in execution.
+        </h2>
+
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {currentWorkItems.map((item, index) => (
+            <RevealSection key={item.title} delay={index * 0.06}>
+              <Link
+                to={item.href}
+                className="group flex h-full min-h-[390px] flex-col overflow-hidden border border-white/12 bg-[#070a09]/82 transition-colors hover:border-[#f1aa3d]/45"
+              >
+                <div className="relative aspect-[1.36] overflow-hidden border-b border-white/10 bg-black">
+                  <img
+                    src={item.image}
+                    alt=""
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                    aria-hidden="true"
+                  />
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_58%,rgba(0,0,0,0.38)_100%)]" aria-hidden="true" />
+                </div>
+
+                <div className="flex flex-1 flex-col p-5">
+                  <h3 className="mb-3 whitespace-pre-line font-season-mix text-[21px] font-medium leading-[1.16] text-[#f4efe6]">
+                    {item.title}
+                  </h3>
+                  <p className="mb-6 font-mono text-[13px] leading-[1.68] text-white/60">
+                    {item.description}
+                  </p>
+                  <span className="mt-auto inline-flex items-center gap-2 font-mono text-[14px] font-medium text-[#f1aa3d]">
+                    <span>View Project</span>
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.6} />
+                  </span>
+                </div>
+              </Link>
+            </RevealSection>
+          ))}
+        </div>
+      </section>
+    </RevealSection>
+  );
+}
+
+function ThroughLineIcon({ type }: { type: string }) {
+  if (type === 'psychology') {
+    return (
+      <svg viewBox="0 0 72 72" className="h-16 w-16 text-[#f1aa3d]" fill="none" aria-hidden="true">
+        <path d="M38 12c-12 0-21 8.5-21 20.3 0 6.1 2.4 11.2 6.8 14.8v8.5h10.7l3.2 6.4h9.8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M25 38h9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        <path d="M43 17c5.8 2.2 9.6 7.6 9.6 14.8 0 3.3-.8 6.2-2.5 8.9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    );
+  }
+
+  if (type === 'narrative') {
+    return (
+      <svg viewBox="0 0 72 72" className="h-16 w-16 text-[#f1aa3d]" fill="none" aria-hidden="true">
+        <circle cx="28" cy="36" r="17" stroke="currentColor" strokeWidth="2" />
+        <circle cx="44" cy="36" r="17" stroke="currentColor" strokeWidth="2" />
+        <circle cx="36" cy="23" r="17" stroke="currentColor" strokeWidth="2" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 72 72" className="h-16 w-16 text-[#f1aa3d]" fill="none" aria-hidden="true">
+      <path d="M36 8 61 21.5v28L36 64 11 49.5v-28L36 8Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+      <path d="M11 21.5 36 36l25-14.5M36 36v28" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+      <path d="M48 29v16L36 52 24 45V29" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" opacity="0.7" />
+    </svg>
+  );
+}
+
+function FinalAboutSections() {
+  return (
+    <RevealSection className="mb-12">
+      <section className="space-y-7">
+        <div className="grid grid-cols-1 border-t border-white/10 pt-7 lg:grid-cols-[0.95fr_2.05fr]">
+          <div className="pr-8">
+            <div className="mb-3 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3">
+              <span className="text-mono-sm font-medium uppercase leading-tight text-emerald-400">THE THROUGH-LINE</span>
+              <span className="h-px bg-white/10" aria-hidden="true" />
+            </div>
+            <h2 className="mb-4 font-season-mix text-[38px] font-medium leading-[0.98] text-[#f4efe6] sm:text-[46px]">
+              Understanding.<br />
+              Structure.<br />
+              Execution.
+            </h2>
+            <p className="max-w-[360px] font-mono text-[13px] leading-[1.7] text-white/58">
+              I study how people think, how narratives shape perception, and how systems drive outcomes. Then I build frameworks, tools, environments, and products that create leverage.
+            </p>
+          </div>
+
+          <div className="mt-8 grid grid-cols-1 border-white/12 lg:mt-0 lg:grid-cols-3">
+            {throughLinePillars.map((pillar) => (
+              <article key={pillar.title} className="border-t border-white/10 py-7 text-center lg:border-l lg:border-t-0 lg:px-10 lg:py-0">
+                <div className="mb-5 flex justify-center">
+                  <ThroughLineIcon type={pillar.icon} />
+                </div>
+                <h3 className="mb-5 font-mono text-[18px] uppercase tracking-[0.12em] text-white/78">{pillar.title}</h3>
+                <p className="mx-auto max-w-[210px] font-mono text-[14px] leading-[1.65] text-white/55">{pillar.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1.4fr_1fr]">
+          <section>
+            <div className="mb-4 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3">
+              <span className="text-mono-sm font-medium uppercase leading-tight text-emerald-400">BOOKS / FIELD DOCUMENTS</span>
+              <span className="h-px bg-white/10" aria-hidden="true" />
+            </div>
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+              {fieldDocuments.map((doc) => (
+                <Link
+                  key={doc.title}
+                  to={doc.href}
+                  className="group relative grid min-h-[136px] grid-cols-[78px_minmax(0,1fr)] gap-4 border border-white/12 bg-[#070a09]/82 p-3 transition-colors hover:border-[#f1aa3d]/45"
+                >
+                  <img src={doc.image} alt="" className="h-[112px] w-[78px] object-cover opacity-88" aria-hidden="true" />
+                  <div className="flex min-w-0 flex-col">
+                    <h3 className="mb-2 whitespace-pre-line font-mono text-[13px] font-medium leading-[1.35] text-white/82">{doc.title}</h3>
+                    <p className="mb-3 font-mono text-[11px] leading-[1.5] text-white/50">{doc.description}</p>
+                    <span className="mt-auto inline-flex items-center gap-2 font-mono text-[12px] font-medium text-[#f1aa3d]">
+                      Read Now
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
+                    </span>
+                  </div>
+                  <span className="absolute right-0 top-0 h-2 w-2 border-r border-t border-emerald-400/35" aria-hidden="true" />
+                  <span className="absolute bottom-0 right-0 h-2 w-2 border-b border-r border-emerald-400/25" aria-hidden="true" />
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          <section>
+            <div className="mb-4 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3">
+              <span className="text-mono-sm font-medium uppercase leading-tight text-emerald-400">OPERATOR SIGNALS</span>
+              <span className="h-px bg-white/10" aria-hidden="true" />
+            </div>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {operatorSignals.map((signal) => (
+                <article key={signal.source} className="relative min-h-[136px] border border-white/12 bg-[#070a09]/82 p-5">
+                  <div className="mb-2 font-season-mix text-[28px] leading-none text-[#f1aa3d]">“</div>
+                  <p className="font-mono text-[13px] leading-[1.6] text-white/66">{signal.quote}</p>
+                  <div className="mt-3 font-mono text-[11px] uppercase tracking-[0.08em] text-white/42">- {signal.source}</div>
+                  <span className="absolute right-0 top-1/2 h-4 w-1 border-y border-r border-emerald-400/30" aria-hidden="true" />
+                </article>
+              ))}
+            </div>
+          </section>
+        </div>
+
+        <section className="relative overflow-hidden border border-emerald-400/35 bg-[#07100f]/72 px-6 py-8 shadow-[inset_0_0_0_1px_rgba(241,170,61,0.2)] sm:px-12">
+          <div className="absolute left-0 top-0 h-3 w-3 border-l border-t border-[#f1aa3d]/45" aria-hidden="true" />
+          <div className="absolute bottom-0 right-0 h-3 w-3 border-b border-r border-[#f1aa3d]/45" aria-hidden="true" />
+          <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-6">
+            <span className="hidden font-season-mix text-[58px] leading-none text-[#f1aa3d]/55 sm:block" aria-hidden="true">✶</span>
+            <div className="text-center font-mono text-[18px] leading-[1.55] sm:text-[22px]">
+              <div className="text-white/86">I build internal and external systems for navigating complexity.</div>
+              <div className="text-emerald-400">Then I test them where it matters.</div>
+            </div>
+            <span className="hidden font-season-mix text-[58px] leading-none text-[#f1aa3d]/55 sm:block" aria-hidden="true">✶</span>
+          </div>
+        </section>
+      </section>
+    </RevealSection>
+  );
+}
+
 const principleIcons: Record<string, React.ElementType> = {
   Crosshair,
   Layers,
@@ -423,225 +690,94 @@ export function AboutPage() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col relative p-6">
+    <div className="min-h-screen flex flex-col relative p-4 sm:p-6">
+      <TopBar className="max-w-[1180px]" />
 
-      {/* ─── Top Navigation Bar ─── */}
-      <header className="flex justify-between items-center pb-3 border-b border-border-subtle mb-8 text-mono-xs text-text-secondary w-full max-w-5xl mx-auto">
-        <Link to="/" className="flex items-center gap-2 hover:text-emerald-500 transition-colors cursor-pointer group">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="opacity-50 group-hover:opacity-100 transition-opacity">
-            <path d="M8 2L4 6L8 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          <span>RETURN_TO_TERMINAL</span>
-        </Link>
-        <div className="flex gap-6 items-center">
-          <span className="text-emerald-500">PAGE:</span>
-          <span>ABOUT</span>
-          <span className="hidden sm:inline text-text-secondary/30">|</span>
-          <span className="hidden sm:inline text-text-secondary/40">43.716041°N / -79.3919392°W</span>
-        </div>
-      </header>
-
-      <main className="flex-grow flex flex-col w-full max-w-5xl mx-auto">
+      <main className="flex-grow flex flex-col w-full max-w-[1180px] mx-auto">
 
         {/* ═══════════════════════════════════════════
             SECTION 01 — HERO
         ═══════════════════════════════════════════ */}
         <RevealSection className="mb-10">
-          <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-14 items-start">
-            {/* Left: Text */}
-            <div className="flex flex-col">
-              {/* Badge + counter */}
-              <div className="flex items-center mb-5">
-                <span className="text-mono-xs px-2.5 py-1 border border-emerald-400/30 text-emerald-400 bg-emerald-400/5">
-                  ABOUT
-                </span>
-                <span className="text-mono-xs text-text-secondary/40 border border-l-0 border-border-subtle px-2.5 py-1">
-                  07 / 1987
-                </span>
-              </div>
+          <section className="relative min-h-[650px] overflow-hidden border border-white/[0.06] bg-black shadow-[inset_0_0_40px_rgba(0,0,0,0.5)]">
+            <img
+              src={aboutHeroBg}
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover object-[58%_center]"
+              aria-hidden="true"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.78)_28%,rgba(0,0,0,0.28)_56%,rgba(0,0,0,0.68)_100%)]" aria-hidden="true" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_68%_42%,rgba(255,255,255,0.08),transparent_32%),linear-gradient(0deg,rgba(0,0,0,0.75),transparent_28%)]" aria-hidden="true" />
+            <div className="pointer-events-none absolute inset-0 opacity-[0.16] [background-image:linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.055)_1px,transparent_1px)] [background-size:20px_20px]" aria-hidden="true" />
 
-              <h1 className="text-display mb-4">
-                About Me
-              </h1>
+            <div className="relative z-10 flex min-h-[650px] flex-col px-4 py-4 sm:px-8 sm:py-5">
+              <header className="mb-10 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-3 text-mono-xs uppercase text-white/48">
+                <Link to="/" className="inline-flex items-center gap-2 border border-white/10 bg-black/30 px-2.5 py-1.5 transition-colors hover:border-emerald-400/40 hover:text-emerald-300">
+                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" className="opacity-70">
+                    <path d="M8 2L4 6L8 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="miter" />
+                  </svg>
+                  <span>RETURN_TO_TERMINAL</span>
+                </Link>
 
-              <div className="text-mono-sm text-emerald-400 uppercase mb-5 leading-relaxed">
-                I STUDY SYSTEMS.<br />
-                THEN I BUILD IN THEM.
-              </div>
-
-              <p className="text-body-lg max-w-[440px]">
-                My path has been anything but linear. It's a journey of curiosity, deep study, and relentless execution—turning understanding into systems that create impact.
-              </p>
-            </div>
-
-            {/* Right: System Map Visual */}
-            {/* <SystemMapVisual /> */}
-            <div className="relative w-full border border-border-subtle bg-bg-surface overflow-hidden flex items-center justify-center p-2">
-              {/* Corner accents */}
-              <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-emerald-500/30 z-10" />
-              <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-emerald-500/30 z-10" />
-              <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-emerald-500/30 z-10" />
-              <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-emerald-500/30 z-10" />
-
-              <img
-                src={aboutHeroImg}
-                alt="System Map Visual"
-                className="w-full h-auto object-contain"
-              />
-            </div>
-          </div>
-
-          {/* ─── HOW THE SYSTEM WORKS ─── */}
-          <div className="w-full h-px bg-border-subtle mt-8 mb-8" />
-          <div className="w-full">
-            <div className="text-mono-base font-medium text-emerald-400 uppercase mb-8">
-              HOW THE SYSTEM WORKS
-            </div>
-
-            <div className="w-full overflow-x-auto pb-4" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-              <div className="flex flex-row items-stretch justify-between min-w-[900px] lg:min-w-0">
-                {transformationSteps.map((step, i) => (
-                  <div key={step.number} className="flex flex-col items-center text-center flex-1 px-2">
-                    {/* Number and Title */}
-                    <div className="flex flex-col items-center mb-6">
-                      <div className="text-emerald-400 text-mono-sm mb-1.5">{step.number}</div>
-                      <div className="text-text-primary text-mono-base uppercase">{step.title}</div>
-                    </div>
-
-                    {/* Image with absolute arrow to the right */}
-                    <div className="w-full flex justify-center mb-8 relative">
-                      <div className="relative flex justify-center w-full">
-                        <img src={step.img} alt={step.title} className="w-full max-w-[160px] max-h-[160px] object-contain" />
-
-                        {i < transformationSteps.length - 1 && (
-                          <div className="absolute top-1/2 -right-2 lg:-right-4 -translate-y-1/2 translate-x-1/2 text-emerald-500/60 z-10">
-                            <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
-                              <path d="M1 1L7 7L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Text */}
-                    <p className="text-body-sm text-text-secondary whitespace-pre-line max-w-[180px]">
-                      {step.text}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </RevealSection>
-
-        <div className="h-px bg-border-subtle mb-3" />
-
-        {/* ═══════════════════════════════════════════
-            SECTION 02 — THE PATH
-        ═══════════════════════════════════════════ */}
-        <RevealSection className="mb-10">
-          {/* Section label */}
-          <div className="flex flex-col gap-3 mb-3">
-            <span className="text-mono-base font-medium text-emerald-400 uppercase leading-tight">THE PATH</span>
-            <div className="w-full h-px bg-border-subtle" />
-          </div>
-
-          {/* Timeline rows */}
-          <div className="flex flex-col">
-            {pathSteps.map((step, idx) => (
-              <PathRow key={step.number} step={step} index={idx} />
-            ))}
-          </div>
-        </RevealSection>
-
-        <div className="h-px bg-border-subtle mb-10" />
-
-        {/* ═══════════════════════════════════════════
-            SECTION 03 — CORE SYSTEM + PRINCIPLES
-        ═══════════════════════════════════════════ */}
-        <RevealSection className="mb-10">
-          <div className="grid grid-cols-1 lg:grid-cols-[0.25fr_0.75fr] gap-10">
-            {/* Left: Core System */}
-            <div className="flex flex-col">
-              <span className="text-mono-xs text-emerald-400 mb-4">{coreSystem.label}</span>
-              <h2 className="text-heading-lg mb-5">
-                {coreSystem.heading.map((line, i) => (
-                  <React.Fragment key={i}>
-                    {line}<br />
-                  </React.Fragment>
-                ))}
-              </h2>
-              <p className="text-body-sm mb-6 max-w-[320px]">
-                {coreSystem.body}
-              </p>
-              <Link
-                to="/reading-path"
-                className="inline-flex items-center gap-2 px-5 py-2.5 border border-border-subtle hover:border-emerald-500 hover:text-emerald-500 transition-colors text-mono-xs tracking-widest uppercase w-fit group"
-              >
-                {coreSystem.cta}
-                <ArrowRight className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity" />
-              </Link>
-            </div>
-
-            {/* Right: My Principles */}
-            <div className="flex flex-col">
-              <span className="text-mono-xs text-emerald-400 mb-4">MY PRINCIPLES</span>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                {principles.map((p, idx) => (
-                  <PrincipleCard key={p.title} principle={p} index={idx} />
-                ))}
-              </div>
-
-              {/* Tools I Operate With */}
-              <div className="flex flex-col gap-3">
-                <span className="text-mono-xs text-emerald-400 flex-shrink-0 text-left">TOOLS I OPERATE WITH</span>
-                <div className="flex flex-wrap gap-2">
-                  {tools.map((tool, idx) => (
-                    <RevealSection key={tool} delay={idx * 0.05}>
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-border-subtle bg-bg-surface text-mono-xs text-text-secondary hover:border-emerald-500/30 hover:text-text-primary transition-colors cursor-default">
-                        <span className="w-1.5 h-1.5 bg-emerald-500/40" />
-                        {tool}
-                      </span>
-                    </RevealSection>
-                  ))}
+                <div className="flex items-center">
+                  <span className="border border-emerald-500/35 bg-emerald-500/10 px-4 py-1.5 text-emerald-400">ABOUT</span>
+                  <span className="border border-l-0 border-white/10 bg-black/28 px-4 py-1.5 text-white/35">02 / 07</span>
                 </div>
+              </header>
+
+              <div className="grid flex-1 grid-cols-1 gap-8 lg:grid-cols-[minmax(0,0.58fr)_minmax(16rem,0.42fr)] lg:items-center">
+                <div className="max-w-[560px]">
+                  <div className="mb-5 text-mono-sm font-medium uppercase text-emerald-400">ABOUT / OPERATOR</div>
+                  <h1 className="font-season-mix text-[46px] font-medium leading-[0.98] tracking-[0] text-[#f4efe6] sm:text-[60px] lg:text-[60px]">
+                    <span className="block">I study systems.</span>
+                    <span className="block pt-2 italic text-[#f1aa3d]">Then I build in them.</span>
+                  </h1>
+
+                  <p className="mt-8 max-w-[530px] font-mono text-[14px] leading-[1.72] text-white/66 sm:text-[15px]">
+                    My path hasn't been linear. I've moved through business, psychology, markets, AI, and countless systems-collecting patterns, stress-testing ideas, and learning what actually holds up in real conditions. Now I build tools, workflows, and products that create leverage and clarity for people and teams operating in complexity.
+                  </p>
+
+                  <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+                    <Link
+                      to="/contact"
+                      className="inline-flex min-h-10 items-center justify-center border border-emerald-500/45 bg-emerald-500/[0.08] px-8 text-mono-xs font-medium uppercase tracking-[0.14em] text-emerald-300 transition-colors hover:border-emerald-300 hover:bg-emerald-500/15"
+                    >
+                      [ Contact Operator ]
+                    </Link>
+                    <Link
+                      to="/"
+                      className="inline-flex min-h-10 items-center justify-center border border-white/16 bg-black/22 px-8 text-mono-xs font-medium uppercase tracking-[0.14em] text-white/58 transition-colors hover:border-white/30 hover:text-white/78"
+                    >
+                      [ View Case Studies ]
+                    </Link>
+                  </div>
+                </div>
+
+                <aside className="ml-auto hidden max-w-[290px] pr-4 text-[#d8d1c6]/78 lg:block">
+                  <div className="mb-3 font-season-mix text-[34px] leading-none text-[#f1aa3d]">“</div>
+                  <blockquote className="font-season-mix text-[20px] italic leading-[1.45]">
+                    The goal isn't just knowledge. It's clarity under pressure and the ability to build systems that actually work in reality.
+                  </blockquote>
+                  <div className="mt-4 text-right font-season-mix text-[34px] leading-none text-[#f1aa3d]">”</div>
+                </aside>
               </div>
             </div>
-          </div>
+          </section>
+
         </RevealSection>
 
-        <div className="h-px bg-border-subtle mb-10" />
+        <PathTimelineSection />
 
-        {/* ═══════════════════════════════════════════
-            SECTION 05 — CLOSING BANNER
-        ═══════════════════════════════════════════ */}
-        <RevealSection className="mb-12">
-          <div className="relative border border-border-subtle bg-bg-surface p-8 sm:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-            {/* Corner accents */}
-            <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-emerald-500/30" />
-            <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-emerald-500/30" />
-            <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-emerald-500/30" />
-            <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-emerald-500/30" />
 
-            {/* Text */}
-            <div className="text-mono-statement">
-              <div className="text-text-primary">{closingBanner.line1}</div>
-              <div className="text-emerald-400">{closingBanner.line2}</div>
-            </div>
+        <CurrentWorkSection />
 
-            {/* Stamp */}
-            <div className="flex-shrink-0 border border-border-subtle px-4 py-3 text-mono-base sm:text-mono-lg text-text-secondary/50 leading-tight text-right">
-              {closingBanner.stamp.map((line, i) => (
-                <div key={i}>{line}</div>
-              ))}
-            </div>
-          </div>
-        </RevealSection>
+        <FinalAboutSections />
+
 
       </main>
 
       {/* ─── Footer ─── */}
-      <footer className="mt-auto border-t border-border-subtle pt-4 flex flex-col md:flex-row justify-between items-center text-mono-xs text-text-secondary w-full max-w-5xl mx-auto gap-4">
+      <footer className="mt-auto border-t border-border-subtle pt-4 flex flex-col md:flex-row justify-between items-center text-mono-xs text-text-secondary w-full max-w-[1180px] mx-auto gap-4">
         <Link to="/" className="text-emerald-500 hover:text-emerald-500/80 transition-colors cursor-pointer">
           SHUTDOWN / EXIT NODE
         </Link>

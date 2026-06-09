@@ -297,6 +297,7 @@ const pathTimelineSteps = [
     title: 'RESEARCH ON THE\nFUTURE OF WORK',
     description: 'I researched how automation and AI are reshaping the labor market and the skills required to thrive.',
     cta: 'View research',
+    href: 'https://ybnjfz0v2gs31z0q.public.blob.vercel-storage.com/The%20Behavioral%20Leverage%20Framework.pdf',
     bullets: ['Rise of automation', 'Shift to knowledge work', 'Human skills as leverage'],
   },
   {
@@ -304,6 +305,7 @@ const pathTimelineSteps = [
     title: 'REBUILDING\nMY MIND',
     description: 'I identified my gaps and rebuilt my thinking from the ground up - across disciplines and mental models.',
     cta: 'My reading list',
+    href: '/reading-path',
     bullets: ['Cross-disciplinary learning', 'Mental models & systems', 'Psychology to persuasion'],
   },
   {
@@ -318,6 +320,7 @@ const pathTimelineSteps = [
     title: 'EXECUTION\nMODE',
     description: 'Bringing ideas to life. Building systems, content, and tools that create real impact.',
     cta: 'Explore my work',
+    href: '#current-work',
     bullets: ['Brand building', 'Product & systems', 'Data to decision', 'AI x creativity'],
   },
 ];
@@ -378,13 +381,13 @@ const fieldDocuments = [
     title: '12 Behavioral\nLeverage Principles',
     description: 'Mental models for better decisions under pressure.',
     image: behavioralLeveragePrinciplesCover,
-    href: '/reading-path',
+    href: 'https://ybnjfz0v2gs31z0q.public.blob.vercel-storage.com/The%20Behavioral%20Leverage%20Framework.pdf',
   },
   {
     title: 'Future of Work\nResearch Report',
     description: 'Signals, shifts, and skill stacks for the next era.',
     image: futureOfWorkCover,
-    href: '/reading-path',
+    href: 'https://ybnjfz0v2gs31z0q.public.blob.vercel-storage.com/The-Future-of-Work-by-Jordan-Chizick.pdf',
   },
 ];
 
@@ -444,10 +447,29 @@ function PathTimelineSection() {
                         </li>
                       ))}
                     </ul>
-                    <div className="inline-flex items-center gap-2 font-mono text-[13px] font-medium text-[#f1aa3d]">
-                      <span>{step.cta}</span>
-                      <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-                    </div>
+                    {step.href ? (
+                      step.href.startsWith('/') ? (
+                        <Link to={step.href} className="inline-flex items-center gap-2 font-mono text-[13px] font-medium text-[#f1aa3d] transition-colors hover:text-[#ffd28a]">
+                          <span>{step.cta}</span>
+                          <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+                        </Link>
+                      ) : (
+                        <a
+                          href={step.href}
+                          target={step.href.startsWith('http') ? '_blank' : undefined}
+                          rel={step.href.startsWith('http') ? 'noreferrer' : undefined}
+                          className="inline-flex items-center gap-2 font-mono text-[13px] font-medium text-[#f1aa3d] transition-colors hover:text-[#ffd28a]"
+                        >
+                          <span>{step.cta}</span>
+                          <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+                        </a>
+                      )
+                    ) : (
+                      <div className="inline-flex items-center gap-2 font-mono text-[13px] font-medium text-[#f1aa3d]">
+                        <span>{step.cta}</span>
+                        <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+                      </div>
+                    )}
                   </article>
                 );
               })}
@@ -462,7 +484,7 @@ function PathTimelineSection() {
 function CurrentWorkSection() {
   return (
     <RevealSection className="mb-10">
-      <section className="">
+      <section id="current-work" className="scroll-mt-24">
         <div className="mb-4 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3">
           <span className="text-mono-sm font-medium uppercase leading-tight text-emerald-400">002 // CURRENT WORK</span>
           <span className="h-px bg-white/10" aria-hidden="true" />
@@ -555,25 +577,44 @@ function FinalAboutSections() {
               <span className="h-px bg-white/10" aria-hidden="true" />
             </div>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-              {fieldDocuments.map((doc) => (
-                <Link
-                  key={doc.title}
-                  to={doc.href}
-                  className="group relative grid min-h-[152px] grid-cols-[88px_minmax(0,1fr)] gap-5 border border-white/12 bg-[#070a09]/82 p-4 transition-colors hover:border-[#f1aa3d]/45"
-                >
-                  <img src={doc.image} alt="" className="h-[124px] w-[88px] object-cover opacity-88" aria-hidden="true" />
-                  <div className="flex min-w-0 flex-col">
-                    <h3 className="mb-3 whitespace-pre-line font-mono text-[14px] font-medium leading-[1.35] text-white/82">{doc.title}</h3>
-                    <p className="mb-4 font-mono text-[12px] leading-[1.55] text-white/50">{doc.description}</p>
-                    <span className="mt-auto inline-flex items-center gap-2 font-mono text-[12px] font-medium text-[#f1aa3d]">
-                      Read Now
-                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
-                    </span>
-                  </div>
-                  <span className="absolute right-0 top-0 h-2 w-2 border-r border-t border-emerald-400/35" aria-hidden="true" />
-                  <span className="absolute bottom-0 right-0 h-2 w-2 border-b border-r border-emerald-400/25" aria-hidden="true" />
-                </Link>
-              ))}
+              {fieldDocuments.map((doc) => {
+                const isExternal = doc.href.startsWith('http');
+                const content = (
+                  <>
+                    <img src={doc.image} alt="" className="h-[124px] w-[88px] object-cover opacity-88" aria-hidden="true" />
+                    <div className="flex min-w-0 flex-col">
+                      <h3 className="mb-3 whitespace-pre-line font-mono text-[14px] font-medium leading-[1.35] text-white/82">{doc.title}</h3>
+                      <p className="mb-4 font-mono text-[12px] leading-[1.55] text-white/50">{doc.description}</p>
+                      <span className="mt-auto inline-flex items-center gap-2 font-mono text-[12px] font-medium text-[#f1aa3d]">
+                        Read Now
+                        <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
+                      </span>
+                    </div>
+                    <span className="absolute right-0 top-0 h-2 w-2 border-r border-t border-emerald-400/35" aria-hidden="true" />
+                    <span className="absolute bottom-0 right-0 h-2 w-2 border-b border-r border-emerald-400/25" aria-hidden="true" />
+                  </>
+                );
+
+                return isExternal ? (
+                  <a
+                    key={doc.title}
+                    href={doc.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group relative grid min-h-[152px] grid-cols-[88px_minmax(0,1fr)] gap-5 border border-white/12 bg-[#070a09]/82 p-4 transition-colors hover:border-[#f1aa3d]/45"
+                  >
+                    {content}
+                  </a>
+                ) : (
+                  <Link
+                    key={doc.title}
+                    to={doc.href}
+                    className="group relative grid min-h-[152px] grid-cols-[88px_minmax(0,1fr)] gap-5 border border-white/12 bg-[#070a09]/82 p-4 transition-colors hover:border-[#f1aa3d]/45"
+                  >
+                    {content}
+                  </Link>
+                );
+              })}
             </div>
           </section>
 

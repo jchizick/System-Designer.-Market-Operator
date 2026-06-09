@@ -290,7 +290,7 @@ const pathTimelineSteps = [
     title: 'UNIVERSITY\nEDUCATION',
     description: 'I built a foundation in strategy, finance, and economics - learning how systems allocate resources and shape outcomes.',
     cta: 'See full details',
-    bullets: ['Strategy & markets', 'Economics & finance', 'Systems thinking introduced'],
+    bullets: ['Strategy & markets', 'Economics & finance', 'Systems thinking intro'],
   },
   {
     number: '02',
@@ -402,43 +402,44 @@ const operatorSignals = [
    ═══════════════════════════════════════════════════════════════ */
 function PathTimelineSection() {
   return (
-    <RevealSection className="mb-10">
-      <section className="relative overflow-hidden border-t border-white/10 pt-7">
-        <div className="mb-7 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-4">
-          <span className="text-mono-sm font-medium uppercase leading-tight text-emerald-400">THE PATH</span>
+    <RevealSection className="mb-8">
+      <section className="relative overflow-hidden">
+        <div className="mb-4 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3">
+          <span className="text-mono-sm font-medium uppercase leading-tight text-emerald-400">001 // THE PATH</span>
           <span className="h-px bg-white/10" aria-hidden="true" />
         </div>
 
-        <div className="relative overflow-x-auto pb-3 scrollbar-hide">
+        <div className="relative overflow-x-auto pb-1 scrollbar-hide">
           <div className="relative min-w-[1040px]">
-            <div className="absolute left-2 right-2 top-[30px] h-px bg-white/44" aria-hidden="true" />
-            <span className="absolute left-1 top-[27px] h-1.5 w-1.5 bg-[#f1aa3d] shadow-[0_0_8px_rgba(241,170,61,0.6)]" aria-hidden="true" />
-            <span className="absolute right-1 top-[27px] h-1.5 w-1.5 bg-[#f1aa3d] shadow-[0_0_8px_rgba(241,170,61,0.6)]" aria-hidden="true" />
+            <div className="absolute left-2 right-2 top-[25px] h-px bg-white/44" aria-hidden="true" />
+            <span className="about-path-signal-packet absolute top-[25px] z-20 h-1.5 w-1.5 rounded-full bg-[#f1aa3d] shadow-[0_0_10px_rgba(241,170,61,0.72)]" aria-hidden="true" />
+            <span className="absolute left-1 top-[22px] h-1.5 w-1.5 bg-[#f1aa3d] shadow-[0_0_8px_rgba(241,170,61,0.6)]" aria-hidden="true" />
+            <span className="absolute right-1 top-[22px] h-1.5 w-1.5 bg-[#f1aa3d] shadow-[0_0_8px_rgba(241,170,61,0.6)]" aria-hidden="true" />
 
-            <div className="grid grid-cols-5 gap-8">
+            <div className="grid grid-cols-5 gap-7">
               {pathTimelineSteps.map((step, index) => {
                 const Icon = pathIcons[index] || GraduationCap;
 
                 return (
-                  <article key={step.number} className="relative min-w-0 pt-[92px]">
-                    <div className="absolute left-1/2 top-0 z-10 flex h-[62px] w-[62px] -translate-x-1/2 items-center justify-center border border-white/55 bg-black/62 text-white/72 shadow-[0_0_16px_rgba(255,255,255,0.04)]">
+                  <article key={step.number} className="relative min-w-0 pt-[76px]">
+                    <div className={`about-path-icon-signal about-path-icon-signal-${index} absolute left-1/2 top-0 z-10 flex h-[52px] w-[52px] -translate-x-1/2 items-center justify-center border border-white/55 bg-black/62 text-white/72 shadow-[0_0_16px_rgba(255,255,255,0.04)]`}>
                       <span className="absolute inset-1.5 border border-white/18" aria-hidden="true" />
-                      <Icon className="h-7 w-7" strokeWidth={1.35} />
+                      <Icon className="h-6 w-6" strokeWidth={1.35} />
                     </div>
 
-                    <div className="mb-3 font-mono text-[18px] leading-none text-[#f1aa3d] tabular-nums">
+                    {/* <div className="mb-2 font-mono text-[17px] text-center leading-none text-[#f1aa3d] tabular-nums">
                       {step.number} /
-                    </div>
-                    <h3 className="mb-5 min-h-[4.2rem] whitespace-pre-line font-mono text-[18px] uppercase leading-[1.18] tracking-[0.04em] text-white/82">
+                    </div> */}
+                    <h3 className="mb-3 min-h-[3.7rem] whitespace-pre-line font-mono text-[17px] text-center uppercase leading-[1.15] tracking-[0.04em] text-white/82">
                       {step.title}
                     </h3>
-                    <p className="mb-5 font-mono text-[12px] leading-[1.72] text-white/55">
+                    <p className="mb-4 font-mono text-[12px] leading-[1.58] text-white/55">
                       {step.description}
                     </p>
-                    <ul className="mb-6 space-y-1.5">
+                    <ul className="mb-4 space-y-1">
                       {step.bullets.map((bullet) => (
-                        <li key={bullet} className="grid grid-cols-[0.65rem_minmax(0,1fr)] gap-1.5 font-mono text-[12px] leading-relaxed text-white/62">
-                          <span className="pt-[0.48rem] text-[9px] leading-none text-[#f1aa3d]">•</span>
+                        <li key={bullet} className="grid grid-cols-[0.65rem_minmax(0,1fr)] gap-1.5 font-mono text-[12px] leading-[1.45] text-white/62">
+                          <span className="pt-[0.42rem] text-[9px] leading-none text-[#f1aa3d]">•</span>
                           <span>{bullet}</span>
                         </li>
                       ))}
@@ -461,9 +462,9 @@ function PathTimelineSection() {
 function CurrentWorkSection() {
   return (
     <RevealSection className="mb-10">
-      <section className="border-t border-white/10 pt-7">
+      <section className="">
         <div className="mb-4 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3">
-          <span className="text-mono-sm font-medium uppercase leading-tight text-emerald-400">CURRENT WORK</span>
+          <span className="text-mono-sm font-medium uppercase leading-tight text-emerald-400">002 // CURRENT WORK</span>
           <span className="h-px bg-white/10" aria-hidden="true" />
         </div>
 
@@ -513,10 +514,10 @@ function FinalAboutSections() {
   return (
     <RevealSection className="mb-12">
       <section className="space-y-7">
-        <div className="grid grid-cols-1 border-t border-white/10 pt-7 lg:grid-cols-[0.95fr_2.05fr]">
+        <div className="grid grid-cols-1 lg:grid-cols-[0.95fr_2.05fr]">
           <div className="pr-8">
             <div className="mb-3 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3">
-              <span className="text-mono-sm font-medium uppercase leading-tight text-emerald-400">THE THROUGH-LINE</span>
+              <span className="text-mono-sm font-medium uppercase leading-tight text-emerald-400">003 // THE THROUGH-LINE</span>
               <span className="h-px bg-white/10" aria-hidden="true" />
             </div>
             <h2 className="mb-4 font-playfair text-[38px] font-medium leading-[0.98] text-[#f4efe6] sm:text-[46px]">
@@ -550,7 +551,7 @@ function FinalAboutSections() {
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,2.25fr)_minmax(260px,0.75fr)]">
           <section>
             <div className="mb-4 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3">
-              <span className="text-mono-sm font-medium uppercase leading-tight text-emerald-400">BOOKS / FIELD DOCUMENTS</span>
+              <span className="text-mono-sm font-medium uppercase leading-tight text-emerald-400">004 // BOOKS + FIELD DOCUMENTS</span>
               <span className="h-px bg-white/10" aria-hidden="true" />
             </div>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -671,20 +672,20 @@ export function AboutPage() {
         {/* ═══════════════════════════════════════════
             SECTION 01 — HERO
         ═══════════════════════════════════════════ */}
-        <RevealSection className="mb-10">
-          <section className="relative min-h-[650px] overflow-hidden border border-white/[0.06] bg-black shadow-[inset_0_0_40px_rgba(0,0,0,0.5)]">
+        <RevealSection className="mb-6">
+          <section className="relative min-h-[540px] overflow-hidden border border-white/[0.06] bg-black shadow-[inset_0_0_40px_rgba(0,0,0,0.5)]">
             <img
               src={aboutHeroBg}
               alt=""
-              className="absolute inset-0 h-full w-full object-cover object-[58%_center]"
+              className="absolute inset-0 h-full w-full object-cover object-[58%_48%]"
               aria-hidden="true"
             />
             <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.78)_28%,rgba(0,0,0,0.28)_56%,rgba(0,0,0,0.68)_100%)]" aria-hidden="true" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_68%_42%,rgba(255,255,255,0.08),transparent_32%),linear-gradient(0deg,rgba(0,0,0,0.75),transparent_28%)]" aria-hidden="true" />
             <div className="pointer-events-none absolute inset-0 opacity-[0.16] [background-image:linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.055)_1px,transparent_1px)] [background-size:20px_20px]" aria-hidden="true" />
 
-            <div className="relative z-10 flex min-h-[650px] flex-col px-4 py-4 sm:px-8 sm:py-5">
-              <header className="mb-10 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-3 text-mono-xs uppercase text-white/48">
+            <div className="relative z-10 flex min-h-[540px] flex-col px-4 py-4 sm:px-8 sm:py-4">
+              <header className="mb-6 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-3 text-mono-xs uppercase text-white/48">
                 <Link to="/" className="inline-flex items-center gap-2 border border-white/10 bg-black/30 px-2.5 py-1.5 transition-colors hover:border-emerald-400/40 hover:text-emerald-300">
                   <svg width="10" height="10" viewBox="0 0 12 12" fill="none" className="opacity-70">
                     <path d="M8 2L4 6L8 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="miter" />
@@ -694,44 +695,44 @@ export function AboutPage() {
 
                 <div className="flex items-center">
                   <span className="border border-emerald-500/35 bg-emerald-500/10 px-4 py-1.5 text-emerald-400">ABOUT</span>
-                  <span className="border border-l-0 border-white/10 bg-black/28 px-4 py-1.5 text-white/35">02 / 07</span>
+                  <span className="border border-l-0 border-white/10 bg-black/28 px-4 py-1.5 text-white/35">1987</span>
                 </div>
               </header>
 
-              <div className="grid flex-1 grid-cols-1 gap-8 lg:grid-cols-[minmax(0,0.58fr)_minmax(16rem,0.42fr)] lg:items-center">
+              <div className="grid flex-1 grid-cols-1 gap-6 lg:grid-cols-[minmax(0,0.58fr)_minmax(16rem,0.42fr)] lg:items-center">
                 <div className="max-w-[560px]">
-                  <div className="mb-5 text-mono-sm font-medium uppercase text-emerald-400">ABOUT / OPERATOR</div>
-                  <h1 className="font-playfair text-[46px] font-medium leading-[0.98] tracking-[0] text-[#f4efe6] sm:text-[60px] lg:text-[60px]">
+                  {/* <div className="mb-4 text-mono-sm font-medium uppercase text-emerald-400">ABOUT / OPERATOR</div> */}
+                  <h1 className="font-playfair text-[44px] font-medium leading-[0.94] tracking-[0] text-[#f4efe6] sm:text-[56px] lg:text-[56px]">
                     <span className="block">I study systems.</span>
-                    <span className="block pt-2 italic text-[#f1aa3d]">Then I build in them.</span>
+                    <span className="block pt-1.5 italic text-[#f1aa3d]">Then I build in them.</span>
                   </h1>
 
-                  <p className="mt-8 max-w-[530px] font-mono text-[14px] leading-[1.72] text-white/66 sm:text-[15px]">
+                  <p className="mt-6 max-w-[530px] font-mono text-[13px] leading-[1.62] text-white/66 sm:text-[14px]">
                     My path hasn't been linear. I've moved through business, psychology, markets, AI, and countless systems-collecting patterns, stress-testing ideas, and learning what actually holds up in real conditions. Now I build tools, workflows, and products that create leverage and clarity for people and teams operating in complexity.
                   </p>
 
-                  <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+                  <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                     <Link
                       to="/contact"
-                      className="inline-flex min-h-10 items-center justify-center border border-emerald-500/45 bg-emerald-500/[0.08] px-8 text-mono-xs font-medium uppercase tracking-[0.14em] text-emerald-300 transition-colors hover:border-emerald-300 hover:bg-emerald-500/15"
+                      className="inline-flex min-h-9 items-center justify-center border border-emerald-500/45 bg-emerald-500/[0.08] px-7 text-mono-xs font-medium uppercase tracking-[0.14em] text-emerald-300 transition-colors hover:border-emerald-300 hover:bg-emerald-500/15"
                     >
                       [ Contact Operator ]
                     </Link>
                     <Link
                       to="/"
-                      className="inline-flex min-h-10 items-center justify-center border border-white/16 bg-black/22 px-8 text-mono-xs font-medium uppercase tracking-[0.14em] text-white/58 transition-colors hover:border-white/30 hover:text-white/78"
+                      className="inline-flex min-h-9 items-center justify-center border border-white/16 bg-black/22 px-7 text-mono-xs font-medium uppercase tracking-[0.14em] text-white/58 transition-colors hover:border-white/30 hover:text-white/78"
                     >
                       [ View Case Studies ]
                     </Link>
                   </div>
                 </div>
 
-                <aside className="ml-auto hidden max-w-[290px] pr-4 text-[#d8d1c6]/78 lg:block">
-                  <div className="mb-3 font-playfair text-[34px] leading-none text-[#f1aa3d]">“</div>
-                  <blockquote className="font-playfair text-[20px] italic leading-[1.45]">
+                <aside className="ml-auto hidden max-w-[285px] pr-4 text-[#d8d1c6]/78 lg:block">
+                  <div className="mb-2 font-playfair text-[30px] leading-none text-[#f1aa3d]">“</div>
+                  <blockquote className="font-playfair text-[19px] italic leading-[1.38]">
                     The goal isn't just knowledge. It's clarity under pressure and the ability to build systems that actually work in reality.
                   </blockquote>
-                  <div className="mt-4 text-right font-playfair text-[34px] leading-none text-[#f1aa3d]">”</div>
+                  <div className="mt-3 text-right font-playfair text-[30px] leading-none text-[#f1aa3d]">”</div>
                 </aside>
               </div>
             </div>
@@ -764,3 +765,5 @@ export function AboutPage() {
     </div>
   );
 }
+
+

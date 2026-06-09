@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
 @import "tailwindcss";
 
 @font-face {
@@ -58,6 +59,7 @@
   --font-upheaval: "Upheaval", "Geist", ui-serif, serif;
   --font-determination: "Determination", "Geist", ui-serif, serif;
   --font-season-mix: "SeasonMix", "Geist", ui-serif, serif;
+  --font-playfair: "Playfair Display", "SeasonMix", ui-serif, Georgia, serif;
 
   --color-bg-base: #050505;
   --color-bg-surface: #0A0A0A;

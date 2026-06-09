@@ -29,6 +29,9 @@ import aiBrandMachineCover from '../assets/ai-brand-machine-cover.png';
 import brawlerMindRealCover from '../assets/brawler-mind-real-cover.png';
 import futureOfWorkCover from '../assets/future-of-work-cover.png';
 import behavioralLeveragePrinciplesCover from '../assets/12-behavioral-leverage-principles.png';
+import psychologyIcon from '../assets/psychology-icon.svg';
+import narrativeIcon from '../assets/narrative-icon.svg';
+import systemsIcon from '../assets/systems-icon.svg';
 import { TopBar } from './TopBar';
 
 /* ─── Animated section wrapper ─── */
@@ -350,17 +353,17 @@ const throughLinePillars = [
   {
     title: 'PSYCHOLOGY',
     description: 'Behavior, cognition, decision-making, identity.',
-    icon: 'psychology',
+    icon: psychologyIcon,
   },
   {
     title: 'NARRATIVE',
-    description: 'Meaning, communication, persuasion, cultural influence.',
-    icon: 'narrative',
+    description: 'Meaning, communication, cultural influence.',
+    icon: narrativeIcon,
   },
   {
     title: 'SYSTEMS',
     description: 'Structure, leverage, feedback loops, compounding.',
-    icon: 'systems',
+    icon: systemsIcon,
   },
 ];
 
@@ -389,10 +392,6 @@ const operatorSignals = [
   {
     quote: 'JLC has a rare ability to turn complex systems and ideas into clarity-and then build things that actually work.',
     source: 'Founder, Fintech Platform',
-  },
-  {
-    quote: 'Strategic, relentless, and incredibly sharp. He sees around corners and executes with precision.',
-    source: 'Head of Growth, AI Startup',
   },
 ];
 
@@ -468,7 +467,7 @@ function CurrentWorkSection() {
           <span className="h-px bg-white/10" aria-hidden="true" />
         </div>
 
-        <h2 className="mb-5 font-season-mix text-[32px] font-medium leading-tight text-[#f4efe6] sm:text-[40px]">
+        <h2 className="mb-5 font-playfair text-[32px] font-medium leading-tight text-[#f4efe6] sm:text-[40px]">
           Systems in execution.
         </h2>
 
@@ -490,7 +489,7 @@ function CurrentWorkSection() {
                 </div>
 
                 <div className="flex flex-1 flex-col p-5">
-                  <h3 className="mb-3 whitespace-pre-line font-season-mix text-[21px] font-medium leading-[1.16] text-[#f4efe6]">
+                  <h3 className="mb-3 whitespace-pre-line font-playfair text-[21px] font-medium leading-[1.16] text-[#f4efe6]">
                     {item.title}
                   </h3>
                   <p className="mb-6 font-mono text-[13px] leading-[1.68] text-white/60">
@@ -510,36 +509,6 @@ function CurrentWorkSection() {
   );
 }
 
-function ThroughLineIcon({ type }: { type: string }) {
-  if (type === 'psychology') {
-    return (
-      <svg viewBox="0 0 72 72" className="h-16 w-16 text-[#f1aa3d]" fill="none" aria-hidden="true">
-        <path d="M38 12c-12 0-21 8.5-21 20.3 0 6.1 2.4 11.2 6.8 14.8v8.5h10.7l3.2 6.4h9.8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M25 38h9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        <path d="M43 17c5.8 2.2 9.6 7.6 9.6 14.8 0 3.3-.8 6.2-2.5 8.9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-      </svg>
-    );
-  }
-
-  if (type === 'narrative') {
-    return (
-      <svg viewBox="0 0 72 72" className="h-16 w-16 text-[#f1aa3d]" fill="none" aria-hidden="true">
-        <circle cx="28" cy="36" r="17" stroke="currentColor" strokeWidth="2" />
-        <circle cx="44" cy="36" r="17" stroke="currentColor" strokeWidth="2" />
-        <circle cx="36" cy="23" r="17" stroke="currentColor" strokeWidth="2" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg viewBox="0 0 72 72" className="h-16 w-16 text-[#f1aa3d]" fill="none" aria-hidden="true">
-      <path d="M36 8 61 21.5v28L36 64 11 49.5v-28L36 8Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-      <path d="M11 21.5 36 36l25-14.5M36 36v28" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-      <path d="M48 29v16L36 52 24 45V29" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" opacity="0.7" />
-    </svg>
-  );
-}
-
 function FinalAboutSections() {
   return (
     <RevealSection className="mb-12">
@@ -550,7 +519,7 @@ function FinalAboutSections() {
               <span className="text-mono-sm font-medium uppercase leading-tight text-emerald-400">THE THROUGH-LINE</span>
               <span className="h-px bg-white/10" aria-hidden="true" />
             </div>
-            <h2 className="mb-4 font-season-mix text-[38px] font-medium leading-[0.98] text-[#f4efe6] sm:text-[46px]">
+            <h2 className="mb-4 font-playfair text-[38px] font-medium leading-[0.98] text-[#f4efe6] sm:text-[46px]">
               Understanding.<br />
               Structure.<br />
               Execution.
@@ -562,9 +531,14 @@ function FinalAboutSections() {
 
           <div className="mt-8 grid grid-cols-1 border-white/12 lg:mt-0 lg:grid-cols-3">
             {throughLinePillars.map((pillar) => (
-              <article key={pillar.title} className="border-t border-white/10 py-7 text-center lg:border-l lg:border-t-0 lg:px-10 lg:py-0">
+              <article key={pillar.title} className="flex min-h-[220px] flex-col items-center justify-center border-t border-white/10 py-7 text-center lg:border-l lg:border-t-0 lg:px-10 lg:py-0">
                 <div className="mb-5 flex justify-center">
-                  <ThroughLineIcon type={pillar.icon} />
+                  <img
+                    src={pillar.icon}
+                    alt=""
+                    className="h-16 w-16 object-contain drop-shadow-[0_0_8px_rgba(241,170,61,0.24)]"
+                    aria-hidden="true"
+                  />
                 </div>
                 <h3 className="mb-5 font-mono text-[18px] uppercase tracking-[0.12em] text-white/78">{pillar.title}</h3>
                 <p className="mx-auto max-w-[210px] font-mono text-[14px] leading-[1.65] text-white/55">{pillar.description}</p>
@@ -573,23 +547,23 @@ function FinalAboutSections() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1.4fr_1fr]">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,2.25fr)_minmax(260px,0.75fr)]">
           <section>
             <div className="mb-4 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3">
               <span className="text-mono-sm font-medium uppercase leading-tight text-emerald-400">BOOKS / FIELD DOCUMENTS</span>
               <span className="h-px bg-white/10" aria-hidden="true" />
             </div>
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               {fieldDocuments.map((doc) => (
                 <Link
                   key={doc.title}
                   to={doc.href}
-                  className="group relative grid min-h-[136px] grid-cols-[78px_minmax(0,1fr)] gap-4 border border-white/12 bg-[#070a09]/82 p-3 transition-colors hover:border-[#f1aa3d]/45"
+                  className="group relative grid min-h-[152px] grid-cols-[88px_minmax(0,1fr)] gap-5 border border-white/12 bg-[#070a09]/82 p-4 transition-colors hover:border-[#f1aa3d]/45"
                 >
-                  <img src={doc.image} alt="" className="h-[112px] w-[78px] object-cover opacity-88" aria-hidden="true" />
+                  <img src={doc.image} alt="" className="h-[124px] w-[88px] object-cover opacity-88" aria-hidden="true" />
                   <div className="flex min-w-0 flex-col">
-                    <h3 className="mb-2 whitespace-pre-line font-mono text-[13px] font-medium leading-[1.35] text-white/82">{doc.title}</h3>
-                    <p className="mb-3 font-mono text-[11px] leading-[1.5] text-white/50">{doc.description}</p>
+                    <h3 className="mb-3 whitespace-pre-line font-mono text-[14px] font-medium leading-[1.35] text-white/82">{doc.title}</h3>
+                    <p className="mb-4 font-mono text-[12px] leading-[1.55] text-white/50">{doc.description}</p>
                     <span className="mt-auto inline-flex items-center gap-2 font-mono text-[12px] font-medium text-[#f1aa3d]">
                       Read Now
                       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
@@ -607,13 +581,12 @@ function FinalAboutSections() {
               <span className="text-mono-sm font-medium uppercase leading-tight text-emerald-400">OPERATOR SIGNALS</span>
               <span className="h-px bg-white/10" aria-hidden="true" />
             </div>
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-3">
               {operatorSignals.map((signal) => (
                 <article key={signal.source} className="relative min-h-[136px] border border-white/12 bg-[#070a09]/82 p-5">
-                  <div className="mb-2 font-season-mix text-[28px] leading-none text-[#f1aa3d]">“</div>
+                  <div className="mb-2.5 font-playfair text-[28px] leading-none text-[#f1aa3d]">“</div>
                   <p className="font-mono text-[13px] leading-[1.6] text-white/66">{signal.quote}</p>
                   <div className="mt-3 font-mono text-[11px] uppercase tracking-[0.08em] text-white/42">- {signal.source}</div>
-                  <span className="absolute right-0 top-1/2 h-4 w-1 border-y border-r border-emerald-400/30" aria-hidden="true" />
                 </article>
               ))}
             </div>
@@ -624,12 +597,12 @@ function FinalAboutSections() {
           <div className="absolute left-0 top-0 h-3 w-3 border-l border-t border-[#f1aa3d]/45" aria-hidden="true" />
           <div className="absolute bottom-0 right-0 h-3 w-3 border-b border-r border-[#f1aa3d]/45" aria-hidden="true" />
           <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-6">
-            <span className="hidden font-season-mix text-[58px] leading-none text-[#f1aa3d]/55 sm:block" aria-hidden="true">✶</span>
+            <span className="hidden font-playfair text-[58px] leading-none text-[#f1aa3d]/55 sm:block" aria-hidden="true">✶</span>
             <div className="text-center font-mono text-[18px] leading-[1.55] sm:text-[22px]">
               <div className="text-white/86">I build internal and external systems for navigating complexity.</div>
               <div className="text-emerald-400">Then I test them where it matters.</div>
             </div>
-            <span className="hidden font-season-mix text-[58px] leading-none text-[#f1aa3d]/55 sm:block" aria-hidden="true">✶</span>
+            <span className="hidden font-playfair text-[58px] leading-none text-[#f1aa3d]/55 sm:block" aria-hidden="true">✶</span>
           </div>
         </section>
       </section>
@@ -728,7 +701,7 @@ export function AboutPage() {
               <div className="grid flex-1 grid-cols-1 gap-8 lg:grid-cols-[minmax(0,0.58fr)_minmax(16rem,0.42fr)] lg:items-center">
                 <div className="max-w-[560px]">
                   <div className="mb-5 text-mono-sm font-medium uppercase text-emerald-400">ABOUT / OPERATOR</div>
-                  <h1 className="font-season-mix text-[46px] font-medium leading-[0.98] tracking-[0] text-[#f4efe6] sm:text-[60px] lg:text-[60px]">
+                  <h1 className="font-playfair text-[46px] font-medium leading-[0.98] tracking-[0] text-[#f4efe6] sm:text-[60px] lg:text-[60px]">
                     <span className="block">I study systems.</span>
                     <span className="block pt-2 italic text-[#f1aa3d]">Then I build in them.</span>
                   </h1>
@@ -754,11 +727,11 @@ export function AboutPage() {
                 </div>
 
                 <aside className="ml-auto hidden max-w-[290px] pr-4 text-[#d8d1c6]/78 lg:block">
-                  <div className="mb-3 font-season-mix text-[34px] leading-none text-[#f1aa3d]">“</div>
-                  <blockquote className="font-season-mix text-[20px] italic leading-[1.45]">
+                  <div className="mb-3 font-playfair text-[34px] leading-none text-[#f1aa3d]">“</div>
+                  <blockquote className="font-playfair text-[20px] italic leading-[1.45]">
                     The goal isn't just knowledge. It's clarity under pressure and the ability to build systems that actually work in reality.
                   </blockquote>
-                  <div className="mt-4 text-right font-season-mix text-[34px] leading-none text-[#f1aa3d]">”</div>
+                  <div className="mt-4 text-right font-playfair text-[34px] leading-none text-[#f1aa3d]">”</div>
                 </aside>
               </div>
             </div>

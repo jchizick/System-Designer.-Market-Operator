@@ -423,7 +423,7 @@ function HeroPanel() {
   return (
     <section className="relative mb-5 grid min-w-0 grid-cols-1 gap-8 lg:grid-cols-[0.72fr_1fr]">
       <div className="min-w-0">
-        <div className="mb-4 inline-flex w-fit max-w-full border border-emerald-500/26 bg-emerald-500/5 px-3 py-1 text-mono-xs uppercase text-white/55">
+        <div className="mb-4 inline-flex w-fit max-w-full border border-emerald-500/26 bg-emerald-500/5 px-3 py-1 text-mono-xs uppercase text-white/55"> 
           <span className="text-emerald-400">MKT_CMD</span>
           <span className="px-2 text-emerald-500/70">//</span>
           <span>Trading Intelligence System</span>

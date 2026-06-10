@@ -19,6 +19,7 @@ import { BlockchainBrawlersV2Page } from './components/BlockchainBrawlersV2Page'
 import { MarketCommandV2Page } from './components/MarketCommandV2Page';
 import { BrawlerMindV2Page } from './components/BrawlerMindV2Page';
 import { ContactPage } from './components/ContactPage';
+import { ServiceStackPage } from './components/ServiceStackPage';
 
 function HomePage() {
   return (
@@ -77,6 +78,7 @@ export default function App() {
         <Route path="/trading-journey-brawler-mind-v2" element={<BrawlerMindV2Page />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/services" element={<ServiceStackPage />} />
         <Route path="/reading-path" element={<ReadingPathPage />} />
         <Route path="/field-notes" element={<FieldNotesArchivePage />} />
         <Route path="/field-notes/:slug" element={<FieldNotePage />} />

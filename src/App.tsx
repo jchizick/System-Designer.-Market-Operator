@@ -46,15 +46,27 @@ function ScrollToTop() {
       window.history.scrollRestoration = 'manual';
     }
 
-    if (hash) {
-      return;
-    }
-
     const scrollToTop = () => {
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
     };
+
+    if (hash) {
+      const scrollToHash = () => {
+        const targetId = decodeURIComponent(hash.slice(1));
+        const target = document.getElementById(targetId);
+
+        if (target) {
+          target.scrollIntoView({ block: 'start', behavior: 'instant' });
+        }
+      };
+
+      scrollToHash();
+      const frame = window.requestAnimationFrame(scrollToHash);
+
+      return () => window.cancelAnimationFrame(frame);
+    }
 
     scrollToTop();
     const frame = window.requestAnimationFrame(scrollToTop);

@@ -238,10 +238,15 @@
     transition: filter 240ms ease, color 240ms ease;
   }
 
+  .service-work-signal {
+    animation: serviceWorkSignal 8.8s linear infinite;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .synthetic-packet,
     .synthetic-processing-pulse,
-    .about-path-icon-signal {
+    .about-path-icon-signal,
+    .service-work-signal {
       animation: none;
     }
 
@@ -317,6 +322,25 @@
         inset 0 0 14px rgba(241, 170, 61, 0.06),
         0 0 18px rgba(241, 170, 61, 0.18);
       color: rgba(255, 244, 219, 0.9);
+    }
+  }
+
+  @keyframes serviceWorkSignal {
+    0% {
+      left: 2rem;
+      opacity: 0;
+      transform: translateY(-50%) scale(0.78);
+    }
+
+    8%,
+    90% {
+      opacity: 0.72;
+    }
+
+    100% {
+      left: calc(100% - 2rem);
+      opacity: 0;
+      transform: translateY(-50%) scale(0.78);
     }
   }
 

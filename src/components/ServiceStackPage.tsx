@@ -26,6 +26,11 @@ import marketCommandServiceThumb from '../assets/market-command-service-thumb.we
 import brawlerMindServiceThumb from '../assets/brawler-mind-service-thumb.webp';
 import blockchainBrawlersServiceThumb from '../assets/blockchain-brawlers-service-thumb.webp';
 import danielsMassageServiceThumb from '../assets/daniels-massage-service-thumb.webp';
+import torontoRealEstateBrandSystemThumb from '../assets/toronto-real-estate-brand-system-thumb.png';
+import servicesAmbientSystemField from '../assets/Futuristic UI schematic with neon details.png';
+
+// Temporarily hidden while testing ambient hero background
+const SHOW_SERVICE_STATUS_PANEL = false;
 
 const offers = [
   {
@@ -182,10 +187,16 @@ const proofGroups = [
         image: blockchainBrawlersServiceThumb,
       },
       {
-        title: "Daniel's Massage Therapy",
+        title: "Local Wellness System",
         description: 'Brand & site system for local business growth & booking.',
         href: '/contact?case=daniels-massage-therapy',
         image: danielsMassageServiceThumb,
+      },
+      {
+        title: 'Toronto Real Estate Brand System',
+        description: 'Brand system and market-facing web presence for a real estate operator.',
+        href: '/contact?case=toronto-real-estate-brand-system',
+        image: torontoRealEstateBrandSystemThumb,
       },
     ],
   },
@@ -427,7 +438,7 @@ function HowIWorkSection() {
                 <div className="pointer-events-none absolute inset-0 opacity-[0.055] [background-image:linear-gradient(rgba(52,211,153,0.24)_1px,transparent_1px),linear-gradient(90deg,rgba(52,211,153,0.18)_1px,transparent_1px)] [background-size:12px_12px]" />
                 <div className="relative z-10 mb-3 flex items-start justify-between gap-3">
                   <div className="font-mono text-[13px] font-semibold uppercase tracking-[0.1em] text-emerald-400">
-                    {step.number} // {step.title}
+                    {step.number} //<br />{step.title}
                   </div>
                   <StepIcon className="h-7 w-7 flex-shrink-0 text-emerald-300/58" strokeWidth={1.35} />
                 </div>
@@ -632,8 +643,8 @@ function BuildCtaSection() {
           <div className="mb-4 text-mono-sm font-medium uppercase tracking-[0.08em] text-emerald-400">
             // Let's Build
           </div>
-          <h2 className="font-mono text-[28px] uppercase leading-tight tracking-[0.02em] text-text-primary sm:text-[32px]">
-            Ready to build a system?
+          <h2 className="font-mono text-[28px] uppercase leading-[1.1] tracking-[0.01em] text-text-primary sm:text-[44px]">
+            Ready to build<br />a system?
           </h2>
           <p className="mt-3 max-w-[570px] font-mono text-[13px] leading-[1.55] text-white/62">
             Bring the scattered pieces. I'll help turn them into structure, interface, workflow, and deployment.
@@ -667,14 +678,22 @@ export function ServiceStackPage() {
       <TopBar className="max-w-[1180px]" />
 
       <main className="flex-grow flex flex-col w-full max-w-[1180px] mx-auto min-w-0">
-        <section className="relative mb-10 min-h-[420px] overflow-hidden border-t border-white/8 pt-10 sm:pt-12">
-          <div className="absolute left-1/2 top-0 h-1 w-36 -translate-x-1/2 bg-emerald-400 shadow-[0_0_16px_rgba(52,211,153,0.45)]" aria-hidden="true" />
+        <section className="relative mb-10 min-h-[420px] overflow-hidden pt-10 sm:pt-0">
+          {/* <div className="absolute left-1/2 top-0 h-1 w-36 -translate-x-1/2 bg-emerald-400 shadow-[0_0_16px_rgba(52,211,153,0.45)]" aria-hidden="true" /> */}
           <div className="pointer-events-none absolute inset-0 opacity-[0.16] [background-image:linear-gradient(rgba(255,255,255,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:32px_32px]" aria-hidden="true" />
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_16%_48%,rgba(16,185,129,0.13),transparent_28%),radial-gradient(circle_at_74%_44%,rgba(16,185,129,0.07),transparent_30%)]" aria-hidden="true" />
+          <div className="pointer-events-none absolute -right-24 top-2 h-[550px] w-[1180px] max-w-[112%] opacity-[0.24] [mask-image:linear-gradient(90deg,transparent_0%,black_30%,black_74%,transparent_100%),linear-gradient(180deg,black_0%,black_68%,transparent_100%)] [mask-composite:intersect] sm:opacity-[0.70] lg:-right-30 lg:w-[940px]" aria-hidden="true">
+            <img
+              src={servicesAmbientSystemField}
+              alt=""
+              className="h-full w-full object-cover object-right"
+            />
+          </div>
+          <div className="pointer-events-none absolute right-0 top-8 h-80 w-[46%] bg-[radial-gradient(circle_at_55%_45%,rgba(52,211,153,0.13),transparent_62%)] blur-sm" aria-hidden="true" />
 
           <div className="relative z-10 grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(360px,0.72fr)] lg:items-center">
             <div className="min-w-0">
-              <div className="mb-7 text-mono-sm font-medium uppercase tracking-[0.08em] text-emerald-400">
+              <div className="mb-2 text-mono-sm font-medium uppercase tracking-[0.08em] text-emerald-400">
                 006 // Service Stack
               </div>
 
@@ -704,7 +723,7 @@ export function ServiceStackPage() {
               </div>
             </div>
 
-            <ServiceStatusPanel />
+            {SHOW_SERVICE_STATUS_PANEL ? <ServiceStatusPanel /> : null}
           </div>
         </section>
 

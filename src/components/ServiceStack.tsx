@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { LayoutDashboard, Radar, Workflow, type LucideIcon } from 'lucide-react';
 
@@ -68,20 +68,6 @@ const ServiceCard: React.FC<{ service: Service }> = ({ service }) => {
 };
 
 export function ServiceStack() {
-  const [showComingSoon, setShowComingSoon] = useState(false);
-
-  useEffect(() => {
-    if (!showComingSoon) {
-      return;
-    }
-
-    const resetComingSoon = window.setTimeout(() => {
-      setShowComingSoon(false);
-    }, 1600);
-
-    return () => window.clearTimeout(resetComingSoon);
-  }, [showComingSoon]);
-
   return (
     <section className="mt-2 mb-4">
       <div className="mb-3 flex items-center gap-4">
@@ -114,30 +100,13 @@ export function ServiceStack() {
               Built for operators, founders, and teams moving through complexity.
             </p>
           </div>
-          <button
-            type="button"
-            aria-label="Service stack coming soon."
-            onClick={() => setShowComingSoon(true)}
+          <Link
+            to="/services"
+            aria-label="Access service stack."
             className="group relative inline-flex flex-shrink-0 items-center justify-center border border-emerald-500/25 bg-bg-surface/70 px-3 py-2 text-mono-xs text-emerald-400 shadow-[0_0_14px_rgba(16,185,129,0.04),inset_0_0_10px_rgba(16,185,129,0.025)] transition-all duration-300 hover:border-emerald-400/45 hover:bg-emerald-500/[0.065] hover:text-emerald-300 hover:shadow-[0_0_18px_rgba(16,185,129,0.09),inset_0_0_12px_rgba(16,185,129,0.04)]"
           >
-            <span className="invisible">[ ACCESS SERVICE STACK ]</span>
-            <span
-              aria-hidden="true"
-              className={`absolute inset-0 flex items-center justify-center transition-opacity duration-200 ${
-                showComingSoon ? 'opacity-0' : 'opacity-100 group-hover:opacity-0'
-              }`}
-            >
-              [ ACCESS SERVICE STACK ]
-            </span>
-            <span
-              aria-hidden="true"
-              className={`absolute inset-0 flex items-center justify-center transition-opacity duration-200 ${
-                showComingSoon ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-              }`}
-            >
-              [ COMING SOON ]
-            </span>
-          </button>
+            [ ACCESS SERVICE STACK ]
+          </Link>
         </div>
       </div>
     </section>

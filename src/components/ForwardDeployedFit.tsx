@@ -9,15 +9,15 @@ const fitSignals = [
 const zoneLabels = [
   {
     label: 'HIGH ACUMEN / LOW TECH',
-    className: 'left-[13%] top-[25%]',
+    className: 'left-[29%] top-[29%] -translate-x-1/2 text-center sm:left-[13%] sm:top-[25%] sm:translate-x-0 sm:text-left',
   },
   {
     label: 'LOW ACUMEN / LOW TECH',
-    className: 'left-[13%] bottom-[10%]',
+    className: 'left-[29%] bottom-[17%] -translate-x-1/2 text-center sm:left-[13%] sm:bottom-[10%] sm:translate-x-0 sm:text-left',
   },
   {
     label: 'HIGH TECH / LOW ACUMEN',
-    className: 'right-[11%] bottom-[10%]',
+    className: 'left-[76%] bottom-[17%] -translate-x-1/2 text-center sm:left-auto sm:right-[11%] sm:bottom-[10%] sm:translate-x-0 sm:text-left',
   },
 ];
 
@@ -128,23 +128,23 @@ function FitDiagram() {
         {zoneLabels.map((zone) => (
           <div
             key={zone.label}
-            className={`pointer-events-none absolute max-w-[8rem] text-mono-2xs uppercase leading-relaxed text-white/35 ${zone.className}`}
+            className={`pointer-events-none absolute max-w-[6.8rem] text-mono-2xs uppercase leading-relaxed text-white/35 sm:max-w-[8rem] ${zone.className}`}
           >
             {zone.label}
           </div>
         ))}
 
-        <div className="absolute right-[7%] top-[14%] flex max-w-[12rem] items-center gap-3 sm:right-[5%] sm:top-[25%]">
+        <div className="absolute left-[76%] top-[28%] flex w-auto -translate-x-1/2 items-center gap-2 text-left sm:left-auto sm:right-[5%] sm:top-[25%] sm:max-w-[12rem] sm:translate-x-0 sm:gap-3">
           <div className="relative h-4 w-4 flex-shrink-0">
             <span className="absolute -inset-5 bg-[radial-gradient(circle,rgba(16,185,129,0.22)_0%,rgba(16,185,129,0.06)_32%,transparent_68%)]" />
             <span className="absolute inset-0 border border-emerald-300/60 bg-emerald-400/82 shadow-[0_0_14px_rgba(16,185,129,0.5)]" />
             <span className="absolute inset-[5px] bg-black/50" />
           </div>
           <div className="min-w-0">
-            <div className="text-mono-xs uppercase leading-tight text-emerald-300">
+            <div className="whitespace-nowrap font-mono text-[8px] uppercase leading-none tracking-[0.08em] text-emerald-300 sm:whitespace-normal sm:text-[10px] sm:leading-tight sm:tracking-[0.1em]">
               Forward-Deployed Fit
             </div>
-            <div className="mt-1 text-mono-2xs uppercase text-emerald-400/58">
+            <div className="mt-1 whitespace-nowrap font-mono text-[7px] uppercase leading-none tracking-[0.08em] text-emerald-400/58 sm:whitespace-normal sm:text-[9px] sm:leading-normal sm:tracking-[0.1em]">
               High Leverage Zone
             </div>
           </div>

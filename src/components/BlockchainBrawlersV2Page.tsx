@@ -680,7 +680,7 @@ function SystemInMotionSection() {
   return (
     <section className="relative mb-5 border border-border-subtle bg-black/18 p-4 sm:p-5">
       <CornerSquares />
-      <div className="grid min-w-0 grid-cols-1 gap-5 lg:grid-cols-[0.5fr_1.5fr]">
+      <div className="grid min-w-0 grid-cols-1 gap-5 lg:grid-cols-[0.4fr_1.6fr]">
         <aside className="min-w-0">
           <div className="mb-3 flex items-center gap-2 text-mono-label uppercase text-emerald-400">
             <span>04</span>
@@ -735,7 +735,7 @@ function SystemInMotionSection() {
   );
 }
 
-function ResultSparkline({ type }: { type: string }) {
+function ResultSparkline({ type, compactOnMobile = false }: { type: string; compactOnMobile?: boolean }) {
   if (type === 'bars') {
     const bars = [34, 64, 74, 68, 62, 78, 88, 12, 76, 66];
 
@@ -761,7 +761,10 @@ function ResultSparkline({ type }: { type: string }) {
     ];
 
     return (
-      <div className="mt-5 grid h-12 grid-cols-3 gap-x-3 gap-y-2" aria-hidden="true">
+      <div
+        className={`${compactOnMobile ? 'mt-0 h-16 w-24 gap-x-2 sm:mt-5 sm:h-12 sm:w-auto sm:gap-x-3' : 'mt-5 h-12 gap-x-3'} grid grid-cols-3 gap-y-2`}
+        aria-hidden="true"
+      >
         {rows.flatMap((row, rowIndex) =>
           row.map((width, colIndex) => (
             <span
@@ -777,7 +780,7 @@ function ResultSparkline({ type }: { type: string }) {
 
   if (type === 'donut') {
     return (
-      <div className="mt-4 flex h-12 items-center justify-center" aria-hidden="true">
+      <div className={`${compactOnMobile ? 'mt-0 h-16 w-24 sm:mt-4 sm:h-12 sm:w-auto' : 'mt-4 h-12'} flex items-center justify-center`} aria-hidden="true">
         <svg className="h-14 w-14 -rotate-90" viewBox="0 0 48 48">
           <circle cx="24" cy="24" r="17" fill="none" stroke="rgba(6,78,59,0.72)" strokeWidth="7" />
           <circle
@@ -797,7 +800,7 @@ function ResultSparkline({ type }: { type: string }) {
 
   if (type === 'stars') {
     return (
-      <div className="mt-6 flex items-center gap-2 text-emerald-400" aria-hidden="true">
+      <div className={`${compactOnMobile ? 'mt-0 flex-wrap justify-end gap-1.5 sm:mt-6 sm:flex-nowrap sm:justify-start sm:gap-2' : 'mt-6 gap-2'} flex items-center text-emerald-400`} aria-hidden="true">
         {Array.from({ length: 5 }, (_, index) => (
           <Star
             key={index}
@@ -815,7 +818,12 @@ function ResultSparkline({ type }: { type: string }) {
     : '0,33 20,28 40,19 60,23 80,18 100,25 120,17 140,13 160,10 180,8 200,7 220,6';
 
   return (
-    <svg className="mt-4 h-12 w-full overflow-visible" viewBox="0 0 220 48" role="img" aria-label="">
+    <svg
+      className={`${compactOnMobile ? 'mt-0 h-16 w-32 sm:mt-4 sm:h-12 sm:w-full' : 'mt-4 h-12 w-full'} overflow-visible`}
+      viewBox="0 0 220 48"
+      role="img"
+      aria-label=""
+    >
       <polyline points={points} fill="none" stroke="rgba(16,185,129,0.88)" strokeWidth="1.5" />
       {points.split(' ').map((point) => {
         const [x, y] = point.split(',');
@@ -838,11 +846,15 @@ function ResultsSection() {
 
       <div className="grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
         {resultCards.map(([value, label, copy, visual]) => (
-          <article key={label} className="min-w-0 border border-emerald-500/20 bg-black/22 p-4">
-            <div className="mb-3 font-mono text-[24px] leading-none text-emerald-400 tabular-nums">{value}</div>
-            <div className="text-body-base font-normal tracking-[0] text-text-primary">{label}</div>
-            <p className="text-body-xs font-mono text-white/55">{copy}</p>
-            <ResultSparkline type={visual} />
+          <article key={label} className="grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border border-emerald-500/20 bg-black/22 p-4 sm:block">
+            <div className="min-w-0">
+              <div className="mb-3 font-mono text-[24px] leading-none text-emerald-400 tabular-nums">{value}</div>
+              <div className="text-body-base font-normal tracking-[0] text-text-primary">{label}</div>
+              <p className="text-body-xs font-mono text-white/55">{copy}</p>
+            </div>
+            <div className="flex shrink-0 justify-end sm:block">
+              <ResultSparkline type={visual} compactOnMobile />
+            </div>
           </article>
         ))}
       </div>

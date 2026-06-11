@@ -1103,12 +1103,12 @@ function SystemInMotionSection() {
   );
 }
 
-function ResultSparkline({ type }: { type: string }) {
+function ResultSparkline({ type, compactOnMobile = false }: { type: string; compactOnMobile?: boolean }) {
   if (type === 'bars') {
     const bars = [26, 52, 78, 68, 88, 62, 92, 100];
 
     return (
-      <div className="mt-4 flex h-12 items-end justify-center gap-2" aria-hidden="true">
+      <div className={`${compactOnMobile ? 'mt-0 h-16 w-24 justify-end gap-1.5 sm:mt-4 sm:h-12 sm:w-auto sm:justify-center sm:gap-2' : 'mt-4 h-12 justify-center gap-2'} flex items-end`} aria-hidden="true">
         {bars.map((height, index) => (
           <span
             key={index}
@@ -1122,7 +1122,7 @@ function ResultSparkline({ type }: { type: string }) {
 
   if (type === 'grid') {
     return (
-      <div className="mt-4 grid h-12 w-12 grid-cols-3 gap-1" aria-hidden="true">
+      <div className={`${compactOnMobile ? 'mt-0 h-16 w-16 sm:mt-4 sm:h-12 sm:w-12' : 'mt-4 h-12 w-12'} grid grid-cols-3 gap-1`} aria-hidden="true">
         {Array.from({ length: 9 }, (_, index) => (
           <span
             key={index}
@@ -1135,7 +1135,7 @@ function ResultSparkline({ type }: { type: string }) {
 
   if (type === 'hexes') {
     return (
-      <div className="mt-4 flex h-12 items-center gap-1.5 text-emerald-400" aria-hidden="true">
+      <div className={`${compactOnMobile ? 'mt-0 h-16 w-24 justify-end gap-1 sm:mt-4 sm:h-12 sm:w-auto sm:justify-start sm:gap-1.5' : 'mt-4 h-12 gap-1.5'} flex items-center text-emerald-400`} aria-hidden="true">
         {Array.from({ length: 4 }, (_, index) => (
           <svg key={index} className="h-6 w-6" viewBox="0 0 24 24">
             <path d="M12 2.8 20 7.4v9.2l-8 4.6-8-4.6V7.4L12 2.8Z" fill="none" stroke="currentColor" strokeWidth="1.7" />
@@ -1147,7 +1147,7 @@ function ResultSparkline({ type }: { type: string }) {
 
   if (type === 'stars') {
     return (
-      <div className="mt-6 flex items-center gap-2 text-emerald-400" aria-hidden="true">
+      <div className={`${compactOnMobile ? 'mt-0 flex-wrap justify-end gap-1.5 sm:mt-6 sm:flex-nowrap sm:justify-start sm:gap-2' : 'mt-6 gap-2'} flex items-center text-emerald-400`} aria-hidden="true">
         {Array.from({ length: 5 }, (_, index) => (
           <Star key={index} className={`h-4 w-4 ${index < 4 ? 'fill-current' : 'fill-current opacity-70'}`} strokeWidth={1.4} />
         ))}
@@ -1161,7 +1161,12 @@ function ResultSparkline({ type }: { type: string }) {
     : '0,10 22,18 44,26 66,25 88,34 110,38 132,45 154,52 176,60';
 
   return (
-    <svg className="mt-4 h-12 w-full overflow-visible" viewBox="0 0 180 48" role="img" aria-label="">
+    <svg
+      className={`${compactOnMobile ? 'mt-0 h-16 w-32 sm:mt-4 sm:h-12 sm:w-full' : 'mt-4 h-12 w-full'} overflow-visible`}
+      viewBox="0 0 180 48"
+      role="img"
+      aria-label=""
+    >
       <polyline points={points} fill="none" stroke="rgba(16,185,129,0.88)" strokeWidth="1.5" />
       {points.split(' ').map((point) => {
         const [x, y] = point.split(',');
@@ -1184,11 +1189,15 @@ function ResultsSection() {
 
       <div className="grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
         {resultCards.map(([value, label, copy, visual]) => (
-          <article key={label} className="flex min-h-[138px] min-w-0 flex-col border border-emerald-500/20 bg-black/22 p-4">
-            <div className="mb-3 font-mono text-[27px] leading-none text-emerald-400 tabular-nums">{value}</div>
-            <div className="text-mono-2xs font-normal uppercase tracking-[0] text-white/72">{label}</div>
-            <p className="text-mono-3xs font-mono leading-relaxed text-white/55">{copy}</p>
-            <ResultSparkline type={visual} />
+          <article key={label} className="grid min-h-[138px] min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border border-emerald-500/20 bg-black/22 p-4 sm:block">
+            <div className="min-w-0">
+              <div className="mb-3 font-mono text-[27px] leading-none text-emerald-400 tabular-nums">{value}</div>
+              <div className="text-mono-2xs font-normal uppercase tracking-[0] text-white/72">{label}</div>
+              <p className="text-mono-3xs font-mono leading-relaxed text-white/55">{copy}</p>
+            </div>
+            <div className="flex shrink-0 justify-end sm:block">
+              <ResultSparkline type={visual} compactOnMobile />
+            </div>
           </article>
         ))}
       </div>

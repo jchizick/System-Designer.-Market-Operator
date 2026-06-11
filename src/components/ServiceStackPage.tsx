@@ -189,13 +189,15 @@ const proofGroups = [
       {
         title: "Local Wellness System",
         description: 'Brand & site system for local business growth & booking.',
-        href: '/contact?case=daniels-massage-therapy',
+        href: '/contact?case=local-wellness-system',
+        cta: 'Inquire About This Build',
         image: danielsMassageServiceThumb,
       },
       {
         title: 'Toronto Real Estate Brand System',
         description: 'Brand system and market-facing web presence for a real estate operator.',
         href: '/contact?case=toronto-real-estate-brand-system',
+        cta: 'Inquire About This Build',
         image: torontoRealEstateBrandSystemThumb,
       },
     ],
@@ -608,7 +610,7 @@ function ProofCard({ group }: { group: (typeof proofGroups)[number] }) {
                 </p>
               ) : null}
               <span className="inline-flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-emerald-400 transition-colors group-hover:text-emerald-300">
-                View Case Study
+                {item.cta || 'View Case Study'}
                 <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.7} />
               </span>
             </div>
@@ -682,7 +684,7 @@ export function ServiceStackPage() {
           {/* <div className="absolute left-1/2 top-0 h-1 w-36 -translate-x-1/2 bg-emerald-400 shadow-[0_0_16px_rgba(52,211,153,0.45)]" aria-hidden="true" /> */}
           <div className="pointer-events-none absolute inset-0 opacity-[0.16] [background-image:linear-gradient(rgba(255,255,255,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:32px_32px]" aria-hidden="true" />
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_16%_48%,rgba(16,185,129,0.13),transparent_28%),radial-gradient(circle_at_74%_44%,rgba(16,185,129,0.07),transparent_30%)]" aria-hidden="true" />
-          <div className="pointer-events-none absolute -right-24 top-2 h-[550px] w-[1180px] max-w-[112%] opacity-[0.24] [mask-image:linear-gradient(90deg,transparent_0%,black_30%,black_74%,transparent_100%),linear-gradient(180deg,black_0%,black_68%,transparent_100%)] [mask-composite:intersect] sm:opacity-[0.70] lg:-right-30 lg:w-[940px]" aria-hidden="true">
+          <div className="pointer-events-none absolute -right-24 top-0 h-[500px] w-[1180px] max-w-[112%] opacity-[0.24] [mask-image:linear-gradient(90deg,transparent_0%,black_30%,black_74%,transparent_100%),linear-gradient(180deg,black_0%,black_68%,transparent_100%)] [mask-composite:intersect] sm:opacity-[0.70] lg:-right-30 lg:w-[940px]" aria-hidden="true">
             <img
               src={servicesAmbientSystemField}
               alt=""
@@ -693,7 +695,7 @@ export function ServiceStackPage() {
 
           <div className="relative z-10 grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(360px,0.72fr)] lg:items-center">
             <div className="min-w-0">
-              <div className="mb-2 text-mono-sm font-medium uppercase tracking-[0.08em] text-emerald-400">
+              <div className="mb-3 text-mono-sm font-medium uppercase tracking-[0.08em] text-emerald-400">
                 006 // Service Stack
               </div>
 

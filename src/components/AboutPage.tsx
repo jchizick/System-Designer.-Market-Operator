@@ -312,7 +312,8 @@ const pathTimelineSteps = [
     number: '04',
     title: 'THE PATH TO\nTRADING',
     description: 'I entered the markets to test everything I had learned. Trading became the ultimate classroom.',
-    cta: 'Trading journal',
+    cta: 'Study the system',
+    href: '/trading-journey-brawler-mind-v2',
     bullets: ['Mastery of self', 'Risk, probability, discipline', 'Systems thinking in action'],
   },
   {
@@ -638,7 +639,7 @@ function FinalAboutSections() {
         <section className="relative overflow-hidden border border-emerald-400/35 bg-[#07100f]/72 px-6 py-8 shadow-[inset_0_0_0_1px_rgba(241,170,61,0.2)] sm:px-12">
           <div className="absolute left-0 top-0 h-3 w-3 border-l border-t border-[#f1aa3d]/45" aria-hidden="true" />
           <div className="absolute bottom-0 right-0 h-3 w-3 border-b border-r border-[#f1aa3d]/45" aria-hidden="true" />
-          <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-6">
+          <div className="grid grid-cols-1 items-center gap-0 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:gap-6">
             <span className="hidden font-playfair text-[58px] leading-none text-[#f1aa3d]/55 sm:block" aria-hidden="true">✶</span>
             <div className="text-center font-mono text-[18px] leading-[1.55] sm:text-[22px]">
               <div className="text-white/86">I build internal and external systems for navigating complexity.</div>

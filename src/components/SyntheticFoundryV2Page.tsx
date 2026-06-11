@@ -1053,12 +1053,12 @@ function SystemInMotionSection() {
   );
 }
 
-function ResultSparkline({ type }: { type: string }) {
+function ResultSparkline({ type, compactOnMobile = false }: { type: string; compactOnMobile?: boolean }) {
   if (type === 'bars') {
     const bars = [26, 45, 60, 48, 70, 42, 86, 55, 92];
 
     return (
-      <div className="mt-4 flex h-12 items-end gap-1.5" aria-hidden="true">
+      <div className={`${compactOnMobile ? 'mt-0 h-16 w-24 justify-end gap-1 sm:mt-4 sm:h-12 sm:w-auto sm:justify-start sm:gap-1.5' : 'mt-4 h-12 gap-1.5'} flex items-end`} aria-hidden="true">
         {bars.map((height, index) => (
           <span
             key={index}
@@ -1072,7 +1072,7 @@ function ResultSparkline({ type }: { type: string }) {
 
   if (type === 'donut') {
     return (
-      <div className="mt-4 flex h-12 items-center justify-center" aria-hidden="true">
+      <div className={`${compactOnMobile ? 'mt-0 h-16 w-24 sm:mt-4 sm:h-12 sm:w-auto' : 'mt-4 h-12'} flex items-center justify-center`} aria-hidden="true">
         <svg className="h-14 w-14 -rotate-90" viewBox="0 0 48 48">
           <circle
             cx="24"
@@ -1099,7 +1099,7 @@ function ResultSparkline({ type }: { type: string }) {
 
   if (type === 'stars') {
     return (
-      <div className="mt-6 flex items-center gap-2 text-emerald-400" aria-hidden="true">
+      <div className={`${compactOnMobile ? 'mt-0 flex-wrap justify-end gap-1.5 sm:mt-6 sm:flex-nowrap sm:justify-start sm:gap-2' : 'mt-6 gap-2'} flex items-center text-emerald-400`} aria-hidden="true">
         {Array.from({ length: 4 }, (_, index) => (
           <Star key={index} className="h-4 w-4 fill-current" strokeWidth={1.4} />
         ))}
@@ -1114,7 +1114,12 @@ function ResultSparkline({ type }: { type: string }) {
     : '0,6 24,22 48,18 72,20 96,21 120,29 144,36';
 
   return (
-    <svg className="mt-4 h-12 w-full overflow-visible" viewBox="0 0 144 48" role="img" aria-label="">
+    <svg
+      className={`${compactOnMobile ? 'mt-0 h-16 w-32 sm:mt-4 sm:h-12 sm:w-full' : 'mt-4 h-12 w-full'} overflow-visible`}
+      viewBox="0 0 144 48"
+      role="img"
+      aria-label=""
+    >
       <polyline
         points={points}
         fill="none"
@@ -1145,11 +1150,15 @@ function ResultsSection() {
 
       <div className="grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
         {resultCards.map(([value, label, copy, visual]) => (
-          <article key={label} className="min-w-0 border border-emerald-500/20 bg-black/22 p-4">
-            <div className="mb-3 font-mono text-[20px] leading-none text-emerald-400 tabular-nums">{value}</div>
-            <div className="text-body-base font-normal tracking-[-0.01em] text-text-primary">{label}</div>
-            <p className="text-body-xs font-mono text-white/55">{copy}</p>
-            <ResultSparkline type={visual} />
+          <article key={label} className="grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border border-emerald-500/20 bg-black/22 p-4 sm:block">
+            <div className="min-w-0">
+              <div className="mb-3 font-mono text-[20px] leading-none text-emerald-400 tabular-nums">{value}</div>
+              <div className="text-body-base font-normal tracking-[-0.01em] text-text-primary">{label}</div>
+              <p className="text-body-xs font-mono text-white/55">{copy}</p>
+            </div>
+            <div className="flex shrink-0 justify-end sm:block">
+              <ResultSparkline type={visual} compactOnMobile />
+            </div>
           </article>
         ))}
       </div>

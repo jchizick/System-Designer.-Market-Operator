@@ -26,7 +26,7 @@ function StatusItem({ label, value, live = false }: { label: string; value: stri
 
 function FDMark() {
   return (
-    <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-emerald-500/50 bg-emerald-500/[0.035] font-mono text-[16px] font-medium tracking-[-0.04em] text-emerald-400 shadow-[inset_0_0_14px_rgba(16,185,129,0.035)] sm:h-10 sm:w-10 sm:text-[18px]">
+    <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-emerald-500/50 bg-emerald-500/[0.035] font-mono text-[16px] font-medium tracking-[-0.04em] text-emerald-400 shadow-[inset_0_0_14px_rgba(16,185,129,0.035)] sm:h-10 sm:w-10 sm:text-[16px]">
       JC
     </div>
   );

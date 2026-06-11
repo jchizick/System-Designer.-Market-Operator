@@ -21,6 +21,8 @@ const caseStudyTitles: Record<string, string> = {
   'the-brawler-mind': 'The Brawler Mind',
   'blockchain-brawlers': 'Blockchain Brawlers',
   'daniels-massage-therapy': 'Daniels Massage Therapy',
+  'local-wellness-system': 'Local Wellness System',
+  'toronto-real-estate-brand-system': 'Toronto Real Estate Brand System',
 };
 
 function titleFromCaseSlug(slug: string) {

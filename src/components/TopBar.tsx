@@ -10,7 +10,7 @@ const navItems = [
   { label: 'HOME', href: '/', match: (pathname: string, hash: string) => pathname === '/' && hash !== '#case-files' },
   { label: 'WORK', href: '/#case-files', match: (_pathname: string, hash: string) => hash === '#case-files' },
   { label: 'SYSTEMS', href: '/services', match: (pathname: string) => pathname === '/services' },
-  { label: 'ABOUT', href: '/about', match: (pathname: string) => pathname === '/about' },
+  { label: 'ABOUT', href: '/about', match: (pathname: string) => pathname === '/about' || pathname === '/reading-path' },
   { label: 'CONTACT', href: '/contact', match: (pathname: string) => pathname === '/contact' },
 ];
 

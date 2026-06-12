@@ -749,7 +749,7 @@ export function AboutPage() {
                     <span className="block pt-1.5 italic text-[#f1aa3d]">Then I build in them.</span>
                   </h1>
 
-                  <p className="mt-6 max-w-[530px] font-mono text-[13px] leading-[1.62] text-white/66 sm:text-[14px]">
+                  <p className="mt-6 max-w-[450px] font-mono text-[13px] leading-[1.62] text-white/66 sm:text-[14px]">
                     My path hasn't been linear. I've moved through business, psychology, markets, AI, and countless systems-collecting patterns, stress-testing ideas, and learning what actually holds up in real conditions. Now I build tools, workflows, and products that create leverage and clarity for people and teams operating in complexity.
                   </p>
 

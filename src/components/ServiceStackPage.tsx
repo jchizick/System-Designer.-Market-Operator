@@ -27,7 +27,7 @@ import brawlerMindServiceThumb from '../assets/brawler-mind-service-thumb.webp';
 import blockchainBrawlersServiceThumb from '../assets/blockchain-brawlers-service-thumb.webp';
 import danielsMassageServiceThumb from '../assets/daniels-massage-service-thumb.webp';
 import torontoRealEstateBrandSystemThumb from '../assets/toronto-real-estate-brand-system-thumb.png';
-import servicesAmbientSystemField from '../assets/Futuristic UI schematic with neon details.png';
+import servicesAmbientSystemField from '../assets/Futuristic command center with holographic displays.png';
 
 // Temporarily hidden while testing ambient hero background
 const SHOW_SERVICE_STATUS_PANEL = false;
@@ -645,8 +645,8 @@ function BuildCtaSection() {
           <div className="mb-4 text-mono-sm font-medium uppercase tracking-[0.08em] text-emerald-400">
             // Let's Build
           </div>
-          <h2 className="font-mono text-[28px] uppercase leading-[1.1] tracking-[0.01em] text-text-primary sm:text-[44px]">
-            Ready to build<br />a system?
+          <h2 className="font-space-grotesk font-medium text-[28px] leading-[1.05] tracking-[0.03em] text-text-primary sm:text-[56px]">
+            Ready to Build<br />A System?
           </h2>
           <p className="mt-3 max-w-[570px] font-mono text-[13px] leading-[1.55] text-white/62">
             Bring the scattered pieces. I'll help turn them into structure, interface, workflow, and deployment.
@@ -695,15 +695,15 @@ export function ServiceStackPage() {
 
           <div className="relative z-10 grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(360px,0.72fr)] lg:items-center">
             <div className="min-w-0">
-              <div className="mb-3 text-mono-sm font-medium uppercase tracking-[0.08em] text-emerald-400">
+              <div className="mb-4 text-mono-sm font-medium uppercase tracking-[0.08em] text-emerald-400">
                 006 // Service Stack
               </div>
 
-              <h1 className="max-w-[680px] font-space-grotesk text-[40px] font-medium leading-[1.12] tracking-[-0.04em] text-text-primary sm:text-[54px] lg:text-[58px]">
+              <h1 className="max-w-[680px] font-space-grotesk text-[40px] font-medium leading-[1.05] tracking-[-0.04em] text-text-primary sm:text-[54px] lg:text-[58px]">
                 Client-facing systems for operators, founders, and teams moving through complexity.
               </h1>
 
-              <p className="mt-6 max-w-[650px] text-body-lg font-space-grotesk leading-[1.45] tracking-[-0.01em] text-white/66">
+              <p className="mt-6 max-w-[650px] text-[16px] font-mono leading-[1.55] tracking-[-0.01em] text-white/66">
                 AI workflows, product interfaces, and brand operating systems - designed, structured, and deployed as usable systems.
               </p>
 

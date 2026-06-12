@@ -230,13 +230,13 @@ export function ContactPage() {
   return (
     <div className="relative flex min-h-screen max-w-full flex-col overflow-x-hidden p-4 sm:p-6">
       <TopBar className="max-w-[1180px]" />
-      <Link
+      {/*<Link
         to="/"
         className="mx-auto flex w-full max-w-[1180px] items-center gap-2 pb-3 text-mono-xs uppercase text-white/45 transition-colors hover:text-emerald-400"
       >
         <ArrowLeft className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
         <span className="truncate">RETURN TO TERMINAL</span>
-      </Link>
+      </Link> */}
       <main className="mx-auto w-full max-w-[1180px] flex-grow">
         <section className="relative mb-8 border border-transparent pt-2">
           <div className="pointer-events-none absolute left-0 top-0 h-3 w-3 border-l border-t border-emerald-500/30" aria-hidden="true" />

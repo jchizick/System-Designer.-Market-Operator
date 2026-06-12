@@ -15,6 +15,9 @@ import {
   Compass,
   Sparkles,
 } from 'lucide-react';
+import { TopBar } from './TopBar';
+import { Footer } from './Footer';
+import readingPathDataFlow from '../assets/Futuristic sci-fi control center design.png';
 
 /* ─── Animated section wrapper (same pattern from AboutPage) ─── */
 function RevealSection({
@@ -303,7 +306,7 @@ function StageCard({ stage, index }: { key?: React.Key; stage: Stage; index: num
           </div>
 
           {/* Description */}
-          <p className="text-body-sm mb-6 whitespace-pre-line max-w-[600px]">
+          <p className="font-space-grotesk text-body-sm mb-6 whitespace-pre-line max-w-[600px]">
             {stage.description}
           </p>
 
@@ -321,7 +324,7 @@ function StageCard({ stage, index }: { key?: React.Key; stage: Stage; index: num
                   <span className="text-emerald-500/40 mt-[5px] text-[6px] flex-shrink-0">
                     ●
                   </span>
-                  <span className="text-body-sm group-hover/book:text-text-primary transition-colors">
+                  <span className="font-space-grotesk text-body-sm group-hover/book:text-text-primary transition-colors">
                     {book}
                   </span>
                 </div>
@@ -335,7 +338,7 @@ function StageCard({ stage, index }: { key?: React.Key; stage: Stage; index: num
               <span className="text-mono-xs text-emerald-400 flex-shrink-0 mt-0.5">
                 👉
               </span>
-              <span className="text-body-sm text-emerald-400/80 italic">
+              <span className="font-mono text-body-sm text-emerald-400/80">
                 {stage.outcome}
               </span>
             </div>
@@ -355,46 +358,27 @@ export function ReadingPathPage() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col relative p-6">
+    <div className="min-h-screen flex flex-col relative p-4 sm:p-6">
       {/* ─── Top Navigation Bar ─── */}
-      <header className="flex justify-between items-center pb-3 border-b border-border-subtle mb-8 text-mono-xs text-text-secondary w-full max-w-5xl mx-auto">
-        <Link
-          to="/about"
-          className="flex items-center gap-2 hover:text-emerald-500 transition-colors cursor-pointer group"
-        >
-          <svg
-            width="12"
-            height="12"
-            viewBox="0 0 12 12"
-            fill="none"
-            className="opacity-50 group-hover:opacity-100 transition-opacity"
-          >
-            <path
-              d="M8 2L4 6L8 10"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <span>RETURN_TO_ABOUT</span>
-        </Link>
-        <div className="flex gap-6 items-center">
-          <span className="text-emerald-500">PAGE:</span>
-          <span>READING PATH</span>
-          <span className="hidden sm:inline text-text-secondary/30">|</span>
-          <span className="hidden sm:inline text-text-secondary/40">
-            10 STAGES
-          </span>
-        </div>
-      </header>
+      <TopBar />
 
       <main className="flex-grow flex flex-col w-full max-w-5xl mx-auto">
         {/* ═══════════════════════════════════════════
             HERO
         ═══════════════════════════════════════════ */}
-        <RevealSection className="mb-10">
-          <div className="flex flex-col items-start">
+        <RevealSection className="relative mb-1 min-h-[420px] overflow-hidden pt-8 sm:pt-0">
+          <div className="pointer-events-none absolute inset-0 opacity-[0.16] [background-image:linear-gradient(rgba(255,255,255,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:32px_32px]" aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_16%_48%,rgba(16,185,129,0.13),transparent_28%),radial-gradient(circle_at_74%_44%,rgba(16,185,129,0.07),transparent_30%)]" aria-hidden="true" />
+          <div className="pointer-events-none absolute -right-24 top-0 h-[500px] w-[1180px] max-w-[112%] opacity-[0.22] [mask-image:linear-gradient(90deg,transparent_0%,black_30%,black_74%,transparent_100%),linear-gradient(180deg,black_0%,black_68%,transparent_100%)] [mask-composite:intersect] sm:opacity-[0.62] lg:-right-20 lg:w-[920px]" aria-hidden="true">
+            <img
+              src={readingPathDataFlow}
+              alt=""
+              className="h-full w-full object-cover object-right"
+            />
+          </div>
+          <div className="pointer-events-none absolute right-0 top-8 h-80 w-[52%] bg-[radial-gradient(circle_at_55%_45%,rgba(52,211,153,0.13),transparent_62%)] blur-sm" aria-hidden="true" />
+
+          <div className="relative z-10 flex min-h-[420px] flex-col items-start justify-center">
             {/* Badge */}
             <div className="flex items-center mb-5">
               <span className="text-mono-xs px-2.5 py-1 border border-emerald-400/30 text-emerald-400 bg-emerald-400/5">
@@ -405,13 +389,13 @@ export function ReadingPathPage() {
               </span>
             </div>
 
-            <h1 className="text-display mb-4">
-              The Mental
+            <h1 className="font-space-grotesk text-display mb-4">
+              THE MENTAL
               <br />
-              Upgrade Path
+              UPGRADE PATH
             </h1>
 
-            <p className="text-body-lg max-w-[640px] mb-8">
+            <p className="font-mono text-body-lg max-w-[640px] mb-8">
               A curated reading progression for perception, psychology,
               influence, markets, systems, strategy, and meaning.
             </p>
@@ -421,8 +405,8 @@ export function ReadingPathPage() {
               {progressionKeywords.map((keyword, idx) => (
                 <RevealSection key={keyword} delay={idx * 0.04}>
                   <div className="flex items-center gap-2">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-border-subtle bg-bg-surface text-mono-xs text-text-secondary hover:border-emerald-500/30 hover:text-text-primary transition-colors cursor-default">
-                      <span className="w-1.5 h-1.5 bg-emerald-500/40" />
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-emerald-500/16 bg-black/34 text-mono-xs text-white/52 shadow-[inset_0_0_12px_rgba(16,185,129,0.025)] transition-colors hover:border-emerald-500/30 hover:text-text-primary cursor-default">
+                      <span className="w-1.5 h-1.5 bg-emerald-400/55" />
                       {keyword}
                     </span>
                     {idx < progressionKeywords.length - 1 && (
@@ -457,10 +441,10 @@ export function ReadingPathPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="flex flex-col gap-4">
-                <p className="text-body-base text-text-primary/80">
+                <p className="font-space-grotesk text-body-base text-text-primary/80">
                   Don't binge the whole thing.
                 </p>
-                <p className="text-body-sm">
+                <p className="font-space-grotesk text-body-sm">
                   Read 2–3 books per stage, apply what you learn, reflect, then
                   move forward. The goal isn't to collect titles. The goal is to
                   build better perception, sharper thinking, and stronger
@@ -472,7 +456,7 @@ export function ReadingPathPage() {
                   <span className="text-emerald-500/50 mt-[5px] text-[6px]">
                     ●
                   </span>
-                  <span className="text-body-sm text-text-primary/80">
+                  <span className="font-space-grotesk text-body-sm text-text-primary/80">
                     Keep a mental models notebook.
                   </span>
                 </div>
@@ -480,7 +464,7 @@ export function ReadingPathPage() {
                   <span className="text-emerald-500/50 mt-[5px] text-[6px]">
                     ●
                   </span>
-                  <span className="text-body-sm text-text-primary/80">
+                  <span className="font-space-grotesk text-body-sm text-text-primary/80">
                     Track the ideas that change how you see the world.
                   </span>
                 </div>
@@ -548,35 +532,7 @@ export function ReadingPathPage() {
       </main>
 
       {/* ─── Footer ─── */}
-      <footer className="mt-auto border-t border-border-subtle pt-4 flex flex-col md:flex-row justify-between items-center text-mono-xs text-text-secondary w-full max-w-5xl mx-auto gap-4">
-        <Link
-          to="/"
-          className="text-emerald-500 hover:text-emerald-500/80 transition-colors cursor-pointer"
-        >
-          SHUTDOWN / EXIT NODE
-        </Link>
-        <div>SYSTEMS OVER ASSETS. DURABILITY OVER DECORATION.</div>
-        <div className="flex gap-4">
-          <Link
-            to="/contact"
-            className="hover:text-text-primary transition-colors"
-          >
-            [ CONTACT ]
-          </Link>
-          <a
-            href="#"
-            className="hover:text-text-primary transition-colors"
-          >
-            [ LINKEDIN ]
-          </a>
-          <a
-            href="#"
-            className="hover:text-text-primary transition-colors"
-          >
-            [ X ]
-          </a>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

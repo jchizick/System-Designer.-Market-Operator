@@ -645,7 +645,7 @@ function BuildCtaSection() {
           <div className="mb-4 text-mono-sm font-medium uppercase tracking-[0.08em] text-emerald-400">
             // Let's Build
           </div>
-          <h2 className="font-space-grotesk font-medium text-[28px] leading-[1.05] tracking-[0.03em] text-text-primary sm:text-[56px]">
+          <h2 className="font-space-grotesk font-medium text-[28px] leading-[1.05] tracking-[0.02em] text-text-primary sm:text-[56px]">
             Ready to Build<br />A System?
           </h2>
           <p className="mt-3 max-w-[570px] font-mono text-[13px] leading-[1.55] text-white/62">

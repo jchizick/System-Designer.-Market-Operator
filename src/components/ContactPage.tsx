@@ -53,6 +53,8 @@ function ContactRadar() {
       <div className="absolute inset-0 border border-emerald-500/10" />
       <div className="absolute left-1/2 top-0 h-full w-px bg-emerald-500/12" />
       <div className="absolute left-0 top-1/2 h-px w-full bg-emerald-500/12" />
+      <div className="contact-radar-sweep absolute inset-[10px] rounded-full opacity-80" />
+      <div className="contact-radar-pulse absolute h-12 w-12 rounded-full border border-emerald-400/28" />
       {[44, 74, 108, 144].map((size) => (
         <div
           key={size}
@@ -60,10 +62,13 @@ function ContactRadar() {
           style={{ width: size, height: size, left: `calc(50% - ${size / 2}px)`, top: `calc(50% - ${size / 2}px)`, borderRadius: '9999px' }}
         />
       ))}
-      <Radar className="h-44 w-44 opacity-15" strokeWidth={0.8} />
-      <span className="h-2 w-2 bg-emerald-400 shadow-[0_0_14px_rgba(16,185,129,0.8)]" />
-      <span className="absolute -right-1 top-4 text-emerald-400/25">+</span>
-      <span className="absolute bottom-5 -left-1 text-emerald-400/25">+</span>
+      <Radar className="h-44 w-44 opacity-18" strokeWidth={0.8} />
+      <span className="contact-radar-flicker h-2 w-2 bg-emerald-400 shadow-[0_0_14px_rgba(16,185,129,0.8)]" />
+      <span className="contact-radar-flicker contact-radar-flicker-delay-1 absolute right-7 top-11 h-1 w-1 bg-emerald-300/45" />
+      <span className="contact-radar-flicker contact-radar-flicker-delay-2 absolute bottom-10 left-9 h-1 w-1 bg-emerald-300/35" />
+      <span className="contact-radar-flicker contact-radar-flicker-delay-3 absolute bottom-11 right-12 h-1.5 w-1.5 border border-emerald-300/25" />
+      <span className="contact-radar-flicker contact-radar-flicker-delay-2 absolute -right-1 top-4 text-emerald-400/25">+</span>
+      <span className="contact-radar-flicker contact-radar-flicker-delay-1 absolute bottom-5 -left-1 text-emerald-400/25">+</span>
     </div>
   );
 }

@@ -242,11 +242,71 @@
     animation: serviceWorkSignal 8.8s linear infinite;
   }
 
+  .contact-radar-sweep {
+    animation: contactRadarSweep 10s linear infinite;
+    background:
+      conic-gradient(from -18deg,
+        transparent 0deg,
+        rgba(16, 185, 129, 0.04) 12deg,
+        rgba(16, 185, 129, 0.24) 27deg,
+        rgba(16, 185, 129, 0.08) 43deg,
+        transparent 62deg,
+        transparent 360deg);
+    transform-origin: center;
+  }
+
+  .contact-radar-sweep::before {
+    background: rgba(52, 211, 153, 0.76);
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.42);
+    content: "";
+    height: 3px;
+    position: absolute;
+    right: 6px;
+    top: calc(50% - 1.5px);
+    width: 3px;
+  }
+
+  .contact-radar-sweep::after {
+    background: linear-gradient(90deg, rgba(16, 185, 129, 0), rgba(16, 185, 129, 0.38));
+    content: "";
+    height: 1px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    width: 46%;
+    transform: translateY(-50%);
+    transform-origin: left center;
+  }
+
+  .contact-radar-pulse {
+    animation: contactRadarPulse 3.5s ease-out infinite;
+    opacity: 0;
+  }
+
+  .contact-radar-flicker {
+    animation: contactRadarFlicker 3.2s ease-in-out infinite;
+  }
+
+  .contact-radar-flicker-delay-1 {
+    animation-delay: 0.85s;
+  }
+
+  .contact-radar-flicker-delay-2 {
+    animation-delay: 1.7s;
+  }
+
+  .contact-radar-flicker-delay-3 {
+    animation-delay: 2.45s;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .synthetic-packet,
     .synthetic-processing-pulse,
     .about-path-icon-signal,
-    .service-work-signal {
+    .service-work-signal,
+    .contact-radar-sweep,
+    .contact-radar-pulse,
+    .contact-radar-flicker {
       animation: none;
     }
 
@@ -341,6 +401,43 @@
       left: calc(100% - 2rem);
       opacity: 0;
       transform: translateY(-50%) scale(0.78);
+    }
+  }
+
+  @keyframes contactRadarSweep {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes contactRadarPulse {
+    0% {
+      opacity: 0.36;
+      transform: scale(0.34);
+    }
+
+    68% {
+      opacity: 0.12;
+    }
+
+    100% {
+      opacity: 0;
+      transform: scale(2.2);
+    }
+  }
+
+  @keyframes contactRadarFlicker {
+    0%,
+    100% {
+      opacity: 0.48;
+    }
+
+    42% {
+      opacity: 0.86;
+    }
+
+    64% {
+      opacity: 0.32;
     }
   }
 

@@ -242,6 +242,260 @@
     animation: serviceWorkSignal 8.8s linear infinite;
   }
 
+  .service-reveal-item {
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 560ms ease,
+      transform 560ms ease,
+      filter 560ms ease;
+    will-change: opacity, transform;
+  }
+
+  .service-reveal-group.is-visible .service-reveal-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .service-active-card {
+    position: relative;
+    transition:
+      border-color 220ms ease,
+      background-color 220ms ease,
+      box-shadow 220ms ease,
+      filter 220ms ease,
+      transform 220ms ease;
+  }
+
+  .service-active-card:hover,
+  .service-active-card:focus-within {
+    border-color: rgba(52, 211, 153, 0.42);
+    background-color: rgba(8, 22, 19, 0.78);
+    box-shadow:
+      inset 0 0 28px rgba(16, 185, 129, 0.045),
+      0 10px 28px rgba(0, 0, 0, 0.26),
+      0 0 22px rgba(16, 185, 129, 0.065);
+    transform: translateY(-2px);
+  }
+
+  .service-fit-panel:hover,
+  .service-fit-panel:focus-within {
+    background-color: rgba(8, 22, 19, 0.2);
+  }
+
+  .service-fit-scanner-core {
+    box-shadow:
+      inset 0 0 20px rgba(16, 185, 129, 0.025),
+      0 0 24px rgba(16, 185, 129, 0.035);
+  }
+
+  .service-fit-scanner-core::before,
+  .service-fit-scanner-core::after {
+    border: 1px solid rgba(52, 211, 153, 0.12);
+    content: "";
+    inset: -0.55rem;
+    opacity: 0.68;
+    position: absolute;
+  }
+
+  .service-fit-scanner-core::after {
+    inset: -1.05rem;
+    opacity: 0.34;
+  }
+
+  .service-fit-scanner-dot {
+    animation: serviceFitScannerPulse 4.8s ease-in-out infinite;
+  }
+
+  .service-status-ticks span {
+    transition:
+      background-color 180ms ease,
+      box-shadow 180ms ease,
+      opacity 180ms ease,
+      transform 180ms ease;
+  }
+
+  .service-active-card:hover .service-status-ticks span,
+  .service-active-card:focus-within .service-status-ticks span {
+    animation: serviceStatusTick 780ms ease-in-out infinite;
+    background-color: rgba(52, 211, 153, 0.85);
+    box-shadow: 0 0 8px rgba(52, 211, 153, 0.22);
+  }
+
+  .service-active-card:hover .service-status-ticks span:nth-child(2),
+  .service-active-card:focus-within .service-status-ticks span:nth-child(2) {
+    animation-delay: 110ms;
+  }
+
+  .service-active-card:hover .service-status-ticks span:nth-child(3),
+  .service-active-card:focus-within .service-status-ticks span:nth-child(3) {
+    animation-delay: 220ms;
+  }
+
+  .service-work-node,
+  .service-work-step-card,
+  .service-work-step-icon,
+  .service-work-step-pulse {
+    animation-duration: 8.8s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+  }
+
+  .service-work-node,
+  .service-work-step-card {
+    animation-name: serviceWorkStepBorderPulse;
+  }
+
+  .service-work-step-icon {
+    animation-name: serviceWorkStepIconPulse;
+  }
+
+  .service-work-step-pulse {
+    animation-name: serviceWorkStepSurfacePulse;
+    background: radial-gradient(circle at 50% 0%, rgba(52, 211, 153, 0.16), transparent 62%);
+  }
+
+  .service-work-node-0,
+  .service-work-step-card-0,
+  .service-work-step-card-0 .service-work-step-icon,
+  .service-work-step-card-0 .service-work-step-pulse {
+    animation-delay: -0.16s;
+  }
+
+  .service-work-node-1,
+  .service-work-step-card-1,
+  .service-work-step-card-1 .service-work-step-icon,
+  .service-work-step-card-1 .service-work-step-pulse {
+    animation-delay: 1.77s;
+  }
+
+  .service-work-node-2,
+  .service-work-step-card-2,
+  .service-work-step-card-2 .service-work-step-icon,
+  .service-work-step-card-2 .service-work-step-pulse {
+    animation-delay: 3.70s;
+  }
+
+  .service-work-node-3,
+  .service-work-step-card-3,
+  .service-work-step-card-3 .service-work-step-icon,
+  .service-work-step-card-3 .service-work-step-pulse {
+    animation-delay: 5.63s;
+  }
+
+  .service-work-node-4,
+  .service-work-step-card-4,
+  .service-work-step-card-4 .service-work-step-icon,
+  .service-work-step-card-4 .service-work-step-pulse {
+    animation-delay: 7.56s;
+  }
+
+  .service-work-loop:has(.service-work-step-card:hover) .service-work-signal,
+  .service-work-loop:has(.service-work-step-card:focus-within) .service-work-signal,
+  .service-work-loop:has(.service-work-step-card:hover) .service-work-node,
+  .service-work-loop:has(.service-work-step-card:focus-within) .service-work-node,
+  .service-work-loop:has(.service-work-step-card:hover) .service-work-step-card,
+  .service-work-loop:has(.service-work-step-card:focus-within) .service-work-step-card,
+  .service-work-loop:has(.service-work-step-card:hover) .service-work-step-icon,
+  .service-work-loop:has(.service-work-step-card:focus-within) .service-work-step-icon,
+  .service-work-loop:has(.service-work-step-card:hover) .service-work-step-pulse,
+  .service-work-loop:has(.service-work-step-card:focus-within) .service-work-step-pulse {
+    animation-play-state: paused;
+  }
+
+  .service-work-step-card:hover,
+  .service-work-step-card:focus-within {
+    border-color: rgba(52, 211, 153, 0.46) !important;
+  }
+
+  .service-work-step-card:hover .service-work-step-icon,
+  .service-work-step-card:focus-within .service-work-step-icon {
+    color: rgba(110, 231, 183, 0.92) !important;
+    filter: drop-shadow(0 0 10px rgba(52, 211, 153, 0.24)) !important;
+  }
+
+  .service-work-step-card:hover .service-work-step-pulse,
+  .service-work-step-card:focus-within .service-work-step-pulse {
+    opacity: 0.58 !important;
+  }
+
+  .service-proof-thumbnail {
+    transition:
+      border-color 220ms ease,
+      box-shadow 220ms ease,
+      filter 220ms ease;
+  }
+
+  .service-proof-thumbnail::after {
+    content: "";
+    position: absolute;
+    inset: -45% -70%;
+    background: linear-gradient(105deg, transparent 38%, rgba(110, 231, 183, 0.16) 48%, rgba(255, 255, 255, 0.12) 50%, transparent 62%);
+    opacity: 0;
+    transform: translateX(-36%);
+    transition:
+      opacity 220ms ease,
+      transform 700ms ease;
+  }
+
+  .group:hover .service-proof-thumbnail,
+  .group:focus-visible .service-proof-thumbnail {
+    border-color: rgba(52, 211, 153, 0.4);
+    box-shadow:
+      inset 0 0 22px rgba(16, 185, 129, 0.055),
+      0 0 20px rgba(16, 185, 129, 0.07);
+    filter: brightness(1.04);
+  }
+
+  .group:hover .service-proof-thumbnail::after,
+  .group:focus-visible .service-proof-thumbnail::after {
+    opacity: 1;
+    transform: translateX(38%);
+  }
+
+  .service-primary-cta,
+  .service-secondary-cta,
+  .service-inline-cta {
+    transition:
+      border-color 180ms ease,
+      background-color 180ms ease,
+      box-shadow 180ms ease,
+      color 180ms ease,
+      filter 180ms ease;
+  }
+
+  .service-primary-cta:hover,
+  .service-primary-cta:focus-visible {
+    filter: brightness(1.04);
+    box-shadow:
+      0 0 24px rgba(52, 211, 153, 0.24),
+      inset 0 0 16px rgba(255, 255, 255, 0.14);
+  }
+
+  .service-secondary-cta:hover,
+  .service-secondary-cta:focus-visible {
+    background-color: rgba(16, 185, 129, 0.055);
+    box-shadow: inset 0 0 18px rgba(16, 185, 129, 0.04);
+  }
+
+  .service-primary-cta svg,
+  .service-secondary-cta svg,
+  .service-inline-cta svg {
+    transition:
+      color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .service-primary-cta:hover svg,
+  .service-primary-cta:focus-visible svg,
+  .service-secondary-cta:hover svg,
+  .service-secondary-cta:focus-visible svg,
+  .service-inline-cta:hover svg,
+  .service-inline-cta:focus-visible svg,
+  .group:hover .service-inline-cta svg {
+    transform: translateX(2px);
+  }
+
   .contact-radar-sweep {
     animation: contactRadarSweep 10s linear infinite;
     background:
@@ -304,10 +558,33 @@
     .synthetic-processing-pulse,
     .about-path-icon-signal,
     .service-work-signal,
+    .service-status-ticks span,
+    .service-work-node,
+    .service-work-step-card,
+    .service-work-step-icon,
+    .service-work-step-pulse,
+    .service-fit-scanner-dot,
     .contact-radar-sweep,
     .contact-radar-pulse,
     .contact-radar-flicker {
       animation: none;
+    }
+
+    .service-reveal-item {
+      opacity: 1;
+      transform: none;
+      transition: none;
+      will-change: auto;
+    }
+
+    .service-active-card,
+    .service-active-card:hover,
+    .service-active-card:focus-within {
+      transform: none;
+    }
+
+    .service-proof-thumbnail::after {
+      content: none;
     }
 
     .about-path-signal-packet {
@@ -392,8 +669,8 @@
       transform: translateY(-50%) scale(0.78);
     }
 
-    8%,
-    90% {
+    5%,
+    96% {
       opacity: 0.72;
     }
 
@@ -401,6 +678,77 @@
       left: calc(100% - 2rem);
       opacity: 0;
       transform: translateY(-50%) scale(0.78);
+    }
+  }
+
+  @keyframes serviceStatusTick {
+    0%,
+    100% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+
+    38% {
+      opacity: 1;
+      transform: scale(1.16);
+    }
+  }
+
+  @keyframes serviceWorkStepBorderPulse {
+    0%,
+    18%,
+    100% {
+      border-color: rgba(16, 185, 129, 0.18);
+      box-shadow: inset 0 0 24px rgba(16, 185, 129, 0.025);
+    }
+
+    6%,
+    10% {
+      border-color: rgba(52, 211, 153, 0.44);
+      box-shadow:
+        inset 0 0 24px rgba(16, 185, 129, 0.052),
+        0 0 18px rgba(16, 185, 129, 0.07);
+    }
+  }
+
+  @keyframes serviceWorkStepIconPulse {
+    0%,
+    18%,
+    100% {
+      color: rgba(110, 231, 183, 0.58);
+      filter: drop-shadow(0 0 0 rgba(52, 211, 153, 0));
+    }
+
+    6%,
+    10% {
+      color: rgba(110, 231, 183, 0.92);
+      filter: drop-shadow(0 0 10px rgba(52, 211, 153, 0.22));
+    }
+  }
+
+  @keyframes serviceWorkStepSurfacePulse {
+    0%,
+    18%,
+    100% {
+      opacity: 0;
+    }
+
+    6%,
+    10% {
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes serviceFitScannerPulse {
+    0%,
+    100% {
+      opacity: 0.36;
+      transform: scale(1);
+    }
+
+    48% {
+      opacity: 0.72;
+      transform: scale(1.18);
     }
   }
 

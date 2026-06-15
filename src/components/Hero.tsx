@@ -25,7 +25,7 @@ export function Hero() {
             AI Workflow & Product Systems
           </h2>
           */}
-          <h1 className="font-space-grotesk text-[42px] font-medium leading-[1.05] tracking-[-.04em] break-words sm:text-[48px] lg:text-[48px]" aria-label="Design Engineer AI Workflow and Product Systems">
+          <h1 className="font-space-grotesk text-[42px] font-medium leading-[1.05] tracking-[-.04em] break-words sm:text-[48px] lg:text-[52px]" aria-label="Design Engineer AI Workflow and Product Systems">
             <span className="block text-text-primary">DESIGN ENGINEER</span>
             <span className="block text-emerald-500">AI WORKFLOW &amp;</span>
             <span className="block text-emerald-500">PRODUCT SYSTEMS</span>

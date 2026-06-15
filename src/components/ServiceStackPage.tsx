@@ -32,6 +32,66 @@ import servicesAmbientSystemField from '../assets/Futuristic command center with
 // Temporarily hidden while testing ambient hero background
 const SHOW_SERVICE_STATUS_PANEL = false;
 
+function useRevealOnScroll() {
+  const ref = React.useRef<HTMLDivElement | null>(null);
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    const node = ref.current;
+
+    if (!node) {
+      return;
+    }
+
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setIsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.16 },
+    );
+
+    observer.observe(node);
+
+    return () => observer.disconnect();
+  }, []);
+
+  return { ref, isVisible };
+}
+
+function RevealGroup({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const { ref, isVisible } = useRevealOnScroll();
+
+  return (
+    <div ref={ref} className={`service-reveal-group ${isVisible ? 'is-visible' : ''} ${className || ''}`}>
+      {children}
+    </div>
+  );
+}
+
+function StatusTicks() {
+  return (
+    <div className="service-status-ticks absolute right-4 top-4 flex gap-1" aria-hidden="true">
+      {[0, 1, 2].map((tick) => (
+        <span key={tick} className="h-1.5 w-1.5 bg-emerald-400/45" />
+      ))}
+    </div>
+  );
+}
+
 const offers = [
   {
     label: '01 // AI',
@@ -286,12 +346,8 @@ function OfferCard({ offer }: { offer: (typeof offers)[number] }) {
   const Icon = offer.icon;
 
   return (
-    <article className="relative flex min-h-[360px] flex-col border border-emerald-500/20 bg-[#07100f]/62 p-4 shadow-[inset_0_0_24px_rgba(16,185,129,0.025)]">
-      <div className="absolute right-4 top-4 flex gap-1">
-        {[0, 1, 2].map((tick) => (
-          <span key={tick} className="h-1.5 w-1.5 bg-emerald-400/45" />
-        ))}
-      </div>
+    <article className="service-active-card relative flex h-full min-h-[360px] flex-col border border-emerald-500/20 bg-[#07100f]/62 p-4 shadow-[inset_0_0_24px_rgba(16,185,129,0.025)]">
+      <StatusTicks />
 
       <div className="mb-4 flex items-start gap-4">
         <div className="flex h-[52px] w-[52px] flex-shrink-0 items-center justify-center border border-emerald-500/28 bg-black/35 text-emerald-400 shadow-[inset_0_0_14px_rgba(16,185,129,0.04)]">
@@ -339,12 +395,8 @@ function EngagementCard({ engagement }: { engagement: (typeof engagementTypes)[n
   const Icon = engagement.icon;
 
   return (
-    <article className="relative min-h-[294px] border border-emerald-500/20 bg-[#07100f]/62 p-4 shadow-[inset_0_0_24px_rgba(16,185,129,0.025)]">
-      <div className="absolute right-4 top-4 flex gap-1">
-        {[0, 1, 2].map((tick) => (
-          <span key={tick} className="h-1.5 w-1.5 bg-emerald-400/45" />
-        ))}
-      </div>
+    <article className="service-active-card relative h-full min-h-[294px] border border-emerald-500/20 bg-[#07100f]/62 p-4 shadow-[inset_0_0_24px_rgba(16,185,129,0.025)]">
+      <StatusTicks />
 
       <div className="mb-3 grid grid-cols-[2.75rem_minmax(0,1fr)] items-center gap-3">
         <div className="flex h-9 w-9 items-center justify-center border border-emerald-500/25 bg-black/35 text-emerald-400">
@@ -355,9 +407,9 @@ function EngagementCard({ engagement }: { engagement: (typeof engagementTypes)[n
         </h3>
       </div>
 
-      <div className="mb-4 w-fit border border-emerald-500/16 bg-black/24 px-2.5 py-1 font-mono text-[10px] font-medium uppercase tracking-[0.12em] text-emerald-400/78">
+      {/* <div className="mb-4 w-fit border border-emerald-500/16 bg-black/24 px-2.5 py-1 font-mono text-[10px] font-medium uppercase tracking-[0.12em] text-emerald-400/78">
         {engagement.accent}
-      </div>
+      </div> */}
 
       <p className="mb-5 font-mono text-[13px] leading-[1.55] text-white/62">
         {engagement.description}
@@ -375,7 +427,7 @@ function EngagementCard({ engagement }: { engagement: (typeof engagementTypes)[n
         ))}
       </ul>
 
-      <Link to="/contact" className="absolute bottom-4 left-4 inline-flex items-center gap-2 font-mono text-[12px] font-medium uppercase tracking-[0.08em] text-emerald-400 transition-colors hover:text-emerald-300">
+      <Link to="/contact" className="service-inline-cta absolute bottom-4 left-4 inline-flex items-center gap-2 font-mono text-[12px] font-medium uppercase tracking-[0.08em] text-emerald-400 transition-colors hover:text-emerald-300">
         View Details
         <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.6} />
       </Link>
@@ -386,13 +438,13 @@ function EngagementCard({ engagement }: { engagement: (typeof engagementTypes)[n
 function OffersSection() {
   return (
     <SectionShell label="The Three Offers" action="Stack Overview">
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-        {offers.map((offer) => (
-          <React.Fragment key={offer.label}>
+      <RevealGroup className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+        {offers.map((offer, index) => (
+          <div key={offer.label} className="service-reveal-item" style={{ transitionDelay: `${index * 70}ms` }}>
             <OfferCard offer={offer} />
-          </React.Fragment>
+          </div>
         ))}
-      </div>
+      </RevealGroup>
     </SectionShell>
   );
 }
@@ -400,13 +452,13 @@ function OffersSection() {
 function EngagementTypesSection() {
   return (
     <SectionShell label="Engagement Types">
-      <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
-        {engagementTypes.map((engagement) => (
-          <React.Fragment key={engagement.title}>
+      <RevealGroup className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+        {engagementTypes.map((engagement, index) => (
+          <div key={engagement.title} className="service-reveal-item" style={{ transitionDelay: `${index * 70}ms` }}>
             <EngagementCard engagement={engagement} />
-          </React.Fragment>
+          </div>
         ))}
-      </div>
+      </RevealGroup>
     </SectionShell>
   );
 }
@@ -414,16 +466,16 @@ function EngagementTypesSection() {
 function HowIWorkSection() {
   return (
     <SectionShell label="How I Work">
-      <div className="relative py-2 sm:py-3">
+      <div className="service-work-loop relative py-2 sm:py-3">
         <div className="relative mb-2 hidden lg:block">
           <div className="absolute left-2 right-7 top-1/2 h-px -translate-y-1/2 border-t border-dashed border-emerald-500/34" aria-hidden="true" />
           <span className="service-work-signal absolute top-[calc(50%+3px)] z-10 hidden h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-emerald-300 shadow-[0_0_14px_rgba(52,211,153,0.65)] lg:block" aria-hidden="true" />
           <div className="absolute right-2 top-1/2 h-0 w-0 -translate-y-1/2 border-y-[6px] border-l-[10px] border-y-transparent border-l-emerald-400/80" aria-hidden="true" />
 
           <div className="relative z-10 grid grid-cols-5 gap-10">
-            {workSteps.map((step) => (
+            {workSteps.map((step, index) => (
               <div key={step.number} className="flex justify-center">
-                <span className="border border-emerald-500/20 bg-[#07100f] px-2.5 py-2.5 font-mono text-[11px] font-semibold leading-none tracking-[0.12em] text-emerald-300/78">
+                <span className={`service-work-node service-work-node-${index} border border-emerald-500/20 bg-[#07100f] px-2.5 py-2.5 font-mono text-[11px] font-semibold leading-none tracking-[0.12em] text-emerald-300/78`}>
                   {step.number}
                 </span>
               </div>
@@ -431,29 +483,32 @@ function HowIWorkSection() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-3 lg:grid-cols-5 lg:gap-10">
-          {workSteps.map((step) => {
+        <RevealGroup className="grid grid-cols-1 gap-3 lg:grid-cols-5 lg:gap-10">
+          {workSteps.map((step, index) => {
             const StepIcon = step.icon;
 
             return (
-              <article key={step.number} className="relative min-h-[130px] overflow-hidden border border-emerald-500/18 bg-[#07100f]/58 p-4 transition-colors hover:border-emerald-400/30">
-                <div className="pointer-events-none absolute inset-0 opacity-[0.055] [background-image:linear-gradient(rgba(52,211,153,0.24)_1px,transparent_1px),linear-gradient(90deg,rgba(52,211,153,0.18)_1px,transparent_1px)] [background-size:12px_12px]" />
-                <div className="relative z-10 mb-3 flex items-start justify-between gap-3">
-                  <div className="font-mono text-[13px] font-semibold uppercase tracking-[0.1em] text-emerald-400">
-                    {step.number} //<br />{step.title}
+              <div key={step.number} className="service-reveal-item" style={{ transitionDelay: `${index * 50}ms` }}>
+                <article className={`service-active-card service-work-step-card service-work-step-card-${index} relative h-full min-h-[130px] overflow-hidden border border-emerald-500/18 bg-[#07100f]/58 p-4`}>
+                  <div className="pointer-events-none absolute inset-0 opacity-[0.055] [background-image:linear-gradient(rgba(52,211,153,0.24)_1px,transparent_1px),linear-gradient(90deg,rgba(52,211,153,0.18)_1px,transparent_1px)] [background-size:12px_12px]" />
+                  <div className="service-work-step-pulse pointer-events-none absolute inset-0 opacity-0" />
+                  <div className="relative z-10 mb-3 flex items-start justify-between gap-3">
+                    <div className="font-mono text-[13px] font-semibold uppercase tracking-[0.1em] text-emerald-400">
+                      {step.number} //<br />{step.title}
+                    </div>
+                    <StepIcon className="service-work-step-icon h-7 w-7 flex-shrink-0 text-emerald-300/58" strokeWidth={1.35} />
                   </div>
-                  <StepIcon className="h-7 w-7 flex-shrink-0 text-emerald-300/58" strokeWidth={1.35} />
-                </div>
-                <p className="relative z-10 font-mono text-[13px] leading-[1.48] text-white/62">
-                  {step.description}
-                </p>
-                <div className="relative z-10 mt-4 border-t border-emerald-500/12 pt-2 font-mono text-[8px] uppercase leading-none tracking-[0.08em] text-white/38">
-                  {step.meta}
-                </div>
-              </article>
+                  <p className="relative z-10 font-mono text-[13px] leading-[1.48] text-white/62">
+                    {step.description}
+                  </p>
+                  <div className="relative z-10 mt-4 border-t border-emerald-500/12 pt-2 font-mono text-[8px] uppercase leading-none tracking-[0.08em] text-white/38">
+                    {step.meta}
+                  </div>
+                </article>
+              </div>
             );
           })}
-        </div>
+        </RevealGroup>
       </div>
     </SectionShell>
   );
@@ -470,20 +525,26 @@ function FitList({
 }) {
   const Icon = tone === 'fit' ? CheckCircle2 : XCircle;
   const colorClasses = tone === 'fit'
-    ? 'text-emerald-400 border-emerald-500/28 bg-emerald-400/[0.035]'
-    : 'text-red-400 border-red-400/26 bg-red-400/[0.025]';
+    ? 'text-emerald-300 border-emerald-400/38 bg-emerald-400/[0.06] shadow-[0_0_14px_rgba(52,211,153,0.08)]'
+    : 'text-red-300 border-red-400/38 bg-red-400/[0.045] shadow-[0_0_14px_rgba(248,113,113,0.055)]';
   const labelClasses = tone === 'fit' ? 'text-emerald-400' : 'text-red-400';
+  const rowClasses = tone === 'fit'
+    ? 'border-emerald-500/14 bg-emerald-500/[0.018]'
+    : 'border-red-400/12 bg-red-400/[0.014]';
 
   return (
-    <div className="min-w-0">
-      <div className={`mb-5 text-mono-sm font-medium uppercase tracking-[0.08em] ${labelClasses}`}>
-        // {label}
+    <div className="service-active-card service-fit-panel h-full min-w-0 border border-emerald-500/12 bg-black/12 p-4">
+      <div className="mb-5 flex items-center justify-between gap-4 border-b border-emerald-500/10 pb-3">
+        <div className={`text-mono-sm font-semibold uppercase tracking-[0.08em] ${labelClasses}`}>
+          // {label}
+        </div>
+        <span className={`h-1.5 w-8 ${tone === 'fit' ? 'bg-emerald-400/52' : 'bg-red-400/48'}`} aria-hidden="true" />
       </div>
-      <ul className="space-y-3.5">
+      <ul className="space-y-2.5">
         {items.map((item) => (
-          <li key={item} className="grid grid-cols-[1.45rem_minmax(0,1fr)] items-start gap-4 font-mono text-[13px] leading-snug text-white/62">
-            <span className={`mt-[-1px] flex h-5 w-5 items-center justify-center rounded-full border ${colorClasses}`}>
-              <Icon className="h-3.5 w-3.5" strokeWidth={2} />
+          <li key={item} className={`grid grid-cols-[2rem_minmax(0,1fr)] items-center gap-3 border px-3 py-2.5 font-mono text-[13px] leading-snug text-white/68 ${rowClasses}`}>
+            <span className={`flex h-7 w-7 items-center justify-center rounded-full border ${colorClasses}`}>
+              <Icon className="h-[18px] w-[18px]" strokeWidth={2.2} />
             </span>
             <span>{item}</span>
           </li>
@@ -495,13 +556,17 @@ function FitList({
 
 function CenterReticle() {
   return (
-    <div className="relative hidden min-h-[168px] items-center justify-center border-x border-emerald-500/14 lg:flex" aria-hidden="true">
-      <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-emerald-500/16" />
-      <div className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 bg-emerald-500/16" />
-      <div className="relative flex h-16 w-16 items-center justify-center rounded-full border border-emerald-500/15">
-        <span className="absolute h-11 w-11 rounded-full border border-emerald-500/24" />
-        <span className="absolute h-6 w-6 rounded-full border border-emerald-400/32" />
-        <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/28 shadow-[0_0_18px_rgba(52,211,153,0.18)]" />
+    <div className="service-fit-scanner relative hidden min-h-[220px] items-center justify-center border-x border-emerald-500/14 lg:flex" aria-hidden="true">
+      <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-emerald-500/24 to-transparent" />
+      <div className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 bg-gradient-to-r from-transparent via-emerald-500/24 to-transparent" />
+      <span className="absolute top-8 h-px w-10 bg-emerald-400/18" />
+      <span className="absolute bottom-8 h-px w-10 bg-red-400/14" />
+      <div className="service-fit-scanner-core relative flex h-20 w-20 items-center justify-center border border-emerald-500/18 bg-black/20">
+        <span className="absolute h-16 w-16 border border-emerald-500/18" />
+        <span className="absolute h-10 w-10 border border-emerald-400/26" />
+        <span className="absolute h-24 w-px bg-gradient-to-b from-transparent via-emerald-400/24 to-transparent" />
+        <span className="absolute h-px w-24 bg-gradient-to-r from-transparent via-emerald-400/24 to-transparent" />
+        <span className="service-fit-scanner-dot h-2.5 w-2.5 bg-emerald-400/36 shadow-[0_0_18px_rgba(52,211,153,0.18)]" />
       </div>
     </div>
   );
@@ -511,11 +576,15 @@ function AudienceFitSection() {
   return (
     <section className="relative border border-emerald-500/12 bg-emerald-500/[0.018] px-5 py-5 sm:px-6 sm:py-6">
       <div className="pointer-events-none absolute inset-0 opacity-[0.07] [background-image:linear-gradient(rgba(16,185,129,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.16)_1px,transparent_1px)] [background-size:24px_24px]" />
-      <div className="relative z-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_180px_minmax(0,1fr)] lg:gap-9">
-        <FitList tone="fit" label="Built For" items={fitSignals} />
+      <RevealGroup className="relative z-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_180px_minmax(0,1fr)] lg:gap-9">
+        <div className="service-reveal-item" style={{ transitionDelay: '0ms' }}>
+          <FitList tone="fit" label="Built For" items={fitSignals} />
+        </div>
         <CenterReticle />
-        <FitList tone="misfit" label="Not Built For" items={misfitSignals} />
-      </div>
+        <div className="service-reveal-item" style={{ transitionDelay: '80ms' }}>
+          <FitList tone="misfit" label="Not Built For" items={misfitSignals} />
+        </div>
+      </RevealGroup>
     </section>
   );
 }
@@ -534,7 +603,7 @@ function ProofThumbnail({
 
   return (
     <div
-      className="relative flex-shrink-0 overflow-hidden border border-emerald-500/24 bg-[#07120f] shadow-[inset_0_0_22px_rgba(16,185,129,0.045),0_0_18px_rgba(16,185,129,0.035)]"
+      className="service-proof-thumbnail relative flex-shrink-0 overflow-hidden border border-emerald-500/24 bg-[#07120f] shadow-[inset_0_0_22px_rgba(16,185,129,0.045),0_0_18px_rgba(16,185,129,0.035)]"
       style={{ width: width + 2, height: height + 2 }}
     >
       <img
@@ -581,7 +650,7 @@ function ProofCard({ group }: { group: (typeof proofGroups)[number] }) {
   const featured = group.items.length === 1;
 
   return (
-    <article className="flex min-h-[322px] flex-col border border-emerald-500/22 bg-[#07100f]/62 shadow-[inset_0_0_24px_rgba(16,185,129,0.025)]">
+    <article className="service-active-card flex h-full min-h-[322px] flex-col border border-emerald-500/22 bg-[#07100f]/62 shadow-[inset_0_0_24px_rgba(16,185,129,0.025)]">
       <header className="flex min-h-12 items-center gap-3 border-b border-emerald-500/18 px-4">
         <Icon className="h-5 w-5 flex-shrink-0 text-emerald-400" strokeWidth={1.8} />
         <h3 className="font-mono text-[13px] font-semibold uppercase tracking-[0.1em] text-emerald-400">
@@ -609,7 +678,7 @@ function ProofCard({ group }: { group: (typeof proofGroups)[number] }) {
                   {item.detail}
                 </p>
               ) : null}
-              <span className="inline-flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-emerald-400 transition-colors group-hover:text-emerald-300">
+              <span className="service-inline-cta inline-flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-emerald-400 transition-colors group-hover:text-emerald-300">
                 {item.cta || 'View Case Study'}
                 <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.7} />
               </span>
@@ -625,13 +694,13 @@ function ProofCard({ group }: { group: (typeof proofGroups)[number] }) {
 function ProofSection() {
   return (
     <SectionShell label="Proof: Case Study Links" action="View All Case Studies" actionHref="/#case-files">
-      <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
-        {proofGroups.map((group) => (
-          <React.Fragment key={group.title}>
+      <RevealGroup className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+        {proofGroups.map((group, index) => (
+          <div key={group.title} className="service-reveal-item" style={{ transitionDelay: `${index * 70}ms` }}>
             <ProofCard group={group} />
-          </React.Fragment>
+          </div>
         ))}
-      </div>
+      </RevealGroup>
     </SectionShell>
   );
 }
@@ -645,7 +714,7 @@ function BuildCtaSection() {
           <div className="mb-4 text-mono-sm font-medium uppercase tracking-[0.08em] text-emerald-400">
             // Let's Build
           </div>
-          <h2 className="font-space-grotesk font-medium text-[28px] leading-[1.05] tracking-[0.02em] text-text-primary sm:text-[56px]">
+          <h2 className="font-space-grotesk font-medium text-[28px] leading-[1.05] tracking-[-0.04em] text-text-primary sm:text-[56px]">
             Ready to Build<br />A System?
           </h2>
           <p className="mt-3 max-w-[570px] font-mono text-[13px] leading-[1.55] text-white/62">
@@ -656,14 +725,14 @@ function BuildCtaSection() {
         <div className="flex flex-col gap-4 sm:flex-row lg:min-w-[600px]">
           <Link
             to="/contact"
-            className="inline-flex min-h-16 flex-1 items-center justify-center gap-6 border border-emerald-400/55 bg-emerald-400 px-7 font-mono text-[13px] font-semibold uppercase tracking-[0.14em] text-[#03110c] shadow-[0_0_22px_rgba(52,211,153,0.2)] transition-colors hover:bg-emerald-300"
+            className="service-primary-cta inline-flex min-h-16 flex-1 items-center justify-center gap-6 border border-emerald-400/55 bg-emerald-400 px-7 font-mono text-[13px] font-semibold uppercase tracking-[0.14em] text-[#03110c] shadow-[0_0_22px_rgba(52,211,153,0.2)] transition-colors hover:bg-emerald-300"
           >
             <span>Start a Build</span>
             <ArrowRight className="h-5 w-5" strokeWidth={1.8} />
           </Link>
           <Link
             to="/#case-files"
-            className="inline-flex min-h-16 flex-1 items-center justify-center gap-6 border border-emerald-500/36 bg-black/28 px-7 font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-white/62 transition-colors hover:border-emerald-400/55 hover:text-white/84"
+            className="service-secondary-cta inline-flex min-h-16 flex-1 items-center justify-center gap-6 border border-emerald-500/36 bg-black/28 px-7 font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-white/62 transition-colors hover:border-emerald-400/55 hover:text-white/84"
           >
             <span>View Case Studies</span>
             <Grid2X2 className="h-5 w-5 text-emerald-400/75" strokeWidth={1.8} />
@@ -710,14 +779,14 @@ export function ServiceStackPage() {
               <div className="mt-9 flex flex-col gap-4 sm:flex-row">
                 <Link
                   to="/contact"
-                  className="inline-flex min-h-14 items-center justify-center gap-8 border border-emerald-400/55 bg-emerald-400 px-8 font-mono text-[13px] font-semibold uppercase tracking-[0.14em] text-[#03110c] shadow-[0_0_22px_rgba(52,211,153,0.2)] transition-colors hover:bg-emerald-300"
+                  className="service-primary-cta inline-flex min-h-14 items-center justify-center gap-8 border border-emerald-400/55 bg-emerald-400 px-8 font-mono text-[13px] font-semibold uppercase tracking-[0.14em] text-[#03110c] shadow-[0_0_22px_rgba(52,211,153,0.2)] transition-colors hover:bg-emerald-300"
                 >
                   <span>Start a Build</span>
                   <ArrowRight className="h-5 w-5" strokeWidth={1.8} />
                 </Link>
                 <Link
                   to="/#case-files"
-                  className="inline-flex min-h-14 items-center justify-center gap-8 border border-emerald-500/36 bg-black/28 px-8 font-mono text-[13px] font-semibold uppercase tracking-[0.14em] text-white/62 transition-colors hover:border-emerald-400/55 hover:text-white/84"
+                  className="service-secondary-cta inline-flex min-h-14 items-center justify-center gap-8 border border-emerald-500/36 bg-black/28 px-8 font-mono text-[13px] font-semibold uppercase tracking-[0.14em] text-white/62 transition-colors hover:border-emerald-400/55 hover:text-white/84"
                 >
                   <span>View Case Studies</span>
                   <Grid2X2 className="h-5 w-5 text-emerald-400/75" strokeWidth={1.8} />

@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { TopBar } from './TopBar';
 import { Footer } from './Footer';
+import { DiagnosticSprintVisual } from './DiagnosticSprintVisual';
 import syntheticFoundryServiceThumb from '../assets/synthetic-foundry-service-thumb.webp';
 import algonquinDashboardServiceThumb from '../assets/algonquin-dashboard-service-thumb.webp';
 import marketCommandServiceThumb from '../assets/market-command-service-thumb.webp';
@@ -28,6 +29,8 @@ import blockchainBrawlersServiceThumb from '../assets/blockchain-brawlers-servic
 import danielsMassageServiceThumb from '../assets/daniels-massage-service-thumb.webp';
 import torontoRealEstateBrandSystemThumb from '../assets/toronto-real-estate-brand-system-thumb.png';
 import servicesAmbientSystemField from '../assets/Futuristic command center with holographic displays.png';
+import buildSprintVisual from '../assets/build-sprint.png';
+import fullSystemBuildVisual from '../assets/full-system-build.png';
 
 // Temporarily hidden while testing ambient hero background
 const SHOW_SERVICE_STATUS_PANEL = false;
@@ -391,14 +394,100 @@ function OfferCard({ offer }: { offer: (typeof offers)[number] }) {
   );
 }
 
-function EngagementCard({ engagement }: { engagement: (typeof engagementTypes)[number] }) {
-  const Icon = engagement.icon;
+function EngagementVisual({ imageSrc, type }: { imageSrc?: string; type: 'diagnostic' | 'build' | 'system' }) {
+  if (imageSrc) {
+    return (
+      <div
+        className={`service-engagement-visual service-engagement-visual--image service-engagement-visual--${type}`}
+        aria-hidden="true"
+      >
+        <img src={imageSrc} alt="" className="service-engagement-visual-image" loading="lazy" />
+        <div className="service-engagement-visual-vignette" />
+      </div>
+    );
+  }
+
+  if (type === 'diagnostic') {
+    return (
+      <div className="service-engagement-visual service-engagement-visual--diagnostic" aria-hidden="true">
+        <div className="service-visual-grid" />
+        <svg viewBox="0 0 260 150" className="service-visual-svg">
+          <circle cx="88" cy="82" r="48" className="service-visual-line" />
+          <circle cx="88" cy="82" r="30" className="service-visual-line service-visual-line--muted" />
+          <path d="M88 82 L128 58" className="service-visual-sweep" />
+          <path d="M88 82 L48 112" className="service-visual-line service-visual-line--muted" />
+          <circle cx="128" cy="58" r="3" className="service-visual-node service-visual-node--hot" />
+          <circle cx="53" cy="72" r="2.5" className="service-visual-node" />
+          <circle cx="104" cy="117" r="2.5" className="service-visual-node" />
+          <circle cx="154" cy="98" r="2" className="service-visual-node service-visual-node--dim" />
+        </svg>
+        <div className="service-visual-chip service-visual-chip--left">
+          <span />
+          Scan
+        </div>
+      </div>
+    );
+  }
+
+  if (type === 'build') {
+    return (
+      <div className="service-engagement-visual service-engagement-visual--build" aria-hidden="true">
+        <div className="service-visual-grid" />
+        <svg viewBox="0 0 260 150" className="service-visual-svg">
+          <path d="M54 72 H102 C116 72 118 44 132 44 H170" className="service-visual-line" />
+          <path d="M102 72 C116 72 118 106 132 106 H178" className="service-visual-line service-visual-line--muted" />
+          <rect x="34" y="54" width="42" height="36" className="service-visual-panel" />
+          <rect x="106" y="26" width="54" height="36" className="service-visual-panel service-visual-panel--active" />
+          <rect x="108" y="88" width="58" height="36" className="service-visual-panel" />
+          <rect x="182" y="55" width="42" height="40" className="service-visual-panel service-visual-panel--active" />
+          <circle cx="102" cy="72" r="3" className="service-visual-node" />
+          <circle cx="178" cy="74" r="3.5" className="service-visual-node service-visual-node--hot" />
+        </svg>
+        <div className="service-visual-chip">
+          <span />
+          Build
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <article className="service-active-card relative h-full min-h-[294px] border border-emerald-500/20 bg-[#07100f]/62 p-4 shadow-[inset_0_0_24px_rgba(16,185,129,0.025)]">
+    <div className="service-engagement-visual service-engagement-visual--system" aria-hidden="true">
+      <div className="service-visual-grid" />
+      <svg viewBox="0 0 260 150" className="service-visual-svg">
+        <path d="M82 38 H178 L196 56 H64 Z" className="service-visual-layer service-visual-layer--top" />
+        <path d="M66 66 H194 L174 86 H86 Z" className="service-visual-layer" />
+        <path d="M84 98 H176 L194 116 H66 Z" className="service-visual-layer service-visual-layer--low" />
+        <path d="M96 56 V98 M132 56 V98 M168 56 V98" className="service-visual-line service-visual-line--muted" />
+        <circle cx="96" cy="56" r="2.6" className="service-visual-node" />
+        <circle cx="132" cy="76" r="3.2" className="service-visual-node service-visual-node--hot" />
+        <circle cx="168" cy="98" r="2.6" className="service-visual-node" />
+      </svg>
+      <div className="service-visual-chip">
+        <span />
+        System
+      </div>
+    </div>
+  );
+}
+
+function EngagementCard({ engagement }: { engagement: (typeof engagementTypes)[number] }) {
+  const Icon = engagement.icon;
+  const visualType = engagement.title === 'Diagnostic Sprint'
+    ? 'diagnostic'
+    : engagement.title === 'Build Sprint'
+      ? 'build'
+      : 'system';
+  const visualImage = visualType === 'build'
+      ? buildSprintVisual
+      : fullSystemBuildVisual;
+  const isDiagnostic = visualType === 'diagnostic';
+
+  return (
+    <article className="service-active-card service-engagement-card group relative flex h-full min-h-[356px] flex-col overflow-hidden border border-emerald-500/20 bg-[#07100f]/62 p-4 shadow-[inset_0_0_24px_rgba(16,185,129,0.025)]">
       <StatusTicks />
 
-      <div className="mb-3 grid grid-cols-[2.75rem_minmax(0,1fr)] items-center gap-3">
+      <div className="mb-3 grid grid-cols-[2.75rem_minmax(0,1fr)] items-center gap-3 pr-12">
         <div className="flex h-9 w-9 items-center justify-center border border-emerald-500/25 bg-black/35 text-emerald-400">
           <Icon className="h-5 w-5" strokeWidth={1.7} />
         </div>
@@ -415,19 +504,29 @@ function EngagementCard({ engagement }: { engagement: (typeof engagementTypes)[n
         {engagement.description}
       </p>
 
-      <div className="mb-3 text-mono-xs font-medium uppercase tracking-[0.08em] text-emerald-400">
-        Includes:
-      </div>
-      <ul className="mb-8 space-y-1.5">
-        {engagement.includes.map((item) => (
-          <li key={item} className="grid grid-cols-[0.8rem_minmax(0,1fr)] gap-2 font-mono text-[12px] leading-tight text-white/58">
-            <span className="mt-[0.35rem] h-1.5 w-1.5 bg-emerald-400" />
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
+      <div className={`service-engagement-detail relative mt-auto min-h-[154px] overflow-hidden border ${isDiagnostic ? 'border-emerald-500/10 bg-[#050c0a]/35' : 'border-emerald-500/14 bg-black/18'}`}>
+        {isDiagnostic ? (
+          <DiagnosticSprintVisual />
+        ) : (
+          <EngagementVisual type={visualType} imageSrc={visualImage} />
+        )}
 
-      <Link to="/contact" className="service-inline-cta absolute bottom-4 left-4 inline-flex items-center gap-2 font-mono text-[12px] font-medium uppercase tracking-[0.08em] text-emerald-400 transition-colors hover:text-emerald-300">
+        <div className="service-engagement-includes">
+          <div className="mb-3 text-mono-xs font-medium uppercase tracking-[0.08em] text-emerald-400">
+            Includes:
+          </div>
+          <ul className="space-y-1.5">
+            {engagement.includes.map((item) => (
+              <li key={item} className="grid grid-cols-[0.8rem_minmax(0,1fr)] gap-2 font-mono text-[12px] leading-tight text-white/62">
+                <span className="mt-[0.35rem] h-1.5 w-1.5 bg-emerald-400" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <Link to="/contact" className="service-inline-cta mt-4 inline-flex items-center gap-2 self-start font-mono text-[12px] font-medium uppercase tracking-[0.08em] text-emerald-400 transition-colors hover:text-emerald-300">
         View Details
         <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.6} />
       </Link>

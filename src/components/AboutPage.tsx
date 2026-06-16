@@ -297,7 +297,7 @@ const pathTimelineSteps = [
     title: 'RESEARCH ON THE\nFUTURE OF WORK',
     description: 'I researched how automation and AI are reshaping the labor market and the skills required to thrive.',
     cta: 'View research',
-    href: 'https://ybnjfz0v2gs31z0q.public.blob.vercel-storage.com/The%20Behavioral%20Leverage%20Framework.pdf',
+    href: 'https://ybnjfz0v2gs31z0q.public.blob.vercel-storage.com/The-Future-of-Work-by-Jordan-Chizick.pdf',
     bullets: ['Rise of automation', 'Shift to knowledge work', 'Human skills as leverage'],
   },
   {

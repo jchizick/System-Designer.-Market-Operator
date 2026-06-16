@@ -114,11 +114,11 @@ export function TopBar({ className = 'max-w-5xl' }: TopBarProps) {
           </div>
 
           <Link
-            to="/#case-files"
+            to="/briefing"
             className="hidden min-h-10 shrink-0 items-center justify-center gap-3 border border-emerald-500/34 bg-emerald-500/[0.025] px-5 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-emerald-400 transition-colors hover:border-emerald-400/55 hover:bg-emerald-500/[0.055] hover:text-emerald-300 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-emerald-400/70 lg:inline-flex"
           >
             <Grid2X2 className="h-4 w-4" strokeWidth={1.8} />
-            <span>ACCESS CASE FILES</span>
+            <span>SCHEDULE BRIEFING</span>
           </Link>
 
           <button
@@ -145,7 +145,7 @@ export function TopBar({ className = 'max-w-5xl' }: TopBarProps) {
           </div>
 
           <div className="grid gap-1.5">
-            {[...navItems, { label: 'ACCESS CASE FILES', href: '/#case-files', match: (_pathname: string, activeHash: string) => activeHash === '#case-files' }].map((item) => {
+            {[...navItems, { label: 'SCHEDULE BRIEFING', href: '/briefing', match: (activePathname: string) => activePathname === '/briefing' }].map((item) => {
               const active = isActive(item);
 
               return (

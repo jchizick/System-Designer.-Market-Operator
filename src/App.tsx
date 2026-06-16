@@ -20,6 +20,7 @@ import { MarketCommandV2Page } from './components/MarketCommandV2Page';
 import { BrawlerMindV2Page } from './components/BrawlerMindV2Page';
 import { ContactPage } from './components/ContactPage';
 import { ServiceStackPage } from './components/ServiceStackPage';
+import { BriefingPage } from './components/BriefingPage';
 
 function HomePage() {
   return (
@@ -90,6 +91,7 @@ export default function App() {
         <Route path="/trading-journey-brawler-mind-v2" element={<BrawlerMindV2Page />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/briefing" element={<BriefingPage />} />
         <Route path="/services" element={<ServiceStackPage />} />
         <Route path="/reading-path" element={<ReadingPathPage />} />
         <Route path="/field-notes" element={<FieldNotesArchivePage />} />

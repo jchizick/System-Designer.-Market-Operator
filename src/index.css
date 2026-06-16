@@ -1304,6 +1304,24 @@
     animation-delay: 2.45s;
   }
 
+  .briefing-cal-embed .cal-inline-container,
+  .briefing-cal-embed cal-inline,
+  .briefing-cal-embed iframe {
+    height: 700px !important;
+    max-width: 100% !important;
+    min-height: 700px !important;
+    width: 100% !important;
+  }
+
+  @media (min-width: 1024px) {
+    .briefing-cal-embed .cal-inline-container,
+    .briefing-cal-embed cal-inline,
+    .briefing-cal-embed iframe {
+      height: 760px !important;
+      min-height: 760px !important;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .synthetic-packet,
     .synthetic-processing-pulse,

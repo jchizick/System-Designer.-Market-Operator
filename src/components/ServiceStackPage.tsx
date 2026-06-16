@@ -21,6 +21,8 @@ import {
 import { TopBar } from './TopBar';
 import { Footer } from './Footer';
 import { DiagnosticSprintVisual } from './DiagnosticSprintVisual';
+import { BuildSprintVisual } from './BuildSprintVisual';
+import { FullSystemBuildVisual } from './FullSystemBuildVisual';
 import syntheticFoundryServiceThumb from '../assets/synthetic-foundry-service-thumb.webp';
 import algonquinDashboardServiceThumb from '../assets/algonquin-dashboard-service-thumb.webp';
 import marketCommandServiceThumb from '../assets/market-command-service-thumb.webp';
@@ -29,8 +31,6 @@ import blockchainBrawlersServiceThumb from '../assets/blockchain-brawlers-servic
 import danielsMassageServiceThumb from '../assets/daniels-massage-service-thumb.webp';
 import torontoRealEstateBrandSystemThumb from '../assets/toronto-real-estate-brand-system-thumb.png';
 import servicesAmbientSystemField from '../assets/Futuristic command center with holographic displays.png';
-import buildSprintVisual from '../assets/build-sprint.png';
-import fullSystemBuildVisual from '../assets/full-system-build.png';
 
 // Temporarily hidden while testing ambient hero background
 const SHOW_SERVICE_STATUS_PANEL = false;
@@ -478,13 +478,12 @@ function EngagementCard({ engagement }: { engagement: (typeof engagementTypes)[n
     : engagement.title === 'Build Sprint'
       ? 'build'
       : 'system';
-  const visualImage = visualType === 'build'
-      ? buildSprintVisual
-      : fullSystemBuildVisual;
   const isDiagnostic = visualType === 'diagnostic';
+  const isBuild = visualType === 'build';
+  const isSystem = visualType === 'system';
 
   return (
-    <article className="service-active-card service-engagement-card group relative flex h-full min-h-[356px] flex-col overflow-hidden border border-emerald-500/20 bg-[#07100f]/62 p-4 shadow-[inset_0_0_24px_rgba(16,185,129,0.025)]">
+    <article className="service-active-card service-engagement-card group relative flex h-full flex-col overflow-hidden border border-emerald-500/20 bg-[#07100f]/62 p-4 shadow-[inset_0_0_24px_rgba(16,185,129,0.025)]">
       <StatusTicks />
 
       <div className="mb-3 grid grid-cols-[2.75rem_minmax(0,1fr)] items-center gap-3 pr-12">
@@ -504,11 +503,15 @@ function EngagementCard({ engagement }: { engagement: (typeof engagementTypes)[n
         {engagement.description}
       </p>
 
-      <div className={`service-engagement-detail relative mt-auto min-h-[154px] overflow-hidden border ${isDiagnostic ? 'border-emerald-500/10 bg-[#050c0a]/35' : 'border-emerald-500/14 bg-black/18'}`}>
+      <div className={`service-engagement-detail relative min-h-[176px] overflow-hidden ${isDiagnostic ? 'service-engagement-detail--diagnostic' : isBuild ? 'service-engagement-detail--build' : isSystem ? 'service-engagement-detail--system' : 'border border-emerald-500/14 bg-black/18'}`}>
         {isDiagnostic ? (
           <DiagnosticSprintVisual />
+        ) : isBuild ? (
+          <BuildSprintVisual />
+        ) : isSystem ? (
+          <FullSystemBuildVisual />
         ) : (
-          <EngagementVisual type={visualType} imageSrc={visualImage} />
+          <EngagementVisual type={visualType} />
         )}
 
         <div className="service-engagement-includes">

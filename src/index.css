@@ -309,12 +309,28 @@
     box-shadow: inset 0 0 22px rgba(16, 185, 129, 0.025);
   }
 
+  .service-engagement-detail--diagnostic,
+  .service-engagement-detail--build,
+  .service-engagement-detail--system {
+    background: transparent;
+    box-shadow: none;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    width: calc(100% + 2rem);
+  }
+
   .service-engagement-detail::after {
     background: linear-gradient(180deg, transparent, rgba(5, 12, 10, 0.42));
     content: "";
     inset: 0;
     pointer-events: none;
     position: absolute;
+  }
+
+  .service-engagement-detail--diagnostic::after,
+  .service-engagement-detail--build::after,
+  .service-engagement-detail--system::after {
+    content: none;
   }
 
   .service-engagement-visual {
@@ -355,18 +371,17 @@
 
   .service-diagnostic-visual {
     background:
-      radial-gradient(circle at 63% 50%, rgba(16, 185, 129, 0.1), transparent 46%),
-      linear-gradient(180deg, rgba(16, 185, 129, 0.025), transparent 48%),
-      #050c0a;
+      radial-gradient(circle at 67% 50%, rgba(16, 185, 129, 0.13), transparent 48%),
+      linear-gradient(180deg, rgba(16, 185, 129, 0.03), rgba(5, 12, 10, 0.08) 56%, transparent);
     opacity: 0.94;
   }
 
   .service-diagnostic-visual::before {
-    background: linear-gradient(90deg, transparent, rgba(52, 211, 153, 0.16), transparent);
+    background: linear-gradient(90deg, transparent, rgba(52, 211, 153, 0.14), transparent);
     content: "";
     height: 1px;
     left: 0;
-    opacity: 0.72;
+    opacity: 0.58;
     position: absolute;
     right: 0;
     top: 0;
@@ -478,6 +493,400 @@
   .service-engagement-card:hover .service-diagnostic-visual .diagnostic-target-core,
   .service-engagement-card:focus-within .service-diagnostic-visual .diagnostic-target-core {
     fill: rgba(167, 243, 208, 0.94);
+  }
+
+  .service-build-visual {
+    background:
+      radial-gradient(circle at 50% 48%, rgba(16, 185, 129, 0.13), transparent 47%),
+      linear-gradient(180deg, rgba(16, 185, 129, 0.03), rgba(5, 12, 10, 0.08) 56%, transparent);
+    opacity: 0.94;
+  }
+
+  .service-build-visual::before {
+    background: linear-gradient(90deg, transparent, rgba(52, 211, 153, 0.14), transparent);
+    content: "";
+    height: 1px;
+    left: 0;
+    opacity: 0.58;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+  }
+
+  .service-build-visual-grid {
+    background-image:
+      linear-gradient(rgba(52, 211, 153, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(52, 211, 153, 0.085) 1px, transparent 1px);
+    background-size: 13px 13px;
+    inset: 0;
+    opacity: 0.32;
+    position: absolute;
+  }
+
+  .service-build-svg {
+    height: 100%;
+    inset: 0;
+    overflow: hidden;
+    position: absolute;
+    shape-rendering: geometricPrecision;
+    width: 100%;
+  }
+
+  .service-exported-card-svg {
+    display: block;
+    height: 100%;
+    inset: 0;
+    overflow: visible;
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+  }
+
+  .service-exported-card-svg svg {
+    display: block;
+    font-family: var(--font-mono);
+    height: 100%;
+    overflow: visible;
+    width: 100%;
+  }
+
+  .service-exported-card-svg text {
+    font-family: var(--font-mono);
+    font-variant-ligatures: none;
+  }
+
+  .build-module-shell,
+  .build-core-shell,
+  .build-core-inner,
+  .build-core-front,
+  .build-process-node,
+  .build-core-glow {
+    stroke-width: 1;
+    transition:
+      fill 220ms ease,
+      stroke 220ms ease,
+      opacity 220ms ease;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .build-module-shell {
+    fill: rgba(16, 185, 129, 0.035);
+    stroke: rgba(110, 231, 183, 0.2);
+  }
+
+  .build-module--active .build-module-shell {
+    fill: rgba(16, 185, 129, 0.055);
+    stroke: rgba(167, 243, 208, 0.28);
+  }
+
+  .build-module-label,
+  .build-step-label {
+    fill: rgba(209, 250, 229, 0.58);
+    font-family: var(--font-mono);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .build-step-label {
+    fill: rgba(209, 250, 229, 0.48);
+    font-size: 7px;
+  }
+
+  .build-step-label--active {
+    fill: rgba(167, 243, 208, 0.84);
+  }
+
+  .build-icon-line,
+  .build-line,
+  .build-core-line,
+  .build-process-line,
+  .build-check {
+    fill: none;
+    stroke: rgba(110, 231, 183, 0.24);
+    stroke-linecap: square;
+    stroke-linejoin: round;
+    stroke-width: 1;
+    transition:
+      stroke 220ms ease,
+      opacity 220ms ease;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .build-icon-line--active,
+  .build-line--active,
+  .build-process-line--active,
+  .build-check {
+    stroke: rgba(167, 243, 208, 0.38);
+  }
+
+  .build-line--dashed,
+  .build-process-line {
+    stroke-dasharray: 2 4;
+  }
+
+  .build-core-shell {
+    fill: rgba(16, 185, 129, 0.035);
+    stroke: rgba(167, 243, 208, 0.26);
+  }
+
+  .build-core-inner {
+    fill: rgba(16, 185, 129, 0.045);
+    stroke: rgba(110, 231, 183, 0.22);
+  }
+
+  .build-core-front {
+    fill: rgba(16, 185, 129, 0.095);
+    stroke: rgba(167, 243, 208, 0.38);
+  }
+
+  .build-core-line {
+    stroke: rgba(110, 231, 183, 0.16);
+  }
+
+  .build-core-center,
+  .build-process-core,
+  .build-connector-dot {
+    fill: rgba(52, 211, 153, 0.82);
+    filter: drop-shadow(0 0 6px rgba(52, 211, 153, 0.3));
+    transition:
+      fill 220ms ease,
+      opacity 220ms ease;
+  }
+
+  .build-core-glow {
+    fill: rgba(52, 211, 153, 0.08);
+    stroke: rgba(52, 211, 153, 0.18);
+  }
+
+  .build-connector-dot {
+    opacity: 0.58;
+  }
+
+  .build-connector-dot--active {
+    opacity: 0.92;
+  }
+
+  .build-process-node {
+    fill: rgba(5, 12, 10, 0.8);
+    stroke: rgba(110, 231, 183, 0.34);
+  }
+
+  .build-process-node--active {
+    fill: rgba(16, 185, 129, 0.14);
+    stroke: rgba(167, 243, 208, 0.62);
+    filter: drop-shadow(0 0 7px rgba(52, 211, 153, 0.28));
+  }
+
+  .build-process-node--complete {
+    stroke: rgba(52, 211, 153, 0.5);
+  }
+
+  .service-engagement-card:hover .service-build-visual .build-core-front,
+  .service-engagement-card:focus-within .service-build-visual .build-core-front {
+    fill: rgba(16, 185, 129, 0.14);
+    stroke: rgba(167, 243, 208, 0.52);
+  }
+
+  .service-engagement-card:hover .service-build-visual .build-core-center,
+  .service-engagement-card:hover .service-build-visual .build-process-core,
+  .service-engagement-card:focus-within .service-build-visual .build-core-center,
+  .service-engagement-card:focus-within .service-build-visual .build-process-core {
+    fill: rgba(167, 243, 208, 0.96);
+  }
+
+  .service-engagement-card:hover .service-build-visual .build-line--active,
+  .service-engagement-card:hover .service-build-visual .build-process-line--active,
+  .service-engagement-card:focus-within .service-build-visual .build-line--active,
+  .service-engagement-card:focus-within .service-build-visual .build-process-line--active {
+    stroke: rgba(167, 243, 208, 0.52);
+  }
+
+  .service-system-visual {
+    background:
+      radial-gradient(circle at 50% 52%, rgba(16, 185, 129, 0.105), transparent 54%),
+      linear-gradient(180deg, rgba(16, 185, 129, 0.022), rgba(5, 12, 10, 0.075) 58%, transparent);
+    opacity: 0.94;
+  }
+
+  .service-system-visual::before {
+    background: linear-gradient(90deg, transparent, rgba(52, 211, 153, 0.14), transparent);
+    content: "";
+    height: 1px;
+    left: 0;
+    opacity: 0.58;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+  }
+
+  .service-system-visual-grid {
+    background-image:
+      linear-gradient(rgba(52, 211, 153, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(52, 211, 153, 0.085) 1px, transparent 1px);
+    background-size: 13px 13px;
+    inset: 0;
+    opacity: 0.32;
+    position: absolute;
+  }
+
+  .service-system-svg {
+    height: 100%;
+    inset: 0;
+    overflow: hidden;
+    position: absolute;
+    shape-rendering: geometricPrecision;
+    width: 100%;
+  }
+
+  .system-layer,
+  .system-layer-edge,
+  .system-layer-grid-line,
+  .system-axis,
+  .system-connector-line,
+  .system-base-grid,
+  .system-output-shell,
+  .system-core-ring {
+    transition:
+      fill 220ms ease,
+      stroke 220ms ease,
+      opacity 220ms ease;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .system-layer {
+    fill: rgba(16, 185, 129, 0.07);
+    stroke: rgba(110, 231, 183, 0.26);
+    stroke-width: 1;
+  }
+
+  .system-layer--top {
+    fill: rgba(16, 185, 129, 0.15);
+    stroke: rgba(167, 243, 208, 0.38);
+    filter: drop-shadow(0 0 6px rgba(52, 211, 153, 0.12));
+  }
+
+  .system-layer--second {
+    fill: rgba(16, 185, 129, 0.105);
+  }
+
+  .system-layer--third {
+    fill: rgba(16, 185, 129, 0.086);
+  }
+
+  .system-layer--fourth,
+  .system-layer--base {
+    fill: rgba(16, 185, 129, 0.06);
+    opacity: 0.9;
+  }
+
+  .system-layer-edge,
+  .system-layer-grid-line,
+  .system-axis,
+  .system-connector-line,
+  .system-base-grid {
+    fill: none;
+    stroke: rgba(110, 231, 183, 0.2);
+    stroke-linecap: square;
+    stroke-linejoin: round;
+    stroke-width: 1;
+  }
+
+  .system-layer-grid-line,
+  .system-base-grid {
+    stroke: rgba(52, 211, 153, 0.115);
+  }
+
+  .system-axis {
+    stroke: rgba(167, 243, 208, 0.18);
+  }
+
+  .system-connector-line {
+    stroke: rgba(110, 231, 183, 0.28);
+  }
+
+  .system-side-label,
+  .system-output-label {
+    fill: rgba(209, 250, 229, 0.58);
+    font-family: var(--font-mono);
+    font-size: 7.1px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .system-output-label {
+    fill: rgba(209, 250, 229, 0.55);
+    font-size: 6.9px;
+  }
+
+  .system-label-dot,
+  .system-node,
+  .system-core-node {
+    fill: rgba(52, 211, 153, 0.76);
+    filter: drop-shadow(0 0 4px rgba(52, 211, 153, 0.18));
+    transition:
+      fill 220ms ease,
+      opacity 220ms ease;
+  }
+
+  .system-node {
+    opacity: 0.66;
+  }
+
+  .system-node--active,
+  .system-core-node {
+    fill: rgba(167, 243, 208, 0.86);
+    opacity: 1;
+  }
+
+  .system-core-glow {
+    fill: rgba(52, 211, 153, 0.065);
+    stroke: rgba(52, 211, 153, 0.14);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .system-core-ring {
+    fill: rgba(16, 185, 129, 0.06);
+    stroke: rgba(167, 243, 208, 0.26);
+    stroke-width: 1;
+  }
+
+  .system-output-shell {
+    fill: rgba(16, 185, 129, 0.02);
+    stroke: rgba(110, 231, 183, 0.23);
+    stroke-width: 1;
+  }
+
+  .system-output-shell--active {
+    fill: rgba(16, 185, 129, 0.045);
+    stroke: rgba(167, 243, 208, 0.32);
+  }
+
+  .service-engagement-card:hover .service-system-visual .system-layer,
+  .service-engagement-card:focus-within .service-system-visual .system-layer {
+    stroke: rgba(167, 243, 208, 0.3);
+  }
+
+  .service-engagement-card:hover .service-system-visual .system-layer--top,
+  .service-engagement-card:focus-within .service-system-visual .system-layer--top {
+    fill: rgba(16, 185, 129, 0.16);
+    stroke: rgba(167, 243, 208, 0.4);
+  }
+
+  .service-engagement-card:hover .service-system-visual .system-node,
+  .service-engagement-card:hover .service-system-visual .system-core-node,
+  .service-engagement-card:focus-within .service-system-visual .system-node,
+  .service-engagement-card:focus-within .service-system-visual .system-core-node {
+    fill: rgba(167, 243, 208, 0.9);
+    opacity: 1;
+  }
+
+  .service-engagement-card:hover .service-system-visual .system-output-shell,
+  .service-engagement-card:focus-within .service-system-visual .system-output-shell {
+    stroke: rgba(167, 243, 208, 0.3);
   }
 
   .service-visual-grid {
@@ -603,6 +1012,13 @@
       opacity 240ms ease,
       transform 240ms ease;
     z-index: 2;
+  }
+
+  .service-engagement-detail--diagnostic .service-engagement-includes,
+  .service-engagement-detail--build .service-engagement-includes,
+  .service-engagement-detail--system .service-engagement-includes {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   .service-engagement-card:hover .service-engagement-visual,
@@ -930,7 +1346,11 @@
     }
 
     .service-diagnostic-visual *,
-    .service-diagnostic-visual::before {
+    .service-diagnostic-visual::before,
+    .service-build-visual *,
+    .service-build-visual::before,
+    .service-system-visual *,
+    .service-system-visual::before {
       animation: none;
       transition: none;
     }

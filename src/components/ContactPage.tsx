@@ -25,6 +25,12 @@ const caseStudyTitles: Record<string, string> = {
   'toronto-real-estate-brand-system': 'Toronto Real Estate Brand System',
 };
 
+const engagementTitles: Record<string, string> = {
+  'diagnostic-sprint': 'Diagnostic Sprint',
+  'build-sprint': 'Build Sprint',
+  'full-system-build': 'Full System Build',
+};
+
 function titleFromCaseSlug(slug: string) {
   return slug
     .split('-')
@@ -161,7 +167,9 @@ export function ContactPage() {
 
   const isSuccess = submitState === 'success';
   const caseParam = searchParams.get('case')?.trim() || '';
+  const engagementParam = searchParams.get('engagement')?.trim() || '';
   const caseStudyTitle = caseParam ? caseStudyTitles[caseParam] || titleFromCaseSlug(caseParam) : '';
+  const engagementTitle = engagementParam ? engagementTitles[engagementParam] || titleFromCaseSlug(engagementParam) : '';
 
   const updateField = (field: keyof FormState, value: string) => {
     setValues((current) => ({ ...current, [field]: value }));
@@ -215,6 +223,7 @@ export function ContactPage() {
         body: JSON.stringify({
           ...values,
           caseStudy: caseStudyTitle || undefined,
+          engagement: engagementTitle || undefined,
         }),
       });
       const result = await response.json().catch(() => null);
@@ -334,6 +343,13 @@ export function ContactPage() {
               <div className="mb-5 inline-flex max-w-full items-center gap-2 border border-emerald-500/28 bg-emerald-500/7 px-3 py-2 text-mono-xs uppercase tracking-widest text-emerald-300">
                 <span className="h-1.5 w-1.5 shrink-0 bg-emerald-400 shadow-[0_0_8px_rgba(16,185,129,0.65)]" />
                 <span className="min-w-0 truncate">Discussing Build: {caseStudyTitle}</span>
+              </div>
+            )}
+
+            {engagementTitle && (
+              <div className="mb-5 inline-flex max-w-full items-center gap-2 border border-emerald-500/28 bg-emerald-500/7 px-3 py-2 text-mono-xs uppercase tracking-widest text-emerald-300">
+                <span className="h-1.5 w-1.5 shrink-0 bg-emerald-400 shadow-[0_0_8px_rgba(16,185,129,0.65)]" />
+                <span className="min-w-0 truncate">Selected Engagement: {engagementTitle}</span>
               </div>
             )}
 

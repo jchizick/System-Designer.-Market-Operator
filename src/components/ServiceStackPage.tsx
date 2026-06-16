@@ -125,6 +125,7 @@ const offers = [
 const engagementTypes = [
   {
     title: 'Diagnostic Sprint',
+    slug: 'diagnostic-sprint',
     accent: 'Clarity First',
     description: 'Short, focused engagement to clarify the real problem and map the path forward.',
     includes: ['System audit', 'Problem map', 'Opportunity map', 'Implementation brief'],
@@ -132,6 +133,7 @@ const engagementTypes = [
   },
   {
     title: 'Build Sprint',
+    slug: 'build-sprint',
     accent: 'Focused Build',
     description: 'Focused build to create the system core fast and ship a working first version.',
     includes: ['UX / UI direction', 'System architecture', 'Frontend build', 'Workflow logic', 'Deployment-ready asset'],
@@ -139,6 +141,7 @@ const engagementTypes = [
   },
   {
     title: 'Full System Build',
+    slug: 'full-system-build',
     accent: 'Premium Depth',
     description: 'Deeper engagement to design, build, and deploy a complete operating system.',
     includes: ['Strategy & positioning', 'System architecture', 'Interface design', 'AI workflow layer', 'Brand / message layer', 'Deployment support'],
@@ -529,8 +532,8 @@ function EngagementCard({ engagement }: { engagement: (typeof engagementTypes)[n
         </div>
       </div>
 
-      <Link to="/contact" className="service-inline-cta mt-4 inline-flex items-center gap-2 self-start font-mono text-[12px] font-medium uppercase tracking-[0.08em] text-emerald-400 transition-colors hover:text-emerald-300">
-        View Details
+      <Link to={`/contact?engagement=${engagement.slug}`} className="service-inline-cta mt-4 inline-flex items-center gap-2 self-start font-mono text-[12px] font-medium uppercase tracking-[0.08em] text-emerald-400 transition-colors hover:text-emerald-300">
+        Start This Engagement
         <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.6} />
       </Link>
     </article>

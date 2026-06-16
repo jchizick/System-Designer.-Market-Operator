@@ -647,7 +647,7 @@ function FitList({
       </div>
       <ul className="space-y-2.5">
         {items.map((item) => (
-          <li key={item} className={`grid grid-cols-[2rem_minmax(0,1fr)] items-center gap-3 border px-3 py-2.5 font-mono text-[13px] leading-snug text-white/68 ${rowClasses}`}>
+          <li key={item} className={`grid grid-cols-[2rem_minmax(0,1fr)] items-center gap-3 border px-2.5 py-2 font-mono text-[13px] leading-snug text-white/68 ${rowClasses}`}>
             <span className={`flex h-7 w-7 items-center justify-center rounded-full border ${colorClasses}`}>
               <Icon className="h-[18px] w-[18px]" strokeWidth={2.2} />
             </span>

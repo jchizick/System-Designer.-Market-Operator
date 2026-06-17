@@ -1038,6 +1038,10 @@
     box-shadow:
       inset 0 0 20px rgba(16, 185, 129, 0.025),
       0 0 24px rgba(16, 185, 129, 0.035);
+    transition:
+      border-color 240ms ease,
+      box-shadow 240ms ease,
+      filter 240ms ease;
   }
 
   .service-fit-scanner-core::before,
@@ -1054,8 +1058,59 @@
     opacity: 0.34;
   }
 
+  .service-fit-scanner-ring {
+    animation: serviceFitScannerRing 5.4s ease-out infinite;
+    transform-origin: center;
+    will-change: opacity, transform;
+  }
+
+  .service-fit-scanner-ring--inner {
+    animation-delay: -1.35s;
+  }
+
+  .service-fit-scanner-ring--outer {
+    animation-delay: -3.05s;
+  }
+
+  .service-fit-scanner-sweep {
+    animation: serviceFitScannerSweep 5.4s ease-in-out infinite;
+    opacity: 0;
+    transform: translateY(-2.45rem);
+    will-change: opacity, transform;
+  }
+
+  .service-fit-scanner-node {
+    animation: serviceFitScannerNode 5.4s ease-in-out infinite;
+    box-shadow:
+      inset 0 0 12px rgba(52, 211, 153, 0.035),
+      0 0 16px rgba(52, 211, 153, 0.045);
+    transform-origin: center;
+    will-change: opacity, transform;
+  }
+
   .service-fit-scanner-dot {
     animation: serviceFitScannerPulse 4.8s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+  }
+
+  .service-fit-section:hover .service-fit-scanner-core,
+  .service-fit-section:focus-within .service-fit-scanner-core {
+    border-color: rgba(52, 211, 153, 0.28);
+    box-shadow:
+      inset 0 0 22px rgba(16, 185, 129, 0.04),
+      0 0 28px rgba(16, 185, 129, 0.055);
+    filter: brightness(1.08);
+  }
+
+  .service-fit-section:hover .service-fit-scanner-ring,
+  .service-fit-section:focus-within .service-fit-scanner-ring {
+    animation-duration: 4.7s;
+  }
+
+  .service-fit-section:hover .service-fit-scanner-sweep,
+  .service-fit-section:focus-within .service-fit-scanner-sweep {
+    background: linear-gradient(90deg, transparent, rgba(167, 243, 208, 0.48), transparent);
   }
 
   .service-status-ticks span {
@@ -1215,12 +1270,62 @@
       filter 180ms ease;
   }
 
+  .service-build-command::before {
+    background:
+      radial-gradient(ellipse at 50% 52%, rgba(52, 211, 153, 0.078), transparent 45%),
+      radial-gradient(circle at 50% 28%, rgba(16, 185, 129, 0.038), transparent 34%),
+      linear-gradient(180deg, rgba(16, 185, 129, 0.018), transparent 54%);
+    content: "";
+    inset: 0;
+    opacity: 0.66;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  .service-build-command::after {
+    background:
+      linear-gradient(90deg, transparent 0 24%, rgba(52, 211, 153, 0.08) 24% calc(24% + 1px), transparent calc(24% + 1px) 100%),
+      linear-gradient(90deg, transparent 0 76%, rgba(52, 211, 153, 0.06) 76% calc(76% + 1px), transparent calc(76% + 1px) 100%),
+      linear-gradient(180deg, transparent 0 30%, rgba(52, 211, 153, 0.08) 30% calc(30% + 1px), transparent calc(30% + 1px) 100%),
+      linear-gradient(180deg, transparent 0 70%, rgba(52, 211, 153, 0.052) 70% calc(70% + 1px), transparent calc(70% + 1px) 100%);
+    content: "";
+    inset: 0;
+    opacity: 0.34;
+    pointer-events: none;
+    position: absolute;
+    mask-image: radial-gradient(ellipse at 50% 52%, black 0%, black 52%, transparent 80%);
+  }
+
+  .service-build-command-inner {
+    isolation: isolate;
+  }
+
+  .service-build-command-inner::before {
+    background:
+      radial-gradient(ellipse at 50% 56%, rgba(52, 211, 153, 0.1), transparent 62%),
+      linear-gradient(90deg, transparent, rgba(52, 211, 153, 0.04), transparent);
+    content: "";
+    filter: blur(0.5px);
+    inset: -1.75rem -3rem -1.45rem;
+    opacity: 0.56;
+    pointer-events: none;
+    position: absolute;
+    z-index: -1;
+  }
+
   .service-primary-cta:hover,
   .service-primary-cta:focus-visible {
     filter: brightness(1.04);
     box-shadow:
       0 0 24px rgba(52, 211, 153, 0.24),
       inset 0 0 16px rgba(255, 255, 255, 0.14);
+  }
+
+  .service-command-primary-cta:hover,
+  .service-command-primary-cta:focus-visible {
+    box-shadow:
+      0 0 24px rgba(52, 211, 153, 0.22),
+      inset 0 0 16px rgba(255, 255, 255, 0.15);
   }
 
   .service-secondary-cta:hover,
@@ -1332,6 +1437,9 @@
     .service-work-step-card,
     .service-work-step-icon,
     .service-work-step-pulse,
+    .service-fit-scanner-ring,
+    .service-fit-scanner-sweep,
+    .service-fit-scanner-node,
     .service-fit-scanner-dot,
     .service-visual-node--hot,
     .contact-radar-sweep,
@@ -1535,6 +1643,63 @@
     48% {
       opacity: 0.72;
       transform: scale(1.18);
+    }
+  }
+
+  @keyframes serviceFitScannerNode {
+    0%,
+    100% {
+      opacity: 0.28;
+      transform: scale(0.92);
+    }
+
+    46%,
+    58% {
+      opacity: 0.62;
+      transform: scale(1.04);
+    }
+  }
+
+  @keyframes serviceFitScannerRing {
+    0% {
+      opacity: 0;
+      transform: scale(0.86);
+    }
+
+    20% {
+      opacity: 0.34;
+    }
+
+    72% {
+      opacity: 0.08;
+    }
+
+    100% {
+      opacity: 0;
+      transform: scale(1.55);
+    }
+  }
+
+  @keyframes serviceFitScannerSweep {
+    0%,
+    18%,
+    100% {
+      opacity: 0;
+      transform: translateY(-2.45rem);
+    }
+
+    34% {
+      opacity: 0.3;
+    }
+
+    58% {
+      opacity: 0.18;
+      transform: translateY(2.45rem);
+    }
+
+    72% {
+      opacity: 0;
+      transform: translateY(2.45rem);
     }
   }
 

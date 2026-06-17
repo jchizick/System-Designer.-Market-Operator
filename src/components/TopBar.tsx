@@ -1,5 +1,5 @@
 import React, { useEffect, useId, useState } from 'react';
-import { Grid2X2, Menu, X } from 'lucide-react';
+import { CalendarDays, Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 type TopBarProps = {
@@ -117,7 +117,7 @@ export function TopBar({ className = 'max-w-5xl' }: TopBarProps) {
             to="/briefing"
             className="hidden min-h-10 shrink-0 items-center justify-center gap-3 border border-emerald-500/34 bg-emerald-500/[0.025] px-5 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-emerald-400 transition-colors hover:border-emerald-400/55 hover:bg-emerald-500/[0.055] hover:text-emerald-300 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-emerald-400/70 lg:inline-flex"
           >
-            <Grid2X2 className="h-4 w-4" strokeWidth={1.8} />
+            <CalendarDays className="h-4 w-4" strokeWidth={1.8} />
             <span>SCHEDULE BRIEFING</span>
           </Link>
 

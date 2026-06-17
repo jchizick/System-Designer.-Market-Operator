@@ -4,16 +4,17 @@ import {
   Activity,
   ArrowRight,
   Box,
+  CalendarDays,
   CheckCircle2,
   CircleDot,
   CloudUpload,
-  Droplet,
   FileSearch,
   GitBranch,
   Grid2X2,
   Layers,
   MoreHorizontal,
   Network,
+  ScanSearch,
   Search,
   Settings2,
   XCircle,
@@ -129,7 +130,7 @@ const engagementTypes = [
     accent: 'Clarity First',
     description: 'Short, focused engagement to clarify the real problem and map the path forward.',
     includes: ['System audit', 'Problem map', 'Opportunity map', 'Implementation brief'],
-    icon: Droplet,
+    icon: ScanSearch,
   },
   {
     title: 'Build Sprint',
@@ -647,7 +648,7 @@ function FitList({
       </div>
       <ul className="space-y-2.5">
         {items.map((item) => (
-          <li key={item} className={`grid grid-cols-[2rem_minmax(0,1fr)] items-center gap-3 border px-2.5 py-2 font-mono text-[13px] leading-snug text-white/68 ${rowClasses}`}>
+          <li key={item} className={`grid grid-cols-[2rem_minmax(0,1fr)] items-center gap-3 border px-2 py-1.5 font-mono text-[13px] leading-snug text-white/68 ${rowClasses}`}>
             <span className={`flex h-7 w-7 items-center justify-center rounded-full border ${colorClasses}`}>
               <Icon className="h-[18px] w-[18px]" strokeWidth={2.2} />
             </span>
@@ -661,16 +662,18 @@ function FitList({
 
 function CenterReticle() {
   return (
-    <div className="service-fit-scanner relative hidden min-h-[220px] items-center justify-center border-x border-emerald-500/14 lg:flex" aria-hidden="true">
+    <div className="service-fit-scanner relative flex min-h-[96px] items-center justify-center border-y border-emerald-500/14 lg:min-h-[220px] lg:border-x lg:border-y-0" aria-hidden="true">
       <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-emerald-500/24 to-transparent" />
       <div className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 bg-gradient-to-r from-transparent via-emerald-500/24 to-transparent" />
       <span className="absolute top-8 h-px w-10 bg-emerald-400/18" />
       <span className="absolute bottom-8 h-px w-10 bg-red-400/14" />
       <div className="service-fit-scanner-core relative flex h-20 w-20 items-center justify-center border border-emerald-500/18 bg-black/20">
-        <span className="absolute h-16 w-16 border border-emerald-500/18" />
-        <span className="absolute h-10 w-10 border border-emerald-400/26" />
+        <span className="service-fit-scanner-ring service-fit-scanner-ring--outer absolute h-16 w-16 border border-emerald-500/18" />
+        <span className="service-fit-scanner-ring service-fit-scanner-ring--inner absolute h-10 w-10 border border-emerald-400/26" />
+        <span className="service-fit-scanner-sweep absolute h-px w-[7.25rem] bg-gradient-to-r from-transparent via-emerald-300/38 to-transparent" />
         <span className="absolute h-24 w-px bg-gradient-to-b from-transparent via-emerald-400/24 to-transparent" />
         <span className="absolute h-px w-24 bg-gradient-to-r from-transparent via-emerald-400/24 to-transparent" />
+        <span className="service-fit-scanner-node absolute h-5 w-5 border border-emerald-300/24 bg-emerald-400/[0.035]" />
         <span className="service-fit-scanner-dot h-2.5 w-2.5 bg-emerald-400/36 shadow-[0_0_18px_rgba(52,211,153,0.18)]" />
       </div>
     </div>
@@ -679,7 +682,7 @@ function CenterReticle() {
 
 function AudienceFitSection() {
   return (
-    <section className="relative border border-emerald-500/12 bg-emerald-500/[0.018] px-5 py-5 sm:px-6 sm:py-6">
+    <section className="service-fit-section relative border border-emerald-500/12 bg-emerald-500/[0.018] px-5 py-5 sm:px-6 sm:py-6">
       <div className="pointer-events-none absolute inset-0 opacity-[0.07] [background-image:linear-gradient(rgba(16,185,129,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.16)_1px,transparent_1px)] [background-size:24px_24px]" />
       <RevealGroup className="relative z-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_180px_minmax(0,1fr)] lg:gap-9">
         <div className="service-reveal-item" style={{ transitionDelay: '0ms' }}>
@@ -812,36 +815,40 @@ function ProofSection() {
 
 function BuildCtaSection() {
   return (
-    <section className="relative border border-emerald-500/14 bg-emerald-500/[0.018] p-5 sm:p-6">
-      <div className="pointer-events-none absolute inset-0 opacity-[0.07] [background-image:linear-gradient(rgba(16,185,129,0.22)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.16)_1px,transparent_1px)] [background-size:24px_24px]" />
-      <div className="relative z-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
-        <div>
-          <div className="mb-4 text-mono-sm font-medium uppercase tracking-[0.08em] text-emerald-400">
-            // Let's Build
-          </div>
-          <h2 className="font-space-grotesk font-medium text-[28px] leading-[1.05] tracking-[-0.04em] text-text-primary sm:text-[56px]">
-            Ready to Build<br />A System?
-          </h2>
-          <p className="mt-3 max-w-[570px] font-mono text-[13px] leading-[1.55] text-white/62">
-            Bring the scattered pieces. I'll help turn them into structure, interface, workflow, and deployment.
-          </p>
+    <section className="service-build-command relative overflow-hidden border border-emerald-500/14 bg-emerald-500/[0.018] px-5 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+      <div className="pointer-events-none absolute inset-0 opacity-[0.055] [background-image:linear-gradient(rgba(16,185,129,0.22)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.16)_1px,transparent_1px)] [background-size:24px_24px]" />
+      <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/22 to-transparent" />
+
+      <div className="service-build-command-inner relative z-10 mx-auto max-w-[820px] text-center">
+        <div className="mb-3 text-mono-sm font-medium uppercase tracking-[0.08em] text-emerald-400">
+          // LET'S BUILD
         </div>
 
-        <div className="flex flex-col gap-4 sm:flex-row lg:min-w-[600px]">
-          <Link
-            to="/contact"
-            className="service-primary-cta inline-flex min-h-16 flex-1 items-center justify-center gap-6 border border-emerald-400/55 bg-emerald-400 px-7 font-mono text-[13px] font-semibold uppercase tracking-[0.14em] text-[#03110c] shadow-[0_0_22px_rgba(52,211,153,0.2)] transition-colors hover:bg-emerald-300"
-          >
-            <span>Start a Build</span>
-            <ArrowRight className="h-5 w-5" strokeWidth={1.8} />
-          </Link>
-          <Link
-            to="/#case-files"
-            className="service-secondary-cta inline-flex min-h-16 flex-1 items-center justify-center gap-6 border border-emerald-500/36 bg-black/28 px-7 font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-white/62 transition-colors hover:border-emerald-400/55 hover:text-white/84"
-          >
-            <span>View Case Studies</span>
-            <Grid2X2 className="h-5 w-5 text-emerald-400/75" strokeWidth={1.8} />
-          </Link>
+        <div className="service-build-command-prompt relative mx-auto">
+          <h2 className="mx-auto max-w-[760px] font-space-grotesk text-[34px] font-medium leading-[1.02] tracking-[-0.04em] text-text-primary sm:text-[46px] lg:text-[52px]">
+            Ready to Build A System?
+          </h2>
+
+          <p className="mx-auto mt-4 max-w-[620px] font-mono text-[13px] leading-[1.58] text-white/62 sm:text-[14px]">
+            Bring the scattered pieces. I'll help turn them into structure, interface, workflow, and deployment.
+          </p>
+
+          <div className="mx-auto mt-7 flex w-full max-w-[540px] flex-col items-stretch justify-center gap-3 sm:flex-row">
+            <Link
+              to="/contact"
+              className="service-primary-cta service-command-primary-cta inline-flex min-h-12 w-full items-center justify-center gap-4 border border-emerald-400/55 bg-emerald-400 px-6 font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#03110c] shadow-[0_0_18px_rgba(52,211,153,0.16)] transition-colors hover:bg-emerald-300 sm:w-[250px]"
+            >
+              <span>Start a Build</span>
+              <ArrowRight className="h-[18px] w-[18px]" strokeWidth={1.8} />
+            </Link>
+            <Link
+              to="/briefing"
+              className="service-secondary-cta inline-flex min-h-12 w-full items-center justify-center gap-3.5 border border-emerald-500/24 bg-black/22 px-6 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-white/58 transition-colors hover:border-emerald-400/50 hover:text-white/80 sm:w-[250px]"
+            >
+              <span>Schedule Briefing</span>
+              <CalendarDays className="h-[18px] w-[18px] text-emerald-400/72" strokeWidth={1.8} />
+            </Link>
+          </div>
         </div>
       </div>
     </section>

@@ -1,4 +1,9 @@
 import { Link } from 'react-router-dom';
+import algonquinDashboardThumb from '../assets/algonquin-dashboard-thumb.png';
+import blockchainBrawlersThumb from '../assets/blockchain-brawlers-thumb.png';
+import brawlerMindThumb from '../assets/brawler-mind-thumb.png';
+import marketCommandThumb from '../assets/market-command-thumb.png';
+import syntheticFoundryThumb from '../assets/synthetic-foundry-thumb.png';
 
 const homepageCaseFiles = [
   {
@@ -6,30 +11,35 @@ const homepageCaseFiles = [
     title: 'Market Command',
     outcome: 'Private trading dashboard for market context, review, and execution readiness.',
     path: '/market-command-v2',
+    thumbnail: marketCommandThumb,
   },
   {
     id: 'SYN_FOUNDRY',
     title: 'Synthetic Foundry',
     outcome: 'AI-assisted brand system for faster strategy and execution.',
     path: '/ai-brand-machine-synthetic-foundry-v2',
+    thumbnail: syntheticFoundryThumb,
   },
   {
     id: 'ALG_DASH',
     title: 'Algonquin Dashboard',
     outcome: 'Trip planning dashboard for routes, gear, meals, and readiness.',
     path: '/algonquin-dashboard-v2',
+    thumbnail: algonquinDashboardThumb,
   },
   {
     id: 'BRAWLER_MIND',
     title: 'The Brawler Mind',
     outcome: 'Trading performance system for psychology, routines, and execution.',
     path: '/trading-journey-brawler-mind-v2',
+    thumbnail: brawlerMindThumb,
   },
   {
     id: 'BRAWL_HQ',
     title: 'Blockchain Brawlers',
     outcome: 'Content, community, and education engine for crypto traders.',
     path: '/blockchain-brawlers-v2',
+    thumbnail: blockchainBrawlersThumb,
   },
 ];
 
@@ -49,9 +59,19 @@ export function CaseFiles() {
           <Link
             key={c.path}
             to={c.path}
-            className="relative flex h-full min-h-[170px] min-w-0 flex-col gap-3 bg-emerald-500/[0.04] border border-emerald-500/10 p-4 group hover:border-emerald-500/25 hover:-translate-y-0.5 hover:shadow-[0_4px_16px_-2px_rgba(16,185,129,0.1)] transition-all duration-300 ease-out cursor-pointer no-underline"
+            className="relative flex h-full min-h-[260px] min-w-0 flex-col gap-3 bg-emerald-500/[0.04] border border-emerald-500/10 p-4 group hover:border-emerald-500/25 hover:-translate-y-0.5 hover:shadow-[0_4px_16px_-2px_rgba(16,185,129,0.1)] transition-all duration-300 ease-out cursor-pointer no-underline"
           >
             <span className="absolute right-4 top-4 h-2 w-2 bg-emerald-400/90 shadow-[0_0_6px_rgba(52,211,153,0.45)]" aria-hidden="true" />
+
+            <div className="-mx-1 -mt-1 aspect-video overflow-hidden border border-emerald-500/12 bg-black/30">
+              <img
+                src={c.thumbnail}
+                alt=""
+                className="h-full w-full object-cover opacity-88 transition duration-300 group-hover:scale-[1.025] group-hover:opacity-100"
+                loading="lazy"
+                aria-hidden="true"
+              />
+            </div>
 
             <div className="h-4 min-w-0 pr-5 text-mono-2xs">
               <span className="block truncate whitespace-nowrap text-text-primary font-medium">SYS: {c.id}</span>

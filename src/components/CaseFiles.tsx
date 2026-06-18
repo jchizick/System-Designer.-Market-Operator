@@ -49,10 +49,10 @@ export function CaseFiles() {
       <div className="flex items-center gap-4 mb-2">
         <span className="text-mono-xs text-emerald-400 flex-shrink-0">002 // CASE STUDIES</span>
         <div className="flex-1 h-px bg-white/[0.06]" />
-        <a href="#" className="text-mono-xs text-emerald-500 hover:text-emerald-400 transition-colors tracking-[0.08em] flex items-center gap-1.5 flex-shrink-0">
+        <Link to="/case-studies" className="text-mono-xs text-emerald-500 hover:text-emerald-400 transition-colors tracking-[0.08em] flex items-center gap-1.5 flex-shrink-0">
           BROWSE ALL SYSTEMS
           <span className="text-[10px]">→</span>
-        </a>
+        </Link>
       </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
         {homepageCaseFiles.map((c) => (

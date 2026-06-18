@@ -21,6 +21,7 @@ import { BrawlerMindV2Page } from './components/BrawlerMindV2Page';
 import { ContactPage } from './components/ContactPage';
 import { ServiceStackPage } from './components/ServiceStackPage';
 import { BriefingPage } from './components/BriefingPage';
+import { CaseStudiesPage } from './components/CaseStudiesPage';
 
 function HomePage() {
   return (
@@ -93,6 +94,7 @@ export default function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/briefing" element={<BriefingPage />} />
         <Route path="/services" element={<ServiceStackPage />} />
+        <Route path="/case-studies" element={<CaseStudiesPage />} />
         <Route path="/reading-path" element={<ReadingPathPage />} />
         <Route path="/field-notes" element={<FieldNotesArchivePage />} />
         <Route path="/field-notes/:slug" element={<FieldNotePage />} />

@@ -639,7 +639,7 @@ function FitList({
     : 'border-red-400/12 bg-red-400/[0.014]';
 
   return (
-    <div className="service-active-card service-fit-panel h-full min-w-0 border border-emerald-500/12 bg-black/12 p-4">
+    <div className={`service-active-card service-fit-panel service-fit-panel--${tone} h-full min-w-0 border border-emerald-500/12 bg-black/12 p-4`}>
       <div className="mb-5 flex items-center justify-between gap-4 border-b border-emerald-500/10 pb-3">
         <div className={`text-mono-sm font-semibold uppercase tracking-[0.08em] ${labelClasses}`}>
           // {label}

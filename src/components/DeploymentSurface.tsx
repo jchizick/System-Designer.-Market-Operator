@@ -52,9 +52,11 @@ const metrics: MetricItem[] = [
 
 function SegmentedMetricBar({
   filledSegments,
+  metricIndex,
   totalSegments = 10,
 }: {
   filledSegments: number;
+  metricIndex: number;
   totalSegments?: number;
 }) {
   return (
@@ -65,11 +67,17 @@ function SegmentedMetricBar({
         return (
           <span
             key={segmentIndex}
+            style={
+              {
+                '--metric-index': metricIndex,
+                '--segment-index': segmentIndex,
+              } as React.CSSProperties
+            }
             className={[
-              'h-2.5 w-[3px] border border-emerald-500/10 sm:h-3 sm:w-1',
+              'response-metric-segment h-2.5 w-[3px] border border-emerald-500/10 bg-emerald-950/45 sm:h-3 sm:w-1',
               isActive
-                ? 'bg-emerald-400/75 shadow-[0_0_5px_rgba(52,211,153,0.18)]'
-                : 'bg-emerald-950/45',
+                ? 'response-metric-segment-active'
+                : '',
             ].join(' ')}
           />
         );
@@ -120,6 +128,66 @@ export function DeploymentSurface() {
         @keyframes deployment-link-heartbeat {
           0%, 70%, 100% { opacity: 0.62; }
           24% { opacity: 1; }
+        }
+
+        @keyframes response-metric-boot {
+          0% { opacity: 0; transform: translateY(3px); border-color: rgba(16, 185, 129, 0.04); }
+          35% { opacity: 0.38; }
+          48% { opacity: 0.16; }
+          62% { opacity: 0.72; }
+          100% { opacity: 1; transform: translateY(0); border-color: rgba(16, 185, 129, 0.12); }
+        }
+
+        @keyframes response-metric-scan {
+          0% { opacity: 0; transform: translateX(-120%); }
+          20% { opacity: 0.42; }
+          100% { opacity: 0; transform: translateX(420%); }
+        }
+
+        @keyframes response-metric-fill {
+          0% { background-color: rgba(2, 44, 34, 0.45); box-shadow: none; }
+          55% { background-color: rgba(110, 231, 183, 0.9); box-shadow: 0 0 7px rgba(52, 211, 153, 0.28); }
+          100% { background-color: rgba(52, 211, 153, 0.75); box-shadow: 0 0 5px rgba(52, 211, 153, 0.18); }
+        }
+
+        @keyframes response-metric-value-lock {
+          0%, 28% { opacity: 0; clip-path: inset(0 100% 0 0); }
+          42% { opacity: 0.25; }
+          52% { opacity: 0.08; }
+          68% { opacity: 0.72; clip-path: inset(0 18% 0 0); }
+          100% { opacity: 1; clip-path: inset(0); }
+        }
+
+        .response-metric {
+          position: relative;
+          overflow: hidden;
+          opacity: 0;
+          animation: response-metric-boot 520ms steps(5, end) forwards;
+          animation-delay: calc(180ms + var(--metric-index) * 240ms);
+        }
+
+        .response-metric::after {
+          content: "";
+          position: absolute;
+          inset-block: 0;
+          left: 0;
+          width: 28%;
+          pointer-events: none;
+          background: linear-gradient(90deg, transparent, rgba(52, 211, 153, 0.1), transparent);
+          opacity: 0;
+          animation: response-metric-scan 680ms ease-out forwards;
+          animation-delay: calc(260ms + var(--metric-index) * 240ms);
+        }
+
+        .response-metric-segment-active {
+          animation: response-metric-fill 220ms steps(2, end) forwards;
+          animation-delay: calc(520ms + var(--metric-index) * 240ms + var(--segment-index) * 55ms);
+        }
+
+        .response-metric-value {
+          opacity: 0;
+          animation: response-metric-value-lock 480ms steps(5, end) forwards;
+          animation-delay: calc(880ms + var(--metric-index) * 240ms);
         }
 
         .deployment-rail {
@@ -200,13 +268,29 @@ export function DeploymentSurface() {
         @media (prefers-reduced-motion: reduce) {
           .deployment-rail::after,
           .deployment-stack-card::before,
-          .deployment-link-status {
+          .deployment-link-status,
+          .response-metric,
+          .response-metric::after,
+          .response-metric-segment-active,
+          .response-metric-value {
             animation: none !important;
           }
 
           .deployment-rail::after,
           .deployment-stack-card::before {
             opacity: 0 !important;
+          }
+
+          .response-metric,
+          .response-metric-value {
+            opacity: 1 !important;
+            transform: none !important;
+            clip-path: none !important;
+          }
+
+          .response-metric-segment-active {
+            background-color: rgba(52, 211, 153, 0.75) !important;
+            box-shadow: 0 0 5px rgba(52, 211, 153, 0.18) !important;
           }
         }
       `}</style>
@@ -271,18 +355,19 @@ export function DeploymentSurface() {
 
           <SurfaceSection title="Response Metrics">
             <div className="space-y-1.5 sm:hidden">
-              {metrics.map(({ label, value, filledSegments }) => (
+              {metrics.map(({ label, value, filledSegments }, metricIndex) => (
                 <div
                   key={label}
-                  className="min-w-0 border-t border-emerald-500/12 bg-emerald-500/[0.01] px-1.5 py-1.5"
+                  style={{ '--metric-index': metricIndex } as React.CSSProperties}
+                  className="response-metric min-w-0 border-t border-emerald-500/12 bg-emerald-500/[0.01] px-1.5 py-1.5"
                 >
                   <div className="min-w-0 truncate text-mono-3xs uppercase text-emerald-400/55">
                     <span className="text-emerald-500/45">//</span>{' '}
                     {label}
                   </div>
                   <div className="mt-1 flex min-w-0 items-center justify-between gap-3">
-                    <SegmentedMetricBar filledSegments={filledSegments} />
-                    <div className="shrink-0 font-mono text-[15px] leading-none text-emerald-300/65 tabular-nums">
+                    <SegmentedMetricBar filledSegments={filledSegments} metricIndex={metricIndex} />
+                    <div className="response-metric-value shrink-0 font-mono text-[15px] leading-none text-emerald-300/65 tabular-nums">
                       {value}
                     </div>
                   </div>
@@ -291,18 +376,19 @@ export function DeploymentSurface() {
             </div>
 
             <div className="hidden grid-cols-3 gap-2 sm:grid">
-              {metrics.map(({ label, value, filledSegments }) => (
+              {metrics.map(({ label, value, filledSegments }, metricIndex) => (
                 <div
                   key={label}
-                  className="min-w-0 border-l border-t border-emerald-500/12 bg-emerald-500/[0.01] px-2 py-1.5"
+                  style={{ '--metric-index': metricIndex } as React.CSSProperties}
+                  className="response-metric min-w-0 border-l border-t border-emerald-500/12 bg-emerald-500/[0.01] px-2 py-1.5"
                 >
                   <div className="mb-0.5 truncate text-mono-3xs uppercase text-emerald-400/55">
                     <span className="text-emerald-500/45">//</span>{' '}
                     {label}
                   </div>
                   <div className="flex min-w-0 items-center justify-between gap-2">
-                    <SegmentedMetricBar filledSegments={filledSegments} />
-                    <div className="shrink-0 font-mono text-[15px] leading-none text-emerald-300/65 tabular-nums">
+                    <SegmentedMetricBar filledSegments={filledSegments} metricIndex={metricIndex} />
+                    <div className="response-metric-value shrink-0 font-mono text-[15px] leading-none text-emerald-300/65 tabular-nums">
                       {value}
                     </div>
                   </div>

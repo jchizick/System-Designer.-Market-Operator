@@ -897,10 +897,10 @@ export function ServiceStackPage() {
                   <ArrowRight className="h-5 w-5" strokeWidth={1.8} />
                 </Link>
                 <Link
-                  to="/#case-files"
+                  to="/case-studies"
                   className="service-secondary-cta inline-flex min-h-14 items-center justify-center gap-8 border border-emerald-500/36 bg-black/28 px-8 font-mono text-[13px] font-semibold uppercase tracking-[0.14em] text-white/62 transition-colors hover:border-emerald-400/55 hover:text-white/84"
                 >
-                  <span>View Case Studies</span>
+                  <span>Explore Work</span>
                   <Grid2X2 className="h-5 w-5 text-emerald-400/75" strokeWidth={1.8} />
                 </Link>
               </div>

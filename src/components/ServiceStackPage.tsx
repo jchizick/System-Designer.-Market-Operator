@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion, useInView, useReducedMotion } from 'motion/react';
 import {
   Activity,
   ArrowRight,
@@ -624,10 +625,14 @@ function FitList({
   tone,
   label,
   items,
+  isActive,
+  reducedMotion,
 }: {
   tone: 'fit' | 'misfit';
   label: string;
   items: string[];
+  isActive: boolean;
+  reducedMotion: boolean;
 }) {
   const Icon = tone === 'fit' ? CheckCircle2 : XCircle;
   const colorClasses = tone === 'fit'
@@ -637,6 +642,10 @@ function FitList({
   const rowClasses = tone === 'fit'
     ? 'border-emerald-500/14 bg-emerald-500/[0.018]'
     : 'border-red-400/12 bg-red-400/[0.014]';
+  const sideDelay = tone === 'fit' ? 0.34 : 0.43;
+  const iconGlow = tone === 'fit'
+    ? '0 0 16px rgba(52, 211, 153, 0.24)'
+    : '0 0 16px rgba(248, 113, 113, 0.22)';
 
   return (
     <div className={`service-active-card service-fit-panel service-fit-panel--${tone} h-full min-w-0 border border-emerald-500/12 bg-black/12 p-4`}>
@@ -644,25 +653,48 @@ function FitList({
         <div className={`text-mono-sm font-semibold uppercase tracking-[0.08em] ${labelClasses}`}>
           // {label}
         </div>
-        <span className={`h-1.5 w-8 ${tone === 'fit' ? 'bg-emerald-400/52' : 'bg-red-400/48'}`} aria-hidden="true" />
+        <motion.span
+          className={`h-1.5 w-8 origin-right ${tone === 'fit' ? 'bg-emerald-400/52' : 'bg-red-400/48'}`}
+          initial={reducedMotion ? false : { scaleX: 0, opacity: 0 }}
+          animate={isActive ? { scaleX: 1, opacity: 1 } : undefined}
+          transition={{ duration: reducedMotion ? 0 : 0.32, delay: reducedMotion ? 0 : sideDelay - 0.12, ease: 'easeOut' }}
+          aria-hidden="true"
+        />
       </div>
       <ul className="space-y-2.5">
-        {items.map((item) => (
-          <li key={item} className={`grid grid-cols-[2rem_minmax(0,1fr)] items-center gap-3 border px-2 py-1.5 font-mono text-[13px] leading-snug text-white/68 ${rowClasses}`}>
-            <span className={`flex h-7 w-7 items-center justify-center rounded-full border ${colorClasses}`}>
+        {items.map((item, index) => (
+          <motion.li
+            key={item}
+            className={`grid grid-cols-[2rem_minmax(0,1fr)] items-center gap-3 border px-2 py-1.5 font-mono text-[13px] leading-snug text-white/68 ${rowClasses}`}
+            initial={reducedMotion ? false : { opacity: 0, y: 7 }}
+            animate={isActive ? { opacity: 1, y: 0 } : undefined}
+            transition={{ duration: reducedMotion ? 0 : 0.35, delay: reducedMotion ? 0 : sideDelay + index * 0.07, ease: 'easeOut' }}
+          >
+            <motion.span
+              className={`flex h-7 w-7 items-center justify-center rounded-full border ${colorClasses}`}
+              initial={reducedMotion ? false : { opacity: 0, scale: 0.85 }}
+              animate={isActive ? { opacity: 1, scale: 1, boxShadow: ['0 0 0 rgba(0,0,0,0)', iconGlow, '0 0 0 rgba(0,0,0,0)'] } : undefined}
+              transition={{ duration: reducedMotion ? 0 : 0.42, delay: reducedMotion ? 0 : sideDelay + index * 0.07 + 0.03, ease: 'easeOut' }}
+            >
               <Icon className="h-[18px] w-[18px]" strokeWidth={2.2} />
-            </span>
+            </motion.span>
             <span>{item}</span>
-          </li>
+          </motion.li>
         ))}
       </ul>
     </div>
   );
 }
 
-function CenterReticle() {
+function CenterReticle({ isActive, reducedMotion }: { isActive: boolean; reducedMotion: boolean }) {
   return (
-    <div className="service-fit-scanner relative flex min-h-[96px] items-center justify-center border-y border-emerald-500/14 lg:min-h-[220px] lg:border-x lg:border-y-0" aria-hidden="true">
+    <motion.div
+      className="service-fit-scanner relative flex min-h-[96px] items-center justify-center border-y border-emerald-500/14 lg:min-h-[220px] lg:border-x lg:border-y-0"
+      initial={reducedMotion ? false : { opacity: 0, scale: 0.94 }}
+      animate={isActive ? { opacity: 1, scale: 1 } : undefined}
+      transition={{ duration: reducedMotion ? 0 : 0.45, delay: reducedMotion ? 0 : 0.25, ease: 'easeOut' }}
+      aria-hidden="true"
+    >
       <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-emerald-500/24 to-transparent" />
       <div className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 bg-gradient-to-r from-transparent via-emerald-500/24 to-transparent" />
       <span className="absolute top-8 h-px w-10 bg-emerald-400/18" />
@@ -675,25 +707,55 @@ function CenterReticle() {
         <span className="absolute h-px w-24 bg-gradient-to-r from-transparent via-emerald-400/24 to-transparent" />
         <span className="service-fit-scanner-node absolute h-5 w-5 border border-emerald-300/24 bg-emerald-400/[0.035]" />
         <span className="service-fit-scanner-dot h-2.5 w-2.5 bg-emerald-400/36 shadow-[0_0_18px_rgba(52,211,153,0.18)]" />
+        <motion.span
+          className="pointer-events-none absolute left-1/2 h-px w-16 -translate-x-1/2 bg-gradient-to-r from-transparent via-emerald-200/55 to-transparent"
+          initial={reducedMotion ? false : { opacity: 0, y: -32 }}
+          animate={isActive ? { opacity: [0, 0.55, 0], y: [-32, 0, 32] } : undefined}
+          transition={{ duration: reducedMotion ? 0 : 0.7, delay: reducedMotion ? 0 : 0.58, ease: 'easeInOut' }}
+        />
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 function AudienceFitSection() {
+  const sectionRef = React.useRef<HTMLElement | null>(null);
+  const reducedMotion = useReducedMotion() ?? false;
+  const isInView = useInView(sectionRef, { once: true, amount: 0.18, margin: '0px 0px -8% 0px' });
+  const isActive = reducedMotion || isInView;
+
   return (
-    <section className="service-fit-section relative border border-emerald-500/12 bg-emerald-500/[0.018] px-5 py-5 sm:px-6 sm:py-6">
-      <div className="pointer-events-none absolute inset-0 opacity-[0.07] [background-image:linear-gradient(rgba(16,185,129,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.16)_1px,transparent_1px)] [background-size:24px_24px]" />
-      <RevealGroup className="relative z-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_180px_minmax(0,1fr)] lg:gap-9">
-        <div className="service-reveal-item" style={{ transitionDelay: '0ms' }}>
-          <FitList tone="fit" label="Built For" items={fitSignals} />
-        </div>
-        <CenterReticle />
-        <div className="service-reveal-item" style={{ transitionDelay: '80ms' }}>
-          <FitList tone="misfit" label="Not Built For" items={misfitSignals} />
-        </div>
-      </RevealGroup>
-    </section>
+    <motion.section
+      ref={sectionRef}
+      className="service-fit-section relative border border-emerald-500/12 bg-emerald-500/[0.018] px-5 py-5 sm:px-6 sm:py-6"
+      initial={reducedMotion ? false : { opacity: 0, y: 16 }}
+      animate={isActive ? { opacity: 1, y: 0, boxShadow: reducedMotion ? '0 0 0 rgba(16,185,129,0)' : ['0 0 0 rgba(16,185,129,0)', '0 0 28px rgba(16,185,129,0.09)', '0 0 0 rgba(16,185,129,0)'] } : undefined}
+      transition={{ duration: reducedMotion ? 0 : 0.5, ease: 'easeOut' }}
+    >
+      <motion.div
+        className="pointer-events-none absolute inset-0 [background-image:linear-gradient(rgba(16,185,129,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.16)_1px,transparent_1px)] [background-size:24px_24px]"
+        initial={reducedMotion ? false : { opacity: 0.035 }}
+        animate={isActive ? { opacity: reducedMotion ? 0.07 : [0.035, 0.095, 0.07] } : undefined}
+        transition={{ duration: reducedMotion ? 0 : 0.75, ease: 'easeOut' }}
+      />
+      <div className="relative z-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_180px_minmax(0,1fr)] lg:gap-9">
+        <motion.div
+          initial={reducedMotion ? false : { opacity: 0, x: -14 }}
+          animate={isActive ? { opacity: 1, x: 0, filter: reducedMotion ? 'brightness(1)' : ['brightness(1)', 'brightness(1.1)', 'brightness(1)'] } : undefined}
+          transition={{ duration: reducedMotion ? 0 : 0.55, delay: reducedMotion ? 0 : 0.1, ease: 'easeOut' }}
+        >
+          <FitList tone="fit" label="Built For" items={fitSignals} isActive={isActive} reducedMotion={reducedMotion} />
+        </motion.div>
+        <CenterReticle isActive={isActive} reducedMotion={reducedMotion} />
+        <motion.div
+          initial={reducedMotion ? false : { opacity: 0, x: 14 }}
+          animate={isActive ? { opacity: 1, x: 0, filter: reducedMotion ? 'brightness(1)' : ['brightness(1)', 'brightness(1.08)', 'brightness(1)'] } : undefined}
+          transition={{ duration: reducedMotion ? 0 : 0.55, delay: reducedMotion ? 0 : 0.13, ease: 'easeOut' }}
+        >
+          <FitList tone="misfit" label="Not Built For" items={misfitSignals} isActive={isActive} reducedMotion={reducedMotion} />
+        </motion.div>
+      </div>
+    </motion.section>
   );
 }
 

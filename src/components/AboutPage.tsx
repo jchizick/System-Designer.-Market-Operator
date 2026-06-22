@@ -415,10 +415,10 @@ function PathTimelineSection() {
 
         <div className="relative overflow-x-auto pb-1 scrollbar-hide">
           <div className="relative min-w-[1040px]">
-            <div className="absolute left-2 right-2 top-[25px] h-px bg-white/44" aria-hidden="true" />
-            <span className="about-path-signal-packet absolute top-[25px] z-20 h-1.5 w-1.5 rounded-full bg-[#f1aa3d] shadow-[0_0_10px_rgba(241,170,61,0.72)]" aria-hidden="true" />
-            <span className="absolute left-1 top-[22px] h-1.5 w-1.5 bg-[#f1aa3d] shadow-[0_0_8px_rgba(241,170,61,0.6)]" aria-hidden="true" />
-            <span className="absolute right-1 top-[22px] h-1.5 w-1.5 bg-[#f1aa3d] shadow-[0_0_8px_rgba(241,170,61,0.6)]" aria-hidden="true" />
+            <div className="absolute left-2 right-2 top-[25px] h-px border-t border-dashed border-emerald-500/38" aria-hidden="true" />
+            <span className="about-path-signal-packet absolute top-[25px] z-20 h-1.5 w-1.5 rounded-full bg-emerald-300 shadow-[0_0_12px_rgba(52,211,153,0.68)]" aria-hidden="true" />
+            <span className="absolute left-1 top-[22px] h-1.5 w-1.5 bg-emerald-400 shadow-[0_0_9px_rgba(52,211,153,0.5)]" aria-hidden="true" />
+            <span className="absolute right-1 top-[22px] h-1.5 w-1.5 bg-emerald-400 shadow-[0_0_9px_rgba(52,211,153,0.5)]" aria-hidden="true" />
 
             <div className="grid grid-cols-5 gap-7">
               {pathTimelineSteps.map((step, index) => {
@@ -426,14 +426,11 @@ function PathTimelineSection() {
 
                 return (
                   <article key={step.number} className="relative min-w-0 pt-[76px]">
-                    <div className={`about-path-icon-signal about-path-icon-signal-${index} absolute left-1/2 top-0 z-10 flex h-[52px] w-[52px] -translate-x-1/2 items-center justify-center border border-white/55 bg-black/62 text-white/72 shadow-[0_0_16px_rgba(255,255,255,0.04)]`}>
-                      <span className="absolute inset-1.5 border border-white/18" aria-hidden="true" />
+                    <div className={`about-path-icon-signal about-path-icon-signal-${index} absolute left-1/2 top-0 z-10 flex h-[52px] w-[52px] -translate-x-1/2 items-center justify-center border border-emerald-500/30 bg-[#07100f]/92 text-emerald-300/78 shadow-[inset_0_0_14px_rgba(16,185,129,0.04)]`}>
+                      <span className="absolute inset-1.5 border border-emerald-500/14" aria-hidden="true" />
                       <Icon className="h-6 w-6" strokeWidth={1.35} />
                     </div>
 
-                    {/* <div className="mb-2 font-mono text-[17px] text-center leading-none text-[#f1aa3d] tabular-nums">
-                      {step.number} /
-                    </div> */}
                     <h3 className="mb-3 min-h-[3.7rem] whitespace-pre-line font-mono text-[17px] text-center uppercase leading-[1.15] tracking-[0.04em] text-white/82">
                       {step.title}
                     </h3>
@@ -443,14 +440,14 @@ function PathTimelineSection() {
                     <ul className="mb-4 space-y-1">
                       {step.bullets.map((bullet) => (
                         <li key={bullet} className="grid grid-cols-[0.65rem_minmax(0,1fr)] gap-1.5 font-mono text-[12px] leading-[1.45] text-white/62">
-                          <span className="pt-[0.42rem] text-[9px] leading-none text-[#f1aa3d]">•</span>
+                          <span className="pt-[0.42rem] text-[9px] leading-none text-emerald-400">•</span>
                           <span>{bullet}</span>
                         </li>
                       ))}
                     </ul>
                     {step.href ? (
                       step.href.startsWith('/') ? (
-                        <Link to={step.href} className="inline-flex items-center gap-2 font-mono text-[13px] font-medium text-[#f1aa3d] transition-colors hover:text-[#ffd28a]">
+                        <Link to={step.href} className="inline-flex items-center gap-2 font-mono text-[13px] font-medium text-emerald-400 transition-colors hover:text-emerald-300">
                           <span>{step.cta}</span>
                           <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
                         </Link>
@@ -459,14 +456,14 @@ function PathTimelineSection() {
                           href={step.href}
                           target={step.href.startsWith('http') ? '_blank' : undefined}
                           rel={step.href.startsWith('http') ? 'noreferrer' : undefined}
-                          className="inline-flex items-center gap-2 font-mono text-[13px] font-medium text-[#f1aa3d] transition-colors hover:text-[#ffd28a]"
+                          className="inline-flex items-center gap-2 font-mono text-[13px] font-medium text-emerald-400 transition-colors hover:text-emerald-300"
                         >
                           <span>{step.cta}</span>
                           <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
                         </a>
                       )
                     ) : (
-                      <div className="inline-flex items-center gap-2 font-mono text-[13px] font-medium text-[#f1aa3d]">
+                      <div className="inline-flex items-center gap-2 font-mono text-[13px] font-medium text-emerald-400">
                         <span>{step.cta}</span>
                         <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
                       </div>
@@ -491,7 +488,7 @@ function CurrentWorkSection() {
           <span className="h-px bg-white/10" aria-hidden="true" />
         </div>
 
-        <h2 className="mb-5 font-playfair text-[32px] font-medium leading-tight text-[#f4efe6] sm:text-[40px]">
+        <h2 className="mb-5 font-space-grotesk text-[32px] font-medium leading-tight tracking-[-0.03em] text-text-primary sm:text-[40px]">
           Systems in execution.
         </h2>
 
@@ -500,26 +497,27 @@ function CurrentWorkSection() {
             <RevealSection key={item.title} delay={index * 0.06}>
               <Link
                 to={item.href}
-                className="group flex h-full min-h-[390px] flex-col overflow-hidden border border-white/12 bg-[#070a09]/82 transition-colors hover:border-[#f1aa3d]/45"
+                className="service-active-card group flex h-full min-h-[390px] flex-col overflow-hidden border border-emerald-500/20 bg-[#07100f]/62 shadow-[inset_0_0_24px_rgba(16,185,129,0.025)] transition-colors hover:border-emerald-400/45"
               >
-                <div className="relative aspect-[1.36] overflow-hidden border-b border-white/10 bg-black">
+                <div className="relative aspect-[1.36] overflow-hidden border-b border-emerald-500/16 bg-black">
                   <img
                     src={item.image}
                     alt=""
                     className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
                     aria-hidden="true"
                   />
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_58%,rgba(0,0,0,0.38)_100%)]" aria-hidden="true" />
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,17,12,0.08)_36%,rgba(0,0,0,0.62)_100%)]" aria-hidden="true" />
+                  <div className="pointer-events-none absolute inset-0 opacity-[0.13] [background-image:linear-gradient(rgba(52,211,153,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(52,211,153,0.1)_1px,transparent_1px)] [background-size:18px_18px]" aria-hidden="true" />
                 </div>
 
                 <div className="flex flex-1 flex-col p-5">
-                  <h3 className="mb-3 whitespace-pre-line font-playfair text-[21px] font-medium leading-[1.16] text-[#f4efe6]">
+                  <h3 className="mb-3 whitespace-pre-line font-space-grotesk text-[21px] font-medium leading-[1.16] tracking-[-0.02em] text-text-primary">
                     {item.title}
                   </h3>
                   <p className="mb-6 font-mono text-[13px] leading-[1.68] text-white/60">
                     {item.description}
                   </p>
-                  <span className="mt-auto inline-flex items-center gap-2 font-mono text-[14px] font-medium text-[#f1aa3d]">
+                  <span className="mt-auto inline-flex items-center gap-2 font-mono text-[13px] font-semibold uppercase tracking-[0.08em] text-emerald-400 transition-colors group-hover:text-emerald-300">
                     <span>View Project</span>
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.6} />
                   </span>
@@ -543,7 +541,7 @@ function FinalAboutSections() {
               <span className="text-mono-sm font-medium uppercase leading-tight text-emerald-400">003 // THE THROUGH-LINE</span>
               <span className="h-px bg-white/10" aria-hidden="true" />
             </div>
-            <h2 className="mb-4 font-playfair text-[38px] font-medium leading-[0.98] text-[#f4efe6] sm:text-[46px]">
+            <h2 className="mb-4 font-space-grotesk text-[38px] font-medium leading-[0.98] tracking-[-0.04em] text-text-primary sm:text-[46px]">
               Understanding.<br />
               Structure.<br />
               Execution.
@@ -560,7 +558,7 @@ function FinalAboutSections() {
                   <img
                     src={pillar.icon}
                     alt=""
-                    className="h-16 w-16 object-contain drop-shadow-[0_0_8px_rgba(241,170,61,0.24)]"
+                    className="h-16 w-16 object-contain drop-shadow-[0_0_10px_rgba(52,211,153,0.18)]"
                     aria-hidden="true"
                   />
                 </div>
@@ -586,7 +584,7 @@ function FinalAboutSections() {
                     <div className="flex min-w-0 flex-col">
                       <h3 className="mb-3 whitespace-pre-line font-mono text-[14px] font-medium leading-[1.35] text-white/82">{doc.title}</h3>
                       <p className="mb-4 font-mono text-[12px] leading-[1.55] text-white/50">{doc.description}</p>
-                      <span className="mt-auto inline-flex items-center gap-2 font-mono text-[12px] font-medium text-[#f1aa3d]">
+                      <span className="mt-auto inline-flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-emerald-400 transition-colors group-hover:text-emerald-300">
                         Read Now
                         <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
                       </span>
@@ -602,7 +600,7 @@ function FinalAboutSections() {
                     href={doc.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="group relative grid min-h-[152px] grid-cols-[88px_minmax(0,1fr)] gap-5 border border-white/12 bg-[#070a09]/82 p-4 transition-colors hover:border-[#f1aa3d]/45"
+                    className="service-active-card group relative grid min-h-[152px] grid-cols-[88px_minmax(0,1fr)] gap-5 border border-emerald-500/20 bg-[#07100f]/62 p-4 shadow-[inset_0_0_20px_rgba(16,185,129,0.025)] transition-colors hover:border-emerald-400/45"
                   >
                     {content}
                   </a>
@@ -610,7 +608,7 @@ function FinalAboutSections() {
                   <Link
                     key={doc.title}
                     to={doc.href}
-                    className="group relative grid min-h-[152px] grid-cols-[88px_minmax(0,1fr)] gap-5 border border-white/12 bg-[#070a09]/82 p-4 transition-colors hover:border-[#f1aa3d]/45"
+                    className="service-active-card group relative grid min-h-[152px] grid-cols-[88px_minmax(0,1fr)] gap-5 border border-emerald-500/20 bg-[#07100f]/62 p-4 shadow-[inset_0_0_20px_rgba(16,185,129,0.025)] transition-colors hover:border-emerald-400/45"
                   >
                     {content}
                   </Link>
@@ -626,26 +624,28 @@ function FinalAboutSections() {
             </div>
             <div className="grid grid-cols-1 gap-3">
               {operatorSignals.map((signal) => (
-                <article key={signal.source} className="relative min-h-[136px] border border-white/12 bg-[#070a09]/82 p-5">
-                  <div className="mb-2.5 font-playfair text-[28px] leading-none text-[#f1aa3d]">“</div>
-                  <p className="font-mono text-[13px] leading-[1.6] text-white/66">{signal.quote}</p>
-                  <div className="mt-3 font-mono text-[11px] uppercase tracking-[0.08em] text-white/42">- {signal.source}</div>
+                <article key={signal.source} className="relative min-h-[136px] overflow-hidden border border-emerald-500/20 bg-[#07100f]/62 p-5 shadow-[inset_0_0_20px_rgba(16,185,129,0.025)]">
+                  <div className="pointer-events-none absolute inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(52,211,153,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(52,211,153,0.1)_1px,transparent_1px)] [background-size:16px_16px]" aria-hidden="true" />
+                  <div className="relative mb-2.5 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-emerald-400">// Signal Received</div>
+                  <p className="relative font-mono text-[13px] leading-[1.6] text-white/66">“{signal.quote}”</p>
+                  <div className="relative mt-3 border-t border-emerald-500/12 pt-3 font-mono text-[10px] uppercase tracking-[0.1em] text-emerald-300/52">- {signal.source}</div>
                 </article>
               ))}
             </div>
           </section>
         </div>
 
-        <section className="relative overflow-hidden border border-emerald-400/35 bg-[#07100f]/72 px-6 py-8 shadow-[inset_0_0_0_1px_rgba(241,170,61,0.2)] sm:px-12">
-          <div className="absolute left-0 top-0 h-3 w-3 border-l border-t border-[#f1aa3d]/45" aria-hidden="true" />
-          <div className="absolute bottom-0 right-0 h-3 w-3 border-b border-r border-[#f1aa3d]/45" aria-hidden="true" />
+        <section className="relative overflow-hidden border border-emerald-400/30 bg-[#07100f]/72 px-6 py-8 shadow-[inset_0_0_28px_rgba(16,185,129,0.035)] sm:px-12">
+          <div className="pointer-events-none absolute inset-0 opacity-[0.07] [background-image:linear-gradient(rgba(52,211,153,0.14)_1px,transparent_1px),linear-gradient(90deg,rgba(52,211,153,0.12)_1px,transparent_1px)] [background-size:20px_20px]" aria-hidden="true" />
+          <div className="absolute left-0 top-0 h-3 w-3 border-l border-t border-emerald-300/45" aria-hidden="true" />
+          <div className="absolute bottom-0 right-0 h-3 w-3 border-b border-r border-emerald-300/45" aria-hidden="true" />
           <div className="grid grid-cols-1 items-center gap-0 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:gap-6">
-            <span className="hidden font-playfair text-[58px] leading-none text-[#f1aa3d]/55 sm:block" aria-hidden="true">✶</span>
-            <div className="text-center font-mono text-[18px] leading-[1.55] sm:text-[22px]">
+            <span className="relative hidden font-mono text-[22px] font-semibold leading-none text-emerald-400/55 sm:block" aria-hidden="true">::</span>
+            <div className="relative text-center font-mono text-[18px] leading-[1.55] sm:text-[22px]">
               <div className="text-white/86">I build internal and external systems for navigating complexity.</div>
               <div className="text-emerald-400">Then I test them where it matters.</div>
             </div>
-            <span className="hidden font-playfair text-[58px] leading-none text-[#f1aa3d]/55 sm:block" aria-hidden="true">✶</span>
+            <span className="relative hidden font-mono text-[22px] font-semibold leading-none text-emerald-400/55 sm:block" aria-hidden="true">::</span>
           </div>
         </section>
       </section>
@@ -715,16 +715,17 @@ export function AboutPage() {
             SECTION 01 — HERO
         ═══════════════════════════════════════════ */}
         <RevealSection className="mb-6">
-          <section className="relative min-h-[540px] overflow-hidden border border-white/[0.06] bg-black shadow-[inset_0_0_40px_rgba(0,0,0,0.5)]">
+          <section className="relative min-h-[540px] overflow-hidden border border-emerald-500/18 bg-black shadow-[inset_0_0_44px_rgba(0,0,0,0.58),0_0_30px_rgba(16,185,129,0.035)]">
             <img
               src={aboutHeroBg}
               alt=""
-              className="absolute inset-0 h-full w-full object-cover object-[58%_48%]"
+              className="absolute inset-0 h-full w-full object-cover object-[58%_48%] saturate-[0.72] contrast-[1.08]"
               aria-hidden="true"
             />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.78)_28%,rgba(0,0,0,0.28)_56%,rgba(0,0,0,0.68)_100%)]" aria-hidden="true" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_68%_42%,rgba(255,255,255,0.08),transparent_32%),linear-gradient(0deg,rgba(0,0,0,0.75),transparent_28%)]" aria-hidden="true" />
-            <div className="pointer-events-none absolute inset-0 opacity-[0.16] [background-image:linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.055)_1px,transparent_1px)] [background-size:20px_20px]" aria-hidden="true" />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.94)_0%,rgba(0,0,0,0.8)_28%,rgba(3,17,12,0.34)_58%,rgba(0,0,0,0.76)_100%)]" aria-hidden="true" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_68%_42%,rgba(16,185,129,0.1),transparent_34%),linear-gradient(0deg,rgba(0,0,0,0.78),transparent_30%)]" aria-hidden="true" />
+            <div className="pointer-events-none absolute inset-0 opacity-[0.2] [background-image:linear-gradient(rgba(52,211,153,0.09)_1px,transparent_1px),linear-gradient(90deg,rgba(52,211,153,0.07)_1px,transparent_1px)] [background-size:20px_20px]" aria-hidden="true" />
+            <div className="pointer-events-none absolute inset-x-0 top-[34%] h-px bg-gradient-to-r from-transparent via-emerald-300/28 to-transparent shadow-[0_0_12px_rgba(52,211,153,0.12)]" aria-hidden="true" />
 
             <div className="relative z-10 flex min-h-[540px] flex-col px-4 py-4 sm:px-8 sm:py-4">
               <header className="mb-6 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-3 text-mono-xs uppercase text-white/48">
@@ -744,9 +745,9 @@ export function AboutPage() {
               <div className="grid flex-1 grid-cols-1 gap-6 lg:grid-cols-[minmax(0,0.58fr)_minmax(16rem,0.42fr)] lg:items-center">
                 <div className="max-w-[560px]">
                   {/* <div className="mb-4 text-mono-sm font-medium uppercase text-emerald-400">ABOUT / OPERATOR</div> */}
-                  <h1 className="font-playfair text-[44px] font-medium leading-[0.94] tracking-[0] text-[#f4efe6] sm:text-[56px] lg:text-[56px]">
+                  <h1 className="font-space-grotesk text-[44px] font-medium leading-[0.96] tracking-[-0.045em] text-text-primary sm:text-[56px] lg:text-[56px]">
                     <span className="block">I study systems.</span>
-                    <span className="block pt-1.5 italic text-[#f1aa3d]">Then I build in them.</span>
+                    <span className="block pt-1.5 text-emerald-400">Then I build in them.</span>
                   </h1>
 
                   <p className="mt-6 max-w-[450px] font-mono text-[13px] leading-[1.62] text-white/66 sm:text-[14px]">
@@ -756,25 +757,31 @@ export function AboutPage() {
                   <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                     <Link
                       to="/contact"
-                      className="inline-flex min-h-9 items-center justify-center border border-emerald-500/45 bg-emerald-500/[0.08] px-7 text-mono-xs font-medium uppercase tracking-[0.14em] text-emerald-300 transition-colors hover:border-emerald-300 hover:bg-emerald-500/15"
+                      className="service-primary-cta inline-flex min-h-12 items-center justify-center gap-5 border border-emerald-400/55 bg-emerald-400 px-7 font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#03110c] shadow-[0_0_18px_rgba(52,211,153,0.16)] transition-colors hover:bg-emerald-300"
                     >
-                      [ Contact Operator ]
+                      <span>Contact Operator</span>
+                      <ArrowRight className="h-4 w-4" strokeWidth={1.8} />
                     </Link>
                     <Link
                       to="/"
-                      className="inline-flex min-h-9 items-center justify-center border border-white/16 bg-black/22 px-7 text-mono-xs font-medium uppercase tracking-[0.14em] text-white/58 transition-colors hover:border-white/30 hover:text-white/78"
+                      className="service-secondary-cta inline-flex min-h-12 items-center justify-center gap-5 border border-emerald-500/30 bg-black/28 px-7 font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-white/62 transition-colors hover:border-emerald-400/55 hover:text-white/84"
                     >
-                      [ View Case Studies ]
+                      <span>View Case Studies</span>
+                      <BookOpen className="h-4 w-4 text-emerald-400/75" strokeWidth={1.8} />
                     </Link>
                   </div>
                 </div>
 
-                <aside className="ml-auto hidden max-w-[285px] pr-4 text-[#d8d1c6]/78 lg:block">
-                  <div className="mb-2 font-playfair text-[30px] leading-none text-[#f1aa3d]">“</div>
-                  <blockquote className="font-playfair text-[19px] italic leading-[1.38]">
+                <aside className="relative ml-auto hidden max-w-[310px] overflow-hidden border border-emerald-500/22 bg-[#07100f]/68 p-5 text-white/68 shadow-[inset_0_0_24px_rgba(16,185,129,0.03)] lg:block">
+                  <div className="pointer-events-none absolute inset-0 opacity-[0.09] [background-image:linear-gradient(rgba(52,211,153,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(52,211,153,0.1)_1px,transparent_1px)] [background-size:16px_16px]" aria-hidden="true" />
+                  <div className="relative mb-4 flex items-center justify-between border-b border-emerald-500/16 pb-3 font-mono text-[10px] font-semibold uppercase tracking-[0.13em] text-emerald-400">
+                    <span>// Operator Note</span>
+                    <span className="text-emerald-300/38">ORIGIN_01</span>
+                  </div>
+                  <blockquote className="relative font-mono text-[14px] leading-[1.62]">
                     The goal isn't just knowledge. It's clarity under pressure and the ability to build systems that actually work in reality.
                   </blockquote>
-                  <div className="mt-3 text-right font-playfair text-[30px] leading-none text-[#f1aa3d]">”</div>
+                  <div className="relative mt-4 border-t border-emerald-500/12 pt-3 font-mono text-[10px] uppercase tracking-[0.12em] text-emerald-300/45">Status // Field Tested</div>
                 </aside>
               </div>
             </div>

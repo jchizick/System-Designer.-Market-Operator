@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Code2, Database, Workflow, type LucideIcon } from 'lucide-react';
-import operatorPhoto from '../assets/operator-photo.png';
+import operatorPhoto from '../assets/about-page-still.png';
 import { OperationalLoop } from './OperationalLoop';
 
 type Capability = {

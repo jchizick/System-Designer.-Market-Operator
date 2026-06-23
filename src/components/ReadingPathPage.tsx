@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useInView } from 'motion/react';
 import {
@@ -54,9 +54,98 @@ interface Stage {
   title: string;
   goal: string;
   description: string;
-  books: string[];
+  books: Book[];
   outcome: string;
   icon: React.ElementType;
+}
+
+interface Book {
+  id: string;
+  title: string;
+  image?: string;
+}
+
+const bookImageModules = import.meta.glob<string>('../assets/book-images/*', {
+  eager: true,
+  import: 'default',
+});
+
+const bookImageByFileName = Object.fromEntries(
+  Object.entries(bookImageModules).map(([path, image]) => [
+    path.split('/').pop() ?? '',
+    image,
+  ])
+) as Record<string, string>;
+
+const bookImageFileByTitle: Record<string, string> = {
+  'Thinking, Fast and Slow': 'thinking-fast-and-slow.jpg',
+  'Predictably Irrational': 'predictably-irrational.jpg',
+  'The Organized Mind': 'the-organized-mind.jpg',
+  'The Great Mental Models': 'the-great-mental-models.webp',
+  'The Pyramid Principle': 'the-pyramid-principle.jpeg',
+  Ultralearning: 'ultralearning.jpg',
+  Range: 'range.jpg',
+  'The Art of Learning': 'the-art-of-learning.jpg',
+  'Mind Map Mastery': 'mind-map-mastery.jpg',
+  'Lateral Thinking': 'lateral-thinking.jpg',
+  'How Emotions Are Made': 'how-emotions-are-made.webp',
+  'Games People Play': 'games-people-play.jpg',
+  'A Theory of Human Motivation': 'a-theory-of-human-motivation.jpg',
+  'Symbolic Interactionism': 'symbolic-interactionism.jpg',
+  'The Righteous Mind': 'the-righteous-mind.jpg',
+  'Influence: The Psychology of Persuasion':
+    'influence-the-psychology-of-persuasion.jpg',
+  Contagious: 'contagious.jpg',
+  Alchemy: 'alchemy.jpg',
+  'Breakthrough Advertising': 'breakthrough-advertising.jpg',
+  Propaganda: 'propaganda.jpg',
+  'Basic Economics': 'basic-economics.jpg',
+  'The Wealth of Nations': 'the-wealth-of-nations.jpg',
+  'The Psychology of Money': 'the-psychology-of-money.jpg',
+  'The Black Swan': 'the-black-swan.jpg',
+  Antifragile: 'antifragile.jpg',
+  'The Art of War': 'the-art-of-war.jpg',
+  'The Prince': 'the-prince.jpg',
+  'The 48 Laws of Power': 'the-48-laws-of-power.jpg',
+  'Playing to Win': 'playing-to-win.jpg',
+  Positioning: 'positioning.jpg',
+  'The Effective Executive': 'the-effective-executive.webp',
+  'High Output Management': 'high-output-managment.jpg',
+  'The Personal MBA': 'the-personal-mba.jpg',
+  'Zero to One': 'zero-to-one.jpg',
+  'The Hard Thing About Hard Things': 'the-hard-thing-about-hard-things.jpg',
+  Scale: 'scale.jpg',
+  'The Misbehavior of Markets': 'the-misbehavior-of-markets.jpg',
+  Superintelligence: 'superintelligence.jpg',
+  'A Brief History of Time': 'a-brief-history-of-time.jpg',
+  'Steps to an Ecology of Mind': 'steps-to-an-ecology-of-mind.jpg',
+  Meditations: 'meditations.jpg',
+  "Man's Search for Meaning": 'mans-search-for-meaning.jpg',
+  'The Republic': 'the-republic.jpg',
+  'Being and Time': 'being-and-time.jpg',
+  'The Lessons of History': 'the-lessons-of-history.jpg',
+  'The Hero with a Thousand Faces': 'the-hero-with-a-thousand-faces.webp',
+  'The Power of Myth': 'the-power-of-myth.jpg',
+  'The Art of Memory': 'the-art-of-memory.jpg',
+  'The Kybalion': 'the-kybalion.jpg',
+};
+
+function slugifyBookTitle(title: string) {
+  return title
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+function createBook(title: string): Book {
+  const imageFileName = bookImageFileByTitle[title];
+
+  return {
+    id: slugifyBookTitle(title),
+    title,
+    image: imageFileName ? bookImageByFileName[imageFileName] : undefined,
+  };
 }
 
 const stages: Stage[] = [
@@ -73,7 +162,7 @@ const stages: Stage[] = [
       'The Organized Mind',
       'The Great Mental Models',
       'The Pyramid Principle',
-    ],
+    ].map(createBook),
     outcome:
       'You start noticing bias, noise, bad thinking—including your own.',
     icon: Eye,
@@ -91,7 +180,7 @@ const stages: Stage[] = [
       'The Art of Learning',
       'Mind Map Mastery',
       'Lateral Thinking',
-    ],
+    ].map(createBook),
     outcome:
       'You stop consuming passively and start training your brain deliberately.',
     icon: Brain,
@@ -109,7 +198,7 @@ const stages: Stage[] = [
       'A Theory of Human Motivation',
       'Symbolic Interactionism',
       'The Righteous Mind',
-    ],
+    ].map(createBook),
     outcome: 'You see behavior as patterns, not personalities.',
     icon: Users,
   },
@@ -126,7 +215,7 @@ const stages: Stage[] = [
       'Alchemy',
       'Breakthrough Advertising',
       'Propaganda',
-    ],
+    ].map(createBook),
     outcome:
       'You start recognizing—and using—attention, emotion, and narrative as tools.',
     icon: Megaphone,
@@ -144,7 +233,7 @@ const stages: Stage[] = [
       'The Psychology of Money',
       'The Black Swan',
       'Antifragile',
-    ],
+    ].map(createBook),
     outcome:
       'You stop thinking in opinions and start thinking in incentives and probabilities.',
     icon: TrendingUp,
@@ -162,7 +251,7 @@ const stages: Stage[] = [
       'The 48 Laws of Power',
       'Playing to Win',
       'Positioning',
-    ],
+    ].map(createBook),
     outcome: 'You start thinking in moves, not reactions.',
     icon: Swords,
   },
@@ -179,7 +268,7 @@ const stages: Stage[] = [
       'The Personal MBA',
       'Zero to One',
       'The Hard Thing About Hard Things',
-    ],
+    ].map(createBook),
     outcome:
       'You build systems that produce results, not just ideas.',
     icon: Cog,
@@ -197,7 +286,7 @@ const stages: Stage[] = [
       'Superintelligence',
       'A Brief History of Time',
       'Steps to an Ecology of Mind',
-    ],
+    ].map(createBook),
     outcome:
       'You start seeing patterns across domains (biology, markets, tech, society).',
     icon: Network,
@@ -215,7 +304,7 @@ const stages: Stage[] = [
       'The Republic',
       'Being and Time',
       'The Lessons of History',
-    ],
+    ].map(createBook),
     outcome:
       'You develop a personal philosophy instead of borrowed beliefs.',
     icon: Compass,
@@ -232,7 +321,7 @@ const stages: Stage[] = [
       'The Power of Myth',
       'The Art of Memory',
       'The Kybalion',
-    ],
+    ].map(createBook),
     outcome:
       'You see how stories shape reality—and how to create them.',
     icon: Sparkles,
@@ -256,8 +345,81 @@ const progressionKeywords = [
 /* ═══════════════════════════════════════════════════════════════
    STAGE CARD
    ═══════════════════════════════════════════════════════════════ */
+function BookCoverRail({
+  books,
+  activeBookId,
+  onActiveBookChange,
+}: {
+  books: Book[];
+  activeBookId: string | null;
+  onActiveBookChange: (bookId: string | null) => void;
+}) {
+  const coverBooks = books.filter((book) => book.image).slice(0, 5);
+
+  if (coverBooks.length === 0) {
+    return null;
+  }
+
+  const displayedActiveBookId = activeBookId ?? coverBooks[0].id;
+
+  return (
+    <aside
+      className="relative border border-emerald-500/10 bg-black/20 p-3 shadow-[inset_0_0_24px_rgba(16,185,129,0.025)] sm:p-4"
+      onMouseLeave={() => onActiveBookChange(null)}
+      aria-label="Book cover previews"
+    >
+      <div className="mb-3 flex items-center justify-between gap-3">
+        <span className="text-mono-xs text-emerald-400/55">FIELD TEXTS</span>
+        <span className="h-px flex-1 bg-emerald-500/10" />
+        <span className="font-mono text-[10px] text-text-secondary/35">
+          {coverBooks.length.toString().padStart(2, '0')}
+        </span>
+      </div>
+
+      <div className="flex items-center gap-3 overflow-x-auto pb-1 sm:gap-4">
+        {coverBooks.map((book) => {
+          const isActive = displayedActiveBookId === book.id;
+
+          return (
+            <button
+              key={book.id}
+              type="button"
+              className={[
+                'relative aspect-[2/3] h-32 w-[86px] flex-[0_0_auto] overflow-hidden border bg-bg-surface/80 text-left shadow-[0_10px_28px_-16px_rgba(0,229,168,0.45)] outline-none transition-[transform,opacity,border-color,box-shadow] duration-300 motion-reduce:transition-none sm:h-36 sm:w-24 lg:h-[162px] lg:w-[108px]',
+                isActive
+                  ? 'z-10 -translate-y-1 scale-[1.025] border-emerald-400/45 opacity-100 shadow-[0_0_0_1px_rgba(0,229,168,0.08),0_16px_32px_-18px_rgba(0,229,168,0.8)]'
+                  : 'border-[rgba(0,229,168,0.18)] opacity-60 hover:opacity-90',
+              ].join(' ')}
+              onMouseEnter={() => onActiveBookChange(book.id)}
+              onMouseMove={() => onActiveBookChange(book.id)}
+              onPointerEnter={() => onActiveBookChange(book.id)}
+              onPointerMove={() => onActiveBookChange(book.id)}
+              onFocus={() => onActiveBookChange(book.id)}
+              onBlur={() => onActiveBookChange(null)}
+              aria-label={`Highlight ${book.title}`}
+            >
+              <img
+                src={book.image}
+                alt={`${book.title} cover`}
+                loading="lazy"
+                className="h-full w-full object-cover"
+              />
+              <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0)_58%,rgba(0,0,0,0.62)_100%)]" />
+              <span className="pointer-events-none absolute left-1.5 top-1.5 h-2 w-2 border-l border-t border-emerald-300/35" />
+              <span className="pointer-events-none absolute bottom-1.5 right-1.5 h-2 w-2 border-b border-r border-emerald-300/35" />
+            </button>
+          );
+        })}
+      </div>
+    </aside>
+  );
+}
+
 function StageCard({ stage, index }: { key?: React.Key; stage: Stage; index: number }) {
   const Icon = stage.icon;
+  const [activeBookId, setActiveBookId] = useState<string | null>(null);
+  const hasCoverImages = stage.books.some((book) => book.image);
+
   return (
     <RevealSection delay={index * 0.06} className="w-full">
       <div
@@ -315,22 +477,54 @@ function StageCard({ stage, index }: { key?: React.Key; stage: Stage; index: num
             <span className="text-mono-xs text-emerald-400/60 mb-3 block">
               READING LIST
             </span>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
-              {stage.books.map((book, bIdx) => (
+            <div
+              className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2"
+              onMouseLeave={() => setActiveBookId(null)}
+            >
+              {stage.books.map((book) => {
+                const isActive = activeBookId === book.id;
+
+                return (
                 <div
-                  key={book}
+                  key={book.id}
                   className="flex items-start gap-2.5 group/book"
+                  onMouseEnter={() => setActiveBookId(book.id)}
+                  onMouseMove={() => setActiveBookId(book.id)}
+                  onPointerEnter={() => setActiveBookId(book.id)}
+                  onPointerMove={() => setActiveBookId(book.id)}
+                  onFocus={() => setActiveBookId(book.id)}
                 >
-                  <span className="text-emerald-500/40 mt-[5px] text-[6px] flex-shrink-0">
+                  <span
+                    className={[
+                      'mt-[5px] text-[6px] flex-shrink-0 transition-colors duration-300 motion-reduce:transition-none',
+                      isActive ? 'text-emerald-300' : 'text-emerald-500/40',
+                    ].join(' ')}
+                  >
                     ●
                   </span>
-                  <span className="font-space-grotesk text-body-sm group-hover/book:text-text-primary transition-colors">
-                    {book}
+                  <span
+                    className={[
+                      'font-space-grotesk text-body-sm transition-colors duration-300 motion-reduce:transition-none group-hover/book:text-text-primary',
+                      isActive ? 'text-text-primary' : 'text-text-primary/72',
+                    ].join(' ')}
+                  >
+                    {book.title}
                   </span>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
+
+          {hasCoverImages && (
+            <div className="mb-6">
+              <BookCoverRail
+                books={stage.books}
+                activeBookId={activeBookId}
+                onActiveBookChange={setActiveBookId}
+              />
+            </div>
+          )}
 
           {/* Outcome */}
           <div className="border-t border-border-subtle pt-4">

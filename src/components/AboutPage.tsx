@@ -857,6 +857,12 @@ function OriginBriefingCard() {
               aria-hidden="true"
             />
           )}
+          <button
+            type="button"
+            onClick={() => setIsVideoOpen(true)}
+            className="absolute inset-0 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-emerald-300/55"
+            aria-label="Play Origin Briefing video from preview"
+          />
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(3,17,12,0.03)_35%,rgba(0,0,0,0.68)_100%)]" aria-hidden="true" />
           <div className="pointer-events-none absolute inset-0 opacity-[0.14] [background-image:linear-gradient(rgba(52,211,153,0.11)_1px,transparent_1px),linear-gradient(90deg,rgba(52,211,153,0.09)_1px,transparent_1px)] [background-size:18px_18px]" aria-hidden="true" />
           <div className="pointer-events-none absolute inset-x-0 top-0 h-px -translate-y-2 bg-gradient-to-r from-transparent via-emerald-300/55 to-transparent opacity-0 shadow-[0_0_12px_rgba(52,211,153,0.2)] transition-[transform,opacity] duration-[1200ms] group-hover:translate-y-[280px] group-hover:opacity-70 motion-reduce:transition-none" aria-hidden="true" />

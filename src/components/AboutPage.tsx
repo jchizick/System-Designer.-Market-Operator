@@ -403,6 +403,7 @@ const operatorSignals = [
 ];
 
 const ORIGIN_BRIEFING_VIDEO_URL = 'https://ybnjfz0v2gs31z0q.public.blob.vercel-storage.com/operator-story.mp4';
+const ABOUT_PAGE_BACKGROUND_LOOP_URL = 'https://ybnjfz0v2gs31z0q.public.blob.vercel-storage.com/about-page-background-loop.mp4';
 
 
 
@@ -814,6 +815,7 @@ function OriginBriefingModal({ onClose }: { onClose: () => void }) {
 function OriginBriefingCard() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const playButtonRef = useRef<HTMLButtonElement>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   const closeVideo = useCallback(() => {
     setIsVideoOpen(false);
@@ -836,17 +838,31 @@ function OriginBriefingCard() {
         </div>
 
         <figure className="relative aspect-video overflow-hidden bg-black lg:aspect-[1.94/1]">
-          <img
-            src={aboutPageStill}
-            alt="Jordan Chizick seated in a study for an origin briefing"
-            className="h-full w-full object-cover object-center saturate-[0.82] contrast-[1.06] transition duration-700 group-hover:scale-[1.015] group-hover:saturate-[0.92] motion-reduce:transition-none"
-          />
+          {shouldReduceMotion ? (
+            <img
+              src={aboutPageStill}
+              alt="Jordan Chizick seated in a study for an origin briefing"
+              className="h-full w-full object-cover object-center saturate-[0.82] contrast-[1.06] transition duration-700 group-hover:scale-[1.015] group-hover:saturate-[0.92] motion-reduce:transition-none"
+            />
+          ) : (
+            <video
+              className="h-full w-full object-cover object-center saturate-[0.82] contrast-[1.06] transition duration-700 group-hover:scale-[1.015] group-hover:saturate-[0.92]"
+              src={ABOUT_PAGE_BACKGROUND_LOOP_URL}
+              poster={aboutPageStill}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-hidden="true"
+            />
+          )}
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(3,17,12,0.03)_35%,rgba(0,0,0,0.68)_100%)]" aria-hidden="true" />
           <div className="pointer-events-none absolute inset-0 opacity-[0.14] [background-image:linear-gradient(rgba(52,211,153,0.11)_1px,transparent_1px),linear-gradient(90deg,rgba(52,211,153,0.09)_1px,transparent_1px)] [background-size:18px_18px]" aria-hidden="true" />
           <div className="pointer-events-none absolute inset-x-0 top-0 h-px -translate-y-2 bg-gradient-to-r from-transparent via-emerald-300/55 to-transparent opacity-0 shadow-[0_0_12px_rgba(52,211,153,0.2)] transition-[transform,opacity] duration-[1200ms] group-hover:translate-y-[280px] group-hover:opacity-70 motion-reduce:transition-none" aria-hidden="true" />
 
           <div className="absolute right-3 top-3 border border-emerald-500/24 bg-black/58 px-2.5 py-1.5 font-mono text-[9px] uppercase tracking-[0.12em] text-emerald-300/64">
-            Duration: 02:14
+            Duration: 02:05
           </div>
 
           <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4">
@@ -854,12 +870,32 @@ function OriginBriefingCard() {
               ref={playButtonRef}
               type="button"
               onClick={() => setIsVideoOpen(true)}
-              className="inline-flex cursor-pointer items-center gap-3 border border-emerald-400/44 bg-black/76 px-4 py-3 font-mono text-[10px] font-semibold uppercase tracking-[0.13em] text-white/82 shadow-[0_0_16px_rgba(16,185,129,0.08)] transition-all duration-300 hover:border-emerald-300/72 hover:text-emerald-100 hover:shadow-[0_0_22px_rgba(52,211,153,0.16)] focus:outline-none focus:ring-2 focus:ring-emerald-300/55 focus:ring-offset-2 focus:ring-offset-black group-hover:border-emerald-300/72 group-hover:text-emerald-100 group-hover:shadow-[0_0_22px_rgba(52,211,153,0.16)]"
+              className="inline-flex cursor-pointer items-center gap-3 border border-emerald-400/44 bg-black/76 px-3 py-2.5 font-mono text-[10px] font-semibold uppercase tracking-[0.13em] text-white/82 shadow-[0_0_16px_rgba(16,185,129,0.08)] transition-all duration-300 hover:border-emerald-300/72 hover:text-emerald-100 hover:shadow-[0_0_22px_rgba(52,211,153,0.16)] focus:outline-none focus:ring-2 focus:ring-emerald-300/55 focus:ring-offset-2 focus:ring-offset-black group-hover:border-emerald-300/72 group-hover:text-emerald-100 group-hover:shadow-[0_0_22px_rgba(52,211,153,0.16)]"
               aria-label="Play Origin Briefing video"
             >
-              <span className="flex h-8 w-8 items-center justify-center rounded-full border border-emerald-400/58 bg-emerald-400/[0.1] text-emerald-300 shadow-[0_0_10px_rgba(52,211,153,0.08)] transition-all duration-300 group-hover:bg-emerald-400/16 group-hover:text-emerald-200 group-hover:shadow-[0_0_16px_rgba(52,211,153,0.22)]">
+              <motion.span
+                className="relative flex h-8 w-8 items-center justify-center rounded-full border border-emerald-400/58 bg-emerald-400/[0.1] text-emerald-300 shadow-[0_0_10px_rgba(52,211,153,0.08)] transition-all duration-300 group-hover:bg-emerald-400/16 group-hover:text-emerald-200 group-hover:shadow-[0_0_16px_rgba(52,211,153,0.22)]"
+                animate={shouldReduceMotion ? undefined : { boxShadow: [
+                  '0 0 10px rgba(52,211,153,0.08)',
+                  '0 0 18px rgba(52,211,153,0.24)',
+                  '0 0 10px rgba(52,211,153,0.08)',
+                ] }}
+                transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <motion.span
+                  className="pointer-events-none absolute inset-[-3px] rounded-full border border-emerald-300/40"
+                  aria-hidden="true"
+                  animate={shouldReduceMotion ? undefined : { opacity: [0, 0.42, 0], scale: [0.82, 1.72, 2.05] }}
+                  transition={{ duration: 2.4, repeat: Infinity, ease: 'easeOut' }}
+                />
+                <motion.span
+                  className="pointer-events-none absolute inset-[-3px] rounded-full border border-emerald-200/22"
+                  aria-hidden="true"
+                  animate={shouldReduceMotion ? undefined : { opacity: [0, 0.28, 0], scale: [0.82, 1.45, 1.78] }}
+                  transition={{ duration: 2.4, repeat: Infinity, ease: 'easeOut', delay: 0.55 }}
+                />
                 <Play className="ml-0.5 h-4 w-4" fill="currentColor" strokeWidth={1.5} />
-              </span>
+              </motion.span>
               <span>[ Play Briefing ]</span>
             </button>
             <span className="hidden font-mono text-[9px] uppercase tracking-[0.12em] text-white/38 sm:block">Frame_001 / 214</span>

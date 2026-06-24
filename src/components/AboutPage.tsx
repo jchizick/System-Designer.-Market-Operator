@@ -1,6 +1,7 @@
-import React, { useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
-import { motion, useInView } from 'motion/react';
+import { motion, useInView, useReducedMotion } from 'motion/react';
 import {
   GraduationCap,
   Search,
@@ -14,6 +15,7 @@ import {
   ArrowRight,
   BookOpen,
   Play,
+  X,
 } from 'lucide-react';
 import {
   systemMapNodes,
@@ -400,6 +402,8 @@ const operatorSignals = [
   },
 ];
 
+const ORIGIN_BRIEFING_VIDEO_URL = 'https://ybnjfz0v2gs31z0q.public.blob.vercel-storage.com/operator-story.mp4';
+
 
 
 /* ═══════════════════════════════════════════════════════════════
@@ -697,65 +701,195 @@ function PrincipleCard({ principle, index }: { key?: React.Key; principle: typeo
   );
 }
 
-function OriginBriefingCard() {
-  return (
-    <motion.article
-      className="group relative w-full overflow-hidden border border-emerald-500/24 bg-[#07100f]/82 shadow-[inset_0_0_28px_rgba(16,185,129,0.03),0_0_24px_rgba(16,185,129,0.035)] transition-colors duration-300 hover:border-emerald-400/58"
-      whileHover={{ y: -2 }}
-      transition={{ duration: 0.25, ease: 'easeOut' }}
-      aria-label="Origin Briefing media preview"
+function OriginBriefingModal({ onClose }: { onClose: () => void }) {
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+
+  const closeModal = useCallback(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.pause();
+      video.currentTime = 0;
+    }
+    onClose();
+  }, [onClose]);
+
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const focusAttempt = window.requestAnimationFrame(() => {
+      closeButtonRef.current?.focus();
+    });
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' || event.key === 'Esc') {
+        closeModal();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown, true);
+
+    const playAttempt = window.setTimeout(() => {
+      const playPromise = videoRef.current?.play();
+      playPromise?.catch(() => {
+        // Native controls remain available if the browser blocks autoplay.
+      });
+    }, 0);
+
+    return () => {
+      window.cancelAnimationFrame(focusAttempt);
+      window.clearTimeout(playAttempt);
+      window.removeEventListener('keydown', handleKeyDown, true);
+      document.body.style.overflow = previousOverflow;
+
+      const video = videoRef.current;
+      if (video) {
+        video.pause();
+        video.currentTime = 0;
+      }
+    };
+  }, [closeModal]);
+
+  return createPortal(
+    <motion.div
+      className="fixed inset-0 z-[10020] flex items-center justify-center bg-black/86 px-4 py-6 backdrop-blur-sm sm:px-6"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Origin Briefing video player"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.18, ease: 'easeOut' }}
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) {
+          closeModal();
+        }
+      }}
     >
-      <div className="flex items-center justify-between gap-4 border-b border-emerald-500/18 bg-black/28 px-4 py-3 font-mono text-[9px] font-semibold uppercase tracking-[0.13em] sm:text-[10px]">
-        <span className="text-emerald-400">// Origin Briefing</span>
-        <span className="text-white/38">Personal History</span>
-      </div>
-
-      <figure className="relative aspect-video cursor-pointer overflow-hidden bg-black lg:aspect-[1.94/1]">
-        <img
-          src={aboutPageStill}
-          alt="Jordan Chizick seated in a study for an origin briefing"
-          className="h-full w-full object-cover object-center saturate-[0.82] contrast-[1.06] transition duration-700 group-hover:scale-[1.015] group-hover:saturate-[0.92] motion-reduce:transition-none"
-        />
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(3,17,12,0.03)_35%,rgba(0,0,0,0.68)_100%)]" aria-hidden="true" />
-        <div className="pointer-events-none absolute inset-0 opacity-[0.14] [background-image:linear-gradient(rgba(52,211,153,0.11)_1px,transparent_1px),linear-gradient(90deg,rgba(52,211,153,0.09)_1px,transparent_1px)] [background-size:18px_18px]" aria-hidden="true" />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-px -translate-y-2 bg-gradient-to-r from-transparent via-emerald-300/55 to-transparent opacity-0 shadow-[0_0_12px_rgba(52,211,153,0.2)] transition-[transform,opacity] duration-[1200ms] group-hover:translate-y-[280px] group-hover:opacity-70 motion-reduce:transition-none" aria-hidden="true" />
-
-        <div className="absolute right-3 top-3 border border-emerald-500/24 bg-black/58 px-2.5 py-1.5 font-mono text-[9px] uppercase tracking-[0.12em] text-emerald-300/64">
-          Duration: 02:14
-        </div>
-
-        <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4">
-          <div className="inline-flex cursor-pointer items-center gap-3 border border-emerald-400/44 bg-black/76 px-4 py-3 font-mono text-[10px] font-semibold uppercase tracking-[0.13em] text-white/82 shadow-[0_0_16px_rgba(16,185,129,0.08)] transition-all duration-300 group-hover:border-emerald-300/72 group-hover:text-emerald-100 group-hover:shadow-[0_0_22px_rgba(52,211,153,0.16)]">
-            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-emerald-400/58 bg-emerald-400/[0.1] text-emerald-300 shadow-[0_0_10px_rgba(52,211,153,0.08)] transition-all duration-300 group-hover:bg-emerald-400/16 group-hover:text-emerald-200 group-hover:shadow-[0_0_16px_rgba(52,211,153,0.22)]">
-              <Play className="ml-0.5 h-4 w-4" fill="currentColor" strokeWidth={1.5} />
-            </span>
-            <span>[ Play Briefing ]</span>
+      <motion.div
+        className="relative w-full max-w-5xl border border-emerald-400/34 bg-[#030706] shadow-[0_0_44px_rgba(16,185,129,0.14),inset_0_0_30px_rgba(16,185,129,0.035)]"
+        initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.985, y: 8 }}
+        animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
+        exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.99, y: 4 }}
+        transition={{ duration: 0.22, ease: [0.25, 0.46, 0.45, 0.94] }}
+      >
+        <div className="flex items-center justify-between border-b border-emerald-500/18 bg-black/38 px-4 py-3">
+          <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.13em] text-emerald-400">
+            // Origin Briefing
           </div>
-          <span className="hidden font-mono text-[9px] uppercase tracking-[0.12em] text-white/38 sm:block">Frame_001 / 214</span>
+          <button
+            ref={closeButtonRef}
+            type="button"
+            onClick={closeModal}
+            className="inline-flex h-9 w-9 items-center justify-center border border-emerald-400/34 bg-black/58 text-emerald-200/82 transition-colors hover:border-emerald-300/72 hover:text-emerald-100 focus:outline-none focus:ring-2 focus:ring-emerald-300/55 focus:ring-offset-2 focus:ring-offset-black"
+            aria-label="Close Origin Briefing video"
+          >
+            <X className="h-4 w-4" strokeWidth={1.7} />
+          </button>
         </div>
-      </figure>
 
-      <div className="grid grid-cols-1 border-t border-emerald-500/18 sm:grid-cols-2">
-        <div className="border-b border-emerald-500/14 px-4 py-3 sm:border-b-0 sm:border-r">
-          <div className="font-mono text-[8px] uppercase tracking-[0.13em] text-white/34">Status</div>
-          <div className="mt-1 font-mono text-[10px] font-medium uppercase tracking-[0.11em] text-emerald-400/78">Field Tested</div>
+        <div className="relative max-h-[calc(100vh-8rem)] overflow-hidden bg-black">
+          <video
+            ref={videoRef}
+            className="block h-full max-h-[calc(100vh-8rem)] w-full object-contain"
+            src={ORIGIN_BRIEFING_VIDEO_URL}
+            poster={aboutPageStill}
+            controls
+            playsInline
+            preload="metadata"
+            autoPlay
+          />
+          <div className="pointer-events-none absolute inset-0 border border-emerald-300/10" aria-hidden="true" />
         </div>
-        <div className="px-4 py-3">
-          <div className="font-mono text-[8px] uppercase tracking-[0.13em] text-white/34">System</div>
-          <div className="mt-1 font-mono text-[10px] font-medium uppercase tracking-[0.11em] text-emerald-400/78">Operator_Story</div>
+
+        <span className="pointer-events-none absolute left-0 top-0 h-3 w-3 border-l border-t border-emerald-300/52" aria-hidden="true" />
+        <span className="pointer-events-none absolute bottom-0 right-0 h-3 w-3 border-b border-r border-emerald-300/52" aria-hidden="true" />
+      </motion.div>
+    </motion.div>,
+    document.body
+  );
+}
+
+function OriginBriefingCard() {
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const playButtonRef = useRef<HTMLButtonElement>(null);
+
+  const closeVideo = useCallback(() => {
+    setIsVideoOpen(false);
+    window.requestAnimationFrame(() => {
+      playButtonRef.current?.focus();
+    });
+  }, []);
+
+  return (
+    <>
+      <motion.article
+        className="group relative w-full overflow-hidden border border-emerald-500/24 bg-[#07100f]/82 shadow-[inset_0_0_28px_rgba(16,185,129,0.03),0_0_24px_rgba(16,185,129,0.035)] transition-colors duration-300 hover:border-emerald-400/58"
+        whileHover={{ y: -2 }}
+        transition={{ duration: 0.25, ease: 'easeOut' }}
+        aria-label="Origin Briefing media preview"
+      >
+        <div className="flex items-center justify-between gap-4 border-b border-emerald-500/18 bg-black/28 px-4 py-3 font-mono text-[9px] font-semibold uppercase tracking-[0.13em] sm:text-[10px]">
+          <span className="text-emerald-400">// Origin Briefing</span>
+          <span className="text-white/38">Personal History</span>
         </div>
-      </div>
 
-      <aside className="relative border-t border-emerald-500/14 bg-black/18 px-4 py-4">
-        <div className="mb-2 font-mono text-[9px] font-semibold uppercase tracking-[0.13em] text-emerald-400/72">// Operator Note</div>
-        <blockquote className="font-mono text-[11px] leading-[1.58] text-white/54 sm:text-[12px]">
-          The goal isn't just knowledge. It's clarity under pressure and the ability to build systems that actually work in reality.
-        </blockquote>
-      </aside>
+        <figure className="relative aspect-video overflow-hidden bg-black lg:aspect-[1.94/1]">
+          <img
+            src={aboutPageStill}
+            alt="Jordan Chizick seated in a study for an origin briefing"
+            className="h-full w-full object-cover object-center saturate-[0.82] contrast-[1.06] transition duration-700 group-hover:scale-[1.015] group-hover:saturate-[0.92] motion-reduce:transition-none"
+          />
+          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(3,17,12,0.03)_35%,rgba(0,0,0,0.68)_100%)]" aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-0 opacity-[0.14] [background-image:linear-gradient(rgba(52,211,153,0.11)_1px,transparent_1px),linear-gradient(90deg,rgba(52,211,153,0.09)_1px,transparent_1px)] [background-size:18px_18px]" aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-px -translate-y-2 bg-gradient-to-r from-transparent via-emerald-300/55 to-transparent opacity-0 shadow-[0_0_12px_rgba(52,211,153,0.2)] transition-[transform,opacity] duration-[1200ms] group-hover:translate-y-[280px] group-hover:opacity-70 motion-reduce:transition-none" aria-hidden="true" />
 
-      <span className="pointer-events-none absolute left-0 top-0 h-3 w-3 border-l border-t border-emerald-300/42" aria-hidden="true" />
-      <span className="pointer-events-none absolute bottom-0 right-0 h-3 w-3 border-b border-r border-emerald-300/42" aria-hidden="true" />
-    </motion.article>
+          <div className="absolute right-3 top-3 border border-emerald-500/24 bg-black/58 px-2.5 py-1.5 font-mono text-[9px] uppercase tracking-[0.12em] text-emerald-300/64">
+            Duration: 02:14
+          </div>
+
+          <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4">
+            <button
+              ref={playButtonRef}
+              type="button"
+              onClick={() => setIsVideoOpen(true)}
+              className="inline-flex cursor-pointer items-center gap-3 border border-emerald-400/44 bg-black/76 px-4 py-3 font-mono text-[10px] font-semibold uppercase tracking-[0.13em] text-white/82 shadow-[0_0_16px_rgba(16,185,129,0.08)] transition-all duration-300 hover:border-emerald-300/72 hover:text-emerald-100 hover:shadow-[0_0_22px_rgba(52,211,153,0.16)] focus:outline-none focus:ring-2 focus:ring-emerald-300/55 focus:ring-offset-2 focus:ring-offset-black group-hover:border-emerald-300/72 group-hover:text-emerald-100 group-hover:shadow-[0_0_22px_rgba(52,211,153,0.16)]"
+              aria-label="Play Origin Briefing video"
+            >
+              <span className="flex h-8 w-8 items-center justify-center rounded-full border border-emerald-400/58 bg-emerald-400/[0.1] text-emerald-300 shadow-[0_0_10px_rgba(52,211,153,0.08)] transition-all duration-300 group-hover:bg-emerald-400/16 group-hover:text-emerald-200 group-hover:shadow-[0_0_16px_rgba(52,211,153,0.22)]">
+                <Play className="ml-0.5 h-4 w-4" fill="currentColor" strokeWidth={1.5} />
+              </span>
+              <span>[ Play Briefing ]</span>
+            </button>
+            <span className="hidden font-mono text-[9px] uppercase tracking-[0.12em] text-white/38 sm:block">Frame_001 / 214</span>
+          </div>
+        </figure>
+
+        <div className="grid grid-cols-1 border-t border-emerald-500/18 sm:grid-cols-2">
+          <div className="border-b border-emerald-500/14 px-4 py-3 sm:border-b-0 sm:border-r">
+            <div className="font-mono text-[8px] uppercase tracking-[0.13em] text-white/34">Status</div>
+            <div className="mt-1 font-mono text-[10px] font-medium uppercase tracking-[0.11em] text-emerald-400/78">Field Tested</div>
+          </div>
+          <div className="px-4 py-3">
+            <div className="font-mono text-[8px] uppercase tracking-[0.13em] text-white/34">System</div>
+            <div className="mt-1 font-mono text-[10px] font-medium uppercase tracking-[0.11em] text-emerald-400/78">Operator_Story</div>
+          </div>
+        </div>
+
+        <aside className="relative border-t border-emerald-500/14 bg-black/18 px-4 py-4">
+          <div className="mb-2 font-mono text-[9px] font-semibold uppercase tracking-[0.13em] text-emerald-400/72">// Operator Note</div>
+          <blockquote className="font-mono text-[11px] leading-[1.58] text-white/54 sm:text-[12px]">
+            The goal isn't just knowledge. It's clarity under pressure and the ability to build systems that actually work in reality.
+          </blockquote>
+        </aside>
+
+        <span className="pointer-events-none absolute left-0 top-0 h-3 w-3 border-l border-t border-emerald-300/42" aria-hidden="true" />
+        <span className="pointer-events-none absolute bottom-0 right-0 h-3 w-3 border-b border-r border-emerald-300/42" aria-hidden="true" />
+      </motion.article>
+
+      {isVideoOpen && <OriginBriefingModal onClose={closeVideo} />}
+    </>
   );
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Code2, Database, Workflow, type LucideIcon } from 'lucide-react';
+import { useReducedMotion } from 'motion/react';
 import operatorPhoto from '../assets/about-page-still.png';
 import { OperationalLoop } from './OperationalLoop';
 
@@ -33,6 +34,8 @@ const capabilities: Capability[] = [
   },
 ];
 
+const ABOUT_PAGE_BACKGROUND_LOOP_URL = 'https://ybnjfz0v2gs31z0q.public.blob.vercel-storage.com/about-page-background-loop.mp4';
+
 const CapabilityCard: React.FC<{ capability: Capability }> = ({ capability }) => {
   const Icon = capability.icon;
 
@@ -62,6 +65,8 @@ const CapabilityCard: React.FC<{ capability: Capability }> = ({ capability }) =>
 };
 
 export function Capabilities() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section className="mb-4">
       <div className="mb-4 flex items-center gap-4">
@@ -96,23 +101,26 @@ export function Capabilities() {
             </span>
           </div>
 
-          <div className="
-  relative z-0 aspect-[5/4] w-full object-cover object-center
-  opacity-95
-  contrast-[1.06]
-  brightness-[0.9]
-  saturate-[0.85]">
-            <img
-              src={operatorPhoto}
-              alt="Operator portrait"
-              className="aspect-[5/4] w-full object-cover object-center  relative overflow-hidden border border-emerald-500/15 bg-bg-base
-  shadow-[0_0_24px_rgba(16,185,129,0.07),inset_0_0_18px_rgba(16,185,129,0.04)]
-  before:pointer-events-none before:absolute before:inset-0 before:z-10
-  before:bg-emerald-500/[0.025] before:mix-blend-screen
-  after:pointer-events-none after:absolute after:inset-0 after:z-10
-  after:bg-[radial-gradient(circle_at_50%_35%,transparent_0%,rgba(16,185,129,0.035)_58%,rgba(0,0,0,0.26)_100%)]
-"
-            />
+          <div className="relative z-0 aspect-[5/4] w-full overflow-hidden border border-emerald-500/15 bg-bg-base opacity-95 shadow-[0_0_24px_rgba(16,185,129,0.07),inset_0_0_18px_rgba(16,185,129,0.04)] before:pointer-events-none before:absolute before:inset-0 before:z-10 before:bg-emerald-500/[0.025] before:mix-blend-screen after:pointer-events-none after:absolute after:inset-0 after:z-10 after:bg-[radial-gradient(circle_at_50%_35%,transparent_0%,rgba(16,185,129,0.035)_58%,rgba(0,0,0,0.26)_100%)]">
+            {shouldReduceMotion ? (
+              <img
+                src={operatorPhoto}
+                alt="Operator portrait"
+                className="h-full w-full object-cover object-center brightness-[0.9] contrast-[1.06] saturate-[0.85]"
+              />
+            ) : (
+              <video
+                className="h-full w-full object-cover object-center brightness-[0.9] contrast-[1.06] saturate-[0.85]"
+                src={ABOUT_PAGE_BACKGROUND_LOOP_URL}
+                poster={operatorPhoto}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-hidden="true"
+              />
+            )}
           </div>
 
           <div className="py-3">

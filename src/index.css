@@ -1325,7 +1325,7 @@
     height: 20px;
     opacity: 0;
     filter: blur(0.4px);
-    transform: translate3d(0, -18%, 0);
+    transform: translate3d(0, 0, 0);
     animation: serviceBuildCommandScan 9.2s cubic-bezier(0.42, 0, 0.22, 1) infinite;
     background:
       linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.07) 20%, rgba(52, 211, 153, 0.2) 50%, rgba(34, 211, 238, 0.07) 80%, transparent),
@@ -1759,7 +1759,7 @@
     0%,
     18% {
       opacity: 0;
-      transform: translate3d(0, -18%, 0);
+      top: -10px;
     }
 
     24% {
@@ -1768,13 +1768,13 @@
 
     58% {
       opacity: 0.5;
-      transform: translate3d(0, calc(100% + 10px), 0);
+      top: calc(100% + 10px);
     }
 
     66%,
     100% {
       opacity: 0;
-      transform: translate3d(0, calc(100% + 10px), 0);
+      top: calc(100% + 10px);
     }
   }
 

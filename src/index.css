@@ -1305,6 +1305,36 @@
     mask-image: radial-gradient(ellipse at 50% 52%, black 0%, black 52%, transparent 80%);
   }
 
+  .service-build-command-scan {
+    opacity: 0;
+    z-index: 1;
+    animation: serviceBuildCommandGlow 9.2s ease-in-out infinite;
+    background:
+      linear-gradient(180deg, transparent 0%, rgba(52, 211, 153, 0.008) 50%, transparent 100%),
+      linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.026), rgba(52, 211, 153, 0.03), transparent);
+    box-shadow:
+      inset 0 0 0 1px rgba(52, 211, 153, 0.02),
+      inset 0 0 28px rgba(34, 211, 238, 0.012);
+  }
+
+  .service-build-command-scan::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: -10px;
+    height: 20px;
+    opacity: 0;
+    filter: blur(0.4px);
+    transform: translate3d(0, -18%, 0);
+    animation: serviceBuildCommandScan 9.2s cubic-bezier(0.42, 0, 0.22, 1) infinite;
+    background:
+      linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.07) 20%, rgba(52, 211, 153, 0.2) 50%, rgba(34, 211, 238, 0.07) 80%, transparent),
+      linear-gradient(180deg, transparent 0 45%, rgba(236, 253, 245, 0.18) 49% 51%, transparent 55% 100%);
+    box-shadow:
+      0 0 8px rgba(34, 211, 238, 0.08),
+      0 0 14px rgba(52, 211, 153, 0.07);
+  }
+
   .service-build-command-inner {
     isolation: isolate;
   }
@@ -1451,6 +1481,8 @@
     .service-fit-scanner-node,
     .service-fit-scanner-dot,
     .service-visual-node--hot,
+    .service-build-command-scan,
+    .service-build-command-scan::before,
     .contact-radar-sweep,
     .contact-radar-pulse,
     .contact-radar-flicker {
@@ -1720,6 +1752,50 @@
 
     46% {
       opacity: 1;
+    }
+  }
+
+  @keyframes serviceBuildCommandScan {
+    0%,
+    18% {
+      opacity: 0;
+      transform: translate3d(0, -18%, 0);
+    }
+
+    24% {
+      opacity: 0.58;
+    }
+
+    58% {
+      opacity: 0.5;
+      transform: translate3d(0, calc(100% + 10px), 0);
+    }
+
+    66%,
+    100% {
+      opacity: 0;
+      transform: translate3d(0, calc(100% + 10px), 0);
+    }
+  }
+
+  @keyframes serviceBuildCommandGlow {
+    0%,
+    18%,
+    72%,
+    100% {
+      opacity: 0;
+      box-shadow:
+        inset 0 0 0 1px rgba(52, 211, 153, 0.02),
+        inset 0 0 28px rgba(34, 211, 238, 0.012);
+    }
+
+    30%,
+    56% {
+      opacity: 0.58;
+      box-shadow:
+        inset 0 0 0 1px rgba(52, 211, 153, 0.045),
+        inset 0 0 30px rgba(34, 211, 238, 0.018),
+        inset 0 0 36px rgba(52, 211, 153, 0.012);
     }
   }
 

@@ -880,6 +880,7 @@ function BuildCtaSection() {
     <section className="service-build-command relative overflow-hidden border border-emerald-500/14 bg-emerald-500/[0.018] px-5 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
       <div className="pointer-events-none absolute inset-0 opacity-[0.055] [background-image:linear-gradient(rgba(16,185,129,0.22)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.16)_1px,transparent_1px)] [background-size:24px_24px]" />
       <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/22 to-transparent" />
+      <div className="service-build-command-scan pointer-events-none absolute inset-0" aria-hidden="true" />
 
       <div className="service-build-command-inner relative z-10 mx-auto max-w-[820px] text-center">
         <div className="mb-3 text-mono-sm font-medium uppercase tracking-[0.08em] text-emerald-400">

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { TopBar } from './components/TopBar';
 import { Hero } from './components/Hero';
@@ -100,6 +101,7 @@ export default function App() {
         <Route path="/field-notes/:slug" element={<FieldNotePage />} />
       </Routes>
       <AtmosphereOverlay />
+      <Analytics />
     </>
   );
 }

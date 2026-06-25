@@ -876,7 +876,7 @@ function OriginBriefingCard() {
               ref={playButtonRef}
               type="button"
               onClick={() => setIsVideoOpen(true)}
-              className="inline-flex cursor-pointer items-center gap-3 border border-emerald-400/44 bg-black/76 px-3 py-2.5 font-mono text-[10px] font-semibold uppercase tracking-[0.13em] text-white/82 shadow-[0_0_16px_rgba(16,185,129,0.08)] transition-all duration-300 hover:border-emerald-300/72 hover:text-emerald-100 hover:shadow-[0_0_22px_rgba(52,211,153,0.16)] focus:outline-none focus:ring-2 focus:ring-emerald-300/55 focus:ring-offset-2 focus:ring-offset-black group-hover:border-emerald-300/72 group-hover:text-emerald-100 group-hover:shadow-[0_0_22px_rgba(52,211,153,0.16)]"
+              className="inline-flex cursor-pointer items-center gap-3 border border-emerald-400/44 bg-black/76 px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.13em] text-white/82 shadow-[0_0_16px_rgba(16,185,129,0.08)] transition-all duration-300 hover:border-emerald-300/72 hover:text-emerald-100 hover:shadow-[0_0_22px_rgba(52,211,153,0.16)] focus:outline-none focus:ring-2 focus:ring-emerald-300/55 focus:ring-offset-2 focus:ring-offset-black group-hover:border-emerald-300/72 group-hover:text-emerald-100 group-hover:shadow-[0_0_22px_rgba(52,211,153,0.16)]"
               aria-label="Play Origin Briefing video"
             >
               <motion.span

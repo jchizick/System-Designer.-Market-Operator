@@ -17,7 +17,6 @@ import {
   Cpu,
   Crosshair,
   Database,
-  Download,
   Dna,
   FileText,
   FolderInput,
@@ -1451,17 +1450,17 @@ export function SyntheticFoundryV2Page() {
             </div>
 
             <div className="mt-5 flex flex-wrap gap-3">
-              <a href="#system-in-motion" className="inline-flex max-w-full items-center gap-3 border border-emerald-700 bg-bg-surface px-4 py-2 text-mono-xs uppercase tracking-widest text-emerald-500 transition-colors hover:bg-emerald-500/10">
-                <span>View System In Action</span>
-                <ArrowRight className="h-4 w-4" strokeWidth={1.6} />
-              </a>
               <a
                 href={syntheticFoundryBrief.pdfUrl}
                 download
-                className="inline-flex max-w-full items-center gap-3 border border-border-subtle bg-transparent px-4 py-2 text-mono-xs uppercase tracking-widest text-text-secondary transition-colors hover:bg-white/5 hover:text-text-primary"
+                className="inline-flex max-w-full items-center gap-3 border border-emerald-700 bg-bg-surface px-4 py-2 text-mono-xs uppercase tracking-widest text-emerald-500 transition-colors hover:bg-emerald-500/10"
               >
-                <span>Download Case Brief</span>
-                <Download className="h-4 w-4" strokeWidth={1.6} />
+                <span>OPEN CASE BRIEF</span>
+                <FileText className="h-4 w-4" strokeWidth={1.6} />
+              </a>
+              <a href="#system-in-motion" className="inline-flex max-w-full items-center gap-3 border border-border-subtle bg-transparent px-4 py-2 text-mono-xs uppercase tracking-widest text-text-secondary transition-colors hover:bg-white/5 hover:text-text-primary">
+                <span>VIEW SYSTEM IN ACTION</span>
+                <ArrowRight className="h-4 w-4" strokeWidth={1.6} />
               </a>
             </div>
           </div>

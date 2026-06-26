@@ -24,6 +24,7 @@ import { ContactPage } from './components/ContactPage';
 import { ServiceStackPage } from './components/ServiceStackPage';
 import { BriefingPage } from './components/BriefingPage';
 import { CaseStudiesPage } from './components/CaseStudiesPage';
+import { OpportunityCommandPage } from './features/opportunity-command/OpportunityCommandPage';
 
 function HomePage() {
   return (
@@ -100,6 +101,8 @@ export default function App() {
         <Route path="/reading-path" element={<ReadingPathPage />} />
         <Route path="/field-notes" element={<FieldNotesArchivePage />} />
         <Route path="/field-notes/:slug" element={<FieldNotePage />} />
+        {/* Internal command-center route; intentionally unlisted from public navigation. */}
+        <Route path="/opportunity-command" element={<OpportunityCommandPage />} />
       </Routes>
       <AtmosphereOverlay />
       <Analytics />

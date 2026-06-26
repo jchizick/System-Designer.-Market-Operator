@@ -1,6 +1,6 @@
 import React from 'react';
-import { loadBusinessLeads, saveBusinessLeads, transitionLeadStatus, updateLeadDraft } from '../storage';
-import type { BusinessLead, PipelineStatus } from '../types';
+import { createBusinessLeadFromInput, loadBusinessLeads, saveBusinessLeads, transitionLeadStatus, updateBusinessLeadFromInput, updateLeadDraft } from '../storage';
+import type { BusinessLead, BusinessLeadFormInput, PipelineStatus } from '../types';
 
 export function useBusinessLeads() {
   const [leads, setLeads] = React.useState<BusinessLead[]>(() => loadBusinessLeads());
@@ -21,9 +21,32 @@ export function useBusinessLeads() {
     updateLead(leadId, (lead) => updateLeadDraft(lead, draft));
   }, [updateLead]);
 
+  const addLead = React.useCallback((input: BusinessLeadFormInput) => {
+    const newLead = createBusinessLeadFromInput(input);
+    setLeads((current) => [newLead, ...current]);
+    return newLead;
+  }, []);
+
+  const updateLeadDetails = React.useCallback((leadId: string, input: BusinessLeadFormInput) => {
+    let savedLead: BusinessLead | undefined;
+
+    setLeads((current) => current.map((lead) => {
+      if (lead.id !== leadId) {
+        return lead;
+      }
+
+      savedLead = updateBusinessLeadFromInput(lead, input);
+      return savedLead;
+    }));
+
+    return savedLead;
+  }, []);
+
   return {
     leads,
     setLeads,
+    addLead,
+    updateLeadDetails,
     changeStatus,
     saveDraft,
   };

@@ -2,6 +2,7 @@ import { CheckCircle2, Clock3, MailCheck, MessageSquareReply, PencilLine, Search
 import type { BusinessLead, PipelineStatus, Priority } from '../types';
 
 const statusLabels: Record<PipelineStatus, string> = {
+  new: 'New',
   prospect: 'Prospect',
   draft_ready: 'Draft ready',
   approved: 'Approved',
@@ -17,6 +18,7 @@ const priorityLabels: Record<Priority, string> = {
 };
 
 const statusIcon: Record<PipelineStatus, typeof Clock3> = {
+  new: Clock3,
   prospect: Search,
   draft_ready: PencilLine,
   approved: ShieldCheck,
@@ -67,15 +69,22 @@ export function LeadTable({
   onSelectLead: (leadId: string) => void;
 }) {
   return (
-    <div className="overflow-x-auto border border-emerald-500/14 bg-black/18">
-      <table className="w-full min-w-[760px] border-collapse">
+    <div className="overflow-x-auto border border-emerald-500/14 bg-black/18 xl:overflow-x-visible">
+      <table className="w-full min-w-[700px] table-fixed border-collapse xl:min-w-0">
+        <colgroup>
+          <col className="w-[34%]" />
+          <col className="w-[25%]" />
+          <col className="w-[12%]" />
+          <col className="w-[13%]" />
+          <col className="w-[16%]" />
+        </colgroup>
         <thead>
           <tr className="border-b border-emerald-500/16 bg-emerald-500/[0.025] text-left font-mono text-[10px] uppercase tracking-[0.1em] text-white/42">
-            <th className="px-3 py-3 font-medium">Lead</th>
-            <th className="px-3 py-3 font-medium">Need</th>
-            <th className="px-3 py-3 font-medium">Fit</th>
-            <th className="px-3 py-3 font-medium">Priority</th>
-            <th className="px-3 py-3 font-medium">Status</th>
+            <th className="px-2.5 py-3 font-medium sm:px-3">Lead</th>
+            <th className="px-2.5 py-3 font-medium sm:px-3">Need</th>
+            <th className="px-2.5 py-3 font-medium sm:px-3">Fit</th>
+            <th className="px-2.5 py-3 font-medium sm:px-3">Priority</th>
+            <th className="px-2.5 py-3 font-medium sm:px-3">Status</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-emerald-500/10">
@@ -88,25 +97,25 @@ export function LeadTable({
                 className={`cursor-pointer transition-colors ${selected ? 'bg-emerald-500/[0.07]' : 'bg-transparent hover:bg-emerald-500/[0.035]'}`}
                 onClick={() => onSelectLead(lead.id)}
               >
-                <td className="px-3 py-3 align-top">
-                  <button type="button" className="block w-full text-left" onClick={() => onSelectLead(lead.id)}>
-                    <span className="block font-space-grotesk text-[16px] font-medium leading-tight text-white/82">{lead.company}</span>
-                    <span className="mt-1 block font-mono text-[11px] uppercase tracking-[0.04em] text-white/42">
+                <td className="min-w-0 px-2.5 py-3 align-top sm:px-3">
+                  <button type="button" className="block w-full min-w-0 text-left" onClick={() => onSelectLead(lead.id)}>
+                    <span className="block truncate font-space-grotesk text-[15px] font-medium leading-tight text-white/82">{lead.company}</span>
+                    <span className="mt-1 block truncate font-mono text-[10px] uppercase tracking-[0.04em] text-white/42">
                       {lead.contactName} // {lead.role}
                     </span>
                   </button>
                 </td>
-                <td className="max-w-[260px] px-3 py-3 align-top font-mono text-[12px] leading-relaxed text-white/58">
-                  {lead.needs[0]}
+                <td className="min-w-0 px-2.5 py-3 align-top font-mono text-[11px] leading-relaxed text-white/58 sm:px-3">
+                  <span className="block truncate">{lead.needs[0]}</span>
                 </td>
-                <td className="px-3 py-3 align-top">
-                  <span className="font-mono text-[18px] leading-none text-emerald-300 tabular-nums">{lead.fitScore.score}</span>
-                  <span className="ml-1 font-mono text-[10px] uppercase text-white/36">/100</span>
+                <td className="whitespace-nowrap px-2.5 py-3 align-top sm:px-3">
+                  <span className="font-mono text-[17px] leading-none text-emerald-300 tabular-nums">{lead.fitScore.score}</span>
+                  <span className="ml-0.5 font-mono text-[9px] uppercase text-white/36">/100</span>
                 </td>
-                <td className="px-3 py-3 align-top">
+                <td className="px-2.5 py-3 align-top sm:px-3">
                   <PriorityBadge priority={lead.priority} />
                 </td>
-                <td className="px-3 py-3 align-top">
+                <td className="px-2.5 py-3 align-top sm:px-3">
                   <StatusBadge status={lead.status} />
                 </td>
               </tr>

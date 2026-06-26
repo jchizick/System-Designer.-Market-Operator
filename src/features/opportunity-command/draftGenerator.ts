@@ -3,7 +3,7 @@ import type { BusinessLead, Draft, OutreachProfile } from './types';
 const nowIso = () => new Date().toISOString();
 
 export function generateBusinessLeadDraft(lead: BusinessLead, profile: OutreachProfile): Draft {
-  const primaryNeed = lead.needs[0]?.toLowerCase() || 'your operating workflow';
+  const primaryNeed = (lead.offerAngle || lead.needs[0] || 'your operating workflow').toLowerCase();
   const signal = lead.signals[0]?.toLowerCase() || 'the way the business is growing';
 
   return {

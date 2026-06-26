@@ -1,6 +1,6 @@
 export type OpportunityType = 'business-outreach';
 
-export type PipelineStatus = 'prospect' | 'draft_ready' | 'approved' | 'sent' | 'replied' | 'archived';
+export type PipelineStatus = 'new' | 'prospect' | 'draft_ready' | 'approved' | 'sent' | 'replied' | 'archived';
 
 export type Priority = 'low' | 'medium' | 'high';
 
@@ -58,10 +58,33 @@ export type BusinessLead = Opportunity & {
   companySize: string;
   signals: string[];
   needs: string[];
+  observedProblem?: string;
+  offerAngle?: string;
+  fitReason?: string;
 };
 
 export type OutreachProfile = {
   name: string;
   fromIdentity: string;
   positioning: string;
+};
+
+export type BusinessLeadFormInput = {
+  businessName: string;
+  website: string;
+  contactName: string;
+  contactRole: string;
+  contactEmail: string;
+  industry: string;
+  location: string;
+  companySize: string;
+  observedProblem: string;
+  offerAngle: string;
+  fitReason: string;
+  priority: Priority;
+  source: string;
+  signals: string;
+  tags: string;
+  notes: string;
+  generateDraft: boolean;
 };

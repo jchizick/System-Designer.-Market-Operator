@@ -25,6 +25,11 @@ export function calculateFitScore(lead: BusinessLead): FitScore {
     reasons.push('Needs map to product/interface/workflow systems.');
   }
 
+  if ([lead.observedProblem, lead.offerAngle, lead.fitReason].some((field) => /dashboard|workflow|booking|brief|crm|lead|system|interface|report/i.test(field || ''))) {
+    score += 10;
+    reasons.push('Manual fit notes identify a system-shaped opportunity.');
+  }
+
   if (lead.signals.some((signal) => /complex|data|multiple|ops-heavy|reports/i.test(signal))) {
     score += 14;
     reasons.push('Operational complexity creates a clear command-center use case.');

@@ -1,4 +1,4 @@
-import { Archive, Check, FileText, MailCheck, MessageSquareReply, RotateCcw } from 'lucide-react';
+import { Archive, Check, Edit3, FileText, MailCheck, MessageSquareReply, RotateCcw } from 'lucide-react';
 import { canTransitionToStatus } from '../storage';
 import type { BusinessLead, PipelineStatus } from '../types';
 import { DraftEditor } from './DraftEditor';
@@ -60,10 +60,12 @@ export function LeadDetailPanel({
   lead,
   onChangeStatus,
   onSaveDraft,
+  onEdit,
 }: {
   lead: BusinessLead;
   onChangeStatus: (status: PipelineStatus) => void;
   onSaveDraft: (draft: { subject: string; body: string }) => void;
+  onEdit: () => void;
 }) {
   const markSentDisabled = !canTransitionToStatus(lead, 'sent');
 
@@ -72,12 +74,20 @@ export function LeadDetailPanel({
       <section className="border border-emerald-500/16 bg-black/18 p-4">
         <div className="mb-4 flex flex-col gap-3 border-b border-emerald-500/12 pb-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="min-w-0">
-            <h2 className="font-space-grotesk text-[26px] font-medium leading-tight text-white/88">{lead.company}</h2>
-            <p className="mt-1 font-mono text-[12px] uppercase tracking-[0.04em] text-white/42">
+            <h2 className="font-space-grotesk text-[22px] font-medium leading-tight text-white/88">{lead.company}</h2>
+            <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.04em] text-white/42">
               {lead.contactName} // {lead.role} // {lead.location}
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={onEdit}
+              className="inline-flex min-h-7 items-center gap-2 border border-emerald-500/24 bg-black/22 px-2.5 font-mono text-[10px] font-semibold uppercase tracking-[0.08em] text-white/58 transition-colors hover:border-emerald-300/42 hover:text-emerald-200"
+            >
+              <Edit3 className="h-3.5 w-3.5" strokeWidth={1.7} />
+              Edit lead
+            </button>
             <StatusBadge status={lead.status} />
             <PriorityBadge priority={lead.priority} />
           </div>

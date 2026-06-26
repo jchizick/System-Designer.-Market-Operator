@@ -913,7 +913,7 @@ function SystemConsoleSparkline() {
 
 function SystemInMotionSection() {
   return (
-    <section className="relative mb-5 border border-border-subtle bg-black/18 p-4">
+    <section id="system-in-motion" className="relative mb-5 scroll-mt-24 border border-border-subtle bg-black/18 p-4">
       <CornerSquares />
       <div className="mb-3 flex items-center gap-2 text-mono-label uppercase text-emerald-400">
         <span>04</span>
@@ -1451,10 +1451,10 @@ export function SyntheticFoundryV2Page() {
             </div>
 
             <div className="mt-5 flex flex-wrap gap-3">
-              <button className="inline-flex max-w-full items-center gap-3 border border-emerald-700 bg-bg-surface px-4 py-2 text-mono-xs uppercase tracking-widest text-emerald-500 transition-colors hover:bg-emerald-500/10">
+              <a href="#system-in-motion" className="inline-flex max-w-full items-center gap-3 border border-emerald-700 bg-bg-surface px-4 py-2 text-mono-xs uppercase tracking-widest text-emerald-500 transition-colors hover:bg-emerald-500/10">
                 <span>View System In Action</span>
                 <ArrowRight className="h-4 w-4" strokeWidth={1.6} />
-              </button>
+              </a>
               <a
                 href={syntheticFoundryBrief.pdfUrl}
                 download

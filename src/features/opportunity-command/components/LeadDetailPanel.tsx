@@ -29,6 +29,23 @@ function WorkflowButton({
 }
 
 function FitMeter({ lead }: { lead: BusinessLead }) {
+  const segmentCount = 10;
+  const filledSegments = Math.max(0, Math.min(segmentCount, Math.round(lead.fitScore.score / 10)));
+  const tone = lead.fitScore.score >= 78
+    ? {
+      active: 'border-emerald-300/42 bg-emerald-400/82 shadow-[0_0_8px_rgba(52,211,153,0.2)]',
+      inactive: 'border-emerald-500/12 bg-emerald-950/28',
+    }
+    : lead.fitScore.score >= 58
+      ? {
+        active: 'border-yellow-200/34 bg-yellow-300/62 shadow-[0_0_7px_rgba(250,204,21,0.12)]',
+        inactive: 'border-yellow-300/10 bg-yellow-950/16',
+      }
+      : {
+        active: 'border-cyan-200/24 bg-cyan-300/38 shadow-[0_0_6px_rgba(103,232,249,0.1)]',
+        inactive: 'border-white/10 bg-white/[0.035]',
+      };
+
   return (
     <div className="border border-emerald-500/16 bg-black/18 p-4">
       <div className="mb-3 flex items-end justify-between gap-4">
@@ -41,8 +58,18 @@ function FitMeter({ lead }: { lead: BusinessLead }) {
           <span className="text-[13px] text-white/34">/100</span>
         </div>
       </div>
-      <div className="h-2 border border-emerald-500/18 bg-black/32 p-[2px]" aria-hidden="true">
-        <div className="h-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.25)]" style={{ width: `${lead.fitScore.score}%` }} />
+      <div
+        className="grid grid-cols-10 gap-1 border border-emerald-500/14 bg-black/24 p-1.5"
+        aria-label={`Fit score ${lead.fitScore.score} out of 100`}
+        title={`Fit score ${lead.fitScore.score} out of 100`}
+      >
+        {Array.from({ length: segmentCount }, (_, index) => (
+          <span
+            key={index}
+            className={`h-3 border ${index < filledSegments ? tone.active : tone.inactive}`}
+            aria-hidden="true"
+          />
+        ))}
       </div>
       <ul className="mt-4 space-y-2">
         {lead.fitScore.reasons.map((reason) => (

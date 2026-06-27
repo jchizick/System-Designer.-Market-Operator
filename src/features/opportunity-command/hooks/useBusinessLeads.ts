@@ -42,9 +42,14 @@ export function useBusinessLeads() {
     return savedLead;
   }, []);
 
+  const replaceLeads = React.useCallback((nextLeads: BusinessLead[]) => {
+    setLeads(nextLeads);
+  }, []);
+
   return {
     leads,
     setLeads,
+    replaceLeads,
     addLead,
     updateLeadDetails,
     changeStatus,

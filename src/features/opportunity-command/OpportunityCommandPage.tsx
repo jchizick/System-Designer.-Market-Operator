@@ -1,9 +1,10 @@
 import React from 'react';
-import { CheckCircle2, FileText, Filter, MessageSquare, Plus, Radar, Search, Send, Users, type LucideIcon } from 'lucide-react';
+import { CheckCircle2, Download, FileJson, FileText, Filter, MessageSquare, Plus, Radar, Search, Send, Upload, Users, type LucideIcon } from 'lucide-react';
 import { LeadFormModal } from './components/LeadFormModal';
 import { LeadDetailPanel } from './components/LeadDetailPanel';
 import { LeadTable } from './components/LeadTable';
 import { useBusinessLeads } from './hooks/useBusinessLeads';
+import { downloadTextFile, exportLeadsToCsv, exportLeadsToJson, getExportDateStamp, mergeImportedLeads, parseImportedLeads } from './importExport';
 import type { BusinessLead, PipelineStatus, Priority } from './types';
 
 const statusOptions: Array<'all' | PipelineStatus> = ['all', 'new', 'prospect', 'draft_ready', 'approved', 'sent', 'replied', 'archived'];
@@ -50,10 +51,10 @@ function KpiCell({
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.11em] text-white/38">{label}</div>
-          <div className="mt-2 font-mono text-[28px] leading-none text-emerald-300 tabular-nums">{value}</div>
+          <div className="mt-1 font-mono text-[28px] leading-none text-emerald-300 tabular-nums">{value}</div>
         </div>
-        <span className={`flex h-9 w-9 shrink-0 items-center justify-center border bg-black/24 ${toneClasses[tone]}`}>
-          <Icon className="h-4.5 w-4.5" strokeWidth={1.65} />
+        <span className={`flex h-11 w-11 shrink-0 items-center justify-center border bg-black/24 ${toneClasses[tone]}`}>
+          <Icon className="h-5.5 w-5.5" strokeWidth={1.65} />
         </span>
       </div>
     </div>
@@ -92,7 +93,7 @@ function SelectControl<T extends string>({
 }
 
 export function OpportunityCommandPage() {
-  const { leads, addLead, updateLeadDetails, changeStatus, saveDraft } = useBusinessLeads();
+  const { leads, replaceLeads, addLead, updateLeadDetails, changeStatus, saveDraft } = useBusinessLeads();
   const [selectedLeadId, setSelectedLeadId] = React.useState(leads[0]?.id || '');
   const [query, setQuery] = React.useState('');
   const [statusFilter, setStatusFilter] = React.useState<'all' | PipelineStatus>('all');
@@ -100,6 +101,8 @@ export function OpportunityCommandPage() {
   const [minFit, setMinFit] = React.useState(0);
   const [formMode, setFormMode] = React.useState<'add' | 'edit' | null>(null);
   const [editingLead, setEditingLead] = React.useState<BusinessLead | undefined>();
+  const [dataMessage, setDataMessage] = React.useState<{ tone: 'success' | 'error'; text: string } | null>(null);
+  const importInputRef = React.useRef<HTMLInputElement | null>(null);
 
   const filteredLeads = React.useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -141,6 +144,61 @@ export function OpportunityCommandPage() {
     { label: 'Replies', value: kpis.replies, icon: MessageSquare, tone: 'purple' as const },
   ];
 
+  const showDataMessage = React.useCallback((tone: 'success' | 'error', text: string) => {
+    setDataMessage({ tone, text });
+    window.setTimeout(() => setDataMessage(null), 4200);
+  }, []);
+
+  const exportJson = () => {
+    downloadTextFile(
+      `opportunity-command-leads-${getExportDateStamp()}.json`,
+      exportLeadsToJson(leads),
+      'application/json',
+    );
+    showDataMessage('success', `Exported ${leads.length} leads to JSON.`);
+  };
+
+  const exportCsv = () => {
+    downloadTextFile(
+      `opportunity-command-leads-${getExportDateStamp()}.csv`,
+      exportLeadsToCsv(leads),
+      'text/csv;charset=utf-8',
+    );
+    showDataMessage('success', `Exported ${leads.length} leads to CSV.`);
+  };
+
+  const importJsonFile = async (file: File) => {
+    try {
+      const text = await file.text();
+      const importedLeads = parseImportedLeads(text);
+
+      if (importedLeads.length === 0) {
+        showDataMessage('error', 'Import failed: no recognizable leads found.');
+        return;
+      }
+
+      const replace = window.confirm(
+        `Import ${importedLeads.length} leads from JSON?\n\nOK: Replace current leads\nCancel: Merge with current leads`,
+      );
+      const nextLeads = replace ? importedLeads : mergeImportedLeads(leads, importedLeads);
+      const firstImportedLead = replace ? nextLeads[0] : nextLeads[leads.length];
+
+      replaceLeads(nextLeads);
+      setSelectedLeadId(firstImportedLead?.id || nextLeads[0]?.id || '');
+      setQuery('');
+      setStatusFilter('all');
+      setPriorityFilter('all');
+      setMinFit(0);
+      showDataMessage('success', `${replace ? 'Replaced with' : 'Merged'} ${importedLeads.length} imported leads.`);
+    } catch {
+      showDataMessage('error', 'Import failed: invalid JSON file.');
+    } finally {
+      if (importInputRef.current) {
+        importInputRef.current.value = '';
+      }
+    }
+  };
+
   return (
     <div className="relative min-h-screen max-w-full overflow-x-hidden p-4 sm:p-6">
       <main className="mx-auto w-full max-w-[1320px]">
@@ -170,7 +228,7 @@ export function OpportunityCommandPage() {
         </header>
 
         <section className="mb-3 border border-emerald-500/14 bg-black/16 p-3">
-          <div className="grid gap-3 lg:grid-cols-[minmax(260px,1fr)_170px_170px_190px_auto] lg:items-end">
+          <div className="grid gap-3 xl:grid-cols-[minmax(320px,480px)_150px_150px_170px_minmax(430px,1fr)] xl:items-end">
             <label className="block min-w-0">
               <span className="mb-2 flex items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-white/38">
                 <Search className="h-3.5 w-3.5 text-emerald-400" strokeWidth={1.7} />
@@ -200,21 +258,73 @@ export function OpportunityCommandPage() {
                 className="w-full accent-emerald-400"
               />
             </label>
-            <button
-              type="button"
-              onClick={() => {
-                setEditingLead(undefined);
-                setFormMode('add');
-              }}
-              className="inline-flex min-h-10 items-center justify-center gap-2 border border-emerald-400/42 bg-emerald-400 px-4 font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-[#03110c] transition-colors hover:bg-emerald-300"
-            >
-              <Plus className="h-4 w-4" strokeWidth={1.8} />
-              Add Lead
-            </button>
+            <div className="min-w-0">
+              <div className="mb-2 block font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-white/38">Data</div>
+              <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 xl:grid-cols-4">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEditingLead(undefined);
+                    setFormMode('add');
+                  }}
+                  className="inline-flex min-h-10 items-center justify-center gap-2 border border-emerald-400/42 bg-emerald-400 px-3 font-mono text-[10px] font-semibold uppercase tracking-[0.08em] text-[#03110c] transition-colors hover:bg-emerald-300"
+                >
+                  <Plus className="h-3.5 w-3.5" strokeWidth={1.8} />
+                  Add
+                </button>
+                <button
+                  type="button"
+                  onClick={() => importInputRef.current?.click()}
+                  className="inline-flex min-h-10 items-center justify-center gap-2 border border-emerald-500/24 bg-black/22 px-3 font-mono text-[10px] font-semibold uppercase tracking-[0.08em] text-white/62 transition-colors hover:border-emerald-300/42 hover:text-emerald-200"
+                >
+                  <Upload className="h-3.5 w-3.5" strokeWidth={1.8} />
+                  Import
+                </button>
+                <button
+                  type="button"
+                  onClick={exportJson}
+                  className="inline-flex min-h-10 items-center justify-center gap-2 border border-emerald-500/24 bg-black/22 px-3 font-mono text-[10px] font-semibold uppercase tracking-[0.08em] text-white/62 transition-colors hover:border-emerald-300/42 hover:text-emerald-200"
+                >
+                  <FileJson className="h-3.5 w-3.5" strokeWidth={1.8} />
+                  JSON
+                </button>
+                <button
+                  type="button"
+                  onClick={exportCsv}
+                  className="inline-flex min-h-10 items-center justify-center gap-2 border border-emerald-500/24 bg-black/22 px-3 font-mono text-[10px] font-semibold uppercase tracking-[0.08em] text-white/62 transition-colors hover:border-emerald-300/42 hover:text-emerald-200"
+                >
+                  <Download className="h-3.5 w-3.5" strokeWidth={1.8} />
+                  CSV
+                </button>
+                <input
+                  ref={importInputRef}
+                  type="file"
+                  accept="application/json,.json"
+                  className="hidden"
+                  onChange={(event) => {
+                    const file = event.target.files?.[0];
+
+                    if (file) {
+                      void importJsonFile(file);
+                    }
+                  }}
+                />
+              </div>
+            </div>
           </div>
+          {dataMessage ? (
+            <div className={`mt-3 border px-3 py-2 font-mono text-[11px] ${
+              dataMessage.tone === 'success'
+                ? 'border-emerald-400/24 bg-emerald-400/[0.045] text-emerald-200'
+                : 'border-red-400/26 bg-red-400/[0.055] text-red-200'
+            }`}
+            >
+              {dataMessage.text}
+            </div>
+          ) : null}
         </section>
 
-        <div className="grid gap-3 xl:grid-cols-[minmax(0,1fr)_420px] 2xl:grid-cols-[minmax(0,1fr)_450px]">
+        <div className="grid gap-3 xl:grid-cols-[minmax(0,1fr)_525px] 2xl:grid-cols-[minmax(0,1fr)_450px]">
           <section className="min-w-0">
             <LeadTable leads={filteredLeads} selectedLeadId={selectedLead?.id || ''} onSelectLead={setSelectedLeadId} />
           </section>

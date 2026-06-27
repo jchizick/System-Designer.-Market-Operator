@@ -4,7 +4,7 @@ import type { BusinessLead, PipelineStatus, Priority } from '../types';
 const statusLabels: Record<PipelineStatus, string> = {
   new: 'New',
   prospect: 'Prospect',
-  draft_ready: 'Draft ready',
+  draft_ready: 'Drafted',
   approved: 'Approved',
   sent: 'Sent',
   replied: 'Replied',
@@ -59,6 +59,48 @@ export function PriorityBadge({ priority }: { priority: Priority }) {
   );
 }
 
+function FitScoreGauge({ score }: { score: number }) {
+  const segmentCount = 10;
+  const filledSegments = Math.max(0, Math.min(segmentCount, Math.round(score / 10)));
+  const tone = score >= 78
+    ? {
+      text: 'text-emerald-300',
+      active: 'border-emerald-300/42 bg-emerald-400/82 shadow-[0_0_7px_rgba(52,211,153,0.2)]',
+      inactive: 'border-emerald-500/12 bg-emerald-950/28',
+    }
+    : score >= 58
+      ? {
+        text: 'text-yellow-200/82',
+        active: 'border-yellow-200/34 bg-yellow-300/62 shadow-[0_0_6px_rgba(250,204,21,0.12)]',
+        inactive: 'border-yellow-300/10 bg-yellow-950/16',
+      }
+      : {
+        text: 'text-cyan-200/62',
+        active: 'border-cyan-200/24 bg-cyan-300/38 shadow-[0_0_5px_rgba(103,232,249,0.1)]',
+        inactive: 'border-white/10 bg-white/[0.035]',
+      };
+
+  return (
+    <div
+      className="flex min-w-0 items-center gap-2"
+      aria-label={`Fit score ${score} out of 100`}
+      title={`Fit score ${score} out of 100`}
+    >
+      <span className={`w-7 shrink-0 text-right font-mono text-[14px] leading-none tabular-nums ${tone.text}`}>
+        {score}
+      </span>
+      <span className="grid shrink-0 grid-cols-10 gap-[2px]" aria-hidden="true">
+        {Array.from({ length: segmentCount }, (_, index) => (
+          <span
+            key={index}
+            className={`h-2.5 w-1 border ${index < filledSegments ? tone.active : tone.inactive}`}
+          />
+        ))}
+      </span>
+    </div>
+  );
+}
+
 export function LeadTable({
   leads,
   selectedLeadId,
@@ -72,10 +114,10 @@ export function LeadTable({
     <div className="overflow-x-auto border border-emerald-500/14 bg-black/18 xl:overflow-x-visible">
       <table className="w-full min-w-[700px] table-fixed border-collapse xl:min-w-0">
         <colgroup>
-          <col className="w-[34%]" />
-          <col className="w-[25%]" />
-          <col className="w-[12%]" />
-          <col className="w-[13%]" />
+          <col className="w-[32%]" />
+          <col className="w-[22%]" />
+          <col className="w-[16%]" />
+          <col className="w-[14%]" />
           <col className="w-[16%]" />
         </colgroup>
         <thead>
@@ -108,11 +150,10 @@ export function LeadTable({
                 <td className="min-w-0 px-2.5 py-3 align-top font-mono text-[11px] leading-relaxed text-white/58 sm:px-3">
                   <span className="block truncate">{lead.needs[0]}</span>
                 </td>
-                <td className="whitespace-nowrap px-2.5 py-3 align-top sm:px-3">
-                  <span className="font-mono text-[17px] leading-none text-emerald-300 tabular-nums">{lead.fitScore.score}</span>
-                  <span className="ml-0.5 font-mono text-[9px] uppercase text-white/36">/100</span>
+                <td className="px-2.5 py-3 align-middle sm:px-3">
+                  <FitScoreGauge score={lead.fitScore.score} />
                 </td>
-                <td className="px-2.5 py-3 align-top sm:px-3">
+                <td className="px-2.5 py-3 align-top sm:px-3 sm:pl-4">
                   <PriorityBadge priority={lead.priority} />
                 </td>
                 <td className="px-2.5 py-3 align-top sm:px-3">

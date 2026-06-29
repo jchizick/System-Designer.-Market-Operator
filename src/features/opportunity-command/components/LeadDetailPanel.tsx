@@ -9,18 +9,32 @@ function WorkflowButton({
   disabled,
   onClick,
   icon: Icon,
+  tone = 'neutral',
+  completed = false,
 }: {
   label: string;
   disabled?: boolean;
   onClick: () => void;
   icon: typeof Check;
+  tone?: 'neutral' | 'blue' | 'emerald' | 'cyan' | 'purple' | 'slate';
+  completed?: boolean;
 }) {
+  const toneClasses = {
+    neutral: 'border-white/14 bg-black/22 text-white/48 hover:border-white/24 hover:bg-white/[0.035] hover:text-white/68',
+    blue: 'border-blue-400/38 bg-blue-400/[0.075] text-blue-200 shadow-[inset_0_0_18px_rgba(96,165,250,0.035)] hover:border-blue-300/54 hover:bg-blue-400/[0.11] hover:text-blue-100',
+    emerald: 'border-emerald-400/38 bg-emerald-400/[0.075] text-emerald-200 shadow-[inset_0_0_18px_rgba(52,211,153,0.04)] hover:border-emerald-300/54 hover:bg-emerald-400/[0.11] hover:text-emerald-100',
+    cyan: 'border-cyan-300/36 bg-cyan-300/[0.075] text-cyan-100 shadow-[inset_0_0_18px_rgba(103,232,249,0.035)] hover:border-cyan-200/52 hover:bg-cyan-300/[0.11] hover:text-cyan-50',
+    purple: 'border-purple-300/38 bg-purple-300/[0.075] text-purple-100 shadow-[inset_0_0_18px_rgba(216,180,254,0.035)] hover:border-purple-200/54 hover:bg-purple-300/[0.11] hover:text-purple-50',
+    slate: 'border-white/20 bg-white/[0.045] text-white/58 shadow-[inset_0_0_18px_rgba(255,255,255,0.018)] hover:border-white/34 hover:bg-white/[0.07] hover:text-white/74',
+  };
+  const stateClasses = completed ? toneClasses[tone] : toneClasses.neutral;
+
   return (
     <button
       type="button"
       disabled={disabled}
       onClick={onClick}
-      className="inline-flex min-h-10 items-center justify-center gap-2 border border-emerald-500/24 bg-black/22 px-3 font-mono text-[10px] font-semibold uppercase tracking-[0.09em] text-white/62 transition-colors hover:border-emerald-300/42 hover:bg-emerald-500/[0.055] hover:text-emerald-200 disabled:cursor-not-allowed disabled:border-white/10 disabled:text-white/24 disabled:hover:bg-black/22"
+      className={`inline-flex min-h-10 items-center justify-center gap-2 border px-3 font-mono text-[10px] font-semibold uppercase tracking-[0.09em] transition-colors disabled:cursor-not-allowed disabled:border-white/10 disabled:bg-black/16 disabled:text-white/24 disabled:shadow-none disabled:hover:bg-black/16 ${stateClasses}`}
     >
       <Icon className="h-3.5 w-3.5" strokeWidth={1.8} />
       {label}
@@ -94,7 +108,17 @@ export function LeadDetailPanel({
   onSaveDraft: (draft: { subject: string; body: string }) => void;
   onEdit: () => void;
 }) {
-  const markSentDisabled = !canTransitionToStatus(lead, 'sent');
+  const workflowRank: Record<PipelineStatus, number> = {
+    new: 0,
+    prospect: 0,
+    draft_ready: 1,
+    approved: 2,
+    sent: 3,
+    replied: 4,
+    archived: 5,
+  };
+  const currentWorkflowRank = workflowRank[lead.status];
+  const markSentDisabled = currentWorkflowRank < 3 && !canTransitionToStatus(lead, 'sent');
 
   return (
     <aside className="space-y-3">
@@ -145,12 +169,12 @@ export function LeadDetailPanel({
       <section className="border border-emerald-500/16 bg-black/18 p-4">
         <div className="mb-3 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-emerald-400">Manual workflow</div>
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-          <WorkflowButton label="Draft ready" icon={FileText} onClick={() => onChangeStatus('draft_ready')} />
-          <WorkflowButton label="Approve" icon={Check} onClick={() => onChangeStatus('approved')} />
-          <WorkflowButton label="Mark sent" icon={MailCheck} disabled={markSentDisabled} onClick={() => onChangeStatus('sent')} />
-          <WorkflowButton label="Reply" icon={MessageSquareReply} onClick={() => onChangeStatus('replied')} />
-          <WorkflowButton label="Archive" icon={Archive} onClick={() => onChangeStatus('archived')} />
-          <WorkflowButton label="Restore" icon={RotateCcw} onClick={() => onChangeStatus('prospect')} />
+          <WorkflowButton label="Draft ready" icon={FileText} tone="blue" completed={currentWorkflowRank >= 1} onClick={() => onChangeStatus('draft_ready')} />
+          <WorkflowButton label="Approve" icon={Check} tone="emerald" completed={currentWorkflowRank >= 2} onClick={() => onChangeStatus('approved')} />
+          <WorkflowButton label="Mark sent" icon={MailCheck} tone="cyan" completed={currentWorkflowRank >= 3} disabled={markSentDisabled} onClick={() => onChangeStatus('sent')} />
+          <WorkflowButton label="Reply" icon={MessageSquareReply} tone="purple" completed={currentWorkflowRank >= 4} onClick={() => onChangeStatus('replied')} />
+          <WorkflowButton label="Archive" icon={Archive} tone="slate" completed={lead.status === 'archived'} onClick={() => onChangeStatus('archived')} />
+          <WorkflowButton label="Restore" icon={RotateCcw} disabled={lead.status !== 'archived'} onClick={() => onChangeStatus('prospect')} />
         </div>
         {markSentDisabled ? (
           <p className="mt-3 font-mono text-[11px] leading-relaxed text-white/38">

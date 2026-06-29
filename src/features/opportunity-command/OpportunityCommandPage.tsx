@@ -31,11 +31,13 @@ const priorityLabel: Record<'all' | Priority, string> = {
 function KpiCell({
   label,
   value,
+  stat,
   icon: Icon,
   tone = 'emerald',
 }: {
   label: string;
   value: number;
+  stat: string;
   icon: LucideIcon;
   tone?: 'emerald' | 'blue' | 'cyan' | 'purple';
 }) {
@@ -47,11 +49,12 @@ function KpiCell({
   };
 
   return (
-    <div className="group min-w-0 border border-emerald-500/16 bg-black/20 p-4 shadow-[inset_0_0_18px_rgba(16,185,129,0.018)]">
+    <div className="group min-w-0 border border-emerald-500/16 border-t-2 border-t-emerald-400/62 bg-black/20 p-4 shadow-[inset_0_0_18px_rgba(16,185,129,0.018)]">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.11em] text-white/38">{label}</div>
-          <div className="mt-1 font-mono text-[28px] leading-none text-emerald-300 tabular-nums">{value}</div>
+          <div className="mt-1 font-mono text-[28px] leading-none text-white/88 tabular-nums">{value}</div>
+          <div className={`mt-2 font-mono text-[10px] font-semibold tracking-[0.05em] ${toneClasses[tone]}`}>{stat}</div>
         </div>
         <span className={`flex h-11 w-11 shrink-0 items-center justify-center border bg-black/24 ${toneClasses[tone]}`}>
           <Icon className="h-5.5 w-5.5" strokeWidth={1.65} />
@@ -128,6 +131,13 @@ export function OpportunityCommandPage() {
   }, [filteredLeads, leads, selectedLeadId]);
 
   const selectedLead = leads.find((lead) => lead.id === selectedLeadId) || filteredLeads[0] || leads[0];
+  const formatPercent = React.useCallback((value: number, total: number) => {
+    if (total <= 0) {
+      return '0%';
+    }
+
+    return `${((value / total) * 100).toFixed(1)}%`;
+  }, []);
 
   const kpis = React.useMemo(() => ({
     total: leads.length,
@@ -137,11 +147,11 @@ export function OpportunityCommandPage() {
     replies: leads.filter((lead) => lead.status === 'replied').length,
   }), [leads]);
   const kpiCards = [
-    { label: 'Total leads', value: kpis.total, icon: Users, tone: 'emerald' as const },
-    { label: 'Draft ready', value: kpis.draftReady, icon: FileText, tone: 'blue' as const },
-    { label: 'Approved', value: kpis.approved, icon: CheckCircle2, tone: 'emerald' as const },
-    { label: 'Sent', value: kpis.sent, icon: Send, tone: 'cyan' as const },
-    { label: 'Replies', value: kpis.replies, icon: MessageSquare, tone: 'purple' as const },
+    { label: 'Total leads', value: kpis.total, stat: '100% of pipeline', icon: Users, tone: 'emerald' as const },
+    { label: 'Draft ready', value: kpis.draftReady, stat: `${formatPercent(kpis.draftReady, kpis.total)} of pipeline`, icon: FileText, tone: 'blue' as const },
+    { label: 'Approved', value: kpis.approved, stat: `${formatPercent(kpis.approved, kpis.total)} of pipeline`, icon: CheckCircle2, tone: 'emerald' as const },
+    { label: 'Sent', value: kpis.sent, stat: `${formatPercent(kpis.sent, kpis.total)} of pipeline`, icon: Send, tone: 'cyan' as const },
+    { label: 'Replies', value: kpis.replies, stat: `${formatPercent(kpis.replies, kpis.sent)} reply rate`, icon: MessageSquare, tone: 'purple' as const },
   ];
 
   const showDataMessage = React.useCallback((tone: 'success' | 'error', text: string) => {
@@ -221,7 +231,7 @@ export function OpportunityCommandPage() {
           <div className="mt-6 grid min-w-0 grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-5">
             {kpiCards.map((card) => (
               <div key={card.label} className="min-w-0">
-                <KpiCell label={card.label} value={card.value} icon={card.icon} tone={card.tone} />
+                <KpiCell label={card.label} value={card.value} stat={card.stat} icon={card.icon} tone={card.tone} />
               </div>
             ))}
           </div>

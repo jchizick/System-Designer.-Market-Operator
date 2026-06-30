@@ -1,4 +1,5 @@
-import { Archive, Check, Edit3, FileText, MailCheck, MessageSquareReply, RotateCcw } from 'lucide-react';
+import React from 'react';
+import { Archive, Check, Edit3, FileText, MailCheck, MessageSquareReply, RotateCcw, Trash2 } from 'lucide-react';
 import { canTransitionToStatus } from '../storage';
 import type { BusinessLead, PipelineStatus } from '../types';
 import { DraftEditor } from './DraftEditor';
@@ -102,12 +103,15 @@ export function LeadDetailPanel({
   onChangeStatus,
   onSaveDraft,
   onEdit,
+  onDelete,
 }: {
   lead: BusinessLead;
   onChangeStatus: (status: PipelineStatus) => void;
   onSaveDraft: (draft: { subject: string; body: string }) => void;
   onEdit: () => void;
+  onDelete: () => void;
 }) {
+  const [confirmingDelete, setConfirmingDelete] = React.useState(false);
   const workflowRank: Record<PipelineStatus, number> = {
     new: 0,
     prospect: 0,
@@ -119,6 +123,10 @@ export function LeadDetailPanel({
   };
   const currentWorkflowRank = workflowRank[lead.status];
   const markSentDisabled = currentWorkflowRank < 3 && !canTransitionToStatus(lead, 'sent');
+
+  React.useEffect(() => {
+    setConfirmingDelete(false);
+  }, [lead.id]);
 
   return (
     <aside className="space-y-3">
@@ -139,10 +147,43 @@ export function LeadDetailPanel({
               <Edit3 className="h-3.5 w-3.5" strokeWidth={1.7} />
               Edit lead
             </button>
+            <button
+              type="button"
+              onClick={() => setConfirmingDelete(true)}
+              className="inline-flex min-h-7 items-center gap-2 border border-red-400/18 bg-red-400/[0.035] px-2.5 font-mono text-[10px] font-semibold uppercase tracking-[0.08em] text-red-200/58 transition-colors hover:border-red-300/34 hover:bg-red-400/[0.06] hover:text-red-100/78"
+            >
+              <Trash2 className="h-3.5 w-3.5" strokeWidth={1.7} />
+              Delete
+            </button>
             <StatusBadge status={lead.status} />
             <PriorityBadge priority={lead.priority} />
           </div>
         </div>
+
+        {confirmingDelete ? (
+          <div className="mb-4 border border-red-400/22 bg-red-400/[0.045] p-3 shadow-[inset_0_0_18px_rgba(248,113,113,0.025)]">
+            <p className="font-mono text-[12px] leading-relaxed text-red-100/78">
+              Delete {lead.company}? This removes the lead from Opportunity Command.
+            </p>
+            <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:justify-end">
+              <button
+                type="button"
+                onClick={() => setConfirmingDelete(false)}
+                className="inline-flex min-h-9 items-center justify-center border border-white/14 bg-black/24 px-3 font-mono text-[10px] font-semibold uppercase tracking-[0.08em] text-white/56 transition-colors hover:border-white/28 hover:text-white/74"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={onDelete}
+                className="inline-flex min-h-9 items-center justify-center gap-2 border border-red-300/34 bg-red-400/[0.09] px-3 font-mono text-[10px] font-semibold uppercase tracking-[0.08em] text-red-100/82 transition-colors hover:border-red-200/48 hover:bg-red-400/[0.13] hover:text-red-50"
+              >
+                <Trash2 className="h-3.5 w-3.5" strokeWidth={1.8} />
+                Delete lead
+              </button>
+            </div>
+          </div>
+        ) : null}
 
         <div className="grid gap-3 font-mono text-[12px] leading-relaxed text-white/58 sm:grid-cols-2">
           <div>

@@ -42,6 +42,10 @@ export function useBusinessLeads() {
     return savedLead;
   }, []);
 
+  const deleteLead = React.useCallback((leadId: string) => {
+    setLeads((current) => current.filter((lead) => lead.id !== leadId));
+  }, []);
+
   const replaceLeads = React.useCallback((nextLeads: BusinessLead[]) => {
     setLeads(nextLeads);
   }, []);
@@ -52,6 +56,7 @@ export function useBusinessLeads() {
     replaceLeads,
     addLead,
     updateLeadDetails,
+    deleteLead,
     changeStatus,
     saveDraft,
   };

@@ -96,7 +96,7 @@ function SelectControl<T extends string>({
 }
 
 export function OpportunityCommandPage() {
-  const { leads, replaceLeads, addLead, updateLeadDetails, changeStatus, saveDraft } = useBusinessLeads();
+  const { leads, replaceLeads, addLead, updateLeadDetails, deleteLead, changeStatus, saveDraft } = useBusinessLeads();
   const [selectedLeadId, setSelectedLeadId] = React.useState(leads[0]?.id || '');
   const [query, setQuery] = React.useState('');
   const [statusFilter, setStatusFilter] = React.useState<'all' | PipelineStatus>('all');
@@ -208,6 +208,25 @@ export function OpportunityCommandPage() {
       }
     }
   };
+
+  const handleDeleteSelectedLead = React.useCallback(() => {
+    if (!selectedLead) {
+      return;
+    }
+
+    const visibleIndex = filteredLeads.findIndex((lead) => lead.id === selectedLead.id);
+    const allIndex = leads.findIndex((lead) => lead.id === selectedLead.id);
+    const nextVisibleLead = visibleIndex >= 0
+      ? filteredLeads[visibleIndex + 1] || filteredLeads[visibleIndex - 1]
+      : undefined;
+    const nextAnyLead = allIndex >= 0
+      ? leads[allIndex + 1] || leads[allIndex - 1]
+      : undefined;
+
+    deleteLead(selectedLead.id);
+    setSelectedLeadId(nextVisibleLead?.id || nextAnyLead?.id || '');
+    showDataMessage('success', `Deleted ${selectedLead.company} from Opportunity Command.`);
+  }, [deleteLead, filteredLeads, leads, selectedLead, showDataMessage]);
 
   return (
     <div className="relative min-h-screen max-w-full overflow-x-hidden p-4 sm:p-6">
@@ -347,6 +366,7 @@ export function OpportunityCommandPage() {
                 setEditingLead(selectedLead);
                 setFormMode('edit');
               }}
+              onDelete={handleDeleteSelectedLead}
             />
           ) : null}
         </div>
